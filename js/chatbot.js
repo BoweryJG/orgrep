@@ -2,7 +2,21 @@
 
 document.addEventListener('DOMContentLoaded', function() {
   // Use the animated orb SVG as the launcher (must exist in HTML with id 'ollie-orb')
-  const orb = document.getElementById('ollie-orb');
+  let orb = document.getElementById('ollie-orb');
+  if (!orb) {
+    orb = document.createElement('img');
+    orb.src = 'animated-orb.svg';
+    orb.id = 'ollie-orb';
+    orb.alt = 'OllieiQ Chatbot Orb';
+    orb.style.position = 'fixed';
+    orb.style.bottom = '32px';
+    orb.style.right = '32px';
+    orb.style.width = '64px';
+    orb.style.height = '64px';
+    orb.style.cursor = 'pointer';
+    orb.style.zIndex = '1000';
+    document.body.appendChild(orb);
+  }
 
   // Create chatbot window
   const chatWindow = document.createElement('div');
@@ -18,13 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.appendChild(chatWindow);
 
   // Show/hide logic
-  if (orb) {
-    orb.addEventListener('click', () => {
-      chatWindow.classList.toggle('hidden');
-    });
-  } else {
-    console.error('OllieiQ orb element not found! Make sure <img id="ollie-orb"> is in your HTML.');
-  }
+  orb.addEventListener('click', () => {
+    chatWindow.classList.toggle('hidden');
+  });
   chatWindow.querySelector('.chatbot-close').onclick = () => {
     chatWindow.classList.add('hidden');
   };
