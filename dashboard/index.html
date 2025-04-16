@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OllieiQ Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"></script>
+  <link rel="stylesheet" href="../css/ollie-launcher.css">
+  <style>
+    body { background: #181c2a; color: #fff; font-family: system-ui, sans-serif; margin: 0; }
+    .dashboard-box { max-width: 480px; margin: 5rem auto; background: #23263a; padding: 2rem 2.5rem; border-radius: 12px; box-shadow: 0 4px 24px #000a; }
+    h2 { margin-top: 0; }
+    .logout-btn { background: #64c8ff; color: #181c2a; border: none; border-radius: 6px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 1.5rem; }
+    #dashboard-error { color: #ff6b6b; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="dashboard-box">
+    <h2>Welcome to the OllieiQ Admin Dashboard</h2>
+    <p>This area is protected and visible only to you (admin).</p>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+    <div id="dashboard-error"></div>
+  </div>
+  <script src="../js/dashboard-protect.js"></script>
+</body>
+</html>
