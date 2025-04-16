@@ -338,43 +338,52 @@
     const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const loginBtn = document.getElementById('login-btn');
-    const loginDropdown = document.getElementById('login-dropdown');
-    const googleBtn = document.getElementById('google-signin-btn');
+const loginDropdown = document.getElementById('login-dropdown');
+const googleBtn = document.getElementById('google-signin-btn');
 
-    // Toggle dropdown on button click
-    loginBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      loginDropdown.classList.toggle('hidden');
-    });
+function showDropdown(e) {
+  e.stopPropagation();
+  loginDropdown.classList.toggle('hidden');
+}
+function hideDropdown() {
+  if (!loginDropdown.classList.contains('hidden')) {
+    loginDropdown.classList.add('hidden');
+  }
+}
+function signOutHandler(e) {
+  e.stopPropagation();
+  _supabase.auth.signOut().then(() => location.reload());
+}
 
-    // Hide dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!loginDropdown.classList.contains('hidden')) {
-        loginDropdown.classList.add('hidden');
-      }
-    });
+// Always attach these listeners ONCE
+loginBtn.removeEventListener('click', showDropdown);
+loginBtn.removeEventListener('click', signOutHandler);
+loginBtn.addEventListener('click', showDropdown);
+document.addEventListener('click', hideDropdown);
+googleBtn.addEventListener('click', async () => {
+  const { error } = await _supabase.auth.signInWithOAuth({ provider: 'google' });
+  if (error) alert('Error signing in: ' + error.message);
+});
 
-    // Google sign-in
-    googleBtn.addEventListener('click', async () => {
-      const { error } = await _supabase.auth.signInWithOAuth({ provider: 'google' });
-      if (error) alert('Error signing in: ' + error.message);
-    });
+// Only update button text and mode, not listeners
+function updateLoginButton(session) {
+  if (session?.user) {
+    loginBtn.textContent = `Hello, ${session.user.user_metadata.full_name || 'User'} (Sign out)`;
+    loginDropdown.classList.add('hidden');
+    loginBtn.removeEventListener('click', showDropdown);
+    loginBtn.addEventListener('click', signOutHandler);
+  } else {
+    loginBtn.textContent = 'Sign Up / Login';
+    loginDropdown.classList.add('hidden');
+    loginBtn.removeEventListener('click', signOutHandler);
+    loginBtn.addEventListener('click', showDropdown);
+  }
+}
 
-    // Update button after login as before
-    _supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user) {
-        loginBtn.textContent = `Hello, ${session.user.user_metadata.full_name || 'User'} (Sign out)`;
-        loginBtn.onclick = async () => {
-          await _supabase.auth.signOut();
-          location.reload();
-        };
-        loginDropdown.classList.add('hidden');
-      } else {
-        loginBtn.textContent = 'Sign Up / Login';
-        loginBtn.onclick = (e) => {
-          e.stopPropagation();
-          loginDropdown.classList.toggle('hidden');
-        };
+// Initial state
+_supabase.auth.getSession().then(({ data: { session } }) => updateLoginButton(session));
+// Listen for auth changes
+_supabase.auth.onAuthStateChange((event, session) => updateLoginButton(session));
       }
     });
     </script>
