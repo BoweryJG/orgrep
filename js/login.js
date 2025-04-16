@@ -8,11 +8,19 @@ document.getElementById('login-form').onsubmit = async function(e) {
   e.preventDefault();
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) {
     document.getElementById('login-error').textContent = error.message;
-  } else {
+  } else if (data && data.session) {
+    // Login succeeded, redirect!
     window.location.href = '/dashboard/';
+  } else {
+    // Fallback: listen for auth state change
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN') {
+        window.location.href = '/dashboard/';
+      }
+    });
   }
 };
 
