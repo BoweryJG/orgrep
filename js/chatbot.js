@@ -48,7 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Call Supabase Edge Function
     fetch('https://cbopynuvhcymbumjnvay.functions.supabase.co/openai-chat', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU'
+      },
       body: JSON.stringify({ message: userMsg })
     })
     .then(res => res.json())
