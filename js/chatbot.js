@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     messages.appendChild(loadingMsg);
     messages.scrollTop = messages.scrollHeight;
     // Call Supabase Edge Function
-    fetch('https://<your-project-ref>.functions.supabase.co/openai-chat', {
+    fetch('https://cbopynuvhcymbumjnvay.functions.supabase.co/openai-chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: userMsg })
