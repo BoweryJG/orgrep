@@ -12,6 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
         <path d="M16 5c-6.075 0-11 3.807-11 8.5 0 2.222 1.182 4.236 3.137 5.74-.13.77-.567 2.44-1.364 4.021-.191.393.241.795.623.623 2.099-.948 4.003-2.009 4.003-2.009.998.188 2.049.292 3.188.292 6.075 0 11-3.807 11-8.5S22.075 5 16 5z" />
       </svg>
     `;
+    // DEBUG: Make launcher impossible to miss
+    launcher.style.background = 'red';
+    launcher.style.border = '3px solid yellow';
+    launcher.style.zIndex = '99999';
+    launcher.style.display = 'flex';
+    launcher.style.alignItems = 'center';
+    launcher.style.justifyContent = 'center';
     document.body.appendChild(launcher);
   }
 
