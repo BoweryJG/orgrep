@@ -378,22 +378,7 @@ function updateLoginButton(session) {
     loginBtn.removeEventListener('click', signOutHandler);
     loginBtn.addEventListener('click', showDropdown);
   }
-    });
-
-    // Only update button text and mode, not listeners
-    function updateLoginButton(session) {
-      if (session?.user) {
-        loginBtn.textContent = `Hello, ${session.user.user_metadata.full_name || 'User'} (Sign out)`;
-        loginDropdown.classList.add('hidden');
-        loginBtn.removeEventListener('click', showDropdown);
-        loginBtn.addEventListener('click', signOutHandler);
-      } else {
-        loginBtn.textContent = 'Sign Up / Login';
-        loginDropdown.classList.add('hidden');
-        loginBtn.removeEventListener('click', signOutHandler);
-        loginBtn.addEventListener('click', showDropdown);
-      }
-    }
+}
 
     // Initial state
     _supabase.auth.getSession().then(({ data: { session } }) => updateLoginButton(session));
