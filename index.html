@@ -70,16 +70,9 @@
                 <stop id="c4s0" offset="0%" stop-color="#FFF5B3"/>
                 <stop id="c4s1" offset="100%" stop-color="#4B3800"/>
               </radialGradient>
-              <!-- Glow filter for parent orb -->
-              <filter id="parentGlowFilter" x="-40%" y="-40%" width="180%" height="180%">
-                <feGaussianBlur stdDeviation="32" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
+
             </defs>
-            <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95" filter="url(#parentGlowFilter)"/>
+            <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
             <g id="children"></g>
           </svg>
         </div>
