@@ -25,10 +25,16 @@
             <a href="#exclusivity">Exclusivity</a>
             <a href="#deployment">Deployment</a>
         </div>
-        <button id="login-btn" class="cta-button">
+        <button id="login-btn" class="cta-button dropdown-btn">
             Sign Up / Login
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <div id="login-dropdown" class="dropdown hidden">
+            <button id="google-signin-btn" class="dropdown-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" style="width:20px;vertical-align:middle;margin-right:8px;">
+                Sign in with Google
+            </button>
+        </div>
     </nav>
 
     <section class="hero" id="hero">
@@ -330,23 +336,29 @@
     const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const loginBtn = document.getElementById('login-btn');
-    const loginModal = document.getElementById('login-modal');
+    const loginDropdown = document.getElementById('login-dropdown');
     const googleBtn = document.getElementById('google-signin-btn');
-    const modalBackdrop = document.querySelector('.modal-backdrop');
 
-    loginBtn.addEventListener('click', () => {
-      loginModal.classList.remove('hidden');
-    });
-    modalBackdrop.addEventListener('click', () => {
-      loginModal.classList.add('hidden');
+    // Toggle dropdown on button click
+    loginBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      loginDropdown.classList.toggle('hidden');
     });
 
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!loginDropdown.classList.contains('hidden')) {
+        loginDropdown.classList.add('hidden');
+      }
+    });
+
+    // Google sign-in
     googleBtn.addEventListener('click', async () => {
       const { error } = await _supabase.auth.signInWithOAuth({ provider: 'google' });
       if (error) alert('Error signing in: ' + error.message);
     });
 
-    // Listen for auth changes and update UI
+    // Update button after login as before
     _supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
         loginBtn.textContent = `Hello, ${session.user.user_metadata.full_name || 'User'} (Sign out)`;
@@ -354,10 +366,13 @@
           await _supabase.auth.signOut();
           location.reload();
         };
-        loginModal.classList.add('hidden');
+        loginDropdown.classList.add('hidden');
       } else {
         loginBtn.textContent = 'Sign Up / Login';
-        loginBtn.onclick = () => loginModal.classList.remove('hidden');
+        loginBtn.onclick = (e) => {
+          e.stopPropagation();
+          loginDropdown.classList.toggle('hidden');
+        };
       }
     });
     </script>

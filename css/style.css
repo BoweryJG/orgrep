@@ -48,6 +48,51 @@
   background: var(--neon-purple);
   color: #fff;
 }
+
+/* Login Dropdown Styles */
+.dropdown {
+  position: absolute;
+  top: 60px; /* Adjust based on navbar height */
+  right: 2.5rem;
+  background: linear-gradient(135deg, var(--purple-dark, #2a144a), var(--purple-medium, #7f4ffb));
+  border-radius: 14px;
+  box-shadow: 0 8px 32px 0 rgba(127, 79, 251, 0.25);
+  min-width: 210px;
+  padding: 0.7rem 0.5rem;
+  z-index: 10001;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-12px) scale(0.96);
+  transition: opacity 0.25s, transform 0.25s;
+}
+.dropdown:not(.hidden) {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+.dropdown-item {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1em;
+  padding: 0.7rem 1rem;
+  width: 100%;
+  text-align: left;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s;
+}
+.dropdown-item:hover {
+  background: var(--neon-purple, #a259ff);
+  color: #fff;
+}
+.dropdown-btn {
+  position: relative;
+  z-index: 10002;
+}
+
 :root {
     --deep-black: #0a0a0a;
     --purple-dark: #361d5a;
