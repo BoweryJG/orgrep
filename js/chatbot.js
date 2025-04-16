@@ -18,9 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.appendChild(chatWindow);
 
   // Show/hide logic
-  orb.addEventListener('click', () => {
-    chatWindow.classList.toggle('hidden');
-  });
+  if (orb) {
+    orb.addEventListener('click', () => {
+      chatWindow.classList.toggle('hidden');
+    });
+  } else {
+    console.error('OllieiQ orb element not found! Make sure <img id="ollie-orb"> is in your HTML.');
+  }
   chatWindow.querySelector('.chatbot-close').onclick = () => {
     chatWindow.classList.add('hidden');
   };
