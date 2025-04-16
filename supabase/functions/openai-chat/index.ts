@@ -1,7 +1,7 @@
 import { serve } from "https://deno.land/std@0.131.0/http/server.ts";
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "https://repspheres.com", // Fixed domain typo
+  "Access-Control-Allow-Origin": "https://repspheres.com", // Corrected to match frontend domain
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
