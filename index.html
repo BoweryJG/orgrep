@@ -172,16 +172,8 @@
     <section class="section" id="ecosystem">
         <h2 class="section-title">The Spheres Ecosystem</h2>
         <p>A modular system with one intelligent core and multiple execution paths, designed to support every level of sales operations.</p>
-        <div class="ecosystem">
-            <div class="center-sphere">
-                <div class="center-sphere-content">SphereSpace</div>
-                </div>
-            <div class="satellite satellite-1"><div class="satellite-content"><span>SalesSphere</span></div></div>
-            <div class="satellite satellite-2"><div class="satellite-content"><span>DocSphere</span></div></div>
-            <div class="satellite satellite-3"><div class="satellite-content"><span>PatientSphere</span></div></div>
-            <div class="satellite satellite-4"><div class="satellite-content"><span>TMSphere</span></div></div>
-            <div class="satellite satellite-5"><div class="satellite-content"><span>ASMSphere</span></div></div>
-            <div class="satellite satellite-6"><div class="satellite-content"><span>VPSphere</span></div></div>
+        <div style="display:flex;justify-content:center;align-items:center;min-height:400px;">
+            <canvas id="canvas" width="600" height="400" style="max-width:100%;height:auto;display:block;"></canvas>
         </div>
     </section>
 
@@ -384,6 +376,265 @@ function updateLoginButton(session) {
     _supabase.auth.getSession().then(({ data: { session } }) => updateLoginButton(session));
     // Listen for auth changes
     _supabase.auth.onAuthStateChange((event, session) => updateLoginButton(session));
+    </script>
+
+    <script>
+    // --- Orb Animation from elaborb.html, adapted for section canvas ---
+    (function() {
+        const canvas = document.getElementById('canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        // Helper to find the visible size of the ecosystem section
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            if (container) {
+                // Use container's size for canvas
+                canvas.width = container.offsetWidth;
+                canvas.height = container.offsetHeight;
+            } else {
+                // Fallback
+                canvas.width = 600;
+                canvas.height = 400;
+            }
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let centerX = canvas.width / 2;
+        let centerY = canvas.height / 2;
+        let time = 0;
+        function getBaseRadius() {
+            return Math.min(canvas.width, canvas.height) * 0.2;
+        }
+        let baseRadius = getBaseRadius();
+
+        // Update on resize
+        function updateCenters() {
+            centerX = canvas.width / 2;
+            centerY = canvas.height / 2;
+            baseRadius = getBaseRadius();
+        }
+        window.addEventListener('resize', updateCenters);
+
+        // Child orbs setup
+        const childCount = 6;
+        const childOrbs = [];
+        const dataTransmissions = [];
+        for (let i = 0; i < childCount; i++) {
+            const hueStart = i * (360 / childCount);
+            const hueRange = 60;
+            childOrbs.push({
+                angle: (i / childCount) * Math.PI * 2,
+                distance: () => baseRadius * 2.2,
+                radius: () => baseRadius * 0.25,
+                speed: 0.2 + Math.random() * 0.3,
+                phase: Math.random() * Math.PI * 2,
+                hueStart: hueStart,
+                hueRange: hueRange,
+                currentHue: hueStart,
+                pulseRate: 0.1 + Math.random() * 0.2,
+                lastDataSent: 0,
+                dataInterval: 2 + Math.random() * 3,
+                receivingData: false,
+                dataReceiveTime: 0
+            });
+        }
+        function getHSLColor(h, s, l, a) {
+            return `hsla(${h % 360}, ${s}%, ${l}%, ${a})`;
+        }
+        function drawBlob(x, y, radius, time, isParent, orbIndex = -1) {
+            const segments = 60;
+            let baseHue;
+            if (isParent) {
+                baseHue = (time * 15) % 360;
+            } else {
+                const orb = childOrbs[orbIndex];
+                orb.currentHue = orb.hueStart + ((Math.sin(time * orb.pulseRate) * 0.5 + 0.5) * orb.hueRange);
+                baseHue = orb.currentHue;
+            }
+            const gradient = ctx.createRadialGradient(
+                x, y, radius * 0.1,
+                x, y, radius * 1.5
+            );
+            const satBase = isParent ? 100 : 90;
+            const lightBase = isParent ? 70 : 65;
+            gradient.addColorStop(0, getHSLColor(baseHue, satBase, lightBase + 20, 0.9));
+            gradient.addColorStop(0.3, getHSLColor((baseHue + 20) % 360, satBase, lightBase, 0.7));
+            gradient.addColorStop(0.7, getHSLColor((baseHue + 40) % 360, satBase - 10, lightBase - 20, 0.4));
+            gradient.addColorStop(1, getHSLColor((baseHue + 60) % 360, satBase - 20, lightBase - 40, 0));
+            ctx.fillStyle = gradient;
+            const timeScale = isParent ? 0.15 : 0.3;
+            const distortionScale = isParent ? 0.3 : 0.2;
+            const inversion = Math.sin(time * 0.2) * (isParent ? 0.3 : 0.1);
+            ctx.beginPath();
+            for (let i = 0; i <= segments; i++) {
+                const angle = (i / segments) * Math.PI * 2;
+                const noise1 = Math.sin(angle * 3 + time * timeScale) * 0.15;
+                const noise2 = Math.sin(angle * 5 + time * timeScale * 1.5) * 0.1;
+                const noise3 = Math.sin(angle * 8 + time * timeScale * 0.7) * 0.07;
+                const inversionEffect = Math.sin(angle * 2 + time * 0.3) * inversion;
+                const distortion = 1 + (noise1 + noise2 + noise3 + inversionEffect) * distortionScale;
+                const px = x + Math.cos(angle) * radius * distortion;
+                const py = y + Math.sin(angle) * radius * distortion;
+                if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+            }
+            ctx.closePath();
+            ctx.fill();
+            if (!isParent && childOrbs[orbIndex].receivingData) {
+                const glowGradient = ctx.createRadialGradient(x, y, radius * 0.8, x, y, radius * 1.8);
+                const dataAge = time - childOrbs[orbIndex].dataReceiveTime;
+                const glowOpacity = Math.max(0, 0.4 - dataAge * 2);
+                if (glowOpacity > 0) {
+                    glowGradient.addColorStop(0, getHSLColor(baseHue, 100, 80, glowOpacity));
+                    glowGradient.addColorStop(1, getHSLColor(baseHue, 100, 70, 0));
+                    ctx.fillStyle = glowGradient;
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius * 1.8, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    childOrbs[orbIndex].receivingData = false;
+                }
+            }
+            const innerRadius = radius * 0.7;
+            const innerGlow = ctx.createRadialGradient(x, y, innerRadius * 0.1, x, y, innerRadius);
+            innerGlow.addColorStop(0, getHSLColor((baseHue + 40) % 360, 100, 95, 0.9));
+            innerGlow.addColorStop(0.5, getHSLColor((baseHue + 30) % 360, 100, 80, 0.4));
+            innerGlow.addColorStop(1, getHSLColor(baseHue, 100, 70, 0));
+            ctx.fillStyle = innerGlow;
+            ctx.beginPath();
+            for (let i = 0; i <= segments; i++) {
+                const angle = (i / segments) * Math.PI * 2;
+                const noise1 = Math.sin(angle * 4 + time * timeScale * 1.2) * 0.15;
+                const noise2 = Math.sin(angle * 7 + time * timeScale * 0.8) * 0.1;
+                const distortion = 1 + (noise1 + noise2) * distortionScale * 0.7;
+                const px = x + Math.cos(angle) * innerRadius * distortion;
+                const py = y + Math.sin(angle) * innerRadius * distortion;
+                if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+            }
+            ctx.closePath();
+            ctx.fill();
+            const numParticles = isParent ? 60 : 20;
+            const particleComplexity = isParent ? 3 : 1;
+            for (let i = 0; i < numParticles; i++) {
+                const particleTime = time * 0.5 + i * 0.2;
+                let particleRadius, particleAngle;
+                if (isParent && i % particleComplexity === 0) {
+                    const spiralTightness = 0.1 + Math.sin(time * 0.2) * 0.05;
+                    particleRadius = (0.1 + (i / numParticles) * 0.6) * radius;
+                    particleAngle = i * spiralTightness + particleTime * 0.5;
+                } else {
+                    particleRadius = (0.1 + (i / numParticles) * 0.6) * radius;
+                    particleAngle = i * 0.3 + particleTime;
+                }
+                const oscillation = Math.sin(particleTime * 0.7 + i * 0.2) * 0.2;
+                const finalRadius = particleRadius * (1 + oscillation);
+                const px = x + Math.cos(particleAngle) * finalRadius;
+                const py = y + Math.sin(particleAngle) * finalRadius;
+                const size = (isParent ? 3 : 2) * (0.5 + Math.sin(particleTime) * 0.5);
+                const particleHue = (baseHue + i * (isParent ? 8 : 4)) % 360;
+                const alpha = 0.3 + Math.sin(particleTime * 0.5 + i * 0.1) * 0.3;
+                ctx.fillStyle = getHSLColor(particleHue, 100, 80, alpha);
+                ctx.beginPath();
+                ctx.arc(px, py, size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        function createDataPacket(sourceX, sourceY, targetX, targetY, hue, childIndex) {
+            dataTransmissions.push({
+                sourceX: sourceX,
+                sourceY: sourceY,
+                targetX: targetX,
+                targetY: targetY,
+                progress: 0,
+                speed: 0.02 + Math.random() * 0.03,
+                hue: hue,
+                size: 4 + Math.random() * 4,
+                childIndex: childIndex
+            });
+        }
+        function drawConnection(x1, y1, x2, y2, time, childIndex) {
+            const orb = childOrbs[childIndex];
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const perpX = -dy / distance;
+            const perpY = dx / distance;
+            const curveAmount = Math.sin(time * 0.5 + childIndex) * distance * 0.3;
+            const ctrlX = (x1 + x2) / 2 + perpX * curveAmount;
+            const ctrlY = (y1 + y2) / 2 + perpY * curveAmount;
+            if (time - orb.lastDataSent > orb.dataInterval) {
+                orb.lastDataSent = time;
+                createDataPacket(x1, y1, x2, y2, orb.currentHue, childIndex);
+                orb.dataInterval = 2 + Math.random() * 3;
+            }
+            const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
+            const parentHue = (time * 15) % 360;
+            gradient.addColorStop(0, getHSLColor(parentHue, 100, 70, 0.7));
+            gradient.addColorStop(0.5, getHSLColor((parentHue + orb.currentHue) / 2, 90, 70, 0.2));
+            gradient.addColorStop(1, getHSLColor(orb.currentHue, 90, 70, 0.7));
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.quadraticCurveTo(ctrlX, ctrlY, x2, y2);
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 2 + Math.sin(time * orb.pulseRate) * 1;
+            ctx.stroke();
+            dataTransmissions.forEach((packet, index) => {
+                if (packet.childIndex === childIndex) {
+                    packet.progress += packet.speed;
+                    if (packet.progress >= 1) {
+                        orb.receivingData = true;
+                        orb.dataReceiveTime = time;
+                        dataTransmissions.splice(index, 1);
+                    } else {
+                        const t = packet.progress;
+                        const ut = 1 - t;
+                        const x = ut * ut * packet.sourceX + 2 * ut * t * ctrlX + t * t * packet.targetX;
+                        const y = ut * ut * packet.sourceY + 2 * ut * t * ctrlY + t * t * packet.targetY;
+                        const flashIntensity = Math.sin(time * 10) * 0.5 + 0.5;
+                        const size = packet.size * (1 + flashIntensity * 0.3);
+                        const glow = ctx.createRadialGradient(x, y, 0, x, y, size * 2);
+                        const flashThreshold = 0.9;
+                        const isFlashing = flashIntensity > flashThreshold;
+                        const saturation = isFlashing ? 100 : 90;
+                        const lightness = isFlashing ? 80 : 70;
+                        const alpha = isFlashing ? 0.9 : 0.7;
+                        glow.addColorStop(0, getHSLColor(packet.hue, saturation, lightness, alpha));
+                        glow.addColorStop(1, getHSLColor(packet.hue, saturation - 20, lightness - 20, 0));
+                        ctx.fillStyle = glow;
+                        ctx.beginPath();
+                        ctx.arc(x, y, size * 2, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.fillStyle = getHSLColor(packet.hue, 100, 90, 0.9);
+                        ctx.beginPath();
+                        ctx.arc(x, y, size * 0.5, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            });
+        }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            time += 0.01;
+            updateCenters();
+            childOrbs.forEach((child, index) => {
+                child.angle += 0.005 * child.speed;
+                const verticalOffset = Math.sin(time * child.speed + child.phase) * baseRadius * 0.5;
+                const childX = centerX + Math.cos(child.angle) * child.distance();
+                const childY = centerY + Math.sin(child.angle) * child.distance() + verticalOffset;
+                drawConnection(centerX, centerY, childX, childY, time, index);
+            });
+            drawBlob(centerX, centerY, baseRadius, time, true);
+            childOrbs.forEach((child, index) => {
+                const verticalOffset = Math.sin(time * child.speed + child.phase) * baseRadius * 0.5;
+                const childX = centerX + Math.cos(child.angle) * child.distance();
+                const childY = centerY + Math.sin(child.angle) * child.distance() + verticalOffset;
+                drawBlob(childX, childY, child.radius(), time, false, index);
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    })();
     </script>
 </body>
 </html>
