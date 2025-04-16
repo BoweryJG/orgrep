@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     chatWindow.classList.add('hidden');
   };
 
-  // Simple echo handler (replace with real backend call)
+  // Supabase Edge Function handler
   const form = chatWindow.querySelector('.chatbot-form');
   const messages = chatWindow.querySelector('.chatbot-messages');
   form.onsubmit = function(e) {
@@ -39,10 +39,27 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!userMsg) return;
     messages.innerHTML += `<div class='chatbot-msg user'>${userMsg}</div>`;
     input.value = '';
-    setTimeout(() => {
-      messages.innerHTML += `<div class='chatbot-msg bot'>You said: ${userMsg}</div>`;
-      messages.scrollTop = messages.scrollHeight;
-    }, 400);
+    // Show loading message
+    const loadingMsg = document.createElement('div');
+    loadingMsg.className = 'chatbot-msg bot';
+    loadingMsg.textContent = 'Thinking...';
+    messages.appendChild(loadingMsg);
     messages.scrollTop = messages.scrollHeight;
+    // Call Supabase Edge Function
+    fetch('https://<your-project-ref>.functions.supabase.co/openai-chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userMsg })
+    })
+    .then(res => res.json())
+    .then(data => {
+      loadingMsg.remove();
+      messages.innerHTML += `<div class='chatbot-msg bot'>${data.reply}</div>`;
+      messages.scrollTop = messages.scrollHeight;
+    })
+    .catch(() => {
+      loadingMsg.textContent = 'Sorry, there was an error.';
+      messages.scrollTop = messages.scrollHeight;
+    });
   };
 });
