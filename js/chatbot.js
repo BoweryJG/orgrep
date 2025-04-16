@@ -15,31 +15,34 @@ document.addEventListener('DOMContentLoaded', function() {
       </svg>
     `;
     // DEBUG: Make launcher impossible to miss
-    launcher.style.background = 'red';
-    launcher.style.border = '6px solid yellow';
-    launcher.style.zIndex = '100000';
+    // Modern, discrete launcher style
+    launcher.style.background = 'white';
+    launcher.style.border = 'none';
+    launcher.style.zIndex = '10000';
     launcher.style.display = 'flex';
     launcher.style.alignItems = 'center';
     launcher.style.justifyContent = 'center';
     launcher.style.position = 'fixed';
-    launcher.style.bottom = '40px';
-    launcher.style.right = '40px';
-    launcher.style.width = '90px';
-    launcher.style.height = '90px';
+    launcher.style.bottom = '32px';
+    launcher.style.right = '32px';
+    launcher.style.width = '56px';
+    launcher.style.height = '56px';
     launcher.style.borderRadius = '50%';
-    launcher.style.boxShadow = '0 0 30px 10px yellow, 0 0 60px 20px red';
-    launcher.style.animation = 'ollie-flash 1s infinite alternate';
-    document.body.appendChild(launcher);
+    launcher.style.boxShadow = '0 4px 16px rgba(0,0,0,0.12)';
+    launcher.style.cursor = 'pointer';
+    launcher.style.transition = 'box-shadow 0.2s, background 0.2s';
 
-    // Add keyframes for flashing animation
-    const style = document.createElement('style');
-    style.innerHTML = `
-      @keyframes ollie-flash {
-        0% { box-shadow: 0 0 30px 10px yellow, 0 0 60px 20px red; }
-        100% { box-shadow: 0 0 60px 30px yellow, 0 0 120px 40px red; }
-      }
-    `;
-    document.head.appendChild(style);
+    // Subtle hover effect
+    launcher.addEventListener('mouseenter', () => {
+      launcher.style.boxShadow = '0 8px 24px rgba(0,0,0,0.18)';
+      launcher.style.background = '#f5f5f5';
+    });
+    launcher.addEventListener('mouseleave', () => {
+      launcher.style.boxShadow = '0 4px 16px rgba(0,0,0,0.12)';
+      launcher.style.background = 'white';
+    });
+
+    document.body.appendChild(launcher);
   }
 
   // Create chatbot window
