@@ -9,32 +9,24 @@ document.addEventListener('DOMContentLoaded', function() {
     launcher = document.createElement('div');
     launcher.id = 'ollie-launcher';
     // Elegant chat bubble SVG icon
-    launcher.innerHTML = `
-      <svg viewBox="0 0 32 32">
-        <path d="M16 5c-6.075 0-11 3.807-11 8.5 0 2.222 1.182 4.236 3.137 5.74-.13.77-.567 2.44-1.364 4.021-.191.393.241.795.623.623 2.099-.948 4.003-2.009 4.003-2.009.998.188 2.049.292 3.188.292 6.075 0 11-3.807 11-8.5S22.075 5 16 5z" />
-      </svg>
-    `;
-    // DEBUG: Make launcher impossible to miss
-    // Use the animated orb SVG as the launcher, exactly as in animated-orb.svg
-    // Use the animated orb SVG, scaled to 72x72px, no overflow
     // Cute animated alien SVG (mini, with blinking eyes via JS)
     launcher.innerHTML = `
 <svg viewBox="0 0 64 64" width="64" height="64" style="display:block; margin:0 auto;">
-<!-- Alien head -->
-<ellipse cx="32" cy="36" rx="22" ry="26" fill="#7fffd4" stroke="#2e8b57" stroke-width="2"/>
-<!-- Alien face shadow -->
-<ellipse cx="32" cy="48" rx="12" ry="6" fill="#5eead4" opacity="0.4"/>
-<!-- Left eye -->
-<ellipse class="alien-eye" cx="22" cy="36" rx="5" ry="8" fill="#222"/>
-<ellipse cx="22" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
-<!-- Right eye -->
-<ellipse class="alien-eye" cx="42" cy="36" rx="5" ry="8" fill="#222"/>
-<ellipse cx="42" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
-<!-- Antennae -->
-<line x1="32" y1="10" x2="22" y2="20" stroke="#2e8b57" stroke-width="2"/>
-<circle cx="22" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
-<line x1="32" y1="10" x2="42" y2="20" stroke="#2e8b57" stroke-width="2"/>
-<circle cx="42" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
+  <!-- Alien head -->
+  <ellipse cx="32" cy="36" rx="22" ry="26" fill="#7fffd4" stroke="#2e8b57" stroke-width="2"/>
+  <!-- Alien face shadow -->
+  <ellipse cx="32" cy="48" rx="12" ry="6" fill="#5eead4" opacity="0.4"/>
+  <!-- Left eye -->
+  <ellipse class="alien-eye" cx="22" cy="36" rx="5" ry="8" fill="#222"/>
+  <ellipse cx="22" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
+  <!-- Right eye -->
+  <ellipse class="alien-eye" cx="42" cy="36" rx="5" ry="8" fill="#222"/>
+  <ellipse cx="42" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
+  <!-- Antennae -->
+  <line x1="32" y1="10" x2="22" y2="20" stroke="#2e8b57" stroke-width="2"/>
+  <circle cx="22" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
+  <line x1="32" y1="10" x2="42" y2="20" stroke="#2e8b57" stroke-width="2"/>
+  <circle cx="42" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
 </svg>
 `;
 
@@ -50,79 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }, 180);
     }, 3000);
-<defs>
-  <radialGradient id="grad1" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
-    <animate attributeName="fx" values="50%;45%;55%;48%;52%;50%" dur="27s" repeatCount="indefinite" calcMode="spline" keySplines="0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8" />
-    <animate attributeName="fy" values="50%;55%;45%;52%;48%;50%" dur="31s" repeatCount="indefinite" calcMode="spline" keySplines="0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8" />
-    <stop offset="0%" stop-color="#00E5FF">
-      <animate attributeName="stop-color"
-        values="#00E5FF; #00FFAA; #AAFF00; #FFAA00; #FF00AA; #AA00FF; #0055FF; #00E5FF"
-        dur="120s" repeatCount="indefinite" />
-    </stop>
-    <stop offset="85%" stop-color="#5B3CFF">
-      <animate attributeName="stop-color"
-        values="#5B3CFF; #0055FF; #00E5FF; #00FFAA; #AAFF00; #FFAA00; #FF00AA; #AA00FF; #5B3CFF"
-        dur="100s" repeatCount="indefinite" />
-      <animate attributeName="offset"
-        values="85%;75%;80%;85%"
-        dur="35s" repeatCount="indefinite" calcMode="spline" keySplines="0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8" />
-    </stop>
-  </radialGradient>
-  <path id="parentOrb" d="M200,160 C236,160 265,180 265,210 C265,240 236,270 200,270 C164,270 135,240 135,210 C135,180 164,160 200,160 Z">
-    <animate attributeName="d"
-      values="M200,160 C236,160 265,180 265,210 C265,240 236,270 200,270 C164,270 135,240 135,210 C135,180 164,160 200,160 Z;
-              
-              M190,140 C235,130 260,155 270,195 C280,235 260,260 225,275 C190,290 140,275 125,235 C110,195 145,150 190,140 Z;
-              
-              M200,130 C240,140 270,170 260,220 C250,270 215,290 180,280 C145,270 110,240 120,200 C130,160 160,120 200,130 Z;
-              
-              M210,150 C245,160 275,190 270,230 C265,270 235,290 195,285 C155,280 120,255 115,215 C110,175 140,150 180,145 C185,145 205,147 210,150 Z;
-              
-              M180,140 C220,130 260,150 275,190 C290,230 270,270 230,285 C190,300 140,285 115,245 C90,205 100,155 140,140 C150,136 170,135 180,140 Z;
-              
-              M200,160 C236,160 265,180 265,210 C265,240 236,270 200,270 C164,270 135,240 135,210 C135,180 164,160 200,160 Z"
-      dur="80s" repeatCount="indefinite" calcMode="spline"
-      keySplines="0.8 0.2 0.2 0.8; 0.8 0.2 0.2 0.8; 0.8 0.2 0.2 0.8; 0.8 0.2 0.2 0.8; 0.8 0.2 0.2 0.8" />
-  </path>
-  <filter id="emotionalGlow" x="-50%" y="-50%" width="200%" height="200%">
-    <feGaussianBlur stdDeviation="15" result="blur1">
-      <animate attributeName="stdDeviation" values="15;18;15;12;15" dur="25s" repeatCount="indefinite" calcMode="spline" keySplines="0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8" />
-    </feGaussianBlur>
-    <feGaussianBlur stdDeviation="25" result="blur2">
-      <animate attributeName="stdDeviation" values="25;20;30;25" dur="27s" repeatCount="indefinite" calcMode="spline" keySplines="0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8" />
-    </feGaussianBlur>
-    <feBlend mode="screen" in="blur1" in2="blur2" result="blendedGlow" />
-    <feComposite in="SourceGraphic" in2="blendedGlow" operator="over" />
-  </filter>
-</defs>
-<g>
-  <use href="#parentOrb" fill="url(#grad1)" filter="url(#emotionalGlow)">
-    <animateTransform attributeName="transform"
-                      type="rotate"
-                      from="0 200 200"
-                      to="360 200 200"
-                      dur="240s"
-                      repeatCount="indefinite"
-                      additive="sum" />
-  </use>
-  <animateTransform attributeName="transform"
-                    type="translate"
-                    values="0,0; 8,-10; 15,-5; 12,8; 4,12; 0,0"
-                    dur="60s"
-                    repeatCount="indefinite"
-                    calcMode="spline"
-                    keySplines="0.6 0.4 0.4 0.6; 0.6 0.4 0.4 0.6; 0.6 0.4 0.4 0.6; 0.6 0.4 0.4 0.6; 0.6 0.4 0.4 0.6"
-                    additive="sum" />
-  <animateTransform attributeName="transform"
-                    type="scale"
-                    values="1;1.02;0.99;1.01;1"
-                    dur="40s"
-                    repeatCount="indefinite"
-                    calcMode="spline"
-                    keySplines="0.6 0.4 0.4 0.6; 0.6 0.4 0.4 0.6; 0.6 0.4 0.4 0.6; 0.6 0.4 0.4 0.6"
-                    additive="sum" />
-</g>
-</svg>`;
 
     launcher.style.background = 'none';
     launcher.style.border = 'none';
