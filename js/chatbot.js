@@ -53,13 +53,21 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(res => res.json())
     .then(data => {
+      console.log("Backend response:", data); // Debug log
       loadingMsg.remove();
-      messages.innerHTML += `<div class='chatbot-msg bot'>${data.reply}</div>`;
+      if (data.reply) {
+        messages.innerHTML += `<div class='chatbot-msg bot'>${data.reply}</div>`;
+      } else if (data.error) {
+        messages.innerHTML += `<div class='chatbot-msg bot'>Error: ${data.error}</div>`;
+      } else {
+        messages.innerHTML += `<div class='chatbot-msg bot'>Unknown error.</div>`;
+      }
       messages.scrollTop = messages.scrollHeight;
     })
-    .catch(() => {
+    .catch((err) => {
       loadingMsg.textContent = 'Sorry, there was an error.';
       messages.scrollTop = messages.scrollHeight;
+      console.error("Fetch error:", err);
     });
   };
 });
