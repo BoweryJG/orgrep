@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - OllieiQ</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"></script>
+  <link rel="stylesheet" href="css/ollie-launcher.css">
+  <style>
+    body { font-family: system-ui, sans-serif; background: #181c2a; color: #fff; display: flex; align-items: center; justify-content: center; height: 100vh; }
+    .login-box { background: #23263a; padding: 2rem 2.5rem; border-radius: 12px; box-shadow: 0 4px 24px #000a; }
+    .login-box h2 { margin-bottom: 1rem; }
+    .login-box input { width: 100%; padding: 0.7rem; margin: 0.5rem 0; border-radius: 6px; border: none; font-size: 1rem; }
+    .login-box button { width: 100%; background: #64c8ff; color: #181c2a; border: none; border-radius: 6px; padding: 0.7rem; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 1rem; }
+    #login-error { color: #ff6b6b; margin-top: 0.5rem; min-height: 1.5em; }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>OllieiQ Admin Login</h2>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+    <div id="login-error"></div>
+  </div>
+  <script src="js/login.js"></script>
+</body>
+</html>
