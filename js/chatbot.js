@@ -1,5 +1,7 @@
 // OllieiQ chatbot with animated orb launcher
 
+console.log("OllieiQ chatbot script loaded");
+
 document.addEventListener('DOMContentLoaded', function() {
   // Use the animated orb SVG as the launcher (must exist in HTML with id 'ollie-orb')
   let launcher = document.getElementById('ollie-launcher');
@@ -14,12 +16,30 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     // DEBUG: Make launcher impossible to miss
     launcher.style.background = 'red';
-    launcher.style.border = '3px solid yellow';
-    launcher.style.zIndex = '99999';
+    launcher.style.border = '6px solid yellow';
+    launcher.style.zIndex = '100000';
     launcher.style.display = 'flex';
     launcher.style.alignItems = 'center';
     launcher.style.justifyContent = 'center';
+    launcher.style.position = 'fixed';
+    launcher.style.bottom = '40px';
+    launcher.style.right = '40px';
+    launcher.style.width = '90px';
+    launcher.style.height = '90px';
+    launcher.style.borderRadius = '50%';
+    launcher.style.boxShadow = '0 0 30px 10px yellow, 0 0 60px 20px red';
+    launcher.style.animation = 'ollie-flash 1s infinite alternate';
     document.body.appendChild(launcher);
+
+    // Add keyframes for flashing animation
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes ollie-flash {
+        0% { box-shadow: 0 0 30px 10px yellow, 0 0 60px 20px red; }
+        100% { box-shadow: 0 0 60px 30px yellow, 0 0 120px 40px red; }
+      }
+    `;
+    document.head.appendChild(style);
   }
 
   // Create chatbot window
