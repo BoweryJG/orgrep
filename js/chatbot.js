@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
     chatWindow.classList.add('hidden');
   };
 
-
   // Supabase Edge Function handler
   const form = chatWindow.querySelector('.chatbot-form');
   const messages = chatWindow.querySelector('.chatbot-messages');
