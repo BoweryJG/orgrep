@@ -11,24 +11,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Elegant chat bubble SVG icon
     // Cute animated alien SVG (mini, with blinking eyes via JS)
     launcher.innerHTML = `
-<svg viewBox="0 0 64 64" width="64" height="64" style="display:block; margin:0 auto;">
-  <!-- Alien head -->
-  <ellipse cx="32" cy="36" rx="22" ry="26" fill="#7fffd4" stroke="#2e8b57" stroke-width="2"/>
-  <!-- Alien face shadow -->
-  <ellipse cx="32" cy="48" rx="12" ry="6" fill="#5eead4" opacity="0.4"/>
-  <!-- Left eye -->
-  <ellipse class="alien-eye" cx="22" cy="36" rx="5" ry="8" fill="#222"/>
-  <ellipse cx="22" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
-  <!-- Right eye -->
-  <ellipse class="alien-eye" cx="42" cy="36" rx="5" ry="8" fill="#222"/>
-  <ellipse cx="42" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
-  <!-- Antennae -->
-  <line x1="32" y1="10" x2="22" y2="20" stroke="#2e8b57" stroke-width="2"/>
-  <circle cx="22" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
-  <line x1="32" y1="10" x2="42" y2="20" stroke="#2e8b57" stroke-width="2"/>
-  <circle cx="42" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
-</svg>
-`;
+      <svg viewBox="0 0 64 64" width="64" height="64" style="display:block; margin:0 auto;">
+        <!-- Alien head -->
+        <ellipse cx="32" cy="36" rx="22" ry="26" fill="#7fffd4" stroke="#2e8b57" stroke-width="2"/>
+        <!-- Alien face shadow -->
+        <ellipse cx="32" cy="48" rx="12" ry="6" fill="#5eead4" opacity="0.4"/>
+        <!-- Left eye -->
+        <ellipse class="alien-eye" cx="22" cy="36" rx="5" ry="8" fill="#222"/>
+        <ellipse cx="22" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
+        <!-- Right eye -->
+        <ellipse class="alien-eye" cx="42" cy="36" rx="5" ry="8" fill="#222"/>
+        <ellipse cx="42" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
+        <!-- Antennae -->
+        <line x1="32" y1="10" x2="22" y2="20" stroke="#2e8b57" stroke-width="2"/>
+        <circle cx="22" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
+        <line x1="32" y1="10" x2="42" y2="20" stroke="#2e8b57" stroke-width="2"/>
+        <circle cx="42" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
+      </svg>
+    `;
 
     // Animate the alien's eyes blinking using JS
     setInterval(() => {
