@@ -17,7 +17,39 @@ document.addEventListener('DOMContentLoaded', function() {
     // DEBUG: Make launcher impossible to miss
     // Use the animated orb SVG as the launcher, exactly as in animated-orb.svg
     // Use the animated orb SVG, scaled to 72x72px, no overflow
-    launcher.innerHTML = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" width="160" height="160" style="display:block; position:absolute; top:-40px; left:-40px; pointer-events:none;">
+    // Cute animated alien SVG (mini, with blinking eyes via JS)
+    launcher.innerHTML = `
+<svg viewBox="0 0 64 64" width="64" height="64" style="display:block; margin:0 auto;">
+<!-- Alien head -->
+<ellipse cx="32" cy="36" rx="22" ry="26" fill="#7fffd4" stroke="#2e8b57" stroke-width="2"/>
+<!-- Alien face shadow -->
+<ellipse cx="32" cy="48" rx="12" ry="6" fill="#5eead4" opacity="0.4"/>
+<!-- Left eye -->
+<ellipse class="alien-eye" cx="22" cy="36" rx="5" ry="8" fill="#222"/>
+<ellipse cx="22" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
+<!-- Right eye -->
+<ellipse class="alien-eye" cx="42" cy="36" rx="5" ry="8" fill="#222"/>
+<ellipse cx="42" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
+<!-- Antennae -->
+<line x1="32" y1="10" x2="22" y2="20" stroke="#2e8b57" stroke-width="2"/>
+<circle cx="22" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
+<line x1="32" y1="10" x2="42" y2="20" stroke="#2e8b57" stroke-width="2"/>
+<circle cx="42" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
+</svg>
+`;
+
+    // Animate the alien's eyes blinking using JS
+    setInterval(() => {
+      const eyes = launcher.querySelectorAll('.alien-eye');
+      eyes.forEach(eye => {
+        eye.setAttribute('ry', '1');
+      });
+      setTimeout(() => {
+        eyes.forEach(eye => {
+          eye.setAttribute('ry', '8');
+        });
+      }, 180);
+    }, 3000);
 <defs>
   <radialGradient id="grad1" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
     <animate attributeName="fx" values="50%;45%;55%;48%;52%;50%" dur="27s" repeatCount="indefinite" calcMode="spline" keySplines="0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8" />
@@ -99,15 +131,15 @@ document.addEventListener('DOMContentLoaded', function() {
     launcher.style.position = 'fixed';
     launcher.style.bottom = '32px';
     launcher.style.right = '32px';
-    launcher.style.width = '80px';
-    launcher.style.height = '80px';
+    launcher.style.width = '64px';
+    launcher.style.height = '64px';
     launcher.style.borderRadius = '50%';
     launcher.style.overflow = 'visible';
     launcher.style.position = 'fixed';
     launcher.style.bottom = '32px';
     launcher.style.right = '32px';
     launcher.style.background = 'none';
-    launcher.style.border = '2px dashed #0ff'; // TEMP: outline for debugging, remove after
+    launcher.style.border = 'none';
     launcher.style.boxShadow = 'none';
     launcher.style.cursor = 'pointer';
     launcher.style.padding = '0';
