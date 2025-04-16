@@ -1,18 +1,14 @@
-// Simple floating chatbot widget
-// You can expand with real backend integration as needed
+// OllieiQ chatbot with animated orb launcher
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Create chatbot button
-  const chatBtn = document.createElement('button');
-  chatBtn.className = 'stunning-btn chatbot-fab';
-  chatBtn.innerText = 'Chat';
-  document.body.appendChild(chatBtn);
+  // Use the animated orb SVG as the launcher (must exist in HTML with id 'ollie-orb')
+  const orb = document.getElementById('ollie-orb');
 
   // Create chatbot window
   const chatWindow = document.createElement('div');
   chatWindow.className = 'chatbot-window hidden';
   chatWindow.innerHTML = `
-    <div class="chatbot-header">Chatbot <span class="chatbot-close">×</span></div>
+    <div class="chatbot-header">OllieiQ <span class="chatbot-close">×</span></div>
     <div class="chatbot-messages"></div>
     <form class="chatbot-form">
       <input type="text" class="chatbot-input" placeholder="Type a message..." autocomplete="off" required />
@@ -22,12 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.appendChild(chatWindow);
 
   // Show/hide logic
-  chatBtn.addEventListener('click', () => {
+  orb.addEventListener('click', () => {
     chatWindow.classList.toggle('hidden');
   });
   chatWindow.querySelector('.chatbot-close').onclick = () => {
     chatWindow.classList.add('hidden');
   };
+
 
   // Supabase Edge Function handler
   const form = chatWindow.querySelector('.chatbot-form');
