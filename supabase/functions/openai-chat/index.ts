@@ -1,6 +1,17 @@
 import { serve } from "https://deno.land/std@0.131.0/http/server.ts";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "https://respsheres.com", // Change to your domain or use '*' for all
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
 serve(async (req) => {
+  // Handle CORS preflight request
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+
   const { message } = await req.json();
   const apiKey = Deno.env.get("OPENAI_API_KEY");
 
@@ -18,6 +29,9 @@ serve(async (req) => {
 
   const data = await response.json();
   return new Response(JSON.stringify({ reply: data.choices[0].message.content }), {
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      ...corsHeaders,
+      "Content-Type": "application/json",
+    },
   });
 });
