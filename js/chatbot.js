@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     // DEBUG: Make launcher impossible to miss
     // Use the animated orb SVG as the launcher, exactly as in animated-orb.svg
-    launcher.innerHTML = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" width="400" height="400" style="display:block;">
+    // Use the animated orb SVG, scaled to 72x72px, no overflow
+    launcher.innerHTML = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" width="72" height="72" style="display:block;">
   <defs>
     <radialGradient id="grad1" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
       <animate attributeName="fx" values="50%;45%;55%;48%;52%;50%" dur="27s" repeatCount="indefinite" calcMode="spline" keySplines="0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8" />
@@ -101,9 +102,9 @@ document.addEventListener('DOMContentLoaded', function() {
     launcher.style.position = 'fixed';
     launcher.style.bottom = '32px';
     launcher.style.right = '32px';
-    launcher.style.width = '400px';
-    launcher.style.height = '400px';
-    launcher.style.borderRadius = '0';
+    launcher.style.width = '72px';
+    launcher.style.height = '72px';
+    launcher.style.borderRadius = '50%';
     launcher.style.boxShadow = 'none';
     launcher.style.cursor = 'pointer';
     launcher.style.padding = '0';
