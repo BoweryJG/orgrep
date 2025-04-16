@@ -86,6 +86,22 @@ const orbAnimationConfig = {
 };
 
 function animateOrb() {
+  // --- Add SVG glow effect for parent orb ---
+  const orbSVG = document.getElementById('orbSVG');
+  let glow = document.getElementById('parentOrbGlow');
+  if (!glow) {
+    glow = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+    glow.setAttribute('id', 'parentOrbGlow');
+    glow.setAttribute('cx', orbAnimationConfig.parentCenter.x);
+    glow.setAttribute('cy', orbAnimationConfig.parentCenter.y);
+    glow.setAttribute('rx', orbAnimationConfig.parentRadius * 1.6);
+    glow.setAttribute('ry', orbAnimationConfig.parentRadius * 1.6);
+    glow.setAttribute('fill', '#00E5FF');
+    glow.setAttribute('opacity', '0.25');
+    glow.setAttribute('filter', 'url(#parentGlowFilter)');
+    orbSVG.insertBefore(glow, orbSVG.firstChild);
+  }
+
   const { parentCenter, parentRadius, childCount, childGradIds, colorFamilies, childRadius, childPoints, childAmp, childrenGroup, childOrbs } = orbAnimationConfig;
 
   // Check if elements are ready
