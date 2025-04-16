@@ -6,7 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
   if (!launcher) {
     launcher = document.createElement('div');
     launcher.id = 'ollie-launcher';
-    launcher.innerHTML = `<img src="animated-orb.svg" alt="OllieiQ Orb" />`;
+    // Elegant chat bubble SVG icon
+    launcher.innerHTML = `
+      <svg viewBox="0 0 32 32">
+        <path d="M16 5c-6.075 0-11 3.807-11 8.5 0 2.222 1.182 4.236 3.137 5.74-.13.77-.567 2.44-1.364 4.021-.191.393.241.795.623.623 2.099-.948 4.003-2.009 4.003-2.009.998.188 2.049.292 3.188.292 6.075 0 11-3.807 11-8.5S22.075 5 16 5z" />
+      </svg>
+    `;
     document.body.appendChild(launcher);
   }
 

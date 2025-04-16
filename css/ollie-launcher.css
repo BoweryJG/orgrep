@@ -5,34 +5,34 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: #1e2235; /* base color */
-  box-shadow: 0 0 0 0 rgba(100, 200, 255, 0.7);
+  background: #1e2235;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 1000;
-  transition: box-shadow 0.3s;
-  border: 3px solid transparent;
+  box-shadow: 0 0 0 0 #64c8ff;
+  border: 2.5px solid #64c8ff;
   animation: ollie-glow 2s infinite alternate;
+  transition: box-shadow 0.3s, border-color 0.3s;
 }
 #ollie-launcher:hover {
-  box-shadow: 0 0 16px 4px #64c8ff, 0 0 32px 8px #8f6fff;
-  border-color: #64c8ff;
+  box-shadow: 0 0 16px 4px #64c8ff, 0 0 32px 8px #1e2235;
+  border-color: #1e2235;
 }
 @keyframes ollie-glow {
   0% {
-    box-shadow: 0 0 8px 2px #64c8ff, 0 0 0 0 #8f6fff;
+    box-shadow: 0 0 8px 2px #64c8ff;
     border-color: #64c8ff;
   }
   100% {
-    box-shadow: 0 0 24px 8px #8f6fff, 0 0 0 0 #64c8ff;
-    border-color: #8f6fff;
+    box-shadow: 0 0 24px 8px #1e2235;
+    border-color: #1e2235;
   }
 }
-#ollie-launcher svg,
-#ollie-launcher img {
-  width: 40px;
-  height: 40px;
+#ollie-launcher svg {
+  width: 36px;
+  height: 36px;
+  fill: #64c8ff;
   pointer-events: none;
 }
