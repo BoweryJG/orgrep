@@ -287,7 +287,7 @@
             <a href="#">Contact</a>
         </div>
          <div class="copyright" style="font-size: 0.9rem; color: #aaaaaa;">
-            © <span id="currentYear"></span> RepSpheres. All rights reserved.
+            &copy; <span id="currentYear"></span> RepSpheres. All rights reserved.
         </div>
     </footer>
 
@@ -385,15 +385,16 @@ function updateLoginButton(session) {
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
 
+        // Margin to prevent clipping
+        const MARGIN = 40;
+
         // Helper to find the visible size of the ecosystem section
         function resizeCanvas() {
             const container = canvas.parentElement;
             if (container) {
-                // Use container's size for canvas
                 canvas.width = container.offsetWidth;
                 canvas.height = container.offsetHeight;
             } else {
-                // Fallback
                 canvas.width = 600;
                 canvas.height = 400;
             }
@@ -401,19 +402,22 @@ function updateLoginButton(session) {
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        let centerX = canvas.width / 2;
-        let centerY = canvas.height / 2;
+        let centerX = 0;
+        let centerY = 0;
         let time = 0;
         function getBaseRadius() {
+            // Subtract margin from both sides
             return Math.min(canvas.width, canvas.height) * 0.2;
         }
         let baseRadius = getBaseRadius();
 
-        // Update on resize
         function updateCenters() {
             centerX = canvas.width / 2;
             centerY = canvas.height / 2;
-            baseRadius = getBaseRadius();
+            baseRadius = Math.min(
+                (canvas.width - 2 * MARGIN),
+                (canvas.height - 2 * MARGIN)
+            ) * 0.2;
         }
         window.addEventListener('resize', updateCenters);
 
@@ -622,14 +626,20 @@ function updateLoginButton(session) {
                 const verticalOffset = Math.sin(time * child.speed + child.phase) * baseRadius * 0.5;
                 const childX = centerX + Math.cos(child.angle) * child.distance();
                 const childY = centerY + Math.sin(child.angle) * child.distance() + verticalOffset;
-                drawConnection(centerX, centerY, childX, childY, time, index);
+                // Clamp childX and childY to stay within margin
+                const safeChildX = Math.max(MARGIN, Math.min(canvas.width - MARGIN, childX));
+                const safeChildY = Math.max(MARGIN, Math.min(canvas.height - MARGIN, childY));
+                drawConnection(centerX, centerY, safeChildX, safeChildY, time, index);
             });
             drawBlob(centerX, centerY, baseRadius, time, true);
             childOrbs.forEach((child, index) => {
                 const verticalOffset = Math.sin(time * child.speed + child.phase) * baseRadius * 0.5;
                 const childX = centerX + Math.cos(child.angle) * child.distance();
                 const childY = centerY + Math.sin(child.angle) * child.distance() + verticalOffset;
-                drawBlob(childX, childY, child.radius(), time, false, index);
+                // Clamp childX and childY to stay within margin
+                const safeChildX = Math.max(MARGIN, Math.min(canvas.width - MARGIN, childX));
+                const safeChildY = Math.max(MARGIN, Math.min(canvas.height - MARGIN, childY));
+                drawBlob(safeChildX, safeChildY, child.radius(), time, false, index);
             });
             requestAnimationFrame(animate);
         }
