@@ -23,12 +23,12 @@
             <a href="#solution">Solution</a>
             <a href="#ecosystem">Ecosystem</a>
             <a href="#exclusivity">Exclusivity</a>
-             <a href="#deployment">Deployment</a>
-            </div>
-        <button class="cta-button">
-            Install RepSpheres
+            <a href="#deployment">Deployment</a>
+        </div>
+        <button class="cta-button">Install RepSpheres
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <button id="login-btn" class="menu-btn">Sign Up / Login</button>
     </nav>
 
     <section class="hero" id="hero">
@@ -311,5 +311,55 @@
     <!-- Link to the external JavaScript file -->
     <script src="js/script.js" defer></script>
 
+    <!-- Supabase Google Auth Modal -->
+    <div id="login-modal" class="hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <h2>Sign in with Google</h2>
+        <button id="google-signin-btn">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" style="width:24px;vertical-align:middle;margin-right:8px;">
+          Sign in with Google
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script>
+    const SUPABASE_URL = 'https://cbopynuvhcymbumjnvay.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const loginBtn = document.getElementById('login-btn');
+    const loginModal = document.getElementById('login-modal');
+    const googleBtn = document.getElementById('google-signin-btn');
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+
+    loginBtn.addEventListener('click', () => {
+      loginModal.classList.remove('hidden');
+    });
+    modalBackdrop.addEventListener('click', () => {
+      loginModal.classList.add('hidden');
+    });
+
+    googleBtn.addEventListener('click', async () => {
+      const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+      if (error) alert('Error signing in: ' + error.message);
+    });
+
+    // Listen for auth changes and update UI
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        loginBtn.textContent = `Hello, ${session.user.user_metadata.full_name || 'User'} (Sign out)`;
+        loginBtn.onclick = async () => {
+          await supabase.auth.signOut();
+          location.reload();
+        };
+        loginModal.classList.add('hidden');
+      } else {
+        loginBtn.textContent = 'Sign Up / Login';
+        loginBtn.onclick = () => loginModal.classList.remove('hidden');
+      }
+    });
+    </script>
 </body>
 </html>

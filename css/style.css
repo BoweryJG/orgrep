@@ -1,4 +1,53 @@
-/* --- Base Styles & Variables --- */
+/* Modal Styles */
+#login-modal {
+  position: fixed;
+  z-index: 10000;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+  opacity: 0; transition: opacity 0.4s;
+}
+#login-modal:not(.hidden) {
+  pointer-events: auto;
+  opacity: 1;
+}
+.modal-backdrop {
+  position: absolute; left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(2px);
+}
+.modal-content {
+  position: relative;
+  background: linear-gradient(135deg, var(--purple-dark), var(--purple-medium));
+  color: #fff;
+  padding: 32px 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 var(--purple-dark);
+  min-width: 320px;
+  text-align: center;
+  animation: spin-in 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes spin-in {
+  0% { transform: scale(0.2) rotate(-120deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+#google-signin-btn {
+  margin-top: 24px;
+  padding: 12px 24px;
+  background: #fff;
+  color: #222;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--purple-dark);
+  transition: background 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+#google-signin-btn:hover {
+  background: var(--neon-purple);
+  color: #fff;
+}
 :root {
     --deep-black: #0a0a0a;
     --purple-dark: #361d5a;
