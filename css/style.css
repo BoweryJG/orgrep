@@ -1,4 +1,37 @@
 /* Modal Styles */
+
+/* Stunning Chatbot Button Style */
+@keyframes borderFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+.stunning-btn {
+  padding: 10px 28px;
+  font-weight: 600;
+  border-radius: 25px;
+  background: #18181b; /* dark flat background */
+  color: #fff;
+  border: 2px solid transparent;
+  background-image:
+    linear-gradient(#18181b, #18181b), /* button background */
+    linear-gradient(90deg, #ff6ec4, #7873f5, #42e695, #f9ea8f, #ff6ec4);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: 200% 200%;
+  animation: borderFlow 4s linear infinite;
+  transition: color 0.2s, background 0.2s;
+  box-shadow: none; /* absolutely no glow */
+}
+.stunning-btn:hover {
+  color: #18181b;
+  background-image:
+    linear-gradient(#fff, #fff),
+    linear-gradient(90deg, #ff6ec4, #7873f5, #42e695, #f9ea8f, #ff6ec4);
+}
 #login-modal {
   position: fixed;
   z-index: 10000;
