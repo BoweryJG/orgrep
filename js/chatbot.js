@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="chatbot-header">OllieiQ <span class="chatbot-close">×</span></div>
     <div class="chatbot-messages"></div>
     <form class="chatbot-form">
-      <input type="text" class="chatbot-input" placeholder="Type a message..." autocomplete="off" required />
+      <input type="text" id="ollie-chat-input" name="ollie-chat-input" class="chatbot-input" placeholder="Type a message..." autocomplete="off" required />
       <button type="submit" class="stunning-btn">Send</button>
     </form>
   `;
