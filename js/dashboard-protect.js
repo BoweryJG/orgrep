@@ -5,9 +5,15 @@ const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 const adminEmail = 'jasonwilliamgolden@gmail.com';
 
 async function protectDashboard() {
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user }, error } = await supabase.auth.getUser();
+  console.log('Dashboard protect:', { user, error });
   if (!user || user.email !== adminEmail) {
-    window.location.href = '/login.html';
+    document.getElementById('dashboard-error').textContent = 'Access denied. Please log in as admin.';
+    setTimeout(() => {
+      window.location.href = '/login.html';
+    }, 1500);
+  } else {
+    document.getElementById('dashboard-error').textContent = 'Welcome, ' + user.email;
   }
 }
 
