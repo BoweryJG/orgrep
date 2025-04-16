@@ -1,0 +1,14 @@
+# .gitignore for RepSpheres
+# Node modules and dependencies
+node_modules/
+.env
+.DS_Store
+*.log
+# Build output
+dist/
+build/
+# Netlify
+.netlify/
+# Python server artifacts
+__pycache__/
+*.pyc
