@@ -21,7 +21,7 @@ serve(async (req) => {
       return new Response(
         JSON.stringify({ error: "OPENAI_API_KEY is not set in environment variables." }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+pl       );
     }
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
