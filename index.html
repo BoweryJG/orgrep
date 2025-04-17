@@ -6,6 +6,7 @@
     <title>RepSpheres: Elevating Elite Sales Teams with Precision Intelligence</title>
     <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/hero-impact.css">
 </head>
 <body>
     <!-- SVG defs for gradients and filters (hidden) -->
@@ -111,10 +112,10 @@
       };
     </script>
 
-    <section class="hero" id="hero">
-        <div style="position:relative; width:100%; height:400px; display:flex; align-items:center; justify-content:center; z-index:1; margin-bottom:2rem;">
-          <svg id="orbSVG" viewBox="-100 -100 1000 1000" style="width:400px; height:400px; display:block; background:transparent; position:relative; z-index:2;">
-            <defs>
+    <section class="hero-impact" id="hero">
+      <div class="hero-orb-bg">
+        <svg id="orbSVG" viewBox="-100 -100 1000 1000" style="width:600px; height:600px; display:block; background:transparent; position:relative; z-index:1;">
+          <defs>
               <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
                 <stop id="p0" offset="0%" stop-color="#00E5FF"/>
                 <stop id="p1" offset="100%" stop-color="#5B3CFF"/>
@@ -145,15 +146,19 @@
             </defs>
             <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
             <g id="children"></g>
-          </svg>
-        </div>
-        <h1>Sales<br><span>Intelligence</span><br>Evolved</h1>
-        <p>Transform your elite sales team with AI-driven psychological insights that decode buyer motivations, personalize every interaction, and engineer predictable outcomes.</p>
-    </section>
-        <button class="cta-button">
-            Request RepSpheres
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+        </svg>
+      </div>
+      <div class="hero-content">
+        <h1>
+          Sales<br>
+          <span class="gradient-text">Intelligence</span><br>
+          <span class="hero-evolved">Evolved</span>
+        </h1>
+        <p class="hero-subhead">
+          Transform your elite sales team with AI-driven psychological insights that decode buyer motivations and engineer predictable outcomes.
+        </p>
+        <button class="cta-button hero-cta">Request RepSpheres</button>
+      </div>
     </section>
 
     <section class="section" id="problem">
