@@ -10,18 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
     launcher.id = 'ollie-launcher';
     // Vibrant chatbot SVG icon
     launcher.innerHTML = `
-      <div style="position:relative;width:64px;height:64px;">
-        <svg viewBox="0 0 200 200" width="64" height="64" style="display:block; margin:0 auto; position:relative; z-index:2;">
-          <g filter="url(#chatbotGlow)">
-            <path d="M50,70 L150,70 C160,70 170,80 170,90 L170,120 C170,130 160,140 150,140 L110,140 L100,160 L90,140 L50,140 C40,140 30,130 30,120 L30,90 C30,80 40,70 50,70 Z" fill="url(#chatbotGradient)" stroke="#fff" stroke-width="2" opacity="0.95"/>
-            <circle cx="75" cy="100" r="12" fill="#fff" opacity="0.9"/>
-            <circle cx="125" cy="100" r="12" fill="#fff" opacity="0.9"/>
-            <circle cx="75" cy="100" r="6" fill="url(#chatbotGradient)" opacity="0.95"/>
-            <circle cx="125" cy="100" r="6" fill="url(#chatbotGradient)" opacity="0.95"/>
-          </g>
+      <div style="position:relative;width:64px;height:64px;display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 48 48" width="48" height="48" style="display:block; margin:0 auto;">
+          <circle cx="24" cy="24" r="20" fill="#5B3CFF" stroke="#fff" stroke-width="2"/>
+          <ellipse cx="24" cy="30" rx="10" ry="5" fill="#fff" opacity=".13"/>
+          <circle cx="17" cy="22" r="2.5" fill="#fff"/>
+          <circle cx="31" cy="22" r="2.5" fill="#fff"/>
+          <rect x="19" y="28" width="10" height="2.5" rx="1.2" fill="#fff" opacity=".7"/>
         </svg>
-        <span class="chatbot-launcher-glass"></span>
-        <span class="chatbot-launcher-ring"></span>
       </div>
     `;
 
