@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podcasts - RepSpheres</title>
+  <link rel="stylesheet" href="/css/navbar-enhanced.css">
+  <link rel="stylesheet" href="/css/public-dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+  <nav class="navbar compact-navbar">
+    <div class="navbar-brand">
+      <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
+        <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
+      </svg>
+      <span>RepSpheres</span>
+    </div>
+    <div class="nav-links">
+      <a href="/blog.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📝</span> Blogs</a>
+      <a href="/podcast.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🎙️</span> Podcasts</a>
+      <a href="/market.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📈</span> Market iQ</a>
+      <a href="/dashboard/vault.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🔒</span> Intelligence Vault</a>
+    </div>
+  </nav>
+  <div class="public-podcast-search">
+    <input type="text" id="podcast-search-input" placeholder="Search podcasts by title, tag, or host...">
+    <button id="podcast-search-btn">Search</button>
+  </div>
+  <section class="public-podcast-list" id="public-podcast-list">
+    <!-- Podcast cards will be rendered here -->
+  </section>
+  <script>
+    const supabaseUrl = 'https://cbopynuvhcymbumjnvay.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+    async function fetchPodcasts(query) {
+      let podcastsQuery = supabase.from('podcasts').select('*').eq('published', true).order('created_at', { ascending: false });
+      if (query) {
+        podcastsQuery = podcastsQuery.ilike('title', `%${query}%`);
+      }
+      const { data, error } = await podcastsQuery;
+      if (error) { document.getElementById('public-podcast-list').innerHTML = '<div style="color:#ff6b6b">Failed to load podcasts.</div>'; return; }
+      renderPodcasts(data || []);
+    }
+    function renderPodcasts(podcasts) {
+      const container = document.getElementById('public-podcast-list');
+      if (!podcasts.length) { container.innerHTML = '<div style="color:#bbb">No podcasts found.</div>'; return; }
+      container.innerHTML = podcasts.map((podcast, idx) => `
+        <div class="public-podcast-card${idx === 0 ? ' public-podcast-featured' : ''}">
+          <div class="public-podcast-title">${podcast.title}</div>
+          <div class="public-podcast-meta">
+            <span class="public-podcast-author">${podcast.host || 'Unknown'}</span>
+            <span class="public-podcast-date">${new Date(podcast.created_at).toLocaleDateString()}</span>
+          </div>
+          <div class="public-podcast-summary">${podcast.summary || (podcast.description ? podcast.description.slice(0, 120) + '...' : '')}</div>
+          <div class="public-podcast-tags">
+            ${(podcast.tags||[]).map(tag => `<span class="public-podcast-tag">${tag}</span>`).join(' ')}
+          </div>
+          ${podcast.audio_url ? `<audio controls src="${podcast.audio_url}" style="width:100%;margin-top:0.8rem;"></audio>` : ''}
+        </div>
+      `).join('');
+    }
+    document.getElementById('podcast-search-btn').onclick = () => {
+      const query = document.getElementById('podcast-search-input').value;
+      fetchPodcasts(query);
+    };
+    document.getElementById('podcast-search-input').addEventListener('keyup', e => { if (e.key === 'Enter') document.getElementById('podcast-search-btn').click(); });
+    fetchPodcasts();
+  </script>
+</body>
+</html>
