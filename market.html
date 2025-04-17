@@ -51,7 +51,7 @@
       const container = document.getElementById('public-market-list');
       if (!items.length) { container.innerHTML = '<div style="color:#bbb">No market data found.</div>'; return; }
       container.innerHTML = items.map((item, idx) => `
-        <div class="public-market-card${idx === 0 ? ' public-market-featured' : ''}">
+        <a class="public-market-card${idx === 0 ? ' public-market-featured' : ''}" href="/market-detail.html?id=${item.id}" style="text-decoration:none;color:inherit;">
           <div class="public-market-title">${item.title}</div>
           <div class="public-market-meta">
             <span class="public-market-author">${item.author || 'Unknown'}</span>

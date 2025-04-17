@@ -64,7 +64,7 @@
       const container = document.getElementById('public-blog-list');
       if (!blogs.length) { container.innerHTML = '<div style="color:#bbb">No blogs found.</div>'; return; }
       container.innerHTML = blogs.map((blog, idx) => `
-        <div class="public-blog-card${idx === 0 ? ' public-blog-featured' : ''}">
+        <a class="public-blog-card${idx === 0 ? ' public-blog-featured' : ''}" href="/blog-detail.html?id=${blog.id}" style="text-decoration:none;color:inherit;">
           <div class="public-blog-title">${blog.title}</div>
           <div class="public-blog-meta">
             <span class="public-blog-author">${blog.author || 'Unknown'}</span>

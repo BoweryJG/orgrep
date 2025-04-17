@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podcast Detail - RepSpheres</title>
+  <link rel="stylesheet" href="/css/navbar-enhanced.css">
+  <link rel="stylesheet" href="/css/public-dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+  <nav class="navbar compact-navbar">
+    <div class="navbar-brand">
+      <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
+        <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
+      </svg>
+      <span>RepSpheres</span>
+    </div>
+    <div class="nav-links">
+      <a href="/blog.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📝</span> Blogs</a>
+      <a href="/podcast.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🎙️</span> Podcasts</a>
+      <a href="/market.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📈</span> Market iQ</a>
+      <a href="/dashboard/vault.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🔒</span> Intelligence Vault</a>
+    </div>
+  </nav>
+  <main id="podcast-detail-container" style="max-width:700px;margin:2.5rem auto 2rem;background:#23263a;padding:2rem 2.5rem;border-radius:14px;box-shadow:0 4px 18px #0007;">
+    <!-- Podcast detail will be rendered here -->
+  </main>
+  <script>
+    const supabaseUrl = 'https://cbopynuvhcymbumjnvay.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+    // Get podcast id from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const podcastId = urlParams.get('id');
+    async function fetchPodcastDetail() {
+      if (!podcastId) { document.getElementById('podcast-detail-container').innerHTML = '<div style="color:#ff6b6b">No podcast specified.</div>'; return; }
+      const { data, error } = await supabase.from('podcasts').select('*').eq('id', podcastId).single();
+      if (error || !data) { document.getElementById('podcast-detail-container').innerHTML = '<div style="color:#ff6b6b">Podcast not found.</div>'; return; }
+      renderPodcastDetail(data);
+    }
+    function renderPodcastDetail(podcast) {
+      document.getElementById('podcast-detail-container').innerHTML = `
+        <div class="public-podcast-title" style="font-size:2rem;">${podcast.title}</div>
+        <div class="public-podcast-meta" style="margin-bottom:1.2rem;">
+          <span class="public-podcast-author">${podcast.host || 'Unknown'}</span>
+          <span class="public-podcast-date">${new Date(podcast.created_at).toLocaleDateString()}</span>
+        </div>
+        ${podcast.featured_image ? `<img src="${podcast.featured_image}" alt="Featured" style="max-width:100%;border-radius:10px;margin-bottom:1.4rem;">` : ''}
+        <div class="public-podcast-summary" style="font-size:1.13rem;color:#ccc;margin-bottom:1.5rem;">${podcast.summary || ''}</div>
+        <div class="public-podcast-body" style="color:#eee;font-size:1.09rem;line-height:1.7;margin-bottom:1.5rem;">${podcast.description || ''}</div>
+        <div class="public-podcast-tags" style="margin-bottom:1.2rem;">
+          ${(podcast.tags||[]).map(tag => `<span class="public-podcast-tag">${tag}</span>`).join(' ')}
+        </div>
+        ${podcast.audio_url ? `<audio controls src="${podcast.audio_url}" style="width:100%;margin-bottom:1.1rem;"></audio>` : ''}
+        <div style="margin-top:2rem;display:flex;gap:1.7rem;align-items:center;">
+          <button id="like-btn" style="background:#7B42F6;color:#fff;border:none;border-radius:8px;padding:0.4rem 1.2rem;font-size:1rem;cursor:pointer;">👍 Like</button>
+          <span id="like-count" style="color:#7B42F6;font-weight:600;font-size:1.1rem;">0</span>
+        </div>
+        <div style="margin-top:2.2rem;">
+          <h3 style="color:#00FFC6;font-size:1.18rem;">Comments</h3>
+          <div id="comments-section" style="margin-top:1rem;"></div>
+          <form id="comment-form" style="margin-top:1.2rem;display:flex;gap:0.7rem;">
+            <input type="text" id="comment-author" placeholder="Your name" required style="flex:1;padding:0.5rem 1rem;border-radius:7px;border:none;">
+            <input type="text" id="comment-body" placeholder="Add a comment..." required style="flex:2;padding:0.5rem 1rem;border-radius:7px;border:none;">
+            <button type="submit" style="background:#00FFC6;color:#181a2b;border:none;border-radius:7px;padding:0 1.1rem;font-weight:700;">Post</button>
+          </form>
+        </div>
+      `;
+      // Load likes and comments
+      loadLikes();
+      loadComments();
+      document.getElementById('like-btn').onclick = async () => {
+        let count = parseInt(document.getElementById('like-count').innerText, 10) || 0;
+        document.getElementById('like-count').innerText = count + 1;
+      };
+      document.getElementById('comment-form').onsubmit = (e) => {
+        e.preventDefault();
+        let author = document.getElementById('comment-author').value.trim();
+        let body = document.getElementById('comment-body').value.trim();
+        if (!author || !body) return;
+        let comments = JSON.parse(localStorage.getItem('podcast-comments-' + podcastId) || '[]');
+        comments.push({author, body, date: new Date().toLocaleString()});
+        localStorage.setItem('podcast-comments-' + podcastId, JSON.stringify(comments));
+        loadComments();
+        document.getElementById('comment-form').reset();
+      };
+    }
+    function loadLikes() {
+      let count = parseInt(localStorage.getItem('podcast-likes-' + podcastId) || '0', 10);
+      document.getElementById('like-count').innerText = count;
+    }
+    function loadComments() {
+      let comments = JSON.parse(localStorage.getItem('podcast-comments-' + podcastId) || '[]');
+      let html = comments.map(c => `<div style='margin-bottom:0.7rem;'><span style='color:#7B42F6;font-weight:700;'>${c.author}</span> <span style='color:#bbb;font-size:0.92rem;'>${c.date}</span><div style='color:#eee;margin-left:1.2rem;'>${c.body}</div></div>`).join('');
+      document.getElementById('comments-section').innerHTML = html || '<span style="color:#bbb">No comments yet.</span>';
+    }
+    fetchPodcastDetail();
+  </script>
+</body>
+</html>

@@ -48,7 +48,7 @@
       const container = document.getElementById('public-podcast-list');
       if (!podcasts.length) { container.innerHTML = '<div style="color:#bbb">No podcasts found.</div>'; return; }
       container.innerHTML = podcasts.map((podcast, idx) => `
-        <div class="public-podcast-card${idx === 0 ? ' public-podcast-featured' : ''}">
+        <a class="public-podcast-card${idx === 0 ? ' public-podcast-featured' : ''}" href="/podcast-detail.html?id=${podcast.id}" style="text-decoration:none;color:inherit;">
           <div class="public-podcast-title">${podcast.title}</div>
           <div class="public-podcast-meta">
             <span class="public-podcast-author">${podcast.host || 'Unknown'}</span>
