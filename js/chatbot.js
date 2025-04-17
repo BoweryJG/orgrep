@@ -8,31 +8,19 @@ document.addEventListener('DOMContentLoaded', function() {
   if (!launcher) {
     launcher = document.createElement('div');
     launcher.id = 'ollie-launcher';
-    // Elegant chat bubble SVG icon
-    // Cute animated alien SVG (mini, with blinking eyes via JS)
+    // Vibrant chatbot SVG icon
     launcher.innerHTML = `
-      <svg viewBox="0 0 64 64" width="64" height="64" style="display:block; margin:0 auto;">
-        <!-- Alien head -->
-        <ellipse cx="32" cy="36" rx="22" ry="26" fill="#7fffd4" stroke="#2e8b57" stroke-width="2"/>
-        <!-- Alien face shadow -->
-        <ellipse cx="32" cy="48" rx="12" ry="6" fill="#5eead4" opacity="0.4"/>
-        <!-- Left eye -->
-        <ellipse class="alien-eye" cx="22" cy="36" rx="5" ry="8" fill="#222"/>
-        <ellipse cx="22" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
-        <!-- Right eye -->
-        <ellipse class="alien-eye" cx="42" cy="36" rx="5" ry="8" fill="#222"/>
-        <ellipse cx="42" cy="38" rx="2" ry="3" fill="#fff" opacity="0.7"/>
-        <!-- Antennae -->
-        <line x1="32" y1="10" x2="22" y2="20" stroke="#2e8b57" stroke-width="2"/>
-        <circle cx="22" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
-        <line x1="32" y1="10" x2="42" y2="20" stroke="#2e8b57" stroke-width="2"/>
-        <circle cx="42" cy="20" r="3" fill="#7fffd4" stroke="#2e8b57" stroke-width="1"/>
+      <svg viewBox="0 0 200 200" width="64" height="64" style="display:block; margin:0 auto;">
+        <g filter="url(#chatbotGlow)">
+          <path d="M50,70 L150,70 C160,70 170,80 170,90 L170,120 C170,130 160,140 150,140 L110,140 L100,160 L90,140 L50,140 C40,140 30,130 30,120 L30,90 C30,80 40,70 50,70 Z" fill="url(#chatbotGradient)" stroke="#fff" stroke-width="2" opacity="0.95"/>
+          <circle cx="75" cy="100" r="12" fill="#fff" opacity="0.9"/>
+          <circle cx="125" cy="100" r="12" fill="#fff" opacity="0.9"/>
+          <circle cx="75" cy="100" r="6" fill="url(#chatbotGradient)" opacity="0.95"/>
+          <circle cx="125" cy="100" r="6" fill="url(#chatbotGradient)" opacity="0.95"/>
+        </g>
       </svg>
     `;
 
-    // Animate the alien's eyes blinking using JS
-    setInterval(() => {
-      const eyes = launcher.querySelectorAll('.alien-eye');
       eyes.forEach(eye => {
         eye.setAttribute('ry', '1');
       });
