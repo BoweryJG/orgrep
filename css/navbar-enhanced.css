@@ -56,18 +56,18 @@
 .navbar .nav-icon svg {
   width: 20px;
   height: 20px;
-  filter: drop-shadow(0 0 8px #7B42F6aa);
+  filter: drop-shadow(0 0 2px #7B42F633);
   animation: nav-glow 2.2s infinite alternate;
 }
 @keyframes nav-glow {
   0% {
-    filter: drop-shadow(0 0 8px #7B42F6aa) drop-shadow(0 0 0px #00FFC6cc);
+    filter: drop-shadow(0 0 2px #7B42F633) drop-shadow(0 0 0px #00FFC622);
   }
   50% {
-    filter: drop-shadow(0 0 18px #00FFC6cc) drop-shadow(0 0 8px #7B42F6aa);
+    filter: drop-shadow(0 0 5px #00FFC622) drop-shadow(0 0 2px #7B42F633);
   }
   100% {
-    filter: drop-shadow(0 0 8px #7B42F6aa) drop-shadow(0 0 0px #00FFC6cc);
+    filter: drop-shadow(0 0 2px #7B42F633) drop-shadow(0 0 0px #00FFC622);
   }
 }
 
