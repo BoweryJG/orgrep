@@ -41,6 +41,24 @@
 
     <section class="hero" id="hero">
         <!-- Orb SVG Visualization -->
+    </section>
+    <!-- Admin Dashboard Menu Bar -->
+    <nav class="navbar" style="margin-top:0;">
+      <div class="navbar-brand">
+        <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
+          <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
+        </svg>
+        <span>OllieiQ Admin</span>
+      </div>
+      <div class="nav-links">
+        <a href="/dashboard/" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+        <a href="/dashboard/blog.html" class="nav-link"><span class="nav-icon">📝</span> Blogs</a>
+        <a href="/dashboard/podcast.html" class="nav-link"><span class="nav-icon">🎙️</span> Podcasts</a>
+        <a href="/dashboard/market.html" class="nav-link"><span class="nav-icon">📈</span> Market iQ</a>
+      </div>
+      <button class="cta-button" onclick="window.location.href='/dashboard/'">Admin Login</button>
+    </nav>
         <div style="position:relative; width:100%; height:400px; display:flex; align-items:center; justify-content:center; z-index:1; margin-bottom:2rem;">
           <svg id="orbSVG" viewBox="0 0 800 800" style="width:400px; height:400px; display:block; background:transparent; position:relative; z-index:2;">
             <defs>
