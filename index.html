@@ -10,55 +10,65 @@
 <body>
     <div class="stars" id="stars"></div>
 
-    <nav class="navbar">
-        <div class="navbar-brand">
-            <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
-                <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
-            </svg>
-            <span>RepSpheres</span>
-        </div>
-        <div class="nav-links">
-            <a href="#problem">Problem</a>
-            <a href="#solution">Solution</a>
-            <a href="#ecosystem">Ecosystem</a>
-            <a href="#exclusivity">Exclusivity</a>
-            <a href="#deployment">Deployment</a>
-        </div>
-        <button id="login-btn" class="cta-button dropdown-btn">
-            Sign Up / Login
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div id="login-dropdown" class="dropdown hidden">
-            <button id="google-signin-btn" class="dropdown-item">
-    <span style="display:flex;align-items:center;gap:10px;">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" style="width:22px;height:22px;vertical-align:middle;filter: drop-shadow(0 0 4px var(--neon-purple));">
-        <span style="font-weight:600;letter-spacing:0.01em;">Sign in with Google</span>
-    </span>
-</button>
-        </div>
-    </nav>
-
-    <section class="hero" id="hero">
-        <!-- Orb SVG Visualization -->
-    </section>
-    <!-- Admin Dashboard Menu Bar -->
-    <nav class="navbar" style="margin-top:0;">
+    <nav class="navbar compact-navbar">
       <div class="navbar-brand">
         <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
           <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
         </svg>
-        <span>OllieiQ Admin</span>
+        <span>RepSpheres</span>
       </div>
       <div class="nav-links">
         <a href="/dashboard/" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
-        <a href="/dashboard/blog.html" class="nav-link"><span class="nav-icon">📝</span> Blogs</a>
-        <a href="/dashboard/podcast.html" class="nav-link"><span class="nav-icon">🎙️</span> Podcasts</a>
-        <a href="/dashboard/market.html" class="nav-link"><span class="nav-icon">📈</span> Market iQ</a>
       </div>
-      <button class="cta-button" onclick="window.location.href='/dashboard/'">Admin Login</button>
+      <div class="nav-admin" id="nav-admin" style="display:none;">
+        <button class="cta-button nav-admin-btn" id="admin-dropdown-btn">
+          <span class="nav-icon">⚙️</span> Admin
+        </button>
+        <div class="admin-dropdown hidden" id="admin-dropdown">
+          <a href="/dashboard/blog.html" class="nav-link"><span class="nav-icon">📝</span> Blogs</a>
+          <a href="/dashboard/podcast.html" class="nav-link"><span class="nav-icon">🎙️</span> Podcasts</a>
+          <a href="/dashboard/market.html" class="nav-link"><span class="nav-icon">📈</span> Market iQ</a>
+        </div>
+      </div>
+      <button id="login-btn" class="cta-button dropdown-btn">
+        Sign Up / Login
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div id="login-dropdown" class="dropdown hidden">
+        <button id="google-signin-btn" class="dropdown-item">
+          <span style="display:flex;align-items:center;gap:10px;">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" style="width:22px;height:22px;vertical-align:middle;filter: drop-shadow(0 0 4px var(--neon-purple));">
+            <span style="font-weight:600;letter-spacing:0.01em;">Sign in with Google</span>
+          </span>
+        </button>
+      </div>
     </nav>
+    <script>
+      // Show admin dropdown if user is admin
+      const adminEmail = 'jasonwilliamgolden@gmail.com';
+      _supabase.auth.getUser().then(({ data: { user } }) => {
+        if (user && user.email === adminEmail) {
+          document.getElementById('nav-admin').style.display = 'flex';
+        }
+      });
+      // Dropdown toggle
+      document.getElementById('admin-dropdown-btn').onclick = function(e) {
+        e.stopPropagation();
+        document.getElementById('admin-dropdown').classList.toggle('hidden');
+      };
+      document.body.onclick = function() {
+        document.getElementById('admin-dropdown').classList.add('hidden');
+      };
+      document.getElementById('admin-dropdown').onclick = function(e) {
+        e.stopPropagation();
+      };
+    </script>
+
+    <section class="hero" id="hero">
+        <!-- Orb SVG Visualization -->
+    </section>
+
         <div style="position:relative; width:100%; height:400px; display:flex; align-items:center; justify-content:center; z-index:1; margin-bottom:2rem;">
           <svg id="orbSVG" viewBox="0 0 800 800" style="width:400px; height:400px; display:block; background:transparent; position:relative; z-index:2;">
             <defs>
