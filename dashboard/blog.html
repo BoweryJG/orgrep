@@ -42,46 +42,18 @@
     </div>
     <button class="cta-button" onclick="logout()">Logout</button>
   </nav>
-  <main class="admin-main-container">
-    <div class="blog-manager-box">
-      <h2>Blog Manager</h2>
-      <form class="blog-form" id="blog-form">
-        <input type="text" id="blog-title" placeholder="Blog Title" required />
-        <textarea id="blog-body" placeholder="Blog Content" rows="5" required></textarea>
-        <button type="submit">Add Blog Post</button>
-        <div id="blog-error"></div>
-      </form>
-      <div class="blog-list" id="blog-list">
-        <!-- Blog posts will be loaded here -->
-      </div>
+  <div class="dashboard-box">
+    <h2>Blog Manager</h2>
+    <form class="blog-form" id="blog-form">
+      <input type="text" id="blog-title" placeholder="Blog Title" required />
+      <textarea id="blog-body" placeholder="Blog Content" rows="5" required></textarea>
+      <button type="submit">Add Blog Post</button>
+      <div id="blog-error"></div>
+    </form>
+    <div class="blog-list" id="blog-list">
+      <!-- Blog posts will be loaded here -->
     </div>
-  </main>
-  <style>
-    .admin-main-container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-top: 2.5rem;
-      background: none;
-    }
-    .blog-manager-box {
-      margin-top: 2rem;
-      box-shadow: 0 4px 24px #000a;
-      max-width: 600px;
-      width: 100%;
-    }
-    @media (max-width: 700px) {
-      .admin-main-container {
-        padding-top: 1rem;
-      }
-      .blog-manager-box {
-        margin-top: 1rem;
-        padding: 1rem 0.5rem;
-      }
-    }
-  </style>
+  </div>
   <script src="../js/blog-manager.js"></script>
 </body>
 </html>
