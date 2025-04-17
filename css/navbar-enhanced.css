@@ -56,7 +56,19 @@
 .navbar .nav-icon svg {
   width: 20px;
   height: 20px;
-  filter: drop-shadow(0 0 6px #7B42F6aa);
+  filter: drop-shadow(0 0 8px #7B42F6aa);
+  animation: nav-glow 2.2s infinite alternate;
+}
+@keyframes nav-glow {
+  0% {
+    filter: drop-shadow(0 0 8px #7B42F6aa) drop-shadow(0 0 0px #00FFC6cc);
+  }
+  50% {
+    filter: drop-shadow(0 0 18px #00FFC6cc) drop-shadow(0 0 8px #7B42F6aa);
+  }
+  100% {
+    filter: drop-shadow(0 0 8px #7B42F6aa) drop-shadow(0 0 0px #00FFC6cc);
+  }
 }
 
 .navbar .cta-button {
