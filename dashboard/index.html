@@ -22,6 +22,21 @@
   </style>
 </head>
 <body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
+        <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
+      </svg>
+      <span>OllieiQ Admin</span>
+    </div>
+    <div class="nav-links">
+      <a href="/dashboard/">Dashboard</a>
+      <a href="#" onclick="alert('Blog Manager coming soon!'); return false;">Blog Manager</a>
+      <a href="#" onclick="alert('Podcast Manager coming soon!'); return false;">Podcast Manager</a>
+    </div>
+    <button class="cta-button" onclick="logout()">Logout</button>
+  </nav>
   <div class="dashboard-box">
     <h2>Welcome to the OllieiQ Admin Dashboard</h2>
     <p>This area is protected and visible only to you (admin).</p>
