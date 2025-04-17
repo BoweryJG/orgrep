@@ -50,6 +50,28 @@
   box-shadow: 0 2px 12px #7B42F6aa;
 }
 
+/* Intelligence Vault Special Styling */
+.navbar .nav-link[href*='vault'] {
+  background: linear-gradient(90deg, #1FFFFF 0%, #FF1493 100%);
+  color: #fff;
+  border: 1.5px solid transparent;
+  border-image: linear-gradient(90deg, #1FFFFF, #FF1493) 1;
+  box-shadow: 0 0 16px #1FFFFF44, 0 0 8px #FF149388;
+  position: relative;
+  overflow: hidden;
+}
+.navbar .nav-link[href*='vault'] .nav-icon svg {
+  filter: drop-shadow(0 0 12px #1FFFFFcc) drop-shadow(0 0 8px #FF1493cc);
+}
+.navbar .nav-link[href*='vault']:hover,
+.navbar .nav-link[href*='vault'].active {
+  background: linear-gradient(90deg, #FF1493 0%, #1FFFFF 100%);
+  color: #181a2b;
+  box-shadow: 0 4px 20px #FF1493cc, 0 0 12px #1FFFFFcc;
+  border-image: linear-gradient(90deg, #FF1493, #1FFFFF) 1;
+}
+
+
 .navbar .nav-icon svg {
   width: 28px;
   height: 28px;
