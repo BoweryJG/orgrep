@@ -86,7 +86,6 @@
   <circle id="mini-orb" cx="12" cy="12" r="5" fill="url(#orbLogoGradient)" filter="url(#orbLogoGlow)" style="pointer-events:none;transition:opacity 0.6s cubic-bezier(.77,0,.18,1.09);"/>
 </svg>
 <div id="guide-orb" style="display:none;position:fixed;top:24px;left:34px;width:44px;height:44px;z-index:10003;pointer-events:none;transition:all 0.9s cubic-bezier(.77,0,.18,1.09);will-change:transform,opacity;"></div>
-<div id="guide-orb" style="display:none;position:fixed;top:24px;left:34px;width:44px;height:44px;z-index:10003;pointer-events:none;transition:all 0.9s cubic-bezier(.77,0,.18,1.09);will-change:transform,opacity;"></div>
         <span>RepSpheres</span>
       </div>
       <div class="nav-links">
@@ -746,70 +745,6 @@ function updateLoginButton(session) {
     })();
     </script>
     <script src="js/chatbot.js"></script>
-<script>
-// --- Guide Orb Animation Logic ---
-const logo = document.querySelector('.logo');
-const guideOrb = document.getElementById('guide-orb');
-let orbActive = false;
 
-// Insert animated orb SVG into #guide-orb
-if (guideOrb) {
-  guideOrb.innerHTML = `<svg width="44" height="44" viewBox="0 0 24 24" style="display:block;" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="orbLogoGradient2" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
-        <stop offset="0%" stop-color="#00E5FF">
-          <animate attributeName="stop-color" values="#00E5FF; #00FFAA; #AAFF00; #FFAA00; #FF00AA; #AA00FF; #0055FF; #00E5FF" dur="120s" repeatCount="indefinite" />
-        </stop>
-        <stop offset="85%" stop-color="#5B3CFF">
-          <animate attributeName="stop-color" values="#5B3CFF; #0055FF; #00E5FF; #00FFAA; #AAFF00; #FFAA00; #FF00AA; #AA00FF; #5B3CFF" dur="100s" repeatCount="indefinite" />
-          <animate attributeName="offset" values="85%;75%;80%;85%" dur="35s" repeatCount="indefinite" />
-        </stop>
-      </radialGradient>
-      <filter id="orbLogoGlow2" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="2.5" result="blur1" />
-        <feGaussianBlur stdDeviation="4.5" result="blur2" />
-        <feBlend mode="screen" in="blur1" in2="blur2" result="blendedGlow" />
-        <feComposite in="SourceGraphic" in2="blendedGlow" operator="over" />
-      </filter>
-    </defs>
-    <circle cx="12" cy="12" r="11" fill="url(#orbLogoGradient2)" filter="url(#orbLogoGlow2)"/>
-  </svg>`;
-}
-
-function orbJumpOut() {
-  if (orbActive) return;
-  orbActive = true;
-  // Hide orb in logo, show floating orb
-  const miniOrb = document.getElementById('mini-orb');
-  if (miniOrb) miniOrb.style.opacity = '0';
-  guideOrb.style.display = 'block';
-  guideOrb.style.opacity = '1';
-  guideOrb.style.transform = 'translateY(0) scale(1)';
-}
-
-function orbReturnHome() {
-  orbActive = false;
-  const miniOrb = document.getElementById('mini-orb');
-  if (miniOrb) miniOrb.style.opacity = '1';
-  guideOrb.style.opacity = '0';
-  setTimeout(()=>{ guideOrb.style.display = 'none'; }, 800);
-}
-
-let lastScrollY = window.scrollY;
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 60) {
-    orbJumpOut();
-    // Optionally, animate orb to follow scroll or float to a corner
-    guideOrb.style.top = '32px';
-    guideOrb.style.left = 'calc(50vw - 22px)';
-    guideOrb.style.transform = 'scale(1.15)';
-  } else {
-    orbReturnHome();
-    guideOrb.style.top = '24px';
-    guideOrb.style.left = '34px';
-    guideOrb.style.transform = 'scale(1)';
-  }
-});
-</script>
 </body>
 </html>
