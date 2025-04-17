@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OllieiQ Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    // Initialize Supabase client for dashboard
+    const supabase = supabase.createClient(
+      'https://cbopynuvhcymbumjnvay.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU'
+    );
+  </script>
   <link rel="stylesheet" href="../css/ollie-launcher.css">
   <style>
     body { background: #181c2a; color: #fff; font-family: system-ui, sans-serif; margin: 0; }
