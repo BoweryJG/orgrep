@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: radial-gradient(ellipse at center, #181a2b 60%, #090a14 100%);
+  background: transparent;
 }
 .hero-orb-bg {
   position: absolute;
