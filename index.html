@@ -44,6 +44,17 @@
           <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
           <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
         </filter>
+        <linearGradient id="chatbotGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#7B42F6" />
+          <stop offset="100%" stop-color="#00FFC6" />
+        </linearGradient>
+        <filter id="chatbotGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+          <feComposite in="blur" in2="SourceGraphic" operator="over" />
+          <feFlood flood-color="#7B42F6" flood-opacity=".8" result="glow" />
+          <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
+          <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
+        </filter>
       </defs>
     </svg>
     <div class="stars" id="stars"></div>
