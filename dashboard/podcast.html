@@ -13,18 +13,7 @@
     const adminEmail = 'jasonwilliamgolden@gmail.com';
   </script>
   <script src="../js/dashboard-protect.js"></script>
-  <style>
-    .podcast-manager-box { max-width: 600px; margin: 5rem auto; background: #23263a; padding: 2rem 2.5rem; border-radius: 12px; box-shadow: 0 4px 24px #000a; }
-    .podcast-list { margin-top: 2rem; }
-    .podcast-item { background: #191c2b; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
-    .podcast-title { font-weight: bold; color: var(--accent-color); }
-    .podcast-body { color: #eee; margin-top: 0.5rem; }
-    .podcast-form { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
-    .podcast-form input, .podcast-form textarea { padding: 0.7rem; border-radius: 6px; border: none; font-size: 1rem; }
-    .podcast-form button { background: #8a4fff; color: #fff; border: none; border-radius: 6px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 0.5rem; }
-    .podcast-form button:hover { background: #b347ff; }
-    #podcast-error { color: #ff6b6b; margin-top: 1rem; }
-  </style>
+
 </head>
 <body>
   <nav class="navbar">
@@ -42,7 +31,7 @@
     </div>
     <button class="cta-button" onclick="logout()">Logout</button>
   </nav>
-  <div class="podcast-manager-box">
+  <div class="dashboard-box">
     <h2>Podcast Manager</h2>
     <form class="podcast-form" id="podcast-form">
       <input type="text" id="podcast-title" placeholder="Podcast Title" required />
