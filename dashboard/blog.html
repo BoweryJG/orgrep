@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Manager - OllieiQ Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const supabaseUrl = 'https://cbopynuvhcymbumjnvay.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+    const adminEmail = 'jasonwilliamgolden@gmail.com';
+  </script>
+  <script src="../js/dashboard-protect.js"></script>
+  <style>
+    .blog-manager-box { max-width: 600px; margin: 5rem auto; background: #23263a; padding: 2rem 2.5rem; border-radius: 12px; box-shadow: 0 4px 24px #000a; }
+    .blog-list { margin-top: 2rem; }
+    .blog-item { background: #191c2b; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+    .blog-title { font-weight: bold; color: var(--accent-color); }
+    .blog-body { color: #eee; margin-top: 0.5rem; }
+    .blog-form { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .blog-form input, .blog-form textarea { padding: 0.7rem; border-radius: 6px; border: none; font-size: 1rem; }
+    .blog-form button { background: #8a4fff; color: #fff; border: none; border-radius: 6px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 0.5rem; }
+    .blog-form button:hover { background: #b347ff; }
+    #blog-error { color: #ff6b6b; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
+        <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
+      </svg>
+      <span>OllieiQ Admin</span>
+    </div>
+    <div class="nav-links">
+      <a href="/dashboard/">Dashboard</a>
+      <a href="/dashboard/blog.html">Blog Manager</a>
+      <a href="/dashboard/podcast.html">Podcast Manager</a>
+    </div>
+    <button class="cta-button" onclick="logout()">Logout</button>
+  </nav>
+  <div class="blog-manager-box">
+    <h2>Blog Manager</h2>
+    <form class="blog-form" id="blog-form">
+      <input type="text" id="blog-title" placeholder="Blog Title" required />
+      <textarea id="blog-body" placeholder="Blog Content" rows="5" required></textarea>
+      <button type="submit">Add Blog Post</button>
+      <div id="blog-error"></div>
+    </form>
+    <div class="blog-list" id="blog-list">
+      <!-- Blog posts will be loaded here -->
+    </div>
+  </div>
+  <script src="../js/blog-manager.js"></script>
+</body>
+</html>
