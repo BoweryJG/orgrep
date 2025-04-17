@@ -7,19 +7,19 @@
   backdrop-filter: blur(12px);
   box-shadow: 0 4px 24px 0 rgba(123,66,246,0.08);
   z-index: 100;
-  padding: 0.75rem 2.5rem;
+  padding: 0.35rem 1.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 72px;
+  min-height: 48px;
   transition: background 0.3s;
 }
 
 .navbar .navbar-brand {
   display: flex;
   align-items: center;
-  gap: 14px;
-  font-size: 1.7rem;
+  gap: 9px;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #fff;
   letter-spacing: 0.03em;
@@ -27,18 +27,18 @@
 
 .navbar .nav-links {
   display: flex;
-  gap: 2.3rem;
+  gap: 1.1rem;
 }
 
 .navbar .nav-link {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.18rem;
+  gap: 6px;
+  font-size: 0.98rem;
   color: #fff;
   font-weight: 600;
-  padding: 0.6rem 1.3rem;
-  border-radius: 2rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 1.2rem;
   transition: background 0.2s, color 0.2s;
   position: relative;
 }
@@ -57,15 +57,15 @@
 }
 
 .navbar .cta-button {
-  font-size: 1.15rem;
-  padding: 0.7rem 2.2rem;
-  border-radius: 2rem;
+  font-size: 0.99rem;
+  padding: 0.38rem 1.05rem;
+  border-radius: 1.2rem;
   background: linear-gradient(90deg, #7B42F6, #00FFC6);
   color: #fff;
   border: none;
-  box-shadow: 0 4px 32px 0 rgba(123,66,246,0.13);
+  box-shadow: 0 2px 16px 0 rgba(123,66,246,0.13);
   transition: background 0.3s;
-  margin-left: 1.5rem;
+  margin-left: 0.7rem;
 }
 .navbar .cta-button:hover {
   background: linear-gradient(90deg, #00FFC6, #7B42F6);
