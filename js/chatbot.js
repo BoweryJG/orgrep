@@ -21,16 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
       </svg>
     `;
 
-      eyes.forEach(eye => {
-        eye.setAttribute('ry', '1');
-      });
-      setTimeout(() => {
-        eyes.forEach(eye => {
-          eye.setAttribute('ry', '8');
-        });
-      }, 180);
-    }, 3000);
-
     launcher.style.background = 'none';
     launcher.style.border = 'none';
     launcher.style.zIndex = '10000';
