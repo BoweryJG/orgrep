@@ -209,6 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroEvolved = document.querySelector('.hero-evolved');
     const miniOrb = document.getElementById('mini-orb');
     const guideOrb = document.getElementById('guide-orb');
+    // (Removed duplicate progressIndicator declaration)
 
     let guideBarActive = false;
     let orbAnimating = false;
@@ -225,15 +226,30 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    // Align the progress bar so its center matches the logo orb's center
+    function alignProgressBarToLogo() {
+        if (!progressIndicator || !miniOrb) return;
+        const orbCenter = getMiniOrbCenter();
+        const barRect = progressIndicator.getBoundingClientRect();
+        // The bar's width is fixed, so align its center to orb center
+        const barWidth = progressIndicator.offsetWidth;
+        // Place the bar so its center is at orbCenter.x
+        const left = orbCenter.x - barWidth / 2;
+        progressIndicator.style.position = 'fixed';
+        progressIndicator.style.left = `${left}px`;
+        progressIndicator.style.top = `0px`;
+        progressIndicator.style.zIndex = 10002;
+        // Optionally, set pointer-events to none if needed
+    }
+
     // Helper: Get the target position for the guide orb (center of guide bar)
     function getGuideOrbTarget() {
-        const bar = document.getElementById('progressIndicator');
-        if (!bar) return { x: 0, y: 0 };
-        const rect = bar.getBoundingClientRect();
-        // Place guide orb vertically aligned with first dot or center of bar
+        if (!progressIndicator) return { x: 0, y: 0 };
+        const barRect = progressIndicator.getBoundingClientRect();
+        // Center of the bar, vertically offset for the orb
         return {
-            x: rect.left + rect.width / 2,
-            y: rect.top + 44 // 44px offset to match guide orb style
+            x: barRect.left + barRect.width / 2,
+            y: barRect.top + 44 // 44px offset to match guide orb style
         };
     }
 
@@ -241,6 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateOrbToGuideBar() {
         if (orbAnimating || guideBarActive) return;
         orbAnimating = true;
+        alignProgressBarToLogo();
         // Get start and end positions
         const start = getMiniOrbCenter();
         const end = getGuideOrbTarget();
@@ -271,6 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 orbAnimating = false;
                 // Hide mini orb, show progress bar
                 if (progressIndicator) progressIndicator.style.display = 'block';
+                alignProgressBarToLogo();
                 // Change logo inner circle to standard purple
                 miniOrb.setAttribute('fill', 'var(--accent-color)');
             }
