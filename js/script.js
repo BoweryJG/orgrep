@@ -239,19 +239,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Align the guide orb and progress bar to the center of the logo orb
     function alignGuideBarAndOrbToLogo() {
         if (!miniOrb || !guideOrb || !progressIndicator) return;
-        const logo = miniOrb.closest('svg');
-        if (!logo) return;
-        const rect = logo.getBoundingClientRect();
         const orbRect = miniOrb.getBoundingClientRect();
-        // Center X of the logo orb (inner orb)
+        // Center X of the orb relative to viewport
         const centerX = orbRect.left + orbRect.width / 2;
-        // Vertically align the guide orb and progress bar
+        // Set guide orb and progress bar left position (fixed coordinates)
+        guideOrb.style.position = 'fixed';
         guideOrb.style.left = `${centerX - guideOrb.offsetWidth / 2}px`;
-        progressIndicator.style.left = `${centerX - progressIndicator.offsetWidth / 2}px`;
         progressIndicator.style.position = 'fixed';
+        progressIndicator.style.left = `${centerX - progressIndicator.offsetWidth / 2}px`;
         progressIndicator.style.top = '0px';
         progressIndicator.style.zIndex = 10002;
     }
+
+    window.addEventListener('resize', alignGuideBarAndOrbToLogo);
 
     // Helper: Get the target position for the guide orb (center of guide bar, left-aligned)
     function getGuideOrbTarget() {
