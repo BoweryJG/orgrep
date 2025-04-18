@@ -148,6 +148,8 @@ function animateOrb() {
 
 // --- Main Site Logic ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Fix: Define navbar so it can be safely used below
+    const navbar = document.querySelector('.navbar');
     // Assign DOM elements
     // (migrated to DOMContentLoaded)
     // (migrated to DOMContentLoaded)
