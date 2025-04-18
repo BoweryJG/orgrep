@@ -440,26 +440,6 @@ document.addEventListener('DOMContentLoaded', () => {
         miniOrb.style.opacity = '0';
         guideBarActive = true;
         orbAnimating = false;
-        if (progressIndicator) progressIndicator.style.display = 'block';
-        // Start following scroll with spiral
-        if (!spiralAnimFrame) spiralOrbAnimationLoop();
-    }
-
-    // Stop spiral animation when orb returns
-    function animateOrbToLogo() {
-        if (orbAnimating || !guideBarActive) return;
-        orbAnimating = true;
-        guideOrb.style.display = 'none';
-        miniOrb.style.opacity = '1';
-        if (progressIndicator) progressIndicator.style.display = 'none';
-        guideBarActive = false;
-        orbAnimating = false;
-        if (spiralAnimFrame) {
-            cancelAnimationFrame(spiralAnimFrame);
-            spiralAnimFrame = null;
-        }
-    }
-
     window.addEventListener('scroll', updateGuideOrbPosition, { passive: true });
     window.addEventListener('resize', updateGuideOrbPosition);
     }
