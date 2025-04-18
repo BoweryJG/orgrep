@@ -78,12 +78,16 @@
   font-weight: 600;
 }
 
+/*
+  Always keep the logo flush left. Padding-left is removed on small screens.
+  The navbar-brand must not add margin/padding to the left.
+*/
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: linear-gradient(90deg, #23263a 0%, #191c2b 100%);
-  padding: 0.65rem 1.25rem;
+  padding: 0.65rem 1.25rem 0.65rem 0; /* Remove left padding */
   border-bottom: 1px solid #282c4a;
   box-shadow: 0 2px 18px #0005;
   position: sticky;
@@ -100,7 +104,9 @@
   font-weight: 700;
   color: #fff;
   letter-spacing: 0.01em;
-}
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+} /* No left margin/padding for left alignment */
 
 .nav-links {
   display: flex;
@@ -194,7 +200,7 @@
   .navbar {
     flex-direction: column;
     align-items: flex-start;
-    padding: 1rem 1rem;
+    padding: 1rem 0 1rem 0 !important; /* Remove left/right padding on mobile */
   }
   .nav-links {
     gap: 0.5rem;

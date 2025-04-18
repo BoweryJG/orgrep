@@ -148,6 +148,18 @@ function animateOrb() {
 
 // --- Main Site Logic ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Ensure bar aligns to orb on load
+    if (typeof alignGuideBarAndOrbToLogo === 'function') alignGuideBarAndOrbToLogo();
+
+    // If navbar or logo layout changes dynamically (e.g., by JS or menu toggle), re-align
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        const observer = new MutationObserver(() => {
+            if (typeof alignGuideBarAndOrbToLogo === 'function') alignGuideBarAndOrbToLogo();
+        });
+        observer.observe(navbar, { attributes: true, childList: true, subtree: true });
+    }
+
 
     // --- Orb Animation Initialization ---
     const orbSVGElement = document.getElementById('orbSVG');
