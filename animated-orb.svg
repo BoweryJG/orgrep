@@ -50,10 +50,6 @@
     </filter>
   </defs>
   
-  <!-- Deep cosmic background with subtle pulsing -->
-  <rect width="400" height="400" fill="#0B0B20">
-    <animate attributeName="fill" values="#0B0B20;#0D0D28;#0A0A23;#0B0B20" dur="45s" repeatCount="indefinite" calcMode="spline" keySplines="0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8; 0.6 0.2 0.4 0.8" />
-  </rect>
   
   <!-- The parent orb with emotional, fluid animations -->
   <g>
