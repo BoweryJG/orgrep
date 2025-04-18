@@ -156,6 +156,12 @@
   transform: translateY(-2px) scale(1.04);
 }
 
+#progressIndicator {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(.4,0,.2,1);
+}
+
 /* Center and style hero title */
 .hero h1, .hero-title, h1.hero-title {
   text-align: center;
