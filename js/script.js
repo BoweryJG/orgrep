@@ -148,11 +148,58 @@ function animateOrb() {
 
 // --- Main Site Logic ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Assign DOM elements
+    // (migrated to DOMContentLoaded)
+    // (migrated to DOMContentLoaded)
+    // (migrated to DOMContentLoaded)
+
+    // Align the guide orb and progress bar to the center of the logo orb
+    function alignGuideBarAndOrbToLogo() {
+        if (!miniOrb || !guideOrb || !progressIndicator) return;
+        const orbRect = miniOrb.getBoundingClientRect();
+        const centerX = orbRect.left + orbRect.width / 2;
+        guideOrb.style.position = 'fixed';
+        guideOrb.style.left = `${centerX - guideOrb.offsetWidth / 2}px`;
+        progressIndicator.style.position = 'fixed';
+        progressIndicator.style.left = `${centerX - progressIndicator.offsetWidth / 2}px`;
+        progressIndicator.style.top = '0px';
+        progressIndicator.style.zIndex = 10002;
+    }
+
+    // Show/hide guide bar after scrolling a bit
+    function handleGuideBarScrollVisibility() {
+        if (!progressIndicator) return;
+        if (window.scrollY > 100) {
+            progressIndicator.style.opacity = '1';
+            progressIndicator.style.pointerEvents = 'auto';
+        } else {
+            progressIndicator.style.opacity = '0';
+            progressIndicator.style.pointerEvents = 'none';
+        }
+    }
+
+    // Initial setup
+    alignGuideBarAndOrbToLogo();
+    handleGuideBarScrollVisibility();
+
+    // Realign on resize and after navbar changes
+    window.addEventListener('resize', alignGuideBarAndOrbToLogo);
+    window.addEventListener('scroll', handleGuideBarScrollVisibility, { passive: true });
+
+    // If navbar or logo layout changes dynamically (e.g., by JS or menu toggle), re-align
+    // (migrated to DOMContentLoaded)
+    if (navbar) {
+        const observer = new MutationObserver(() => {
+            alignGuideBarAndOrbToLogo();
+        });
+        observer.observe(navbar, { attributes: true, childList: true, subtree: true });
+    }
+
     // Ensure bar aligns to orb on load
     if (typeof alignGuideBarAndOrbToLogo === 'function') alignGuideBarAndOrbToLogo();
 
     // If navbar or logo layout changes dynamically (e.g., by JS or menu toggle), re-align
-    const navbar = document.querySelector('.navbar');
+    // (migrated to DOMContentLoaded)
     if (navbar) {
         const observer = new MutationObserver(() => {
             if (typeof alignGuideBarAndOrbToLogo === 'function') alignGuideBarAndOrbToLogo();
@@ -211,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cookieBanner = document.getElementById('cookieBanner');
     const cookieButtons = document.querySelectorAll('.cookie-btn');
     const parallaxElements = document.querySelectorAll('.parallax');
-    const progressIndicator = document.getElementById('progressIndicator');
+    // (migrated to DOMContentLoaded)
     const progressTracker = document.getElementById('progressTracker');
     const progressTrail = document.getElementById('progressTrail');
     const currentYearSpan = document.getElementById('currentYear');
@@ -221,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Flash animation for logo orb (mini-orb)
     function triggerLogoOrbFlash() {
-        const miniOrb = document.getElementById('mini-orb');
+        // (migrated to DOMContentLoaded)
         if (!miniOrb) return;
         miniOrb.classList.add('orb-flash');
         setTimeout(() => {
@@ -229,8 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 400); // Duration matches CSS animation
     }
     const heroEvolved = document.querySelector('.hero-evolved');
-    const miniOrb = document.getElementById('mini-orb');
-    const guideOrb = document.getElementById('guide-orb');
+    // (migrated to DOMContentLoaded)
+    // (migrated to DOMContentLoaded)
     // (Removed duplicate progressIndicator declaration)
 
     let guideBarActive = false;
