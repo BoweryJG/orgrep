@@ -236,14 +236,21 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // Always left-align the progress bar (no dynamic centering)
-    function alignProgressBarToLogo() {
-        if (!progressIndicator) return;
+    // Align the guide orb and progress bar to the center of the logo orb
+    function alignGuideBarAndOrbToLogo() {
+        if (!miniOrb || !guideOrb || !progressIndicator) return;
+        const logo = miniOrb.closest('svg');
+        if (!logo) return;
+        const rect = logo.getBoundingClientRect();
+        const orbRect = miniOrb.getBoundingClientRect();
+        // Center X of the logo orb (inner orb)
+        const centerX = orbRect.left + orbRect.width / 2;
+        // Vertically align the guide orb and progress bar
+        guideOrb.style.left = `${centerX - guideOrb.offsetWidth / 2}px`;
+        progressIndicator.style.left = `${centerX - progressIndicator.offsetWidth / 2}px`;
         progressIndicator.style.position = 'fixed';
-        progressIndicator.style.left = '15px';
         progressIndicator.style.top = '0px';
         progressIndicator.style.zIndex = 10002;
-        // Optionally, set pointer-events to none if needed
     }
 
     // Helper: Get the target position for the guide orb (center of guide bar, left-aligned)
@@ -293,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 orbAnimating = false;
                 // Hide mini orb, show progress bar
                 if (progressIndicator) progressIndicator.style.display = 'block';
-                alignProgressBarToLogo();
+                alignGuideBarAndOrbToLogo();
                 // Change logo inner circle to standard purple
                 miniOrb.setAttribute('fill', 'var(--accent-color)');
             }
