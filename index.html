@@ -132,28 +132,41 @@
     </nav>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script>
-      // Initialize Supabase client
-      const SUPABASE_URL = 'https://cbopynuvhcymbumjnvay.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
-      const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      // Show admin dropdown if user is admin
-      const adminEmail = 'jasonwilliamgolden@gmail.com';
-      _supabase.auth.getUser().then(({ data: { user } }) => {
-        if (user && user.email === adminEmail) {
-          document.getElementById('nav-admin').style.display = 'flex';
+      document.addEventListener('DOMContentLoaded', function() {
+        // Only run if Supabase is available
+        if (!window.supabase) return;
+
+        const SUPABASE_URL = typeof SUPABASE_URL !== 'undefined' ? SUPABASE_URL : '';
+        const SUPABASE_ANON_KEY = typeof SUPABASE_ANON_KEY !== 'undefined' ? SUPABASE_ANON_KEY : '';
+        const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Show admin dropdown if user is admin
+        const adminEmail = 'jasonwilliamgolden@gmail.com';
+        _supabase.auth.getUser().then(({ data: { user } }) => {
+          if (user && user.email === adminEmail) {
+            var navAdmin = document.getElementById('nav-admin');
+            if (navAdmin) navAdmin.style.display = 'flex';
+          }
+        });
+
+        // Dropdown toggle logic (safe)
+        var adminDropdownButton = document.getElementById('admin-dropdown-btn');
+        var adminDropdown = document.getElementById('admin-dropdown');
+
+        if (adminDropdownButton && adminDropdown) {
+          adminDropdownButton.onclick = function(e) {
+            e.stopPropagation();
+            adminDropdown.classList.toggle('hidden');
+          };
+          document.body.onclick = function() {
+            adminDropdown.classList.add('hidden');
+          };
+          adminDropdown.onclick = function(e) {
+            e.stopPropagation();
+          };
         }
+        // If elements are missing, do nothing (no errors)
       });
-      // Dropdown toggle
-      document.getElementById('admin-dropdown-btn').onclick = function(e) {
-        e.stopPropagation();
-        document.getElementById('admin-dropdown').classList.toggle('hidden');
-      };
-      document.body.onclick = function() {
-        document.getElementById('admin-dropdown').classList.add('hidden');
-      };
-      document.getElementById('admin-dropdown').onclick = function(e) {
-        e.stopPropagation();
-      };
     </script>
 
     <section class="hero-impact" id="hero">
