@@ -463,18 +463,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', updateGuideOrbPosition, { passive: true });
     window.addEventListener('resize', updateGuideOrbPosition);
     }
+// Removed duplicate animateOrbToLogo function that caused a syntax error.
 
-    // Animate orb back to logo
-    function animateOrbToLogo() {
-        if (orbAnimating || !guideBarActive) return;
-        orbAnimating = true;
-        // Instantly hide guide orb and show mini orb
-        guideOrb.style.display = 'none';
-        miniOrb.style.opacity = '1';
-        if (progressIndicator) progressIndicator.style.display = 'none';
-        guideBarActive = false;
-        orbAnimating = false;
-    }
     }
 
     // Scroll trigger logic
