@@ -1130,7 +1130,13 @@ body {
     .footer-links { margin-top: 1rem; } /* Add space */
     .copyright { margin-top: 1rem; width: 100%; /* Ensure full width */}
     .cookie-banner { padding: 1rem 2rem; }
-    .progress-indicator { left: 15px; } /* Move indicator closer to edge on smaller screens */
+    .progress-indicator { left: 15px !important; display: flex !important; }
+    #guide-orb {
+        left: 15px !important;
+        right: auto !important;
+        display: block !important;
+        position: fixed !important;
+    }
 }
 
 
@@ -1170,8 +1176,14 @@ body {
     .footer-links { gap: 1rem; justify-content: center; }
     .cookie-banner { flex-direction: column; padding: 1rem 1.5rem; gap: 1rem; }
     .cookie-text { margin-right: 0; text-align: center; }
-     .progress-indicator { left: 10px; } /* Even closer */
-     .progress-dot::after { display: none; } /* Hide labels on small screens */
+    .progress-indicator { left: 15px !important; display: flex !important; }
+    #guide-orb {
+        left: 15px !important;
+        right: auto !important;
+        display: block !important;
+        position: fixed !important;
+    }
+    .progress-dot::after { display: none; } /* Hide labels on small screens */
 }
 
  @media (max-width: 480px) {
@@ -1188,5 +1200,11 @@ body {
      .ecosystem { height: 400px; }
      .center-sphere { width: 120px; height: 120px;}
      .satellite { width: 60px; height: 60px; font-size: 0.7rem; }
-      .progress-indicator { display: none; } /* Optionally hide indicator on very small screens */
- }
+      .progress-indicator { left: 15px !important; display: flex !important; }
+      #guide-orb {
+         left: 15px !important;
+         right: auto !important;
+         display: block !important;
+         position: fixed !important;
+     }
+  }
