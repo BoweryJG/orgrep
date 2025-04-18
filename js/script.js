@@ -226,23 +226,17 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // Align the progress bar so its center matches the logo orb's center
+    // Always left-align the progress bar (no dynamic centering)
     function alignProgressBarToLogo() {
-        if (!progressIndicator || !miniOrb) return;
-        const orbCenter = getMiniOrbCenter();
-        const barRect = progressIndicator.getBoundingClientRect();
-        // The bar's width is fixed, so align its center to orb center
-        const barWidth = progressIndicator.offsetWidth;
-        // Place the bar so its center is at orbCenter.x
-        const left = orbCenter.x - barWidth / 2;
+        if (!progressIndicator) return;
         progressIndicator.style.position = 'fixed';
-        progressIndicator.style.left = `${left}px`;
-        progressIndicator.style.top = `0px`;
+        progressIndicator.style.left = '15px';
+        progressIndicator.style.top = '0px';
         progressIndicator.style.zIndex = 10002;
         // Optionally, set pointer-events to none if needed
     }
 
-    // Helper: Get the target position for the guide orb (center of guide bar)
+    // Helper: Get the target position for the guide orb (center of guide bar, left-aligned)
     function getGuideOrbTarget() {
         if (!progressIndicator) return { x: 0, y: 0 };
         const barRect = progressIndicator.getBoundingClientRect();
@@ -265,7 +259,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show guide orb at start position, hide mini orb
         guideOrb.style.display = 'block';
         guideOrb.style.opacity = '1';
-        guideOrb.style.left = `${start.x - 22}px`;
+        // Always left-align the guide orb
+        guideOrb.style.left = '15px';
         guideOrb.style.top = `${start.y - 22}px`;
         miniOrb.style.opacity = '0';
 
@@ -307,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show guide orb at start position
         guideOrb.style.display = 'block';
         guideOrb.style.opacity = '1';
-        guideOrb.style.left = `${start.x - 22}px`;
+        guideOrb.style.left = '15px';
         guideOrb.style.top = `${start.y - 22}px`;
 
         // Animate along a spiral path back
