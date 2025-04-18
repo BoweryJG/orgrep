@@ -206,6 +206,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const sectionsForScroll = document.querySelectorAll('.section, .hero, .parallax, .footer'); // Sections for progress dots
 
     // --- Guide Orb & Progress Bar Scroll Logic ---
+
+    // Flash animation for logo orb (mini-orb)
+    function triggerLogoOrbFlash() {
+        const miniOrb = document.getElementById('mini-orb');
+        if (!miniOrb) return;
+        miniOrb.classList.add('orb-flash');
+        setTimeout(() => {
+            miniOrb.classList.remove('orb-flash');
+        }, 400); // Duration matches CSS animation
+    }
     const heroEvolved = document.querySelector('.hero-evolved');
     const miniOrb = document.getElementById('mini-orb');
     const guideOrb = document.getElementById('guide-orb');
@@ -333,7 +343,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const rect = heroEvolved.getBoundingClientRect();
         const trigger = rect.top < window.innerHeight * 0.25; // Trigger when "evolved" is 25% from top
         if (trigger && !guideBarActive && !orbAnimating) {
-            animateOrbToGuideBar();
+            triggerLogoOrbFlash();
+            setTimeout(() => {
+                animateOrbToGuideBar();
+            }, 400); // Wait for flash to finish before animating
         } else if (!trigger && guideBarActive && !orbAnimating) {
             animateOrbToLogo();
         }

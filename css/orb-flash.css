@@ -1,0 +1,9 @@
+@keyframes orb-flash {
+  0%   { filter: drop-shadow(0 0 0px #fff) brightness(1); }
+  40%  { filter: drop-shadow(0 0 24px #fff) brightness(2.5); }
+  60%  { filter: drop-shadow(0 0 18px #fff) brightness(2); }
+  100% { filter: drop-shadow(0 0 0px #fff) brightness(1); }
+}
+.orb-flash {
+  animation: orb-flash 0.4s cubic-bezier(.77,0,.18,1.09);
+}
