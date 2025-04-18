@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // (migrated to DOMContentLoaded)
 
     // Align the guide orb and progress bar to the center of the logo orb
-    function alignGuideBarAndOrbToLogo() {
+    function alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator) {
         if (!miniOrb || !guideOrb || !progressIndicator) return;
         const orbRect = miniOrb.getBoundingClientRect();
         const centerX = orbRect.left + orbRect.width / 2;
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Show/hide guide bar after scrolling a bit
-    function handleGuideBarScrollVisibility() {
+    function handleGuideBarScrollVisibility(progressIndicator) {
         if (!progressIndicator) return;
         if (window.scrollY > 100) {
             progressIndicator.style.opacity = '1';
@@ -179,30 +179,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initial setup
-    alignGuideBarAndOrbToLogo();
-    handleGuideBarScrollVisibility();
+    const miniOrb = document.getElementById('mini-orb');
+    const guideOrb = document.getElementById('guide-orb');
+    const progressIndicator = document.getElementById('progressIndicator');
+    alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
+    handleGuideBarScrollVisibility(progressIndicator);
 
     // Realign on resize and after navbar changes
-    window.addEventListener('resize', alignGuideBarAndOrbToLogo);
-    window.addEventListener('scroll', handleGuideBarScrollVisibility, { passive: true });
+    window.addEventListener('resize', () => alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator));
+    window.addEventListener('scroll', () => handleGuideBarScrollVisibility(progressIndicator), { passive: true });
 
     // If navbar or logo layout changes dynamically (e.g., by JS or menu toggle), re-align
     // (migrated to DOMContentLoaded)
     if (navbar) {
         const observer = new MutationObserver(() => {
-            alignGuideBarAndOrbToLogo();
+            alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
         });
         observer.observe(navbar, { attributes: true, childList: true, subtree: true });
     }
 
     // Ensure bar aligns to orb on load
-    if (typeof alignGuideBarAndOrbToLogo === 'function') alignGuideBarAndOrbToLogo();
+    if (typeof alignGuideBarAndOrbToLogo === 'function') alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
 
     // If navbar or logo layout changes dynamically (e.g., by JS or menu toggle), re-align
     // (migrated to DOMContentLoaded)
     if (navbar) {
         const observer = new MutationObserver(() => {
-            if (typeof alignGuideBarAndOrbToLogo === 'function') alignGuideBarAndOrbToLogo();
+            if (typeof alignGuideBarAndOrbToLogo === 'function') alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
         });
         observer.observe(navbar, { attributes: true, childList: true, subtree: true });
     }
@@ -268,13 +271,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Flash animation for logo orb (mini-orb)
     function triggerLogoOrbFlash() {
-        // (migrated to DOMContentLoaded)
-        if (!miniOrb) return;
-        miniOrb.classList.add('orb-flash');
-        setTimeout(() => {
-            miniOrb.classList.remove('orb-flash');
-        }, 400); // Duration matches CSS animation
-    }
+    const miniOrb = document.getElementById('mini-orb');
+    if (!miniOrb) return;
+    miniOrb.classList.add('orb-flash');
+    setTimeout(() => {
+        miniOrb.classList.remove('orb-flash');
+    }, 400); // Duration matches CSS animation
+}
     const heroEvolved = document.querySelector('.hero-evolved');
     // (migrated to DOMContentLoaded)
     // (migrated to DOMContentLoaded)
@@ -284,7 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let orbAnimating = false;
 
     // Helper: Get the center position of the logo orb in the viewport
-    function getMiniOrbCenter() {
+    function getMiniOrbCenter(miniOrb) {
+        if (!miniOrb) return { x: 0, y: 0 };
         const logo = miniOrb.closest('svg');
         if (!logo) return { x: 0, y: 0 };
         const rect = logo.getBoundingClientRect();
@@ -296,12 +300,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Align the guide orb and progress bar to the center of the logo orb
-    function alignGuideBarAndOrbToLogo() {
+    function alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator) {
         if (!miniOrb || !guideOrb || !progressIndicator) return;
         const orbRect = miniOrb.getBoundingClientRect();
-        // Center X of the orb relative to viewport
         const centerX = orbRect.left + orbRect.width / 2;
-        // Set guide orb and progress bar left position (fixed coordinates)
         guideOrb.style.position = 'fixed';
         guideOrb.style.left = `${centerX - guideOrb.offsetWidth / 2}px`;
         progressIndicator.style.position = 'fixed';
@@ -310,10 +312,10 @@ document.addEventListener('DOMContentLoaded', () => {
         progressIndicator.style.zIndex = 10002;
     }
 
-    window.addEventListener('resize', alignGuideBarAndOrbToLogo);
+    window.addEventListener('resize', () => alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator));
 
     // Helper: Get the target position for the guide orb (center of guide bar, left-aligned)
-    function getGuideOrbTarget() {
+    function getGuideOrbTarget(progressIndicator) {
         if (!progressIndicator) return { x: 0, y: 0 };
         const barRect = progressIndicator.getBoundingClientRect();
         // Center of the bar, vertically offset for the orb
@@ -324,8 +326,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Animate orb from logo to guide bar (whimsical path)
-    function animateOrbToGuideBar() {
+    function animateOrbToGuideBar(miniOrb, guideOrb, progressIndicator) {
         if (orbAnimating || guideBarActive) return;
+        alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
         orbAnimating = true;
         alignProgressBarToLogo();
         // Get start and end positions
