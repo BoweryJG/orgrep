@@ -205,6 +205,135 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentYearSpan = document.getElementById('currentYear');
     const sectionsForScroll = document.querySelectorAll('.section, .hero, .parallax, .footer'); // Sections for progress dots
 
+    // --- Guide Orb & Progress Bar Scroll Logic ---
+    const heroEvolved = document.querySelector('.hero-evolved');
+    const miniOrb = document.getElementById('mini-orb');
+    const guideOrb = document.getElementById('guide-orb');
+
+    let guideBarActive = false;
+    let orbAnimating = false;
+
+    // Helper: Get the center position of the logo orb in the viewport
+    function getMiniOrbCenter() {
+        const logo = miniOrb.closest('svg');
+        if (!logo) return { x: 0, y: 0 };
+        const rect = logo.getBoundingClientRect();
+        // SVG viewBox is 24x24, orb is at (12,12) with r=5
+        return {
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2
+        };
+    }
+
+    // Helper: Get the target position for the guide orb (center of guide bar)
+    function getGuideOrbTarget() {
+        const bar = document.getElementById('progressIndicator');
+        if (!bar) return { x: 0, y: 0 };
+        const rect = bar.getBoundingClientRect();
+        // Place guide orb vertically aligned with first dot or center of bar
+        return {
+            x: rect.left + rect.width / 2,
+            y: rect.top + 44 // 44px offset to match guide orb style
+        };
+    }
+
+    // Animate orb from logo to guide bar (whimsical path)
+    function animateOrbToGuideBar() {
+        if (orbAnimating || guideBarActive) return;
+        orbAnimating = true;
+        // Get start and end positions
+        const start = getMiniOrbCenter();
+        const end = getGuideOrbTarget();
+
+        // Show guide orb at start position, hide mini orb
+        guideOrb.style.display = 'block';
+        guideOrb.style.opacity = '1';
+        guideOrb.style.left = `${start.x - 22}px`;
+        guideOrb.style.top = `${start.y - 22}px`;
+        miniOrb.style.opacity = '0';
+
+        // Animate along a spiral path using JS (simple parametric spiral)
+        let t = 0, duration = 1.2, steps = 60;
+        function step() {
+            t += 1 / steps;
+            // Spiral: interpolate with some sine/cosine for whimsy
+            const spiral = 60 * Math.sin(Math.PI * t * 2) * (1 - t);
+            const x = lerp(start.x, end.x, t) + spiral * Math.cos(Math.PI * t * 2);
+            const y = lerp(start.y, end.y, t) + spiral * Math.sin(Math.PI * t * 2);
+            guideOrb.style.left = `${x - 22}px`;
+            guideOrb.style.top = `${y - 22}px`;
+            if (t < 1) {
+                requestAnimationFrame(step);
+            } else {
+                guideOrb.style.left = `${end.x - 22}px`;
+                guideOrb.style.top = `${end.y - 22}px`;
+                guideBarActive = true;
+                orbAnimating = false;
+                // Hide mini orb, show progress bar
+                if (progressIndicator) progressIndicator.style.display = 'block';
+                // Change logo inner circle to standard purple
+                miniOrb.setAttribute('fill', 'var(--accent-color)');
+            }
+        }
+        step();
+    }
+
+    // Animate orb back to logo
+    function animateOrbToLogo() {
+        if (orbAnimating || !guideBarActive) return;
+        orbAnimating = true;
+        // Get start and end positions
+        const start = getGuideOrbTarget();
+        const end = getMiniOrbCenter();
+
+        // Show guide orb at start position
+        guideOrb.style.display = 'block';
+        guideOrb.style.opacity = '1';
+        guideOrb.style.left = `${start.x - 22}px`;
+        guideOrb.style.top = `${start.y - 22}px`;
+
+        // Animate along a spiral path back
+        let t = 0, duration = 1.2, steps = 60;
+        function step() {
+            t += 1 / steps;
+            const spiral = 60 * Math.sin(Math.PI * (1 - t) * 2) * t;
+            const x = lerp(start.x, end.x, t) + spiral * Math.cos(Math.PI * (1 - t) * 2);
+            const y = lerp(start.y, end.y, t) + spiral * Math.sin(Math.PI * (1 - t) * 2);
+            guideOrb.style.left = `${x - 22}px`;
+            guideOrb.style.top = `${y - 22}px`;
+            if (t < 1) {
+                requestAnimationFrame(step);
+            } else {
+                guideOrb.style.display = 'none';
+                miniOrb.style.opacity = '1';
+                if (progressIndicator) progressIndicator.style.display = 'none';
+                guideBarActive = false;
+                orbAnimating = false;
+            }
+        }
+        step();
+    }
+
+    // Scroll trigger logic
+    function checkScrollTrigger() {
+        if (!heroEvolved) return;
+        const rect = heroEvolved.getBoundingClientRect();
+        const trigger = rect.top < window.innerHeight * 0.25; // Trigger when "evolved" is 25% from top
+        if (trigger && !guideBarActive && !orbAnimating) {
+            animateOrbToGuideBar();
+        } else if (!trigger && guideBarActive && !orbAnimating) {
+            animateOrbToLogo();
+        }
+    }
+
+    // Initial state
+    if (progressIndicator) progressIndicator.style.display = 'none';
+    if (guideOrb) guideOrb.style.display = 'none';
+    if (miniOrb) miniOrb.style.opacity = '1';
+
+    window.addEventListener('scroll', checkScrollTrigger, { passive: true });
+    window.addEventListener('resize', checkScrollTrigger);
+
     // --- Utility Functions ---
     const throttle = (func, limit) => {
         let inThrottle;
