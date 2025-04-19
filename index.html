@@ -459,58 +459,62 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script>
-
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Supabase client
+    const SUPABASE_URL = 'https://cbopynuvhcymbumjnvay.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
+    const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const loginBtn = document.getElementById('login-btn');
-const loginDropdown = document.getElementById('login-dropdown');
-const googleBtn = document.getElementById('google-signin-btn');
+    const loginDropdown = document.getElementById('login-dropdown');
+    const googleBtn = document.getElementById('google-signin-btn');
 
-function showDropdown(e) {
-  e.stopPropagation();
-  loginDropdown.classList.toggle('hidden');
-}
-function hideDropdown() {
-  if (!loginDropdown.classList.contains('hidden')) {
-    loginDropdown.classList.add('hidden');
-  }
-}
-function signOutHandler(e) {
-  e.stopPropagation();
-  _supabase.auth.signOut().then(() => location.reload());
-}
+    function showDropdown(e) {
+      e.stopPropagation();
+      loginDropdown.classList.toggle('hidden');
+    }
+    function hideDropdown() {
+      if (!loginDropdown.classList.contains('hidden')) {
+        loginDropdown.classList.add('hidden');
+      }
+    }
+    function signOutHandler(e) {
+      e.stopPropagation();
+      _supabase.auth.signOut().then(() => location.reload());
+    }
 
-// Always attach these listeners ONCE
-loginBtn.removeEventListener('click', showDropdown);
-loginBtn.removeEventListener('click', signOutHandler);
-loginBtn.addEventListener('click', showDropdown);
-document.addEventListener('click', hideDropdown);
-googleBtn.addEventListener('click', async () => {
-  const { error } = await _supabase.auth.signInWithOAuth({ provider: 'google' });
-  if (error) alert('Error signing in: ' + error.message);
-});
-
-// Only update button text and mode, not listeners
-function updateLoginButton(session) {
-  if (session?.user) {
-    loginBtn.textContent = `Hello, ${session.user.user_metadata.full_name || 'User'} (Sign out)`;
-    loginDropdown.classList.add('hidden');
+    // Always attach these listeners ONCE
     loginBtn.removeEventListener('click', showDropdown);
-    loginBtn.addEventListener('click', signOutHandler);
-  } else {
-    loginBtn.textContent = 'Sign Up / Login';
-    loginDropdown.classList.add('hidden');
     loginBtn.removeEventListener('click', signOutHandler);
     loginBtn.addEventListener('click', showDropdown);
-  }
-}
+    document.addEventListener('click', hideDropdown);
+    googleBtn.addEventListener('click', async () => {
+      const { error } = await _supabase.auth.signInWithOAuth({ provider: 'google' });
+      if (error) alert('Error signing in: ' + error.message);
+    });
+
+    // Only update button text and mode, not listeners
+    function updateLoginButton(session) {
+      if (session?.user) {
+        loginBtn.textContent = `Hello, ${session.user.user_metadata.full_name || 'User'} (Sign out)`;
+        loginDropdown.classList.add('hidden');
+        loginBtn.removeEventListener('click', showDropdown);
+        loginBtn.addEventListener('click', signOutHandler);
+      } else {
+        loginBtn.textContent = 'Sign Up / Login';
+        loginDropdown.classList.add('hidden');
+        loginBtn.removeEventListener('click', signOutHandler);
+        loginBtn.addEventListener('click', showDropdown);
+      }
+    }
 
     // Initial state
     _supabase.auth.getSession().then(({ data: { session } }) => updateLoginButton(session));
     // Listen for auth changes
     _supabase.auth.onAuthStateChange((event, session) => updateLoginButton(session));
-    </script>
+});
+</script>
 
     <script>
     // --- Orb Animation from elaborb.html, adapted for section canvas ---
