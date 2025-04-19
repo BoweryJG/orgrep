@@ -797,6 +797,18 @@ body {
     animation: neonPulse 3.2s ease-in-out infinite alternate;
     margin-top: 3rem;
     margin-bottom: 3rem;
+    /* Gradient overlay at top for smooth blue blend */
+    overflow: hidden;
+}
+.parallax-content::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 36px;
+    border-radius: 18px 18px 0 0;
+    pointer-events: none;
+    z-index: 3;
+    background: linear-gradient(180deg, #00ffc6cc 0%, transparent 100%);
+    opacity: 0.75;
 }
 @keyframes neonPulse {
   0%, 100% { box-shadow: 0 0 24px 2px #00ffc6b0, 0 0 0 2.5px #00ffc6cc inset; }
