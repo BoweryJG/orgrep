@@ -739,7 +739,7 @@ if (navbar) {
 
 
     // --- Initial Setup Calls ---
-    createStarryBackground();
+    createStarryBackgroundFor();
     enhanceSatellites();
     createOrbitAnimations();
     addCentralParticles();
