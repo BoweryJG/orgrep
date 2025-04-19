@@ -804,17 +804,35 @@ body {
     content: none !important;
     display: none !important;
 }
+    background: transparent;
+    overflow: hidden;
+    box-shadow: 0 0 38px 6px #00ffc670, 0 0 0 2.5px #00ffc6cc inset;
+    margin-top: 4rem;
+}
+
+.parallax-content::before {
+    content: none !important;
+    display: none !important;
+}
+
 .parallax-content::after {
     content: none !important;
     display: none !important;
 }
-.parallax-content {
-    /* Neon border and pulse remain */
-    background: transparent;
-    box-shadow: 0 0 38px 6px #00ffc670, 0 0 0 2.5px #00ffc6cc inset;
-    margin-top: 4rem;
-    /* The rest of your .parallax-content styles remain unchanged */
+
+.parallax-inner {
+    background: linear-gradient(180deg, #00ffc6 0%, #00ffc6 100%);
+    border-radius: 16px;
+    padding: 0 2rem;
+    color: #fff !important;
+    opacity: 1 !important;
+    position: relative;
+    animation: neonPulse 3.2s ease-in-out infinite alternate;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    /* Gradient overlay at top for smooth blue blend */
 }
+
 @keyframes neonPulse {
   0%, 100% { box-shadow: 0 0 24px 2px #00ffc6b0, 0 0 0 2.5px #00ffc6cc inset; }
   50% { box-shadow: 0 0 38px 6px #00ffc6f0, 0 0 0 3.5px #00ffc6ee inset; }
