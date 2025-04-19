@@ -776,7 +776,6 @@ body {
     z-index: 10 !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-    border: 2px solid #00ffc6 !important; /* Debug: remove after verifying */
 }
 
 .stars {
@@ -793,7 +792,9 @@ body {
     color: #fff !important;
     opacity: 1 !important;
     position: relative;
-    border: 2px dashed #7B42F6 !important; /* Debug: remove after verifying */
+    border-radius: 18px;
+    box-shadow: 0 0 24px 2px #00ffc6b0, 0 0 0 2.5px #00ffc6cc inset;
+    /* Subtle neon glow border */
 }
 
 .parallax-content h2 {
