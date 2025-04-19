@@ -800,7 +800,20 @@ body {
     /* Gradient overlay at top for smooth blue blend */
     overflow: hidden;
 }
-.parallax-content::before, .parallax-content::after {
+.parallax-content::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: -14px;
+    height: 38px;
+    border-radius: 24px 24px 0 0;
+    pointer-events: none;
+    z-index: 21;
+    background: linear-gradient(180deg, rgba(18,22,56,0.98) 0%, rgba(0,255,198,0.18) 40%, transparent 100%);
+    opacity: 0.87;
+    filter: blur(2px);
+    mix-blend-mode: lighten;
+}
+.parallax-content::after {
     content: none !important;
     display: none !important;
 }
