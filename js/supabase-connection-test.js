@@ -4,7 +4,7 @@
 (function() {
 
   function runTest() {
-    if (!window.supabase || !window.supabase.createClient) {
+    if (!window.supabase) {
       setTimeout(runTest, 100);
       return;
     }
