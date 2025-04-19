@@ -321,8 +321,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- FORCE STARS TO SHOW IN ALL .stars DIVS ON PAGE LOAD ---
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.stars').forEach(starsDiv => {
+    function populateStarsInAllSections() {
+        // Only target .stars inside .parallax (the neon section)
+        document.querySelectorAll('.parallax .stars').forEach(starsDiv => {
             starsDiv.innerHTML = '';
             for (let i = 0; i < 60; i++) {
                 const star = document.createElement('div');
@@ -341,7 +342,12 @@ document.addEventListener('DOMContentLoaded', () => {
             starsDiv.style.opacity = '1';
             starsDiv.style.display = 'block';
         });
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        populateStarsInAllSections();
     });
+    // Also re-populate on window resize in case layout changes
+    window.addEventListener('resize', populateStarsInAllSections);
     // (Original helper and logic kept below for reference)
 
     // Helper to generate stars in a given container
