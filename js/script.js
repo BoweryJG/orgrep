@@ -299,26 +299,26 @@ document.addEventListener('DOMContentLoaded', () => {
      // --- Initialization Functions ---
 
     // Create twinkling stars
-    const createStarryBackground = () => {
-        if (!starsContainer) return;
-        starsContainer.innerHTML = '';
-        const fragment = document.createDocumentFragment();
-        for (let i = 0; i < CONFIG.numStars; i++) {
-            const star = document.createElement('div');
-            star.classList.add('star');
-            const size = getRandom(1, 3);
-            const brightness = getRandom(0.4, 0.9);
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            star.style.opacity = brightness.toString();
-            star.style.left = `${getRandom(0, 100)}%`;
-            star.style.top = `${getRandom(0, 100)}%`;
-            star.style.animationDelay = `${getRandom(0, 8)}s`;
-            star.style.animationDuration = `${getRandom(2, 5)}s`;
-            fragment.appendChild(star);
-        }
-        starsContainer.appendChild(fragment);
-    };
+    function createStarryBackgroundFor(starsContainer) {
+    if (!starsContainer) return;
+    starsContainer.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < 60; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        const size = Math.random() * 2 + 1;
+        const brightness = Math.random() * 0.5 + 0.4;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.opacity = brightness.toString();
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 8}s`;
+        star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        fragment.appendChild(star);
+    }
+    starsContainer.appendChild(fragment);
+}
 
     // --- FORCE STARS TO SHOW IN ALL .stars DIVS ON PAGE LOAD ---
     function populateStarsInAllSections() {
