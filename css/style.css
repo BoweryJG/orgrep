@@ -459,8 +459,10 @@ body {
     position: absolute;
     background-color: white;
     border-radius: 50%;
-    opacity: 0; /* Initial opacity set by JS */
+    opacity: 1 !important;
     animation: twinkle 4s infinite; /* Base duration, overridden by JS */
+    z-index: 3 !important;
+    display: block !important;
 }
 
 @keyframes twinkle {
@@ -780,12 +782,14 @@ body {
 .stars {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 0 !important;
+    z-index: 2 !important;
     pointer-events: none;
+    opacity: 1 !important;
+    display: block !important;
 }
 
 .parallax-content {
-    z-index: 20 !important;
+    z-index: 3 !important;
     text-align: center;
     padding: 0 2rem;
     color: #fff !important;
