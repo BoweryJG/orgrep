@@ -612,15 +612,18 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: stretch;
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto 2.5em auto !important;
   gap: 2.5rem 2.5rem;
   position: relative;
 }
+/* Remove the connector line */
 .timeline-unified::before {
+  display: none;
+}
   content: '';
   position: absolute;
   top: 2.5rem;
@@ -653,18 +656,66 @@
     .timeline-unified .timeline-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
-  flex: 0 1 48%;
-  min-width: 280px;
-  max-width: 420px;
+  flex: 0 1 47%;
+  min-width: 340px;
+  max-width: 500px;
   margin: 0;
-  background: rgba(30,18,60,0.70);
-  border-radius: 16px;
-  box-shadow: 0 2px 12px 0 rgba(123,66,246,0.10);
-  padding: 1.3em 1.1em;
+  background: rgba(30,18,60,0.90);
+  border-radius: 18px;
+  box-shadow: 0 2px 18px 0 rgba(123,66,246,0.13);
+  padding: 2.2em 2em 2em 2em;
   position: relative;
   z-index: 1;
+}
+.timeline-unified .timeline-marker {
+  min-width: 18px;
+  min-height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#7B42F6,#00ffc6);
+  margin-bottom: 1.2em;
+  margin-right: 0;
+  margin-top: 0;
+  align-self: center;
+  box-shadow: 0 0 10px #7B42F688;
+}
+.timeline-unified .timeline-content {
+  flex: 1;
+  text-align: left;
+  color: #e0e0e0;
+  font-size: 1.08em;
+}
+@media (max-width: 1100px) {
+  .timeline-unified {
+    max-width: 98vw;
+    gap: 1.2rem 1.2rem;
+  }
+  .timeline-unified .timeline-item {
+    min-width: 220px;
+    max-width: 98vw;
+    flex: 1 1 48%;
+    padding: 1.3em 1em;
+  }
+}
+@media (max-width: 900px) {
+  .timeline-unified {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 98vw;
+    padding: 0 0.3em;
+  }
+  .timeline-unified .timeline-item {
+    max-width: 98vw;
+    min-width: 0;
+    flex: 1 1 100%;
+    margin: 0 auto 1.5em auto;
+    padding: 1.3em 0.7em;
+  }
+  .timeline-unified .timeline-content {
+    text-align: center;
+  }
 }
 @media (max-width: 900px) {
   .timeline-unified {
