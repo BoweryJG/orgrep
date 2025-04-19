@@ -807,7 +807,7 @@ body {
 .parallax-content {
     /* Neon border and pulse remain */
     background: transparent;
-    box-shadow: 0 0 24px 2px #00ffc6b0, 0 0 0 2.5px #00ffc6cc inset;
+    box-shadow: 0 0 38px 6px #00ffc670, 0 0 0 2.5px #00ffc6cc inset;
     /* The rest of your .parallax-content styles remain unchanged */
 }
 @keyframes neonPulse {
