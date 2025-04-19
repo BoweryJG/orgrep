@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // (migrated to DOMContentLoaded)
     if (navbar) {
         const observer = new MutationObserver(() => {
-            alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
+
         });
         observer.observe(navbar, { attributes: true, childList: true, subtree: true });
     }
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // (migrated to DOMContentLoaded)
     if (navbar) {
         const observer = new MutationObserver(() => {
-            if (typeof alignGuideBarAndOrbToLogo === 'function') alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
+
         });
         observer.observe(navbar, { attributes: true, childList: true, subtree: true });
     }
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (trigger && !guideBarActive && !orbAnimating) {
             triggerLogoOrbFlash();
             setTimeout(() => {
-                animateOrbToGuideBar();
+
             }, 400); // Wait for flash to finish before animating
         } else if (!trigger && guideBarActive && !orbAnimating) {
             animateOrbToLogo();
