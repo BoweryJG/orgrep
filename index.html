@@ -335,51 +335,8 @@
         <section class="section spheres-ecosystem" id="spheres-ecosystem" style="background: linear-gradient(135deg, #0a0a23 0%, #7B42F6 100%); color: #fff; padding: 6rem 2rem 5rem 2rem; position: relative;">
   <div class="ecosystem-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
     <div class="ecosystem-animation" style="position: relative; width: 100%; max-width: 600px; height: 600px; margin: 0 auto;">
-      <!-- Orb animation removed as requested -->
-    
-          const canvas = document.getElementById('ecosystem-canvas');
-          const ctx = canvas.getContext('2d');
-          function resizeCanvas() {
-            // Use parent width, fixed height for section
-            const parent = canvas.parentElement;
-            const width = Math.min(parent.offsetWidth, 600);
-            canvas.width = width;
-            canvas.height = 600;
-          }
-          resizeCanvas();
-          window.addEventListener('resize', resizeCanvas);
-          let centerX = canvas.width / 2;
-          let centerY = canvas.height / 2;
-          let time = 0;
-          function getBaseRadius() {
-            return Math.min(canvas.width, canvas.height) * 0.2;
-          }
-          let baseRadius = getBaseRadius();
-          const childCount = 6;
-          const childOrbs = [];
-          const dataTransmissions = [];
-          for (let i = 0; i < childCount; i++) {
-            const hueStart = i * (360 / childCount);
-            const hueRange = 60;
-            childOrbs.push({
-              angle: (i / childCount) * Math.PI * 2,
-              distance: baseRadius * 2.2,
-              radius: baseRadius * 0.25,
-              speed: 0.2 + Math.random() * 0.3,
-              phase: Math.random() * Math.PI * 2,
-              hueStart: hueStart,
-              hueRange: hueRange,
-              currentHue: hueStart,
-              pulseRate: 0.1 + Math.random() * 0.2,
-              lastDataSent: 0,
-              dataInterval: 2 + Math.random() * 3,
-              receivingData: false,
-              dataReceiveTime: 0
-            });
-          }
-          function getHSLColor(h, s, l, a) {
-            return `hsla(${h % 360}, ${s}%, ${l}%, ${a})`;
-          }
+      <!-- Orb animation fully removed -->
+              }
           function drawBlob(x, y, radius, time, isParent, orbIndex = -1) {
             const segments = 60;
             let baseHue;
