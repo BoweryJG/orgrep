@@ -1226,7 +1226,7 @@ document.addEventListener('DOMContentLoaded', function() {
         function getHSLColor(h, s, l, a) {
             return `hsla(${h % 360}, ${s}%, ${l}%, ${a})`;
         }
-        function drawBlob(x, y, r, t, colorA, colorB) {
+        function drawBlob(x, y, r, t, isParent, orbIndex) {
 
             const segments = 60;
             let baseHue;
@@ -1411,7 +1411,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const safeChildY = Math.max(MARGIN, Math.min(canvas.height - MARGIN, childY));
                 drawConnection(centerX, centerY, safeChildX, safeChildY, time, index);
             });
-            drawBlob(centerX, centerY, baseRadius, time, true);
+            drawBlob(centerX, centerY, baseRadius, time, true, null);
             childOrbs.forEach((child, index) => {
                 const verticalOffset = Math.sin(time * child.speed + child.phase) * baseRadius * 0.5;
                 const childX = centerX + Math.cos(child.angle) * child.distance();
@@ -1419,7 +1419,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Clamp childX and childY to stay within margin
                 const safeChildX = Math.max(MARGIN, Math.min(canvas.width - MARGIN, childX));
                 const safeChildY = Math.max(MARGIN, Math.min(canvas.height - MARGIN, childY));
-                drawBlob(safeChildX, safeChildY, child.radius, time, false, index);
+                drawBlob(safeChildX, safeChildY, child.radius(), time, false, index);
             });
             requestAnimationFrame(animate);
         }
