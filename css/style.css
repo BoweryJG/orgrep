@@ -793,8 +793,12 @@ body {
     opacity: 1 !important;
     position: relative;
     border-radius: 18px;
-    box-shadow: 0 0 24px 2px #00ffc6b0, 0 0 0 2.5px #00ffc6cc inset;
-    animation: neonPulse 3.2s ease-in-out infinite alternate;
+    border: 2.5px solid #00ffc6;
+    box-shadow: 0 0 0 3.5px #00ffc6cc inset;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    overflow: hidden;
+    background: transparent;
 }
 
 .parallax-content::before {
