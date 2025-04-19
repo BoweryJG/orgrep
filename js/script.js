@@ -329,11 +329,18 @@ document.addEventListener('DOMContentLoaded', () => {
             starsDiv.style.display = 'block';
         });
     }
-    document.addEventListener('DOMContentLoaded', () => {
-        populateStarsInAllSections();
-    });
-    // Also re-populate on window resize in case layout changes
-    window.addEventListener('resize', populateStarsInAllSections);
+    function forcePopulateStars() {
+        document.querySelectorAll('.stars').forEach(starsDiv => {
+            createStarryBackgroundFor(starsDiv);
+            starsDiv.style.opacity = '1';
+            starsDiv.style.display = 'block';
+        });
+    }
+    document.addEventListener('DOMContentLoaded', forcePopulateStars);
+    window.addEventListener('resize', forcePopulateStars);
+    // Fallback: try again after short delay in case something overwrites
+    setTimeout(forcePopulateStars, 1000);
+    setTimeout(forcePopulateStars, 3000);
 
     function populateStarsInAllSections() {
         // Only target .stars inside .parallax (the neon section)
