@@ -117,7 +117,7 @@
         // Restore Supabase credentials and client
         const SUPABASE_URL = 'https://cbopynuvhcymbumjnvay.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
-        const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const _supabase = window.supabase;
 
         // Show admin dropdown if user is admin
         const adminEmail = 'jasonwilliamgolden@gmail.com';
@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize Supabase client
     const SUPABASE_URL = 'https://cbopynuvhcymbumjnvay.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
-    const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const _supabase = window.supabase;
 
     const loginBtn = document.getElementById('login-btn');
     const loginDropdown = document.getElementById('login-dropdown');
