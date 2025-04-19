@@ -618,7 +618,7 @@ body {
 
 .card-style {
   border-radius: 1.2em;
-  background: rgba(123,66,246,0.13);
+  background: rgba(123,66,246,0.92); /* Make sure card-style is solid */
   box-shadow: 0 2px 14px 0 rgba(138,79,255,0.08);
   padding: 1.3rem 1.1rem;
   max-width: 260px;
@@ -633,11 +633,12 @@ body {
 .card-style:hover, .card-style:focus {
   box-shadow: 0 4px 24px 0 rgba(123,66,246,0.19), 0 2px 18px 0 rgba(0,255,198,0.09);
   transform: translateY(-4px) scale(1.03);
+  background: rgba(123,66,246,0.98);
   background: rgba(123,66,246,0.18);
 }
 
 .feature-card, .moat-card {
-  background: rgba(22, 11, 35, 0.7);
+  background: rgba(22, 11, 35, 0.85); /* Make sure cards are solid or nearly solid */
   border-radius: 10px;
   padding: 2rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -791,7 +792,7 @@ body {
     opacity: 1 !important;
     position: relative;
     border-radius: 18px;
-    background: transparent !important;
+    background: transparent !important; /* Make box interior fully transparent */
     box-shadow: none !important;
     border: 2px solid #00ffc6;
     animation: neonPulse 1.8s infinite alternate;
