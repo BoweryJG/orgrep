@@ -322,26 +322,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Section-specific stars background logic ---
     document.addEventListener('DOMContentLoaded', () => {
+        // Animate stars in all .stars inside .parallax-content (neon box)
+        document.querySelectorAll('.parallax-content .stars').forEach(starsDiv => {
+            createStarryBackgroundFor(starsDiv);
+            starsDiv.style.opacity = '1';
+        });
+        // (Optional) Keep original outer parallax stars logic if needed
         const parallaxSection = document.querySelector('.parallax');
-        if (!parallaxSection) return;
-        const starsDiv = parallaxSection.querySelector('.stars');
-        if (!starsDiv) return;
-        window.starsContainer = starsDiv;
-
-        // Use IntersectionObserver for performance
-        const observer = new window.IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    createStarryBackground();
-                    starsDiv.style.opacity = '1';
-                } else {
-                    starsDiv.innerHTML = '';
-                    starsDiv.style.opacity = '0';
-                }
-            });
-        }, { threshold: 0.15 }); // 15% in view
-        observer.observe(parallaxSection);
+        if (parallaxSection) {
+            const starsDiv = parallaxSection.querySelector('.stars');
+            if (starsDiv) {
+                window.starsContainer = starsDiv;
+                const observer = new window.IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            createStarryBackground();
+                            starsDiv.style.opacity = '1';
+                        } else {
+                            starsDiv.innerHTML = '';
+                            starsDiv.style.opacity = '0';
+                        }
+                    });
+                }, { threshold: 0.15 });
+                observer.observe(parallaxSection);
+            }
+        }
     });
+    // Helper to generate stars in a given container
+    function createStarryBackgroundFor(starsContainer) {
+        if (!starsContainer) return;
+        starsContainer.innerHTML = '';
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < 60; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random() * 2 + 1;
+            const brightness = Math.random() * 0.5 + 0.4;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.opacity = brightness.toString();
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 8}s`;
+            star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            fragment.appendChild(star);
+        }
+        starsContainer.appendChild(fragment);
+    }
 
 
      // Enhance satellite content with inner elements and particles
