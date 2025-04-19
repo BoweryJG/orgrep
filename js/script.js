@@ -440,11 +440,8 @@ document.addEventListener('DOMContentLoaded', () => {
         miniOrb.style.opacity = '0';
         guideBarActive = true;
         orbAnimating = false;
-    window.addEventListener('scroll', updateGuideOrbPosition, { passive: true });
-    window.addEventListener('resize', updateGuideOrbPosition);
-    }
-// Removed duplicate animateOrbToLogo function that caused a syntax error.
-
+        window.addEventListener('scroll', updateGuideOrbPosition, { passive: true });
+        window.addEventListener('resize', updateGuideOrbPosition);
     }
 
     // Scroll trigger logic
