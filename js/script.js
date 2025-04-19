@@ -343,30 +343,15 @@ document.addEventListener('DOMContentLoaded', () => {
             starsDiv.style.display = 'block';
         });
     }
-    // (Original helper and logic kept below for reference)
 
-    // Helper to generate stars in a given container
-    function createStarryBackgroundFor(starsContainer) {
-        if (!starsContainer) return;
-        starsContainer.innerHTML = '';
-        const fragment = document.createDocumentFragment();
-        for (let i = 0; i < 60; i++) {
-            const star = document.createElement('div');
-            star.classList.add('star');
-            const size = Math.random() * 2 + 1;
-            const brightness = Math.random() * 0.5 + 0.4;
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            star.style.opacity = brightness.toString();
-            star.style.left = `${Math.random() * 100}%`;
-            star.style.top = `${Math.random() * 100}%`;
-            star.style.animationDelay = `${Math.random() * 8}s`;
-            star.style.animationDuration = `${Math.random() * 3 + 2}s`;
-            fragment.appendChild(star);
-        }
-        starsContainer.appendChild(fragment);
-    }
+// If navbar or logo layout changes dynamically (e.g., by JS or menu toggle), re-align
+// (migrated to DOMContentLoaded)
+if (navbar) {
+    const observer = new MutationObserver(() => {
 
+    });
+    observer.observe(navbar, { attributes: true, childList: true, subtree: true });
+}
 
      // Enhance satellite content with inner elements and particles
     const enhanceSatellites = () => {
