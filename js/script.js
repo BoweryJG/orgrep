@@ -331,12 +331,13 @@ function createStarryBackground(starsContainer) {
         });
     }
     function forcePopulateStars() {
-        document.querySelectorAll('.stars').forEach(starsDiv => {
-            createStarryBackground(starsDiv);
-            starsDiv.style.opacity = '1';
-            starsDiv.style.display = 'block';
-        });
+    const firstStarsDiv = document.querySelector('.stars');
+    if (firstStarsDiv) {
+        createStarryBackground(firstStarsDiv);
+        firstStarsDiv.style.opacity = '1';
+        firstStarsDiv.style.display = 'block';
     }
+}
     document.addEventListener('DOMContentLoaded', forcePopulateStars);
     window.addEventListener('resize', forcePopulateStars);
     // Fallback: try again after short delay in case something overwrites
