@@ -182,13 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial setup
     const miniOrb = document.getElementById('mini-orb');
-    const guideOrb = document.getElementById('guide-orb');
-    // Remove progress bar logic
-    // alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
-    // handleGuideBarScrollVisibility(progressIndicator);
-
-    // Hide guide orb by default
-    if (guideOrb) guideOrb.style.display = 'none';
+    // guide-orb and progress bar logic removed for static orb in logo
     if (miniOrb) miniOrb.style.opacity = '1';
 
     // Scroll trigger logic
