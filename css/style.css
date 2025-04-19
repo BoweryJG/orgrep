@@ -801,17 +801,8 @@ body {
     overflow: hidden;
 }
 .parallax-content::before {
-    content: '';
-    position: absolute;
-    left: 0; right: 0; top: -14px;
-    height: 38px;
-    border-radius: 24px 24px 0 0;
-    pointer-events: none;
-    z-index: 21;
-    background: linear-gradient(180deg, rgba(18,22,56,0.98) 0%, rgba(0,255,198,0.18) 40%, transparent 100%);
-    opacity: 0.87;
-    filter: blur(2px);
-    mix-blend-mode: lighten;
+    content: none !important;
+    display: none !important;
 }
 .parallax-content::after {
     content: none !important;
@@ -821,6 +812,7 @@ body {
     /* Neon border and pulse remain */
     background: transparent;
     box-shadow: 0 0 38px 6px #00ffc670, 0 0 0 2.5px #00ffc6cc inset;
+    margin-top: 4rem;
     /* The rest of your .parallax-content styles remain unchanged */
 }
 @keyframes neonPulse {
