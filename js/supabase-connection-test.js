@@ -6,7 +6,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Try to fetch a single blog row to test connection
-supabase.from('blogs').select('*').limit(1).then(({ data, error }) => {
+supabase.from('blog_posts').select('*').limit(1).then(({ data, error }) => {
   console.log('Supabase connection test:', { data, error });
   const el = document.createElement('div');
   el.style = 'position:fixed;bottom:0;left:0;z-index:9999;background:#fff;color:#222;padding:8px;font-size:14px;border:1px solid #ccc;';
