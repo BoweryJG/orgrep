@@ -792,12 +792,27 @@ body {
     position: relative;
     border-radius: 18px;
     background: transparent !important;
-    /* Faint neon glow around the border only */
-    box-shadow: 0 0 18px 3px #00ffc655, 0 0 6px 2px #7b42f644;
-    border: 1.5px solid rgba(0,255,198,0.18);
+    box-shadow: none !important;
+    border: 2px solid #00ffc6;
+    animation: neonPulse 1.8s infinite alternate;
     margin-top: 3rem;
     margin-bottom: 3rem;
     overflow: hidden;
+}
+
+@keyframes neonPulse {
+  0% {
+    box-shadow: 0 0 0 0 #00ffc680, 0 0 8px 2px #00ffc655;
+    border-color: #00ffc6;
+  }
+  60% {
+    box-shadow: 0 0 16px 6px #00ffc6cc, 0 0 24px 8px #7b42f688;
+    border-color: #00ffc6;
+  }
+  100% {
+    box-shadow: 0 0 0 0 #00ffc680, 0 0 8px 2px #00ffc655;
+    border-color: #00ffc6;
+  }
 }
 
 .parallax-content::before {
