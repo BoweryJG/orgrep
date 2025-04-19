@@ -796,7 +796,7 @@ body {
     opacity: 1 !important;
     position: relative;
     border-radius: 18px;
-    background: transparent !important; /* Make box interior fully transparent */
+    background: transparent !important;
     box-shadow: none !important;
     border: 2px solid #00ffc6;
     animation: neonPulse 1.8s infinite alternate;
@@ -804,6 +804,31 @@ body {
     margin-bottom: 3rem;
     overflow: hidden;
 }
+
+.parallax-content::before {
+    content: '';
+    position: absolute;
+    top: -10%; left: -10%; width: 120%; height: 120%;
+    z-index: 0;
+    border-radius: 22px;
+    opacity: 0.68;
+    filter: blur(16px) brightness(1.25);
+    background: linear-gradient(270deg, #7B42F6, #00FFC6, #FFAA00, #5B3CFF, #00E5FF, #7B42F6);
+    background-size: 1200% 1200%;
+    animation: parallaxGradientMove 18s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes parallaxGradientMove {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 100%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+.parallax-content > * { position: relative; z-index: 1; }
+
 
 @keyframes neonPulse {
   0% {
