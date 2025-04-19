@@ -156,7 +156,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // (migrated to DOMContentLoaded)
 
     // Align the guide orb and progress bar to the center of the logo orb
-    function alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator) {
+    // function alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator) {
+    //   // Removed: guideOrb logic for static orb
+    // }
         if (!miniOrb || !guideOrb || !progressIndicator) return;
         const orbRect = miniOrb.getBoundingClientRect();
         const centerX = orbRect.left + orbRect.width / 2;
@@ -324,119 +326,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // Align the guide orb and progress bar to the center of the logo orb
-    function alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator) {
-        if (!miniOrb || !guideOrb || !progressIndicator) return;
-        const orbRect = miniOrb.getBoundingClientRect();
-        const centerX = orbRect.left + orbRect.width / 2;
-        guideOrb.style.position = 'fixed';
-        guideOrb.style.left = `${centerX - guideOrb.offsetWidth / 2}px`;
-        progressIndicator.style.position = 'fixed';
-        progressIndicator.style.left = `${centerX - progressIndicator.offsetWidth / 2}px`;
-        progressIndicator.style.top = '0px';
-        progressIndicator.style.zIndex = 10002;
-    }
-
-    window.addEventListener('resize', () => alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator));
-    // Also align on DOMContentLoaded
-    window.addEventListener('DOMContentLoaded', () => alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator));
-    // Also align if navbar/layout changes
-    if (navbar) {
-        const observer = new MutationObserver(() => {
-            alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
-        });
-        observer.observe(navbar, { attributes: true, childList: true, subtree: true });
-    }
-
-    // Helper: Get the target position for the guide orb (center of guide bar, left-aligned)
-    function getGuideOrbTarget(progressIndicator) {
-        if (!progressIndicator) return { x: 0, y: 0 };
-        const barRect = progressIndicator.getBoundingClientRect();
-        // Center of the bar, vertically offset for the orb
-        return {
-            x: barRect.left + barRect.width / 2,
-            y: barRect.top + 44 // 44px offset to match guide orb style
-        };
-    }
-
-    // Animate orb from logo to guide bar and make it follow the progress bar
-    function animateOrbToGuideBar(miniOrb, guideOrb, progressIndicator) {
-        if (orbAnimating || guideBarActive) return;
-        alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
-        orbAnimating = true;
-        alignProgressBarToLogo();
-        // Get start and end positions
-        const start = getMiniOrbCenter();
-        const end = getGuideOrbTarget();
-
-        // Show guide orb at start position, hide mini orb
-        guideOrb.style.display = 'block';
-        guideOrb.style.opacity = '1';
-        miniOrb.style.opacity = '0';
-        guideBarActive = true;
-        orbAnimating = false;
-        if (progressIndicator) progressIndicator.style.display = 'block';
-        // Start following scroll
-        updateGuideOrbPosition();
-    }
-
-    // Make the guide orb follow the progress bar as user scrolls
-    function updateGuideOrbPosition() {
-        if (!guideBarActive) return;
-        const progressIndicator = document.getElementById('progressIndicator');
-        const guideOrb = document.getElementById('guide-orb');
-        if (!progressIndicator || !guideOrb) return;
-        const barRect = progressIndicator.getBoundingClientRect();
-        const minY = barRect.top;
-        const maxY = barRect.bottom;
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        let progress = docHeight > 0 ? scrollTop / docHeight : 0;
-        progress = Math.max(0, Math.min(1, progress));
-
-        // Time-based phase for spiraling
-        const now = performance.now() / 1000;
-        // Spiral/float parameters
-        const spiralAmpX = 16; // px, horizontal amplitude
-        const spiralAmpY = 10; // px, vertical amplitude
-        const spiralFreq = 1.2; // spiral cycles per scroll
-        const timeFreq = 0.25; // how much time affects the spiral
-        // Spiral phase depends on scroll progress and time
-        const phase = 2 * Math.PI * (spiralFreq * progress + timeFreq * now);
-        // Calculate spiral offsets
-        const spiralX = Math.cos(phase) * spiralAmpX;
-        const spiralY = Math.sin(phase) * spiralAmpY;
-
-        // Position orb along the bar with floaty spiral offset
-        const orbY = minY + (maxY - minY) * progress - guideOrb.offsetHeight / 2 + spiralY;
-        const orbX = barRect.left + barRect.width / 2 - guideOrb.offsetWidth / 2 + spiralX;
-        guideOrb.style.left = `${orbX}px`;
-        guideOrb.style.top = `${orbY}px`;
-    }
-
-    // Animate the floaty spiral on each frame while active
-    let spiralAnimFrame = null;
-    function spiralOrbAnimationLoop() {
-        if (guideBarActive) {
-            updateGuideOrbPosition();
-            spiralAnimFrame = requestAnimationFrame(spiralOrbAnimationLoop);
-        } else {
-            spiralAnimFrame = null;
-        }
-    }
-
-    // Start spiral animation when orb activates
-    function animateOrbToGuideBar(miniOrb, guideOrb, progressIndicator) {
-        if (orbAnimating || guideBarActive) return;
-        alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
-        guideOrb.style.display = 'block';
-        guideOrb.style.opacity = '1';
-        miniOrb.style.opacity = '0';
-        guideBarActive = true;
-        orbAnimating = false;
-        window.addEventListener('scroll', updateGuideOrbPosition, { passive: true });
-        window.addEventListener('resize', updateGuideOrbPosition);
-    }
 
     // Scroll trigger logic
     function checkScrollTrigger() {
@@ -455,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial state
     if (progressIndicator) progressIndicator.style.display = 'none';
-    if (guideOrb) guideOrb.style.display = 'none';
+    // if (guideOrb) guideOrb.style.display = 'none'; // guideOrb removed
     if (miniOrb) miniOrb.style.opacity = '1';
 
     window.addEventListener('scroll', checkScrollTrigger, { passive: true });
