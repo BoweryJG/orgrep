@@ -155,20 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // (migrated to DOMContentLoaded)
     // (migrated to DOMContentLoaded)
 
-    // Align the guide orb and progress bar to the center of the logo orb
-    // function alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator) {
-    //   // Removed: guideOrb logic for static orb
-    // }
-        if (!miniOrb || !guideOrb || !progressIndicator) return;
-        const orbRect = miniOrb.getBoundingClientRect();
-        const centerX = orbRect.left + orbRect.width / 2;
-        guideOrb.style.position = 'fixed';
-        guideOrb.style.left = `${centerX - guideOrb.offsetWidth / 2}px`;
-        progressIndicator.style.position = 'fixed';
-        progressIndicator.style.left = `${centerX - progressIndicator.offsetWidth / 2}px`;
-        progressIndicator.style.top = '0px';
-        progressIndicator.style.zIndex = 10002;
-    }
 
     // Show/hide guide bar after scrolling a bit
     function handleGuideBarScrollVisibility(progressIndicator) {
