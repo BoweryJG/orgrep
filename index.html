@@ -335,7 +335,38 @@
         <section class="section spheres-ecosystem" id="spheres-ecosystem" style="background: linear-gradient(135deg, #0a0a23 0%, #7B42F6 100%); color: #fff; padding: 6rem 2rem 5rem 2rem; position: relative;">
   <div class="ecosystem-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
     <div class="ecosystem-animation" style="position: relative; width: 100%; max-width: 600px; height: 600px; margin: 0 auto;">
-      <canvas id="ecosystem-canvas" width="600" height="600" style="max-width:100vw;max-height:55vw;min-width:280px;min-height:180px;display:block;margin:0 auto;"></canvas>
+      <svg id="orbSVG-ecosystem" viewBox="-100 -100 1000 1000" style="width:600px; height:600px; display:block; background:transparent; position:relative; z-index:1;">
+        <defs>
+          <radialGradient id="parentGrad-eco" cx="50%" cy="50%" r="70%">
+            <stop id="p0-eco" offset="0%" stop-color="#00E5FF"/>
+            <stop id="p1-eco" offset="100%" stop-color="#5B3CFF"/>
+            <stop id="p2-eco" offset="50%" stop-color="#00E5FF"/>
+            <stop id="p3-eco" offset="75%" stop-color="#5B3CFF"/>
+          </radialGradient>
+          <radialGradient id="childGrad0-eco" cx="50%" cy="50%" r="70%">
+            <stop id="c0s0-eco" offset="0%" stop-color="#B3D8FF"/>
+            <stop id="c0s1-eco" offset="100%" stop-color="#0A192F"/>
+          </radialGradient>
+          <radialGradient id="childGrad1-eco" cx="50%" cy="50%" r="70%">
+            <stop id="c1s0-eco" offset="0%" stop-color="#C6FFD9"/>
+            <stop id="c1s1-eco" offset="100%" stop-color="#145A32"/>
+          </radialGradient>
+          <radialGradient id="childGrad2-eco" cx="50%" cy="50%" r="70%">
+            <stop id="c2s0-eco" offset="0%" stop-color="#FFB3C9"/>
+            <stop id="c2s1-eco" offset="100%" stop-color="#7B1F3A"/>
+          </radialGradient>
+          <radialGradient id="childGrad3-eco" cx="50%" cy="50%" r="70%">
+            <stop id="c3s0-eco" offset="0%" stop-color="#E0D1FF"/>
+            <stop id="c3s1-eco" offset="100%" stop-color="#311B4F"/>
+          </radialGradient>
+          <radialGradient id="childGrad4-eco" cx="50%" cy="50%" r="70%">
+            <stop id="c4s0-eco" offset="0%" stop-color="#FFF5B3"/>
+            <stop id="c4s1-eco" offset="100%" stop-color="#4B3800"/>
+          </radialGradient>
+        </defs>
+        <path id="parentOrb-eco" fill="url(#parentGrad-eco)" opacity="0.95"/>
+        <g id="children-eco"></g>
+      </svg>
     </div>
     <div class="ecosystem-content" style="max-width: 700px; margin: 2rem auto 0 auto; text-align: center;">
       <h2 class="section-title" style="font-size:2.7rem;letter-spacing:0.01em;color:#fff;margin-bottom:1.2rem;">Spheres Ecosystem</h2>
