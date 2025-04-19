@@ -616,19 +616,33 @@ body {
     margin-top: 2rem;
 }
 
-.feature-card, .moat-card {
+.card-style {
+  border-radius: 1.2em;
+  background: rgba(123,66,246,0.13);
+  box-shadow: 0 2px 14px 0 rgba(138,79,255,0.08);
+  padding: 1.3rem 1.1rem;
+  max-width: 260px;
+  margin-bottom: 1.2rem;
+  transition: box-shadow 0.3s, transform 0.3s, background 0.3s;
   position: relative;
   overflow: hidden;
-  transition: transform 0.28s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.28s cubic-bezier(.68,-0.55,.27,1.55);
   cursor: pointer;
   will-change: transform, box-shadow;
+}
 
-    background: rgba(22, 11, 35, 0.7);
-    border-radius: 10px;
-    padding: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(138, 79, 255, 0.1);
+.card-style:hover, .card-style:focus {
+  box-shadow: 0 4px 24px 0 rgba(123,66,246,0.19), 0 2px 18px 0 rgba(0,255,198,0.09);
+  transform: translateY(-4px) scale(1.03);
+  background: rgba(123,66,246,0.18);
+}
+
+.feature-card, .moat-card {
+  background: rgba(22, 11, 35, 0.7);
+  border-radius: 10px;
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(138, 79, 255, 0.1);
 }
 
 .feature-card:hover, .moat-card:hover {
