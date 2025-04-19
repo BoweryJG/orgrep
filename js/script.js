@@ -175,29 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scroll trigger logic
     let orbActive = false;
-    window.addEventListener('scroll', () => {
-        if (!miniOrb || !guideOrb) return;
-        if (window.scrollY > 100 && !orbActive) {
-            // Animate orb out of logo to left
-            miniOrb.style.opacity = '0';
-            guideOrb.style.display = 'block';
-            guideOrb.style.position = 'fixed';
-            guideOrb.style.left = '24px';
-            guideOrb.style.top = '24px';
-            guideOrb.style.opacity = '1';
-            orbActive = true;
-        } else if (window.scrollY <= 100 && orbActive) {
-            // Animate orb back to logo
-            guideOrb.style.display = 'none';
-            miniOrb.style.opacity = '1';
-            orbActive = false;
-        }
-    }, { passive: true });
 
-    // On resize, keep guide orb fixed on left if active
-    window.addEventListener('resize', () => {
-        if (guideOrb && orbActive) {
-            guideOrb.style.left = '24px';
             guideOrb.style.top = '24px';
         }
     });
