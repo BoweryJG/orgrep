@@ -1032,38 +1032,40 @@
 </style>
             <!-- SVG Helix Timeline Enhancement -->
 <style>
-.helix-timeline-container {
+.helix-timeline-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto;
   position: relative;
-  width: 100%;
-  min-height: 700px;
+}
+.helix-svg-col {
+  flex: 0 0 140px;
+  position: relative;
+  min-width: 120px;
+  height: 900px;
+  display: flex;
+  align-items: flex-start;
+}
+.helix-timeline-steps-col {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  z-index: 1;
-  margin-bottom: 3rem;
-}
-.helix-svg {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-  z-index: 0;
-  pointer-events: none;
+  gap: 5rem;
+  justify-content: center;
 }
 .helix-timeline-steps {
   position: relative;
   width: 100%;
-  max-width: 1100px;
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-  z-index: 1;
 }
 .helix-timeline-step {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   position: relative;
   z-index: 2;
+  min-height: 120px;
 }
 .helix-timeline-step.left {
   flex-direction: row;
@@ -1074,11 +1076,11 @@
   justify-content: flex-end;
 }
 .helix-timeline-marker {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: linear-gradient(135deg,#00ffc6 30%,#7b42f6 100%);
-  box-shadow: 0 0 16px 4px #7b42f6cc, 0 0 0 5px #00ffc633;
+  box-shadow: 0 0 24px 8px #00ffc688, 0 0 0 8px #7b42f655;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1086,11 +1088,14 @@
   color: #fff;
   position: relative;
   z-index: 3;
+  margin: 0 0.5em;
   animation: helixPulse 2.5s infinite ease-in-out;
 }
+.helix-timeline-step.left .helix-timeline-marker { margin-left: -24px; }
+.helix-timeline-step.right .helix-timeline-marker { margin-right: -24px; }
 @keyframes helixPulse {
-  0%,100% { box-shadow: 0 0 16px 4px #7b42f6cc, 0 0 0 5px #00ffc633; }
-  50% { box-shadow: 0 0 32px 8px #00ffc6cc, 0 0 0 10px #7b42f688; }
+  0%,100% { box-shadow: 0 0 24px 8px #00ffc688, 0 0 0 8px #7b42f655; }
+  50% { box-shadow: 0 0 48px 16px #7b42f6cc, 0 0 0 16px #00ffc655; }
 }
 .helix-timeline-card {
   background: rgba(40,20,70,0.62);
@@ -1101,7 +1106,6 @@
   min-width: 260px;
   max-width: 370px;
   padding: 2.1rem 1.6rem;
-  margin: 0 1.5rem;
   color: #fff;
   position: relative;
   z-index: 2;
@@ -1114,65 +1118,78 @@
   transform: translateY(0) scale(1);
   transition: opacity 0.6s cubic-bezier(.68,-0.55,.27,1.55), transform 0.6s cubic-bezier(.68,-0.55,.27,1.55);
 }
+@media (max-width: 1100px) {
+  .helix-timeline-main { max-width: 98vw; }
+}
 @media (max-width: 900px) {
-  .helix-timeline-steps { max-width: 98vw; }
+  .helix-timeline-main {
+    flex-direction: column;
+    align-items: center;
+    max-width: 98vw;
+  }
+  .helix-svg-col { height: 400px; min-width: 80px; }
+  .helix-timeline-steps-col { gap: 3rem; }
   .helix-timeline-card { min-width: 180px; max-width: 98vw; }
 }
 </style>
 <section id="repSpheres-powers-results" class="helix-section" style="margin-bottom:2.5em;">
   <h2 class="section-title" style="font-size:2.5rem;margin-bottom:1.4rem;">How RepSpheres Powers Results</h2>
   <p style="font-size:1.18em;color:#e0e0e0;max-width:700px;margin:0 auto 2.5em auto;text-align:center;">Every RepSphere journey follows a proven path—each step building toward smarter, more effective engagement. Here’s how it flows:</p>
-  <div class="helix-timeline-container fade-in-on-scroll">
-    <svg class="helix-svg" width="120" height="900" viewBox="0 0 120 900" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 100%; min-height: 700px;">
-      <defs>
-        <linearGradient id="helixStroke" x1="0" y1="0" x2="120" y2="900" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#00ffc6"/>
-          <stop offset="1" stop-color="#7B42F6"/>
-        </linearGradient>
-      </defs>
-      <path id="helixPath" d="M60 40 C 90 80, 30 160, 60 200 C 90 240, 30 320, 60 360 C 90 400, 30 480, 60 520 C 90 560, 30 640, 60 680 C 90 720, 30 800, 60 840" stroke="url(#helixStroke)" stroke-width="6" fill="none" filter="url(#helixGlow)"/>
-      <filter id="helixGlow" x="-30%" y="-30%" width="160%" height="160%">
-        <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-        <feMerge>
-          <feMergeNode in="coloredBlur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
-    </svg>
-    <div class="helix-timeline-steps">
-      <div class="helix-timeline-step left">
-        <div class="helix-timeline-marker">1</div>
-        <div class="helix-timeline-card">
-          <h3 style="color:#00ffc6;">Sphere Creation</h3>
-          <p>Create a Sphere for any target, account, or opportunity—this becomes your workspace for focused intelligence and engagement.</p>
+  <div class="helix-timeline-main">
+    <div class="helix-svg-col">
+      <svg class="helix-svg" width="120" height="900" viewBox="0 0 120 900" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:900px;width:120px;">
+        <defs>
+          <linearGradient id="helixStroke" x1="0" y1="0" x2="120" y2="900" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#00ffc6"/>
+            <stop offset="1" stop-color="#7B42F6"/>
+          </linearGradient>
+        </defs>
+        <path id="helixPath" d="M60 40 C 90 80, 30 160, 60 200 C 90 240, 30 320, 60 360 C 90 400, 30 480, 60 520 C 90 560, 30 640, 60 680 C 90 720, 30 800, 60 840" stroke="url(#helixStroke)" stroke-width="6" fill="none" filter="url(#helixGlow)"/>
+        <filter id="helixGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </svg>
+    </div>
+    <div class="helix-timeline-steps-col">
+      <div class="helix-timeline-steps">
+        <div class="helix-timeline-step left">
+          <div class="helix-timeline-marker">1</div>
+          <div class="helix-timeline-card">
+            <h3 style="color:#00ffc6;">Sphere Creation</h3>
+            <p>Create a Sphere for any target, account, or opportunity—this becomes your workspace for focused intelligence and engagement.</p>
+          </div>
         </div>
-      </div>
-      <div class="helix-timeline-step right">
-        <div class="helix-timeline-marker">2</div>
-        <div class="helix-timeline-card">
-          <h3 style="color:#8a4fff;">Data Ingestion & Enrichment</h3>
-          <p>Automatically pull in and enrich data from your CRM, web, email, and other connected sources.</p>
+        <div class="helix-timeline-step right">
+          <div class="helix-timeline-marker">2</div>
+          <div class="helix-timeline-card">
+            <h3 style="color:#8a4fff;">Data Ingestion & Enrichment</h3>
+            <p>Automatically pull in and enrich data from your CRM, web, email, and other connected sources.</p>
+          </div>
         </div>
-      </div>
-      <div class="helix-timeline-step left">
-        <div class="helix-timeline-marker">3</div>
-        <div class="helix-timeline-card">
-          <h3 style="color:#00ffc6;">Psychological Trigger Mapping</h3>
-          <p><strong>RepSpheres</strong> analyzes all available data to identify the psychological motivators and triggers most likely to drive action—leveraging a library of 150+ behavioral science principles.</p>
+        <div class="helix-timeline-step left">
+          <div class="helix-timeline-marker">3</div>
+          <div class="helix-timeline-card">
+            <h3 style="color:#00ffc6;">Psychological Trigger Mapping</h3>
+            <p><strong>RepSpheres</strong> analyzes all available data to identify the psychological motivators and triggers most likely to drive action—leveraging a library of 150+ behavioral science principles.</p>
+          </div>
         </div>
-      </div>
-      <div class="helix-timeline-step right">
-        <div class="helix-timeline-marker">4</div>
-        <div class="helix-timeline-card">
-          <h3 style="color:#8a4fff;">Automated Playbooks & Messaging</h3>
-          <p>Launch automations or receive suggested actions—personalized messaging, outreach, or tasks—algorithmically aligned to each target’s unique psychological fingerprint.</p>
+        <div class="helix-timeline-step right">
+          <div class="helix-timeline-marker">4</div>
+          <div class="helix-timeline-card">
+            <h3 style="color:#8a4fff;">Automated Playbooks & Messaging</h3>
+            <p>Launch automations or receive suggested actions—personalized messaging, outreach, or tasks—algorithmically aligned to each target’s unique psychological fingerprint.</p>
+          </div>
         </div>
-      </div>
-      <div class="helix-timeline-step left">
-        <div class="helix-timeline-marker">5</div>
-        <div class="helix-timeline-card">
-          <h3 style="color:#00ffc6;">Feedback & Optimization</h3>
-          <p>Results and engagement data flow back into the Sphere, powering continuous learning and smarter future actions.</p>
+        <div class="helix-timeline-step left">
+          <div class="helix-timeline-marker">5</div>
+          <div class="helix-timeline-card">
+            <h3 style="color:#00ffc6;">Feedback & Optimization</h3>
+            <p>Results and engagement data flow back into the Sphere, powering continuous learning and smarter future actions.</p>
+          </div>
         </div>
       </div>
     </div>
