@@ -803,11 +803,24 @@ body {
 .parallax-content::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; height: 36px;
-    border-radius: 18px 18px 0 0;
+    left: 0; right: 0; top: 0;
+    height: 0;
+    /* Remove top overlay */
     pointer-events: none;
     z-index: 3;
-    background: linear-gradient(180deg, #00ffc6cc 0%, transparent 100%);
+    background: none;
+    opacity: 1;
+}
+
+.parallax-content::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 70px;
+    border-radius: 0 0 32px 32px;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(180deg, #00ffc633 8%, transparent 100%);
     opacity: 0.75;
 }
 @keyframes neonPulse {
