@@ -274,17 +274,17 @@
           Even the best sales teams hit a wall—buried under disconnected tools, generic messaging, and missed opportunities. <strong>The real cost?</strong> Lost deals, wasted effort, and burnout.
         </p>
         <div class="problem-card-container enhanced-problem-cards" style="display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;">
-          <div class="problem-card" style="background:rgba(30,18,60,0.98);border-radius:20px;padding:2.2rem 1.6rem;box-shadow:0 4px 24px 0 rgba(123,66,246,0.18);max-width:320px;min-width:260px;flex:1 1 260px;display:flex;flex-direction:column;align-items:center;margin-bottom:1.5rem;">
+          <div class="problem-card glass-card">
             <div style="font-size:2.1rem;margin-bottom:0.7rem;">🧩</div>
             <h3 style="margin-bottom:0.7rem;font-size:1.3rem;">Fragmented Tools</h3>
             <p style="color:#d1c4e9;">Juggling too many platforms leads to confusion, wasted time, and critical insights slipping through the cracks.</p>
           </div>
-          <div class="problem-card" style="background:rgba(30,18,60,0.98);border-radius:20px;padding:2.2rem 1.6rem;box-shadow:0 4px 24px 0 rgba(123,66,246,0.18);max-width:320px;min-width:260px;flex:1 1 260px;display:flex;flex-direction:column;align-items:center;margin-bottom:1.5rem;">
+          <div class="problem-card glass-card">
             <div style="font-size:2.1rem;margin-bottom:0.7rem;">⏳</div>
             <h3 style="margin-bottom:0.7rem;font-size:1.3rem;">Momentum Killers</h3>
             <p style="color:#d1c4e9;">Every context switch and manual step drains energy and slows down the path from insight to closed deal.</p>
           </div>
-          <div class="problem-card" style="background:rgba(30,18,60,0.98);border-radius:20px;padding:2.2rem 1.6rem;box-shadow:0 4px 24px 0 rgba(123,66,246,0.18);max-width:320px;min-width:260px;flex:1 1 260px;display:flex;flex-direction:column;align-items:center;margin-bottom:1.5rem;">
+          <div class="problem-card glass-card">
             <div style="font-size:2.1rem;margin-bottom:0.7rem;">🗣️</div>
             <h3 style="margin-bottom:0.7rem;font-size:1.3rem;">One-Size-Fits-None</h3>
             <p style="color:#d1c4e9;">Personalization is promised but rarely delivered—most outreach is bland, forgettable, and easy to ignore.</p>
@@ -341,6 +341,51 @@
           </div>
         </div>
         <style>
+.enhanced-title {
+  text-align: center;
+  position: relative;
+}
+.gradient-underline {
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 0.7em auto 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  box-shadow: 0 0 18px #8a4fff77;
+  animation: gradient-move 2.5s linear infinite alternate;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(40, 20, 70, 0.55);
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+  padding: 2.2rem 1.6rem;
+  max-width: 320px;
+  min-width: 260px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.glass-card:hover {
+  box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
+  transform: translateY(-8px) scale(1.025);
+}
+@media (max-width: 700px) {
+  .gradient-underline { width: 60px; height: 4px; }
+  .problem-card-container { gap: 1.1rem !important; }
+}
+
           @keyframes spin { to { transform: rotate(360deg); } }
           @media (max-width: 700px) {
             .parallax-content h2 { font-size:2.1rem !important; }
@@ -718,6 +763,51 @@
 
         <section class="section timeline-triggers-section" id="timeline" style="background: linear-gradient(135deg, #1a1333 0%, #7B42F6 100%); color: #fff; padding: 6rem 2rem 3rem 2rem; position: relative;">
   <style>
+.enhanced-title {
+  text-align: center;
+  position: relative;
+}
+.gradient-underline {
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 0.7em auto 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  box-shadow: 0 0 18px #8a4fff77;
+  animation: gradient-move 2.5s linear infinite alternate;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(40, 20, 70, 0.55);
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+  padding: 2.2rem 1.6rem;
+  max-width: 320px;
+  min-width: 260px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.glass-card:hover {
+  box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
+  transform: translateY(-8px) scale(1.025);
+}
+@media (max-width: 700px) {
+  .gradient-underline { width: 60px; height: 4px; }
+  .problem-card-container { gap: 1.1rem !important; }
+}
+
     .timeline-unified {
   display: flex;
   flex-wrap: wrap;
