@@ -764,15 +764,13 @@ body {
 /* --- Parallax --- */
 .parallax {
     min-height: 60vh;
-    background-attachment: fixed;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    background-color: transparent;
     z-index: 10 !important;
     opacity: 1 !important;
     pointer-events: auto !important;
@@ -793,7 +791,7 @@ body {
     opacity: 1 !important;
     position: relative;
     border-radius: 18px;
-    background: rgba(22, 11, 35, 0.7);
+    background: transparent !important;
     box-shadow: 0 8px 32px #1d0d2dbb, 0 2px 18px #7b42f655;
     border: 1.5px solid rgba(0,255,198,0.18);
     margin-top: 3rem;
@@ -866,13 +864,9 @@ display: none !important;
 }
 
 .parallax::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent; /* Overlay removed for clean background */
+    content: none !important;
+    display: none !important;
+    background: transparent !important;
 }
 
 .parallax-content {
