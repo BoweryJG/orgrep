@@ -792,7 +792,8 @@ body {
     position: relative;
     border-radius: 18px;
     background: transparent !important;
-    box-shadow: 0 8px 32px #1d0d2dbb, 0 2px 18px #7b42f655;
+    /* Faint neon glow around the border only */
+    box-shadow: 0 0 18px 3px #00ffc655, 0 0 6px 2px #7b42f644;
     border: 1.5px solid rgba(0,255,198,0.18);
     margin-top: 3rem;
     margin-bottom: 3rem;
