@@ -346,18 +346,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('DOMContentLoaded', () => {
         populateStarsInAllSections();
     });
-    window.onload = () => {
-        populateStarsInAllSections();
-    };
     // Also re-populate on window resize in case layout changes
     window.addEventListener('resize', populateStarsInAllSections);
 
-    // Add debug logging
     function populateStarsInAllSections() {
         // Only target .stars inside .parallax (the neon section)
-        const starsDivs = document.querySelectorAll('.parallax .stars');
-        console.log('[DEBUG] Found', starsDivs.length, '.parallax .stars elements');
-        starsDivs.forEach(starsDiv => {
+        document.querySelectorAll('.parallax .stars').forEach(starsDiv => {
             starsDiv.innerHTML = '';
             for (let i = 0; i < 60; i++) {
                 const star = document.createElement('div');
