@@ -169,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initial setup
-    const miniOrb = document.getElementById('mini-orb');
+
     // guide-orb and progress bar logic removed for static orb in logo
-    if (miniOrb) miniOrb.style.opacity = '1';
+
 
     // Scroll trigger logic
     let orbActive = false;
@@ -258,15 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Guide Orb & Progress Bar Scroll Logic ---
 
-    // Flash animation for logo orb (mini-orb)
-    function triggerLogoOrbFlash() {
-    const miniOrb = document.getElementById('mini-orb');
-    if (!miniOrb) return;
-    miniOrb.classList.add('orb-flash');
-    setTimeout(() => {
-        miniOrb.classList.remove('orb-flash');
-    }, 400); // Duration matches CSS animation
-}
+
     const heroEvolved = document.querySelector('.hero-evolved');
     // (migrated to DOMContentLoaded)
     // (migrated to DOMContentLoaded)
@@ -275,42 +267,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let guideBarActive = false;
     let orbAnimating = false;
 
-    // Helper: Get the center position of the logo orb in the viewport
-    function getMiniOrbCenter(miniOrb) {
-        if (!miniOrb) return { x: 0, y: 0 };
-        const logo = miniOrb.closest('svg');
-        if (!logo) return { x: 0, y: 0 };
-        const rect = logo.getBoundingClientRect();
-        // SVG viewBox is 24x24, orb is at (12,12) with r=5
-        return {
-            x: rect.left + rect.width / 2,
-            y: rect.top + rect.height / 2
-        };
-    }
 
 
-    // Scroll trigger logic
-    function checkScrollTrigger() {
-        if (!heroEvolved) return;
-        const rect = heroEvolved.getBoundingClientRect();
-        const trigger = rect.top < window.innerHeight * 0.25; // Trigger when "evolved" is 25% from top
-        if (trigger && !guideBarActive && !orbAnimating) {
-            triggerLogoOrbFlash();
-            setTimeout(() => {
 
-            }, 400); // Wait for flash to finish before animating
-        } else if (!trigger && guideBarActive && !orbAnimating) {
-            animateOrbToLogo();
-        }
-    }
+
 
     // Initial state
     if (progressIndicator) progressIndicator.style.display = 'none';
     // if (guideOrb) guideOrb.style.display = 'none'; // guideOrb removed
-    if (miniOrb) miniOrb.style.opacity = '1';
 
-    window.addEventListener('scroll', checkScrollTrigger, { passive: true });
-    window.addEventListener('resize', checkScrollTrigger);
+
+
+
 
     // --- Utility Functions ---
     const throttle = (func, limit) => {
