@@ -301,15 +301,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create twinkling stars
     const createStarryBackground = () => {
         if (!starsContainer) return;
-        starsContainer.innerHTML = ''; // Clear existing stars
+        starsContainer.innerHTML = '';
         const fragment = document.createDocumentFragment();
-
         for (let i = 0; i < CONFIG.numStars; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
             const size = getRandom(1, 3);
             const brightness = getRandom(0.4, 0.9);
-
             star.style.width = `${size}px`;
             star.style.height = `${size}px`;
             star.style.opacity = brightness.toString();
@@ -317,11 +315,34 @@ document.addEventListener('DOMContentLoaded', () => {
             star.style.top = `${getRandom(0, 100)}%`;
             star.style.animationDelay = `${getRandom(0, 8)}s`;
             star.style.animationDuration = `${getRandom(2, 5)}s`;
-
             fragment.appendChild(star);
         }
         starsContainer.appendChild(fragment);
     };
+
+    // --- Section-specific stars background logic ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const parallaxSection = document.querySelector('.parallax');
+        if (!parallaxSection) return;
+        const starsDiv = parallaxSection.querySelector('.stars');
+        if (!starsDiv) return;
+        window.starsContainer = starsDiv;
+
+        // Use IntersectionObserver for performance
+        const observer = new window.IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    createStarryBackground();
+                    starsDiv.style.opacity = '1';
+                } else {
+                    starsDiv.innerHTML = '';
+                    starsDiv.style.opacity = '0';
+                }
+            });
+        }, { threshold: 0.15 }); // 15% in view
+        observer.observe(parallaxSection);
+    });
+
 
      // Enhance satellite content with inner elements and particles
     const enhanceSatellites = () => {
