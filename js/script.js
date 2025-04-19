@@ -176,9 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scroll trigger logic
     let orbActive = false;
 
-            guideOrb.style.top = '24px';
-        }
-    });
+
 
     // If navbar or logo layout changes dynamically (e.g., by JS or menu toggle), re-align
     // (migrated to DOMContentLoaded)
