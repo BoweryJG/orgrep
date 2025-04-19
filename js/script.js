@@ -324,21 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function populateStarsInAllSections() {
         // Only target .stars inside .parallax (the neon section)
         document.querySelectorAll('.parallax .stars').forEach(starsDiv => {
-            starsDiv.innerHTML = '';
-            for (let i = 0; i < 60; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.width = `${Math.random() * 2 + 1}px`;
-                star.style.height = `${Math.random() * 2 + 1}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.opacity = `${Math.random() * 0.5 + 0.4}`;
-                star.style.position = 'absolute';
-                star.style.background = 'white';
-                star.style.borderRadius = '50%';
-                star.style.zIndex = '3';
-                starsDiv.appendChild(star);
-            }
+            createStarryBackgroundFor(starsDiv);
             starsDiv.style.opacity = '1';
             starsDiv.style.display = 'block';
         });
@@ -352,21 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function populateStarsInAllSections() {
         // Only target .stars inside .parallax (the neon section)
         document.querySelectorAll('.parallax .stars').forEach(starsDiv => {
-            starsDiv.innerHTML = '';
-            for (let i = 0; i < 60; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.width = `${Math.random() * 2 + 1}px`;
-                star.style.height = `${Math.random() * 2 + 1}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.opacity = `${Math.random() * 0.5 + 0.4}`;
-                star.style.position = 'absolute';
-                star.style.background = 'white';
-                star.style.borderRadius = '50%';
-                star.style.zIndex = '3';
-                starsDiv.appendChild(star);
-            }
+            createStarryBackgroundFor(starsDiv);
             starsDiv.style.opacity = '1';
             starsDiv.style.display = 'block';
         });
