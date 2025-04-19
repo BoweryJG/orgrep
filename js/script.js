@@ -346,8 +346,37 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('DOMContentLoaded', () => {
         populateStarsInAllSections();
     });
+    window.onload = () => {
+        populateStarsInAllSections();
+    };
     // Also re-populate on window resize in case layout changes
     window.addEventListener('resize', populateStarsInAllSections);
+
+    // Add debug logging
+    function populateStarsInAllSections() {
+        // Only target .stars inside .parallax (the neon section)
+        const starsDivs = document.querySelectorAll('.parallax .stars');
+        console.log('[DEBUG] Found', starsDivs.length, '.parallax .stars elements');
+        starsDivs.forEach(starsDiv => {
+            starsDiv.innerHTML = '';
+            for (let i = 0; i < 60; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = `${Math.random() * 2 + 1}px`;
+                star.style.height = `${Math.random() * 2 + 1}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.opacity = `${Math.random() * 0.5 + 0.4}`;
+                star.style.position = 'absolute';
+                star.style.background = 'white';
+                star.style.borderRadius = '50%';
+                star.style.zIndex = '3';
+                starsDiv.appendChild(star);
+            }
+            starsDiv.style.opacity = '1';
+            starsDiv.style.display = 'block';
+        });
+    }
     // (Original helper and logic kept below for reference)
 
     // Helper to generate stars in a given container
