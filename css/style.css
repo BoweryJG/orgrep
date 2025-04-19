@@ -667,6 +667,26 @@ body {
     background: var(--purple-medium);
 }
 
+.timeline-step {
+  transition: transform 0.28s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.28s cubic-bezier(.68,-0.55,.27,1.55);
+  cursor: pointer;
+  will-change: transform, box-shadow;
+
+    margin-bottom: 4rem;
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.timeline-step:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(138, 79, 255, 0.5);
+}
+
+.timeline-step:active {
+  transform: scale(0.95);
+}
+
 .timeline-item {
     margin-bottom: 4rem;
     position: relative;
