@@ -320,34 +320,30 @@ document.addEventListener('DOMContentLoaded', () => {
         starsContainer.appendChild(fragment);
     };
 
-    // --- Section-specific stars background logic ---
+    // --- FORCE STARS TO SHOW IN ALL .stars DIVS ON PAGE LOAD ---
     document.addEventListener('DOMContentLoaded', () => {
-        // Animate stars in all .stars inside .parallax-content (neon box)
-        document.querySelectorAll('.parallax-content .stars').forEach(starsDiv => {
-            createStarryBackgroundFor(starsDiv);
-            starsDiv.style.opacity = '1';
-        });
-        // (Optional) Keep original outer parallax stars logic if needed
-        const parallaxSection = document.querySelector('.parallax');
-        if (parallaxSection) {
-            const starsDiv = parallaxSection.querySelector('.stars');
-            if (starsDiv) {
-                window.starsContainer = starsDiv;
-                const observer = new window.IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            createStarryBackground();
-                            starsDiv.style.opacity = '1';
-                        } else {
-                            starsDiv.innerHTML = '';
-                            starsDiv.style.opacity = '0';
-                        }
-                    });
-                }, { threshold: 0.15 });
-                observer.observe(parallaxSection);
+        document.querySelectorAll('.stars').forEach(starsDiv => {
+            starsDiv.innerHTML = '';
+            for (let i = 0; i < 60; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = `${Math.random() * 2 + 1}px`;
+                star.style.height = `${Math.random() * 2 + 1}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.opacity = `${Math.random() * 0.5 + 0.4}`;
+                star.style.position = 'absolute';
+                star.style.background = 'white';
+                star.style.borderRadius = '50%';
+                star.style.zIndex = '3';
+                starsDiv.appendChild(star);
             }
-        }
+            starsDiv.style.opacity = '1';
+            starsDiv.style.display = 'block';
+        });
     });
+    // (Original helper and logic kept below for reference)
+
     // Helper to generate stars in a given container
     function createStarryBackgroundFor(starsContainer) {
         if (!starsContainer) return;
