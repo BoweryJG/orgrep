@@ -806,8 +806,7 @@ body {
 }
 .parallax-content {
     /* Neon border and pulse remain */
-    background: linear-gradient(180deg, rgba(0,255,198,0.12) 0%, rgba(0,255,198,0.04) 80%, transparent 100%),
-                radial-gradient(ellipse at 50% 0%, rgba(0,255,198,0.13) 0%, transparent 70%);
+    background: transparent;
     box-shadow: 0 0 24px 2px #00ffc6b0, 0 0 0 2.5px #00ffc6cc inset;
     /* The rest of your .parallax-content styles remain unchanged */
 }
