@@ -671,6 +671,12 @@ body {
   transition: transform 0.28s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.28s cubic-bezier(.68,-0.55,.27,1.55);
   cursor: pointer;
   will-change: transform, box-shadow;
+  position: relative;
+  overflow: hidden;
+
+  transition: transform 0.28s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.28s cubic-bezier(.68,-0.55,.27,1.55);
+  cursor: pointer;
+  will-change: transform, box-shadow;
 
     margin-bottom: 4rem;
     position: relative;
