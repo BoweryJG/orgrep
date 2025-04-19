@@ -794,7 +794,37 @@ body {
     position: relative;
     border-radius: 18px;
     box-shadow: 0 0 24px 2px #00ffc6b0, 0 0 0 2.5px #00ffc6cc inset;
-    /* Subtle neon glow border */
+    animation: neonPulse 3.2s ease-in-out infinite alternate;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 24px 2px #00ffc6b0, 0 0 0 2.5px #00ffc6cc inset; }
+  50% { box-shadow: 0 0 38px 6px #00ffc6f0, 0 0 0 3.5px #00ffc6ee inset; }
+}
+
+.parallax-content .feature-card, .parallax-content .card-style, .parallax-content > div[style*='background:rgba(123,66,246'] {
+  transition: transform 0.32s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.32s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.parallax-content .feature-card:hover, .parallax-content .card-style:hover, .parallax-content > div[style*='background:rgba(123,66,246']:hover {
+  transform: translateY(-7px) scale(1.045);
+  box-shadow: 0 8px 32px #00ffc6aa, 0 2px 18px #7b42f699;
+}
+
+.cta-button.hero-cta {
+  transition: transform 0.23s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.23s cubic-bezier(.68,-0.55,.27,1.55);
+  box-shadow: 0 0 18px #00ffc6a0;
+}
+.cta-button.hero-cta:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 32px #00ffc6cc, 0 3px 18px #7b42f699;
+}
+
+.cta-microcopy {
+  color: #b3ffe6;
+  font-size: 1.07rem;
+  margin-top: 0.5rem;
+  opacity: 0.92;
 }
 
 .parallax-content h2 {
