@@ -176,18 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
             progressIndicator.style.pointerEvents = 'auto';
         } else {
             progressIndicator.style.opacity = '0';
-            progressIndicator.style.pointerEvents = 'none';
-        }
-    }
-
     // Initial setup
     const miniOrb = document.getElementById('mini-orb');
-    const guideOrb = document.getElementById('guide-orb');
-    // Remove progress bar logic
-    // alignGuideBarAndOrbToLogo(miniOrb, guideOrb, progressIndicator);
-    // handleGuideBarScrollVisibility(progressIndicator);
-
-    // Hide guide orb by default
     if (guideOrb) guideOrb.style.display = 'none';
     if (miniOrb) miniOrb.style.opacity = '1';
 
