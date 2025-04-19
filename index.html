@@ -1419,7 +1419,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Clamp childX and childY to stay within margin
                 const safeChildX = Math.max(MARGIN, Math.min(canvas.width - MARGIN, childX));
                 const safeChildY = Math.max(MARGIN, Math.min(canvas.height - MARGIN, childY));
-                drawBlob(safeChildX, safeChildY, child.radius(), time, false, index);
+                drawBlob(safeChildX, safeChildY, child.radius, time, false, index);
             });
             requestAnimationFrame(animate);
         }
