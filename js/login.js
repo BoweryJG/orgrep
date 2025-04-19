@@ -25,8 +25,13 @@ document.getElementById('login-form').onsubmit = async function(e) {
 };
 
 // Optional: redirect to dashboard if already logged in as admin
-supabase.auth.getUser().then(({ data: { user } }) => {
-  if (user && user.email === adminEmail) {
-    window.location.href = '/dashboard/';
+(async () => {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session) {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user && user.email === adminEmail) {
+        window.location.href = '/dashboard/';
+      }
+    });
   }
-});
+})();
