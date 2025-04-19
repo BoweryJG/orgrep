@@ -875,5 +875,29 @@ document.addEventListener('DOMContentLoaded', function() {
     <script src="js/supabase-client.js"></script>
     <script src="js/chatbot.js"></script>
     <script src="js/supabase-connection-test.js"></script>
+<script>
+// Ripple effect for feature-card and moat-card
+function createRipple(event) {
+  const card = event.currentTarget;
+  let ripple = card.querySelector('.ripple');
+  if (!ripple) return;
+  ripple.classList.remove('animate');
+  const rect = card.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  ripple.style.width = ripple.style.height = size + 'px';
+  ripple.style.left = (event.clientX - rect.left - size/2) + 'px';
+  ripple.style.top = (event.clientY - rect.top - size/2) + 'px';
+  ripple.classList.add('animate');
+  card.classList.add('rippling');
+  setTimeout(() => {
+    ripple.classList.remove('animate');
+    card.classList.remove('rippling');
+  }, 500);
+}
+
+document.querySelectorAll('.feature-card, .moat-card').forEach(card => {
+  card.addEventListener('click', createRipple);
+});
+</script>
 </body>
 </html>
