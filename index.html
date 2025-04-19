@@ -267,11 +267,13 @@
 
     <section class="section problem-section" id="problem" style="background: linear-gradient(135deg, #1a1333 0%, #7B42F6 100%); padding: 7rem 2rem 6rem 2rem; color: #fff;">
       <div style="max-width:950px;margin:0 auto;text-align:center;">
-        <h2 class="section-title" style="color:#fff;letter-spacing:0.01em; font-size:2.8rem;">What’s Holding Elite Sales Teams Back?</h2>
+        <h2 class="section-title enhanced-title" style="color:#fff;letter-spacing:0.01em; font-size:2.8rem; position:relative;">What’s Holding Elite Sales Teams Back?
+  <span class="gradient-underline"></span>
+</h2>
         <p class="section-intro" style="font-size:1.3em;max-width:700px;margin:1.5em auto 2.2em auto;line-height:1.7; color:#e0e0e0;">
           Even the best sales teams hit a wall—buried under disconnected tools, generic messaging, and missed opportunities. <strong>The real cost?</strong> Lost deals, wasted effort, and burnout.
         </p>
-        <div class="problem-card-container" style="display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;">
+        <div class="problem-card-container enhanced-problem-cards" style="display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;">
           <div class="problem-card" style="background:rgba(30,18,60,0.98);border-radius:20px;padding:2.2rem 1.6rem;box-shadow:0 4px 24px 0 rgba(123,66,246,0.18);max-width:320px;min-width:260px;flex:1 1 260px;display:flex;flex-direction:column;align-items:center;margin-bottom:1.5rem;">
             <div style="font-size:2.1rem;margin-bottom:0.7rem;">🧩</div>
             <h3 style="margin-bottom:0.7rem;font-size:1.3rem;">Fragmented Tools</h3>
@@ -344,7 +346,43 @@
             .parallax-content h2 { font-size:2.1rem !important; }
             .parallax-content p { font-size:1.1rem !important; }
           }
-        </style>
+        .enhanced-title {
+  text-align: center;
+  position: relative;
+}
+.gradient-underline {
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 0.7em auto 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  box-shadow: 0 0 18px #8a4fff77;
+  animation: gradient-move 2.5s linear infinite alternate;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(40, 20, 70, 0.55);
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.glass-card:hover {
+  box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
+  transform: translateY(-8px) scale(1.025);
+}
+@media (max-width: 700px) {
+  .gradient-underline { width: 60px; height: 4px; }
+  .problem-card-container { gap: 1.1rem !important; }
+}
+</style>
       </div>
         <div class="timeline" style="margin-bottom:2.5em;">
           <div class="timeline-item">
@@ -887,7 +925,43 @@
         gap: 1.1rem;
       }
     }
-  </style>
+  .enhanced-title {
+  text-align: center;
+  position: relative;
+}
+.gradient-underline {
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 0.7em auto 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  box-shadow: 0 0 18px #8a4fff77;
+  animation: gradient-move 2.5s linear infinite alternate;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(40, 20, 70, 0.55);
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.glass-card:hover {
+  box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
+  transform: translateY(-8px) scale(1.025);
+}
+@media (max-width: 700px) {
+  .gradient-underline { width: 60px; height: 4px; }
+  .problem-card-container { gap: 1.1rem !important; }
+}
+</style>
             <h2 class="section-title" style="font-size:2.5rem;margin-bottom:1.4rem;">How RepSpheres Powers Results</h2>
             <p style="font-size:1.18em;color:#e0e0e0;max-width:700px;margin:0 auto 2.5em auto;text-align:center;">Every RepSphere journey follows a proven path—each step building toward smarter, more effective engagement. Here’s how it flows:</p>
             <div class="timeline timeline-unified fade-in-on-scroll" style="margin-bottom:2.5em;">
