@@ -441,43 +441,7 @@
 }
 </style>
       </div>
-        <div class="timeline" style="margin-bottom:2.5em;">
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h3>Sphere Creation</h3>
-              <p>Create a Sphere for any target, account, or opportunity—this becomes your workspace for focused intelligence and engagement.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h3>Data Ingestion & Enrichment</h3>
-              <p>Automatically pull in and enrich data from your CRM, web, email, and other connected sources.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h3>Psychological Trigger Mapping</h3>
-              <p><strong>RepSpheres</strong> analyzes all available data to identify the psychological motivators and triggers most likely to drive action—leveraging a library of 150+ behavioral science principles.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h3>Automated Playbooks & Messaging</h3>
-              <p>Launch automations or receive suggested actions—personalized messaging, outreach, or tasks—algorithmically aligned to each target’s unique psychological fingerprint.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h3>Feedback & Optimization</h3>
-              <p>Results and engagement data flow back into the Sphere, powering continuous learning and smarter future actions.</p>
-            </div>
-          </div>
-        </div>
+
         <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2.5rem 2rem;margin-bottom:2.2em;">
           <div style="min-width:180px;flex:1 1 220px;background:rgba(255,255,255,0.09);border-radius:1em;padding:1.5em 1em 1.2em 1em;box-shadow:0 4px 24px rgba(0,0,0,0.07);">
             <span style="font-size:2.2em;display:block;margin-bottom:0.5em;">🧠</span>
@@ -836,6 +800,8 @@
 .timeline-unified::before {
   display: none;
 }
+/* The following block was missing a selector; assuming it is for a pseudo-element, e.g., .timeline-unified::before */
+.timeline-unified::before {
   content: '';
   position: absolute;
   top: 2.5rem;
