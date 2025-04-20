@@ -1197,26 +1197,7 @@
 </script>
             <div style="font-size:1.5rem;margin-bottom:0.5rem;">⏰</div>
 
-    }
-    </div>
-  </div>
-    function onScrollHelixTimeline() {
-      var steps = document.querySelectorAll('.helix-timeline-step');
-      var windowHeight = window.innerHeight;
-      steps.forEach(function(el) {
-        var rect = el.getBoundingClientRect();
-        if (rect.top < windowHeight - 100) {
-          el.classList.add('visible');
-        } else {
-          el.classList.remove('visible');
-        }
-      });
-    }
-    window.addEventListener('scroll', onScrollHelixTimeline);
-    window.addEventListener('resize', onScrollHelixTimeline);
-    document.addEventListener('DOMContentLoaded', onScrollHelixTimeline);
-  })();
-  </script>
+
 </section>
                 <div style="font-size:1.5rem;margin-bottom:0.5rem;">⏰</div>
                 <div style="font-weight:600;margin-bottom:0.3rem;">Urgency & Scarcity</div>
