@@ -247,7 +247,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const satelliteContents = document.querySelectorAll('.satellite-content');
     const centerSphere = document.querySelector('.center-sphere');
     const ecosystem = document.querySelector('.ecosystem');
-    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieBanner = document.getElementById('cookie-banner');
+    const cookieButtons = cookieBanner ? cookieBanner.querySelectorAll('.cookie-btn') : [];
+    if (!cookieBanner || !cookieButtons.length) {
+        console.warn('Cookie banner or buttons not found.');
+    }
 
     const parallaxElements = document.querySelectorAll('.parallax');
     // (migrated to DOMContentLoaded)
@@ -731,15 +735,17 @@ if (navbar) {
      }
 
     // Cookie Banner Logic
-    cookieButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            if (cookieBanner) {
-                cookieBanner.style.display = 'none';
-                // Add actual cookie setting logic here
-                console.log(`Cookie preference: ${btn.textContent.trim()}`);
-            }
+    if (cookieButtons && cookieButtons.length) {
+        cookieButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (cookieBanner) {
+                    cookieBanner.style.display = 'none';
+                    // Add actual cookie setting logic here
+                    console.log(`Cookie preference: ${btn.textContent.trim()}`);
+                }
+            });
         });
-    });
+    }
 
      // Set current year in footer
      if (currentYearSpan) {
@@ -748,7 +754,7 @@ if (navbar) {
 
 
     // --- Initial Setup Calls ---
-    createStarryBackgroundFor();
+    
     enhanceSatellites();
     createOrbitAnimations();
     addCentralParticles();
