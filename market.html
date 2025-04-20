@@ -108,11 +108,5 @@
       renderMarketChart(data || []);
     }
     document.getElementById('market-search-btn').onclick = () => {
-      const query = document.getElementById('market-search-input').value;
-      fetchMarketData(query);
-    };
-    document.getElementById('market-search-input').addEventListener('keyup', e => { if (e.key === 'Enter') document.getElementById('market-search-btn').click(); });
-    fetchMarketData();
-  </script>
 </body>
 </html>
