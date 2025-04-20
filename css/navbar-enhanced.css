@@ -3,17 +3,75 @@
   position: sticky;
   top: 0;
   width: 100%;
-  background: rgba(24, 26, 43, 0.88);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 24px 0 rgba(123,66,246,0.08);
+  background: linear-gradient(90deg, rgba(34,36,60,0.92) 0%, rgba(123,66,246,0.88) 100%);
+  backdrop-filter: blur(18px) saturate(120%);
+  box-shadow: 0 6px 32px 0 rgba(123,66,246,0.15), 0 1.5px 0 #7B42F6 inset;
+  border-bottom: 1.5px solid rgba(123,66,246,0.23);
+  border-radius: 0 0 20px 20px;
   z-index: 100;
-  padding: 0.14rem 0.7rem;
+  padding: 0.45rem 2.2rem 0.45rem 1.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 36px;
-  transition: background 0.3s;
+  min-height: 48px;
+  transition: background 0.3s, box-shadow 0.3s;
 }
+
+.navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 12px #7B42F655;
+}
+
+.navbar .nav-links {
+  display: flex;
+  gap: 1.1rem;
+}
+
+.navbar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.04rem;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.35rem 1.05rem;
+  border-radius: 1.2rem;
+  background: rgba(255,255,255,0.05);
+  transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+  position: relative;
+  min-height: 36px;
+  box-shadow: 0 1.5px 0 #7B42F6 inset;
+  border: 1px solid rgba(123,66,246,0.09);
+}
+
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+  background: linear-gradient(90deg, #7B42F6 0%, #00FFC6 100%);
+  color: #181a2b;
+  box-shadow: 0 4px 18px #7B42F6aa, 0 0 0 2.5px #00FFC6cc;
+  border-color: #00FFC6;
+  text-shadow: none;
+}
+
+.navbar .nav-icon svg {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 0 2px #7B42F633);
+  animation: nav-glow 2.2s infinite alternate;
+}
+
+/* Glassmorphism effect for nav */
+.navbar {
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  backdrop-filter: blur(18px) saturate(120%);
+}
+
 
 .navbar .navbar-brand {
   display: flex;
