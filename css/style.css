@@ -1131,7 +1131,7 @@ display: none !important;
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, var(--scroll-tracker-color) 0%, color-mix(in srgb, var(--scroll-tracker-color) 80%, black) 100%);
+    background: radial-gradient(circle at 30% 30%, var(--scroll-tracker-color) 0%, #00331a 100%); /* fallback for color-mix */
     box-shadow:
         0 0 15px var(--scroll-tracker-shadow),
         0 0 30px var(--scroll-tracker-shadow-faded),
@@ -1159,8 +1159,7 @@ display: none !important;
 
 .progress-dot.active {
     transform: translateX(-50%) scale(1.2); /* Scale up when active */
-    box-shadow: 0 0 15px color-mix(in srgb, var(--scroll-dot-color) 100%, white 20%),
-                0 0 20px color-mix(in srgb, var(--scroll-dot-color) 60%, white 10%);
+    box-shadow: 0 0 15px #a98fff, 0 0 20px #a98fff; /* fallback for color-mix */
 }
 
 /* Dot Tooltip/Label */
@@ -1191,7 +1190,7 @@ display: none !important;
      left: 50%;
      /* top and height set by JS */
      width: 4px;
-     background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--scroll-tracker-color) 60%, transparent));
+     background: linear-gradient(to bottom, transparent, #8b4fff);
      transform: translateX(-50%);
      z-index: 0; /* Behind everything */
      opacity: 0.6;
