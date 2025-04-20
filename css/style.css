@@ -690,17 +690,37 @@ body {
   transition: transform 0.28s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.28s cubic-bezier(.68,-0.55,.27,1.55);
   cursor: pointer;
   will-change: transform, box-shadow;
+  margin-bottom: 3rem;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  width: 100%;
+}
 
-  transition: transform 0.28s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.28s cubic-bezier(.68,-0.55,.27,1.55);
-  cursor: pointer;
-  will-change: transform, box-shadow;
+.timeline-marker {
+  position: absolute;
+  left: -48px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0,255,198,0.12);
+  box-shadow: 0 0 12px 2px #00ffc655, 0 0 0 0 #00ffc600;
+  border: 2.5px solid #00ffc6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.18rem;
+  color: #fff;
+  z-index: 2;
+  transition: box-shadow 0.25s, background 0.25s;
+}
 
-    margin-bottom: 4rem;
-    position: relative;
-    display: flex;
-    width: 100%;
+.timeline-marker.active, .timeline-marker:hover {
+  box-shadow: 0 0 22px 4px #00ffc6aa, 0 0 0 0 #00ffc600;
+  background: rgba(0,255,198,0.23);
+  border-color: #00ffc6;
 }
 
 .timeline-step:hover {
@@ -727,13 +747,19 @@ body {
 }
 
 .timeline-content {
-    width: calc(50% - 40px); /* Adjust width based on timeline line position */
-    padding: 2rem;
-    background: rgba(22, 11, 35, 0.7);
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(138, 79, 255, 0.1);
+    width: calc(50% - 40px);
+    padding: 2.3rem 2rem 2.1rem 2.3rem;
+    background: rgba(34, 18, 46, 0.82);
+    border-radius: 14px;
+    backdrop-filter: blur(7px);
+    border: 1.5px solid rgba(138, 79, 255, 0.13);
+    box-shadow: 0 4px 22px 0 rgba(123,66,246,0.10);
     position: relative;
+    transition: box-shadow 0.25s, background 0.23s;
+}
+.timeline-content:hover {
+    box-shadow: 0 8px 36px #00ffc6aa, 0 2px 18px #7b42f699;
+    background: rgba(44, 22, 66, 0.94);
 }
 .timeline-item:nth-child(odd) .timeline-content {
     margin-right: 40px;
@@ -1240,20 +1266,7 @@ display: none !important;
     text-align: center; /* Center on small screens */
 }
 
-/* --- Cookie Banner --- */
-.cookie-banner {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: rgba(10, 10, 10, 0.9);
-    backdrop-filter: blur(5px);
-    padding: 1rem 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1001; /* Above navbar? Or just 100? Check design intent */
-    border-top: 1px solid rgba(138, 79, 255, 0.3);
-}
+
 
 .cookie-text {
     flex: 1;
@@ -1267,32 +1280,7 @@ display: none !important;
     gap: 1rem;
 }
 
-.cookie-btn {
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-    border: 1px solid transparent; /* Base border */
-}
 
-.cookie-decline {
-    background-color: transparent;
-    border-color: #cccccc;
-    color: #cccccc;
-}
-
-.cookie-manage {
-    background-color: transparent;
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-}
-
-.cookie-accept {
-    background-color: var(--accent-color);
-    border-color: var(--accent-color);
-    color: white;
-}
 
 .cookie-btn:hover {
     opacity: 0.9;
@@ -1352,14 +1340,12 @@ display: none !important;
 
     .footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
     .footer-links { gap: 1rem; justify-content: center; }
-    .cookie-banner { flex-direction: column; padding: 1rem 1.5rem; gap: 1rem; }
-    .cookie-text { margin-right: 0; text-align: center; }
+    
     .progress-indicator { left: 15px !important; display: flex !important; }
     #guide-orb {
         left: 15px !important;
         right: auto !important;
         display: block !important;
-        position: fixed !important;
     }
     .progress-dot::after { display: none; } /* Hide labels on small screens */
 }

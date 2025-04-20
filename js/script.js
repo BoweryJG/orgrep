@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const centerSphere = document.querySelector('.center-sphere');
     const ecosystem = document.querySelector('.ecosystem');
     const cookieBanner = document.getElementById('cookieBanner');
-    const cookieButtons = document.querySelectorAll('.cookie-btn');
+
     const parallaxElements = document.querySelectorAll('.parallax');
     // (migrated to DOMContentLoaded)
     const progressTracker = document.getElementById('progressTracker');
