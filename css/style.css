@@ -1282,9 +1282,7 @@ display: none !important;
 
 
 
-.cookie-btn:hover {
-    opacity: 0.9;
-}
+
 
 /* --- Responsive Design --- */
 @media (max-width: 1024px) {
@@ -1295,7 +1293,7 @@ display: none !important;
     .footer { padding: 3rem 2rem; align-items: flex-start; /* Adjust alignment */ }
     .footer-links { margin-top: 1rem; } /* Add space */
     .copyright { margin-top: 1rem; width: 100%; /* Ensure full width */}
-    .cookie-banner { padding: 1rem 2rem; }
+
     .progress-indicator { left: 15px !important; display: flex !important; }
     #guide-orb {
         left: 15px !important;
