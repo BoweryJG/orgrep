@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/hero-impact.css">
+  <link rel="stylesheet" href="/css/navbar-enhanced.css">
+  <link rel="stylesheet" href="/css/orb-flash.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Podcasts - RepSpheres</title>
@@ -9,6 +13,58 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
+  <!-- SVG defs for gradients and filters (hidden, for nav icons/branding) -->
+  <svg width="0" height="0" style="position:absolute;">
+    <defs>
+      <linearGradient id="dashboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FF00FF" />
+        <stop offset="100%" stop-color="#00FFFF" />
+        <animate attributeName="x1" values="0%;100%;0%" dur="7s" repeatCount="indefinite" />
+        <animate attributeName="y1" values="0%;100%;0%" dur="5s" repeatCount="indefinite" />
+      </linearGradient>
+      <filter id="dashboardGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+        <feComposite in="blur" in2="SourceGraphic" operator="over" />
+        <feFlood flood-color="#FF00FF" flood-opacity=".8" result="glow" />
+        <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
+        <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
+      </filter>
+      <linearGradient id="vaultGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#1FFFFF" />
+        <stop offset="100%" stop-color="#FF1493" />
+        <animate attributeName="x1" values="0%;100%;0%" dur="8s" repeatCount="indefinite" />
+        <animate attributeName="y1" values="0%;100%;0%" dur="6s" repeatCount="indefinite" />
+      </linearGradient>
+      <filter id="vaultGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+        <feComposite in="blur" in2="SourceGraphic" operator="over" />
+        <feFlood flood-color="#1FFFFF" flood-opacity=".8" result="glow" />
+        <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
+        <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
+      </filter>
+    </defs>
+  </svg>
+  <nav class="navbar compact-navbar">
+    <div class="navbar-brand">
+      <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:2;">
+        <defs>
+          <radialGradient id="orbLogoGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+            <stop offset="0%" stop-color="#00FFC6" />
+            <stop offset="100%" stop-color="#8a4fff" />
+          </radialGradient>
+        </defs>
+        <circle cx="12" cy="12" r="10" fill="url(#orbLogoGradient)" filter="url(#dashboardGlow)" />
+        <circle cx="12" cy="12" r="5" fill="#fff" />
+      </svg>
+      <span style="margin-left:0.5em;font-weight:600;font-size:1.25em;letter-spacing:0.01em;">Podcasts</span>
+    </div>
+    <div class="nav-links">
+      <a href="/blog.html" class="nav-link"><span class="nav-icon">📝</span> Blogs</a>
+      <a href="/podcast.html" class="nav-link"><span class="nav-icon">🎙️</span> Podcasts</a>
+      <a href="/market.html" class="nav-link"><span class="nav-icon">📈</span> Market iQ</a>
+      <a href="/dashboard/vault.html" class="nav-link"><span class="nav-icon">🔒</span> Intelligence Vault</a>
+    </div>
+  </nav>
   <nav class="navbar compact-navbar">
     <div class="navbar-brand">
       <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -130,5 +186,5 @@
       }
     })();
   </script>
-</body>
+</body> <!-- End of unified style -->
 </html>
