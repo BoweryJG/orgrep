@@ -102,12 +102,21 @@
     }
 
     // Try loading podcasts, fallback to sample data on error or empty
-    fetchPodcasts().then(() => {
-      const container = document.getElementById('public-podcast-list');
-      if (!container.innerHTML || container.innerHTML.includes('No podcasts')) {
+    (async function() {
+      try {
+        await fetchPodcasts();
+        const container = document.getElementById('public-podcast-list');
+        if (!container.innerHTML || container.innerHTML.includes('No podcasts')) {
+          console.log('No podcasts found in Supabase, showing sample data.');
+          renderSamplePodcasts();
+        } else {
+          console.log('Loaded podcasts from Supabase.');
+        }
+      } catch (err) {
+        console.log('Error loading podcasts from Supabase, showing sample data.', err);
         renderSamplePodcasts();
       }
-    }).catch(renderSamplePodcasts);
+    })();
   </script>
 </body>
 </html>
