@@ -66,21 +66,7 @@
       <a href="/dashboard/vault.html" class="nav-link"><span class="nav-icon">🔒</span> Intelligence Vault</a>
     </div>
   </nav>
-  <nav class="navbar compact-navbar">
-    <div class="navbar-brand">
-      <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
-        <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
-      </svg>
-      <span>RepSpheres</span>
-    </div>
-    <div class="nav-links">
-      <a href="/blog.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📝</span> Blogs</a>
-      <a href="/podcast.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🎙️</span> Podcasts</a>
-      <a href="/market.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📈</span> Market iQ</a>
-      <a href="/dashboard/vault.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🔒</span> Intelligence Vault</a>
-    </div>
-  </nav>
+
   <div class="public-market-search">
     <input type="text" id="market-search-input" placeholder="Search market data by keyword...">
     <button id="market-search-btn">Search</button>
@@ -147,22 +133,27 @@
     document.getElementById('market-search-input').addEventListener('keyup', e => { if (e.key === 'Enter') document.getElementById('market-search-btn').click(); });
     fetchMarketData();
   </script>
+  <script>
     async function fetchMarketData(query) {
       let marketQuery = supabase
-        .from('market_data')
-        .select('*')
-        .order('created_at', { ascending: false });
+      .from('market_data')
+      .select('*')
+      .order('created_at', { ascending: false });
       if (query) {
-        marketQuery = marketQuery.ilike('title', `%${query}%`);
+        marketQuery = marketQuery.like('title', `%${query}%`);
       }
       const { data, error } = await marketQuery;
       if (error) {
-        document.getElementById('public-market-list').innerHTML = '<div style="color:#ff6b6b">Failed to load market data.</div>';
+        document.getElementById('public-market-list').innerHTML = 'Failed to load market data.';
         return;
       }
       renderMarketData(data || []);
       renderMarketChart(data || []);
     }
     document.getElementById('market-search-btn').onclick = () => {
+      const query = document.getElementById('market-search-input').value;
+      fetchMarketData(query);
+    };
+  </script>
 </body> <!-- End of unified style -->
 </html>
