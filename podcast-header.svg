@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="headerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2C3E50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4CA1AF;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Sound wave pattern -->
+    <pattern id="soundWavePattern" patternUnits="userSpaceOnUse" width="120" height="60" patternTransform="rotate(0)">
+      <path d="M0,30 Q30,10 60,30 Q90,50 120,30" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2" />
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="1200" height="300" fill="url(#headerGradient)" />
+  
+  <!-- Sound wave background pattern -->
+  <rect width="1200" height="300" fill="url(#soundWavePattern)" />
+  
+  <!-- Decorative spheres representing "RepSpheres" -->
+  <circle cx="150" cy="150" r="80" fill="#3498db" opacity="0.8" />
+  <circle cx="1050" cy="150" r="80" fill="#e74c3c" opacity="0.8" />
+  
+  <!-- Various sized spheres/circles to represent podcast network -->
+  <circle cx="250" cy="100" r="20" fill="#f39c12" opacity="0.7" />
+  <circle cx="350" cy="180" r="35" fill="#27ae60" opacity="0.7" />
+  <circle cx="450" cy="90" r="25" fill="#8e44ad" opacity="0.7" />
+  <circle cx="550" cy="200" r="30" fill="#16a085" opacity="0.7" />
+  <circle cx="650" cy="120" r="40" fill="#d35400" opacity="0.7" />
+  <circle cx="750" cy="220" r="25" fill="#2980b9" opacity="0.7" />
+  <circle cx="850" cy="80" r="35" fill="#c0392b" opacity="0.7" />
+  <circle cx="950" cy="190" r="20" fill="#2ecc71" opacity="0.7" />
+  
+  <!-- Central microphone icon -->
+  <g transform="translate(600, 150) scale(1.8)">
+    <rect x="-15" y="-40" width="30" height="60" rx="5" fill="#34495e" />
+    <circle cx="0" cy="-50" r="20" fill="#34495e" />
+    <rect x="-7" y="-75" width="14" height="10" fill="#34495e" />
+    <rect x="-25" y="25" width="50" height="5" fill="#34495e" />
+    <circle cx="0" cy="-50" r="15" fill="#95a5a6" />
+    
+    <!-- Sound waves emanating from mic -->
+    <path d="M30,-50 Q40,-30 30,-10" fill="none" stroke="#fff" stroke-width="2" stroke-opacity="0.6" />
+    <path d="M40,-50 Q55,-30 40,-10" fill="none" stroke="#fff" stroke-width="2" stroke-opacity="0.4" />
+    <path d="M50,-50 Q70,-30 50,-10" fill="none" stroke="#fff" stroke-width="2" stroke-opacity="0.2" />
+    
+    <path d="M-30,-50 Q-40,-30 -30,-10" fill="none" stroke="#fff" stroke-width="2" stroke-opacity="0.6" />
+    <path d="M-40,-50 Q-55,-30 -40,-10" fill="none" stroke="#fff" stroke-width="2" stroke-opacity="0.4" />
+    <path d="M-50,-50 Q-70,-30 -50,-10" fill="none" stroke="#fff" stroke-width="2" stroke-opacity="0.2" />
+  </g>
+  
+  <!-- Title text -->
+  <text x="600" y="260" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="white">PODCASTS</text>
+  
+  <!-- RepSpheres text -->
+  <text x="600" y="60" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="white">RepSpheres</text>
+</svg>
