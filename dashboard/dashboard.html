@@ -40,7 +40,50 @@
       <div id="psych-triggers" class="chart-container"></div>
     </section>
     <!-- Timeline Section: Alternating Steps -->
-    <section class="helix-timeline">
+    <section class="helix-timeline-wrapper">
+      <div class="helix-timeline">
+        <div class="timeline-column left">
+          <div class="helix-timeline-step visible">
+            <div class="helix-timeline-card">
+              <h3 style="color:#8a4fff;">Discovery & Assessment</h3>
+              <p>Initial discovery and assessment of your data and business needs.</p>
+            </div>
+          </div>
+          <div class="helix-timeline-step visible">
+            <div class="helix-timeline-card">
+              <h3 style="color:#8a4fff;">Analysis & Visualization</h3>
+              <p>Analyze and visualize your data to uncover actionable insights.</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-column center">
+          <svg class="helix-svg" width="120" height="900" viewBox="0 0 120 900" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 100%; min-height: 700px;">
+            <defs>
+              <linearGradient id="helixStroke" x1="0" y1="0" x2="120" y2="900" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00ffc6"></stop>
+                <stop offset="1" stop-color="#7B42F6"></stop>
+              </linearGradient>
+            </defs>
+            <path id="helixPath" d="M60 40 C 90 80, 30 160, 60 200 C 90 240, 30 320, 60 360 C 90 400, 30 480, 60 520 C 90 560, 30 640, 60 680 C 90 720, 30 800, 60 840" stroke="url(#helixStroke)" stroke-width="6" fill="none" filter="url(#helixGlow)"></path>
+            <filter id="helixGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="8" result="coloredBlur"></feGaussianBlur>
+              <feMerge>
+                <feMergeNode in="coloredBlur"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+              </feMerge>
+            </filter>
+          </svg>
+        </div>
+        <div class="timeline-column right">
+          <div class="helix-timeline-step visible">
+            <div class="helix-timeline-card">
+              <h3 style="color:#8a4fff;">Data Ingestion &amp; Enrichment</h3>
+              <p>Automatically pull in and enrich data from your CRM, web, email, and other connected sources.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
       <div class="helix-timeline-step left visible">
         <div class="helix-timeline-marker">1</div>
         <div class="helix-timeline-card">
