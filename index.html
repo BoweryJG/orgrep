@@ -819,6 +819,85 @@
   position: relative;
   z-index: 1;
 }
+
+.timeline-card-step {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+  justify-content: center;
+}
+.timeline-card-marker {
+  min-width: 48px;
+  min-height: 48px;
+  max-width: 48px;
+  max-height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#00ffc6 30%,#7b42f6 100%);
+  box-shadow: 0 0 16px 4px #7b42f6cc, 0 0 0 5px #00ffc633;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6em;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 0.25rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+.timeline-card-content {
+  background: rgba(40,20,70,0.75);
+  border-radius: 18px;
+  box-shadow: 0 4px 28px 0 #7B42F688, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  backdrop-filter: blur(8px);
+  min-width: 260px;
+  max-width: 370px;
+  padding: 2.1rem 1.6rem;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+  transition: box-shadow 0.25s, transform 0.25s;
+  opacity: 1;
+  transform: none;
+}
+.timeline-card-step.left .timeline-card-content {
+  margin-right: 60px;
+  margin-left: 0;
+  text-align: right;
+}
+.timeline-card-step.right .timeline-card-content {
+  margin-left: 60px;
+  margin-right: 0;
+  text-align: left;
+}
+.timeline-card-step.left {
+  flex-direction: row;
+}
+.timeline-card-step.right {
+  flex-direction: row-reverse;
+}
+@media (max-width: 900px) {
+  .timeline-cards-container { max-width: 98vw; }
+  .timeline-card-content { min-width: 180px; max-width: 98vw; margin: 0 !important; text-align: left !important; }
+  .timeline-card-step, .timeline-card-step.right, .timeline-card-step.left {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.2rem;
+  }
+  .timeline-card-marker {
+    position: static;
+    left: auto;
+    transform: none;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+  }
+}
+
 .timeline-card-step {
   display: flex;
   flex-direction: row;
