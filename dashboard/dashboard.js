@@ -30,35 +30,32 @@ priceFilter.addEventListener('input', () => {
 
 // --- Populate filters from Supabase ---
 async function fetchFilters() {
-  // Fetch state options from Supabase
-  const { data: states, error: statesError } = await supabase.from('states').select('id, name');
-  if (statesError) {
-    console.error('Error fetching states:', statesError);
-  } else if (states && Array.isArray(states)) {
-    stateFilter.innerHTML = '<option value="">All States</option>' +
-      states.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+  // Fetch unique states from contacts table
+  const { data: contacts, error: contactsError } = await supabase.from('contacts').select('id, name, state, procedure');
+  if (contactsError) {
+    console.error('Error fetching contacts:', contactsError);
+    return;
   }
+  // Extract unique states and procedures
+  const uniqueStates = [...new Set(contacts.map(c => c.state).filter(Boolean))];
+  const uniqueProcedures = [...new Set(contacts.map(c => c.procedure).filter(Boolean))];
 
-  // Fetch procedure options from Supabase
-  const { data: procedures, error: proceduresError } = await supabase.from('procedures').select('id, name');
-  if (proceduresError) {
-    console.error('Error fetching procedures:', proceduresError);
-  } else if (procedures && Array.isArray(procedures)) {
-    procedureFilter.innerHTML = '<option value="">All Procedures</option>' +
-      procedures.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-  }
+  stateFilter.innerHTML = '<option value="">All States</option>' +
+    uniqueStates.map(state => `<option value="${state}">${state}</option>`).join('');
+  procedureFilter.innerHTML = '<option value="">All Procedures</option>' +
+    uniqueProcedures.map(proc => `<option value="${proc}">${proc}</option>`).join('');
 }
 fetchFilters();
 
 // --- Fetch and render dashboard data ---
 async function fetchDashboardData() {
-  // Example: Fetch dashboard data from Supabase (adjust table/column names as needed)
-  const { data, error } = await supabase.from('dashboard_data').select('*');
+  // Fetch all contacts as dashboard data for now
+  const { data, error } = await supabase.from('contacts').select('*');
   if (error) {
-    console.error('Error fetching dashboard data:', error);
+    console.error('Error fetching contacts (dashboard data):', error);
     return;
   }
-  console.log('Dashboard data:', data);
+  console.log('Contacts (dashboard data):', data);
   // TODO: Render charts/maps using the fetched data
 }
 fetchDashboardData();
