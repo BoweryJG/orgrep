@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>US Dental & Aesthetic Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min"></script>
+  <script src="dashboard.js" defer></script>
+</head>
+<body>
+  <header class="dashboard-header">
+    <h1>US Dental & Aesthetic Industry Dashboard</h1>
+    <button id="cta-btn" class="cta-btn">Get This Campaign</button>
+  </header>
+  <main>
+    <section class="hero-section">
+      <div id="animated-map" class="animated-map"></div>
+      <div class="filters">
+        <select id="state-filter"><option value="">All States</option></select>
+        <select id="procedure-filter"><option value="">All Procedures</option></select>
+        <input type="range" id="price-filter" min="0" max="10000" step="100" />
+        <span id="price-value"></span>
+      </div>
+    </section>
+    <section class="charts-section">
+      <div class="chart-container">
+        <canvas id="growthChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="priceChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="adSpendChart"></canvas>
+      </div>
+      <div id="psych-triggers" class="chart-container"></div>
+    </section>
+    <section class="sem-section">
+      <div id="google-trends-widget"></div>
+      <div id="seo-keywords"></div>
+    </section>
+  </main>
+  <div id="lead-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Get This Campaign</h2>
+      <form id="lead-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <input type="text" name="business" placeholder="Business Name" />
+        <input type="text" name="interest" placeholder="What are you interested in?" />
+        <button type="submit">Submit</button>
+      </form>
+      <button id="download-report">Download PDF Report</button>
+    </div>
+  </div>
+</body>
+</html>
