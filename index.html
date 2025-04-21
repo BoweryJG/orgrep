@@ -66,74 +66,6 @@
           <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
           <feComposite in="blur" in2="SourceGraphic" operator="over" />
           <feFlood flood-color="#00FF66" flood-opacity=".8" result="glow" />
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RepSpheres: Elevating Elite Sales Teams with Precision Intelligence</title>
-    <link rel="icon" type="image/svg+xml" sizes="192x192" href="animated-orb.svg">
-    <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/hero-impact.css">
-    <link rel="stylesheet" href="css/navbar-enhanced.css">
-    <link rel="stylesheet" href="css/orb-flash.css">
-</head>
-<body>
-    <!-- SVG defs for gradients and filters (hidden) -->
-    <svg width="0" height="0" style="position:absolute;">
-      <defs>
-        <!-- Dashboard vibrant gradient and glow -->
-        <linearGradient id="dashboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FF00FF" />
-          <stop offset="100%" stop-color="#00FFFF" />
-          <animate attributeName="x1" values="0%;100%;0%" dur="7s" repeatCount="indefinite" />
-          <animate attributeName="y1" values="0%;100%;0%" dur="5s" repeatCount="indefinite" />
-        </linearGradient>
-        <filter id="dashboardGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-          <feComposite in="blur" in2="SourceGraphic" operator="over" />
-          <feFlood flood-color="#FF00FF" flood-opacity=".8" result="glow" />
-          <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
-          <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
-        </filter>
-        <!-- Vault vibrant gradient and glow -->
-        <linearGradient id="vaultGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#1FFFFF" />
-          <stop offset="100%" stop-color="#FF1493" />
-          <animate attributeName="x1" values="0%;100%;0%" dur="8s" repeatCount="indefinite" />
-          <animate attributeName="y1" values="0%;100%;0%" dur="6s" repeatCount="indefinite" />
-        </linearGradient>
-        <filter id="vaultGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-          <feComposite in="blur" in2="SourceGraphic" operator="over" />
-          <feFlood flood-color="#1FFFFF" flood-opacity=".8" result="glow" />
-          <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
-          <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
-        </filter>
-        <linearGradient id="blogGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FF6B00" />
-          <stop offset="100%" stop-color="#00AAFF" />
-        </linearGradient>
-        <linearGradient id="podcastGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#00FF66" />
-          <stop offset="100%" stop-color="#FF0099" />
-        </linearGradient>
-        <linearGradient id="marketGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FFFF00" />
-          <stop offset="100%" stop-color="#8A2BE2" />
-        </linearGradient>
-        <filter id="blogGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-          <feComposite in="blur" in2="SourceGraphic" operator="over" />
-          <feFlood flood-color="#00AAFF" flood-opacity=".8" result="glow" />
-          <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
-          <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
-        </filter>
-        <filter id="podcastGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-          <feComposite in="blur" in2="SourceGraphic" operator="over" />
-          <feFlood flood-color="#00FF66" flood-opacity=".8" result="glow" />
           <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
           <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
         </filter>
@@ -916,49 +848,128 @@
   flex-direction: row-reverse;
   justify-content: flex-end;
 }
+.helix-timeline-marker {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#00ffc6 30%,#7b42f6 100%);
+  box-shadow: 0 0 16px 4px #7b42f6cc, 0 0 0 5px #00ffc633;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  color: #fff;
+  position: relative;
+  z-index: 3;
+  animation: helixPulse 2.5s infinite ease-in-out;
+}
+@keyframes helixPulse {
+  0%,100% { box-shadow: 0 0 16px 4px #7b42f6cc, 0 0 0 5px #00ffc633; }
+  50% { box-shadow: 0 0 32px 8px #00ffc6cc, 0 0 0 10px #7b42f688; }
+}
+.helix-timeline-card {
+  background: rgba(40,20,70,0.62);
+  border-radius: 18px;
+  box-shadow: 0 4px 28px 0 #7B42F688, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  backdrop-filter: blur(8px);
+  min-width: 260px;
+  max-width: 370px;
+  padding: 2.1rem 1.6rem;
+  margin: 0 1.5rem;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+  transition: box-shadow 0.25s, transform 0.25s;
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+}
+.helix-timeline-step.visible .helix-timeline-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.6s cubic-bezier(.68,-0.55,.27,1.55), transform 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@media (max-width: 900px) {
+  .helix-timeline-steps { max-width: 98vw; }
+  .helix-timeline-card { min-width: 180px; max-width: 98vw; }
+}
 </style>
-
-<!-- Process Cards Section (restored, no helix) -->
-<section class="process-cards-section" style="display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;margin:3rem 0;">
-  <div class="process-card">
-    <div class="process-marker">1</div>
-    <div class="process-card-content">
-      <h3 style="color:#00ffc6;">Sphere Creation</h3>
-      <p>Create a Sphere for any target, account, or opportunity—this becomes your workspace for focused intelligence and engagement.</p>
+<!-- Helix Timeline Section -->
+<div class="helix-timeline-container fade-in-on-scroll">
+  <svg class="helix-svg" width="120" height="900" viewBox="0 0 120 900" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 100%; min-height: 700px;">
+    <defs>
+      <linearGradient id="helixStroke" x1="0" y1="0" x2="120" y2="900" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#00ffc6"/>
+        <stop offset="1" stop-color="#7B42F6"/>
+      </linearGradient>
+    </defs>
+    <path id="helixPath" d="M60 40 C 90 80, 30 160, 60 200 C 90 240, 30 320, 60 360 C 90 400, 30 480, 60 520 C 90 560, 30 640, 60 680 C 90 720, 30 800, 60 840" stroke="url(#helixStroke)" stroke-width="6" fill="none" filter="url(#helixGlow)"/>
+    <filter id="helixGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </svg>
+  <div class="helix-timeline-steps">
+    <div class="helix-timeline-step left">
+      <div class="helix-timeline-marker">1</div>
+      <div class="helix-timeline-card">
+        <h3 style="color:#00ffc6;">Sphere Creation</h3>
+        <p>Create a Sphere for any target, account, or opportunity—this becomes your workspace for focused intelligence and engagement.</p>
+      </div>
+    </div>
+    <div class="helix-timeline-step right">
+      <div class="helix-timeline-marker">2</div>
+      <div class="helix-timeline-card">
+        <h3 style="color:#8a4fff;">Data Ingestion & Enrichment</h3>
+        <p>Automatically pull in and enrich data from your CRM, web, email, and other connected sources.</p>
+      </div>
+    </div>
+    <div class="helix-timeline-step left">
+      <div class="helix-timeline-marker">3</div>
+      <div class="helix-timeline-card">
+        <h3 style="color:#00ffc6;">Psychological Trigger Mapping</h3>
+        <p><strong>RepSpheres</strong> analyzes all available data to identify the psychological motivators and triggers most likely to drive action—leveraging a library of 150+ behavioral science principles.</p>
+      </div>
+    </div>
+    <div class="helix-timeline-step right">
+      <div class="helix-timeline-marker">4</div>
+      <div class="helix-timeline-card">
+        <h3 style="color:#8a4fff;">Automated Playbooks & Messaging</h3>
+        <p>Launch automations or receive suggested actions—personalized messaging, outreach, or tasks—algorithmically aligned to each target’s unique psychological fingerprint.</p>
+      </div>
+    </div>
+    <div class="helix-timeline-step left">
+      <div class="helix-timeline-marker">5</div>
+      <div class="helix-timeline-card">
+        <h3 style="color:#00ffc6;">Feedback & Optimization</h3>
+        <p>Results and engagement data flow back into the Sphere, powering continuous learning and smarter future actions.</p>
+      </div>
     </div>
   </div>
-  <div class="process-card">
-    <div class="process-marker">2</div>
-    <div class="process-card-content">
-      <h3 style="color:#8a4fff;">Data Ingestion & Enrichment</h3>
-      <p>Automatically pull in and enrich data from your CRM, web, email, and other connected sources.</p>
-    </div>
-  </div>
-  <div class="process-card">
-    <div class="process-marker">3</div>
-    <div class="process-card-content">
-      <h3 style="color:#00ffc6;">Psychological Trigger Mapping</h3>
-      <p><strong>RepSpheres</strong> analyzes all available data to identify the psychological motivators and triggers most likely to drive action—leveraging a library of 150+ behavioral science principles.</p>
-    </div>
-  </div>
-  <div class="process-card">
-    <div class="process-marker">4</div>
-    <div class="process-card-content">
-      <h3 style="color:#8a4fff;">Automated Playbooks & Messaging</h3>
-      <p>Launch automations or receive suggested actions—personalized messaging, outreach, or tasks—algorithmically aligned to each target’s unique psychological fingerprint.</p>
-    </div>
-  </div>
-  <div class="process-card">
-    <div class="process-marker">5</div>
-    <div class="process-card-content">
-      <h3 style="color:#00ffc6;">Feedback & Optimization</h3>
-      <p>Results and engagement data flow back into the Sphere, powering continuous learning and smarter future actions.</p>
-    </div>
-  </div>
-</section>
-
-
-
+</div>
+<script>
+// Animate helix timeline cards on scroll
+(function() {
+  function onScrollHelixTimeline() {
+    var steps = document.querySelectorAll('.helix-timeline-step');
+    var windowHeight = window.innerHeight;
+    steps.forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < windowHeight - 100) {
+        el.classList.add('visible');
+      } else {
+        el.classList.remove('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScrollHelixTimeline);
+  window.addEventListener('resize', onScrollHelixTimeline);
+  document.addEventListener('DOMContentLoaded', onScrollHelixTimeline);
+})();
+</script>
             
 
 
@@ -1246,26 +1257,5 @@ document.querySelectorAll('.feature-card, .moat-card, .timeline-step').forEach(c
   card.addEventListener('click', createRipple);
 });
 </script>
-<script>
-// Animate process cards on scroll (like timeline)
-(function() {
-  function onScrollProcessCards() {
-    var cards = document.querySelectorAll('.process-card');
-    var windowHeight = window.innerHeight;
-    cards.forEach(function(el) {
-      var rect = el.getBoundingClientRect();
-      if (rect.top < windowHeight - 100) {
-        el.classList.add('visible');
-      } else {
-        el.classList.remove('visible');
-      }
-    });
-  }
-  window.addEventListener('scroll', onScrollProcessCards);
-  window.addEventListener('resize', onScrollProcessCards);
-  document.addEventListener('DOMContentLoaded', onScrollProcessCards);
-})();
-</script>
-<script src="js/script.js"></script>
 </body>
 </html>

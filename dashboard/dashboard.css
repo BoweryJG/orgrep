@@ -144,62 +144,6 @@ body {
   background: linear-gradient(90deg, #7b42f6 0%, #00ffc6 80%);
   box-shadow: 0 0 32px #00ffc655, 0 2px 12px #7b42f633;
 }
-.helix-timeline-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  background: none;
-  margin: 3rem 0;
-}
-.helix-timeline {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 1200px;
-  min-height: 700px;
-  position: relative;
-}
-.timeline-column {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 0;
-}
-.timeline-column.center {
-  flex: 0 0 120px;
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  position: relative;
-  z-index: 1;
-}
-.timeline-column.left,
-.timeline-column.right {
-  z-index: 2;
-}
-.helix-timeline-step {
-  display: flex;
-  justify-content: flex-end;
-  margin: 2.5rem 0;
-}
-.timeline-column.right .helix-timeline-step {
-  justify-content: flex-start;
-}
-.helix-timeline-card {
-  background: #18182f;
-  border-radius: 1.2em;
-  box-shadow: 0 2px 16px 0 #7b42f644;
-  padding: 1.5em 2em;
-  min-width: 260px;
-  max-width: 340px;
-  margin: 0 1.2em;
-}
-.helix-svg {
-  display: block;
-  margin: 0 auto;
-}
 @media (max-width: 900px) {
   .charts-section {
     grid-template-columns: 1fr;
