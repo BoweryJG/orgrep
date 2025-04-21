@@ -63,9 +63,9 @@
   left: 20%;
   right: 20%;
   bottom: 5px;
-  height: 3px;
+  height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, #00ffc6 0%, #7B42F6 100%);
+  background: #7B42F6;
   opacity: 0;
   transform: scaleX(0);
   transition: opacity 0.2s, transform 0.2s;
