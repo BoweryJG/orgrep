@@ -118,58 +118,111 @@
   </style>
 </head>
 <body>
-  <svg id="blog-orb" class="orb-bg-parent" viewBox="-100 -100 1000 1000" style="width:320px; height:320px; display:block; background:transparent; position:fixed; right:40px; bottom:40px; z-index:0; pointer-events:none; opacity:0.37; filter:blur(1.2px) saturate(1.12); animation: orbPulse 7s ease-in-out infinite, orbRotate 22s linear infinite; transform-origin: 60% 60%;">
-  <defs>
-    <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
-      <stop id="p0" offset="0%" stop-color="#00E5FF"/>
-      <stop id="p1" offset="100%" stop-color="#5B3CFF"/>
-      <stop id="p2" offset="50%" stop-color="#00E5FF"/>
-      <stop id="p3" offset="75%" stop-color="#5B3CFF"/>
-    </radialGradient>
-  </defs>
-  <ellipse cx="500" cy="500" rx="400" ry="400" fill="url(#parentGrad)" opacity="0.95"/>
-</svg>
+  <canvas id="blog-orb-canvas" width="340" height="340" style="position:fixed; right:40px; bottom:40px; width:320px; height:320px; z-index:0; pointer-events:none; opacity:0.37; filter:blur(1.2px) saturate(1.12);"></canvas>
 <script>
 (function() {
-  const orb = document.getElementById('blog-orb');
-  let targetX = window.innerWidth - 200;
-  let targetY = window.innerHeight - 200;
-  let currentX = targetX, currentY = targetY;
-  let orbSize = 320;
+  const canvas = document.getElementById('blog-orb-canvas');
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width, height = canvas.height;
+  let t = 0;
+  let orbState = {
+    cx: width/2,
+    cy: height/2,
+    r: 135,
+    morph: Array(8).fill(0).map(() => Math.random() * Math.PI * 2),
+    morphSpeed: Array(8).fill(0).map(() => 0.01 + Math.random() * 0.03),
+    gradAngle: 0,
+    gradSpeed: 0.004,
+    breathing: 0,
+    breathingSpeed: 0.012 + Math.random()*0.005,
+    vx: 0,
+    vy: 0,
+    tx: width/2,
+    ty: height/2,
+    alive: true
+  };
 
-  function lerp(a, b, t) { return a + (b - a) * t; }
+  function drawMorphingOrb() {
+    ctx.clearRect(0, 0, width, height);
+    // Animate morph points
+    for (let i = 0; i < orbState.morph.length; i++) {
+      orbState.morph[i] += orbState.morphSpeed[i] * (0.8 + 0.7 * Math.sin(t + i));
+    }
+    orbState.breathing = Math.sin(t * orbState.breathingSpeed) * 10;
+    orbState.gradAngle += orbState.gradSpeed;
+    // Calculate gradient center
+    const gradCx = orbState.cx + Math.cos(orbState.gradAngle) * 40;
+    const gradCy = orbState.cy + Math.sin(orbState.gradAngle) * 40;
+    const grad = ctx.createRadialGradient(
+      gradCx, gradCy, 40 + 18 * Math.sin(t),
+      orbState.cx, orbState.cy, orbState.r + 28 + orbState.breathing
+    );
+    grad.addColorStop(0, '#00E5FF');
+    grad.addColorStop(0.55, '#5B3CFF');
+    grad.addColorStop(1, '#23263a');
+    // Draw morphing orb
+    ctx.save();
+    ctx.beginPath();
+    for (let i = 0; i < 8; i++) {
+      let angle = (Math.PI * 2 / 8) * i;
+      let nextAngle = (Math.PI * 2 / 8) * ((i+1)%8);
+      let radius = orbState.r + orbState.breathing + Math.sin(orbState.morph[i]) * 18;
+      let nextRadius = orbState.r + orbState.breathing + Math.sin(orbState.morph[(i+1)%8]) * 18;
+      let x = orbState.cx + Math.cos(angle) * radius;
+      let y = orbState.cy + Math.sin(angle) * radius;
+      let nx = orbState.cx + Math.cos(nextAngle) * nextRadius;
+      let ny = orbState.cy + Math.sin(nextAngle) * nextRadius;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.bezierCurveTo(x, y, nx, ny, nx, ny);
+    }
+    ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.shadowColor = '#8a4fff';
+    ctx.shadowBlur = 42;
+    ctx.globalAlpha = 0.96;
+    ctx.fill();
+    ctx.restore();
+  }
 
   function animate() {
-    currentX = lerp(currentX, targetX, 0.08);
-    currentY = lerp(currentY, targetY, 0.08);
-    orb.style.right = 'auto';
-    orb.style.bottom = 'auto';
-    orb.style.left = (currentX) + 'px';
-    orb.style.top = (currentY) + 'px';
+    // Orb moves on its own
+    orbState.tx += Math.sin(t * 0.7) * 0.09;
+    orbState.ty += Math.cos(t * 0.5) * 0.07;
+    // Smoothly approach target
+    orbState.cx += (orbState.tx - orbState.cx) * 0.07;
+    orbState.cy += (orbState.ty - orbState.cy) * 0.07;
+    drawMorphingOrb();
+    t += 0.018;
     requestAnimationFrame(animate);
   }
 
-  function setTargetFromEvent(e) {
+  // User interaction: orb gently shifts toward pointer
+  function nudgeOrb(e) {
     let x, y;
     if (e.touches && e.touches.length) {
-      x = e.touches[0].clientX;
-      y = e.touches[0].clientY;
+      x = e.touches[0].clientX - canvas.getBoundingClientRect().left;
+      y = e.touches[0].clientY - canvas.getBoundingClientRect().top;
     } else {
-      x = e.clientX;
-      y = e.clientY;
+      x = e.clientX - canvas.getBoundingClientRect().left;
+      y = e.clientY - canvas.getBoundingClientRect().top;
     }
-    // Keep orb within viewport
-    targetX = Math.max(20, Math.min(window.innerWidth - orbSize - 20, x - orbSize / 2));
-    targetY = Math.max(20, Math.min(window.innerHeight - orbSize - 20, y - orbSize / 2));
+    // Only nudge if pointer is reasonably close to orb
+    if (Math.abs(x - orbState.cx) < 180 && Math.abs(y - orbState.cy) < 180) {
+      orbState.tx += (x - orbState.cx) * 0.4 + (Math.random()-0.5)*18;
+      orbState.ty += (y - orbState.cy) * 0.4 + (Math.random()-0.5)*18;
+    }
   }
+  window.addEventListener('mousemove', nudgeOrb, {passive:true});
+  window.addEventListener('touchmove', nudgeOrb, {passive:true});
 
-  window.addEventListener('mousemove', setTargetFromEvent, {passive:true});
-  window.addEventListener('touchmove', setTargetFromEvent, {passive:true});
-
-  // On resize, keep orb in bounds
-  window.addEventListener('resize', function() {
-    targetX = Math.max(20, Math.min(window.innerWidth - orbSize - 20, targetX));
-    targetY = Math.max(20, Math.min(window.innerHeight - orbSize - 20, targetY));
+  // Responsive
+  window.addEventListener('resize', () => {
+    canvas.width = width = 340;
+    canvas.height = height = 340;
+    orbState.cx = width/2;
+    orbState.cy = height/2;
+    orbState.tx = width/2;
+    orbState.ty = height/2;
   });
 
   animate();
