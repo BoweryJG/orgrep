@@ -1242,5 +1242,25 @@ document.querySelectorAll('.feature-card, .moat-card, .timeline-step').forEach(c
   card.addEventListener('click', createRipple);
 });
 </script>
+<script>
+// Animate process cards on scroll (like timeline)
+(function() {
+  function onScrollProcessCards() {
+    var cards = document.querySelectorAll('.process-card');
+    var windowHeight = window.innerHeight;
+    cards.forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < windowHeight - 100) {
+        el.classList.add('visible');
+      } else {
+        el.classList.remove('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScrollProcessCards);
+  window.addEventListener('resize', onScrollProcessCards);
+  document.addEventListener('DOMContentLoaded', onScrollProcessCards);
+})();
+</script>
 </body>
 </html>
