@@ -1,0 +1,72 @@
+.ecosystem-hero {
+  position: relative;
+  background: linear-gradient(120deg, #7B42F6 0%, #00ffc6 100%);
+  padding: 7rem 2rem 5rem 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+.ecosystem-bg {
+  position: absolute;
+  top: -80px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle at 50% 30%, #00ffc6cc 0%, #7B42F6 80%, transparent 100%);
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+.ecosystem-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.ecosystem-eyebrow {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 1.2rem;
+  opacity: 0.85;
+}
+.ecosystem-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 0.7em;
+  position: relative;
+  display: inline-block;
+}
+.ecosystem-underline {
+  display: block;
+  width: 120px;
+  height: 6px;
+  margin: 0.5em auto 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  box-shadow: 0 0 18px #8a4fff77;
+  animation: gradient-move 2.5s linear infinite alternate;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.ecosystem-lead {
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 1.2em;
+}
+.ecosystem-highlight {
+  color: #00ffc6;
+  font-weight: 700;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.ecosystem-support {
+  font-size: 1.05rem;
+  color: #e4e4e4;
+  opacity: 0.92;
+}
+@media (max-width: 700px) {
+  .ecosystem-title { font-size: 2.1rem; }
+  .ecosystem-bg { width: 320px; height: 320px; top: -40px; }
+}
