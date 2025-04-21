@@ -118,7 +118,7 @@
   </style>
 </head>
 <body>
-  <svg class="orb-bg-parent" viewBox="-100 -100 1000 1000" style="width:600px; height:600px; display:block; background:transparent; position:fixed; right:-120px; bottom:-120px; z-index:0; pointer-events:none; opacity:0.37; filter:blur(1.5px) saturate(1.15); animation: orbPulse 7s ease-in-out infinite, orbRotate 22s linear infinite; transform-origin: 60% 60%;">
+  <svg id="blog-orb" class="orb-bg-parent" viewBox="-100 -100 1000 1000" style="width:320px; height:320px; display:block; background:transparent; position:fixed; right:40px; bottom:40px; z-index:0; pointer-events:none; opacity:0.37; filter:blur(1.2px) saturate(1.12); animation: orbPulse 7s ease-in-out infinite, orbRotate 22s linear infinite; transform-origin: 60% 60%;">
   <defs>
     <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
       <stop id="p0" offset="0%" stop-color="#00E5FF"/>
@@ -127,8 +127,54 @@
       <stop id="p3" offset="75%" stop-color="#5B3CFF"/>
     </radialGradient>
   </defs>
-  <path d="M400,500 C400,776.142 776.142,900 500,900 C223.858,900 100,776.142 100,500 C100,223.858 223.858,100 500,100 C776.142,100 900,223.858 900,500 C900,776.142 776.142,900 500,900 Z" fill="url(#parentGrad)" opacity="0.95"/>
+  <ellipse cx="500" cy="500" rx="400" ry="400" fill="url(#parentGrad)" opacity="0.95"/>
 </svg>
+<script>
+(function() {
+  const orb = document.getElementById('blog-orb');
+  let targetX = window.innerWidth - 200;
+  let targetY = window.innerHeight - 200;
+  let currentX = targetX, currentY = targetY;
+  let orbSize = 320;
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function animate() {
+    currentX = lerp(currentX, targetX, 0.08);
+    currentY = lerp(currentY, targetY, 0.08);
+    orb.style.right = 'auto';
+    orb.style.bottom = 'auto';
+    orb.style.left = (currentX) + 'px';
+    orb.style.top = (currentY) + 'px';
+    requestAnimationFrame(animate);
+  }
+
+  function setTargetFromEvent(e) {
+    let x, y;
+    if (e.touches && e.touches.length) {
+      x = e.touches[0].clientX;
+      y = e.touches[0].clientY;
+    } else {
+      x = e.clientX;
+      y = e.clientY;
+    }
+    // Keep orb within viewport
+    targetX = Math.max(20, Math.min(window.innerWidth - orbSize - 20, x - orbSize / 2));
+    targetY = Math.max(20, Math.min(window.innerHeight - orbSize - 20, y - orbSize / 2));
+  }
+
+  window.addEventListener('mousemove', setTargetFromEvent, {passive:true});
+  window.addEventListener('touchmove', setTargetFromEvent, {passive:true});
+
+  // On resize, keep orb in bounds
+  window.addEventListener('resize', function() {
+    targetX = Math.max(20, Math.min(window.innerWidth - orbSize - 20, targetX));
+    targetY = Math.max(20, Math.min(window.innerHeight - orbSize - 20, targetY));
+  });
+
+  animate();
+})();
+</script>
   <!-- SVG defs for gradients and filters (hidden, for nav icons/branding) -->
   <svg width="0" height="0" style="position:absolute;">
     <defs>
