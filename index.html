@@ -341,94 +341,159 @@
                 </div>
               </div>
               <div style="text-align:center;margin-top:2.2rem;">
-  <button class="cta-button hero-cta">Start Winning More Deals</button>
-</div>
-<!-- Helix Timeline Section -->
-<div class="helix-timeline-container fade-in-on-scroll">
-  <svg class="helix-svg" width="120" height="900" viewBox="0 0 120 900" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 100%; min-height: 700px;">
-    <defs>
-      <linearGradient id="helixStroke" x1="0" y1="0" x2="120" y2="900" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#00ffc6"/>
-        <stop offset="1" stop-color="#7B42F6"/>
-      </linearGradient>
-    </defs>
-    <path id="helixPath" d="M60 40 C 90 80, 30 160, 60 200 C 90 240, 30 320, 60 360 C 90 400, 30 480, 60 520 C 90 560, 30 640, 60 680 C 90 720, 30 800, 60 840" stroke="url(#helixStroke)" stroke-width="6" fill="none" filter="url(#helixGlow)"/>
-    <filter id="helixGlow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </svg>
-  <div class="helix-timeline-steps">
-    <div class="helix-timeline-step left">
-      <div class="helix-timeline-marker">1</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#00ffc6;">Sphere Creation</h3>
-        <p>Create a Sphere for any target, account, or opportunity—this becomes your workspace for focused intelligence and engagement.</p>
-      </div>
-    </div>
-    <div class="helix-timeline-step right">
-      <div class="helix-timeline-marker">2</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#8a4fff;">Data Ingestion & Enrichment</h3>
-        <p>Automatically pull in and enrich data from your CRM, web, email, and other connected sources.</p>
-      </div>
-    </div>
-    <div class="helix-timeline-step left">
-      <div class="helix-timeline-marker">3</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#00ffc6;">Psychological Trigger Mapping</h3>
-        <p><strong>RepSpheres</strong> analyzes all available data to identify the psychological motivators and triggers most likely to drive action—leveraging a library of 150+ behavioral science principles.</p>
-      </div>
-    </div>
-    <div class="helix-timeline-step right">
-      <div class="helix-timeline-marker">4</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#8a4fff;">Automated Playbooks & Messaging</h3>
-        <p>Launch automations or receive suggested actions—personalized messaging, outreach, or tasks—algorithmically aligned to each target’s unique psychological fingerprint.</p>
-      </div>
-    </div>
-    <div class="helix-timeline-step left">
-      <div class="helix-timeline-marker">5</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#00ffc6;">Feedback & Optimization</h3>
-        <p>Results and engagement data flow back into the Sphere, powering continuous learning and smarter future actions.</p>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-// Animate helix timeline cards on scroll
-(function() {
-  function onScrollHelixTimeline() {
-    var steps = document.querySelectorAll('.helix-timeline-step');
-    var windowHeight = window.innerHeight;
-    steps.forEach(function(el) {
-      var rect = el.getBoundingClientRect();
-      if (rect.top < windowHeight - 100) {
-        el.classList.add('visible');
-      } else {
-        el.classList.remove('visible');
-      }
-    });
-  }
-  window.addEventListener('scroll', onScrollHelixTimeline);
-  window.addEventListener('resize', onScrollHelixTimeline);
-  document.addEventListener('DOMContentLoaded', onScrollHelixTimeline);
-})();
-</script>              </div>
+                <button class="cta-button hero-cta">Start Winning More Deals</button>
+              </div>
 
                 <circle cx="35" cy="35" r="32" stroke="#00FFC6" stroke-width="4" fill="none"/>
                 <circle cx="35" cy="35" r="22" stroke="#8a4fff" stroke-width="3" fill="none"/>
                 <circle cx="35" cy="35" r="10" fill="#8a4fff"/>
               </svg>
-{{ ... }}
+            </div>
+
+          </div>
+        </div>
+        <style>
+.enhanced-title {
+  text-align: center;
+  position: relative;
+}
+.gradient-underline {
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 0.7em auto 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  box-shadow: 0 0 18px #8a4fff77;
+  animation: gradient-move 2.5s linear infinite alternate;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(40, 20, 70, 0.55);
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+  padding: 2.2rem 1.6rem;
+  max-width: 320px;
+  min-width: 260px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.glass-card:hover {
+  box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
+  transform: translateY(-8px) scale(1.025);
+}
+@media (max-width: 700px) {
+  .gradient-underline { width: 60px; height: 4px; }
+  .problem-card-container { gap: 1.1rem !important; }
+}
+
+          @keyframes spin { to { transform: rotate(360deg); } }
+          @media (max-width: 700px) {
+            .parallax-content h2 { font-size:2.1rem !important; }
+            .parallax-content p { font-size:1.1rem !important; }
+          }
+        .enhanced-title {
+  text-align: center;
+  position: relative;
+}
+.gradient-underline {
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 0.7em auto 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  box-shadow: 0 0 18px #8a4fff77;
+  animation: gradient-move 2.5s linear infinite alternate;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(40, 20, 70, 0.55);
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.glass-card:hover {
+  box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
+  transform: translateY(-8px) scale(1.025);
+}
+@media (max-width: 700px) {
+  .gradient-underline { width: 60px; height: 4px; }
   .problem-card-container { gap: 1.1rem !important; }
 }
 </style>
       </div>
+
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2.5rem 2rem;margin-bottom:2.2em;">
+          <div style="min-width:180px;flex:1 1 220px;background:rgba(255,255,255,0.09);border-radius:1em;padding:1.5em 1em 1.2em 1em;box-shadow:0 4px 24px rgba(0,0,0,0.07);">
+            <span style="font-size:2.2em;display:block;margin-bottom:0.5em;">🧠</span>
+            <div style="font-weight:600;font-size:1.1em;">Deep Motivator Mapping</div>
+            <div style="font-size:0.98em;opacity:0.9;margin-top:0.5em;">Goes far beyond demographics or firmographics—pinpoints what truly drives each decision-maker.</div>
+          </div>
+          <div style="min-width:180px;flex:1 1 220px;background:rgba(255,255,255,0.09);border-radius:1em;padding:1.5em 1em 1.2em 1em;box-shadow:0 4px 24px rgba(0,0,0,0.07);">
+            <span style="font-size:2.2em;display:block;margin-bottom:0.5em;">🔬</span>
+            <div style="font-weight:600;font-size:1.1em;">AI-Driven Personalization</div>
+            <div style="font-size:0.98em;opacity:0.9;margin-top:0.5em;">Every message, sequence, and playbook is algorithmically aligned to the target’s unique psychological fingerprint.</div>
+          </div>
+          <div style="min-width:180px;flex:1 1 220px;background:rgba(255,255,255,0.09);border-radius:1em;padding:1.5em 1em 1.2em 1em;box-shadow:0 4px 24px rgba(0,0,0,0.07);">
+            <span style="font-size:2.2em;display:block;margin-bottom:0.5em;">🚀</span>
+            <div style="font-weight:600;font-size:1.1em;">Unmatched Competitive Edge</div>
+            <div style="font-size:0.98em;opacity:0.9;margin-top:0.5em;">No other platform offers this depth of psychological insight and automation—giving you a decisive advantage.</div>
+          </div>
+        </div>
+        <div style="font-size:1.1em;max-width:680px;margin:0 auto;opacity:0.95;">
+          <strong>Why settle for generic outreach?</strong> With RepSpheres, every interaction is engineered for resonance and response, powered by the science of human behavior.
+        </div>
+
+        <section class="section spheres-ecosystem" id="spheres-ecosystem" style="background: linear-gradient(135deg, #0a0a23 0%, #7B42F6 100%); color: #fff; padding: 6rem 2rem 5rem 2rem; position: relative;">
+  <div class="ecosystem-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+    <div class="ecosystem-animation" style="position: relative; width: 100%; max-width: 600px; height: 600px; margin: 0 auto;">
+      <canvas id="canvas"></canvas>
+      <script>
+        // --- Orb Animation: Direct from fuckyouorb.html ---
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            canvas.width = 600;
+            canvas.height = 600;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        let centerX = canvas.width / 2;
+        let centerY = canvas.height / 2;
+        let time = 0;
+        const baseRadius = Math.min(canvas.width, canvas.height) * 0.2;
+        const childCount = 6;
+        const childOrbs = [];
+        const dataTransmissions = [];
+        for (let i = 0; i < childCount; i++) {
+            const hueStart = i * (360 / childCount);
+            const hueRange = 60;
+            childOrbs.push({
+                angle: (i / childCount) * Math.PI * 2,
+                distance: baseRadius * 2.2,
+                radius: baseRadius * 0.25,
+                speed: 0.2 + Math.random() * 0.3,
+                phase: Math.random() * Math.PI * 2,
+                hueStart: hueStart,
                 hueRange: hueRange,
                 currentHue: hueStart,
                 pulseRate: 0.1 + Math.random() * 0.2,
@@ -1054,7 +1119,82 @@
   .helix-timeline-card { min-width: 180px; max-width: 98vw; }
 }
 </style>
-
+<!-- Helix Timeline Section -->
+<div class="helix-timeline-container fade-in-on-scroll">
+  <svg class="helix-svg" width="120" height="900" viewBox="0 0 120 900" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 100%; min-height: 700px;">
+    <defs>
+      <linearGradient id="helixStroke" x1="0" y1="0" x2="120" y2="900" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#00ffc6"/>
+        <stop offset="1" stop-color="#7B42F6"/>
+      </linearGradient>
+    </defs>
+    <path id="helixPath" d="M60 40 C 90 80, 30 160, 60 200 C 90 240, 30 320, 60 360 C 90 400, 30 480, 60 520 C 90 560, 30 640, 60 680 C 90 720, 30 800, 60 840" stroke="url(#helixStroke)" stroke-width="6" fill="none" filter="url(#helixGlow)"/>
+    <filter id="helixGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </svg>
+  <div class="helix-timeline-steps">
+    <div class="helix-timeline-step left">
+      <div class="helix-timeline-marker">1</div>
+      <div class="helix-timeline-card">
+        <h3 style="color:#00ffc6;">Sphere Creation</h3>
+        <p>Create a Sphere for any target, account, or opportunity—this becomes your workspace for focused intelligence and engagement.</p>
+      </div>
+    </div>
+    <div class="helix-timeline-step right">
+      <div class="helix-timeline-marker">2</div>
+      <div class="helix-timeline-card">
+        <h3 style="color:#8a4fff;">Data Ingestion & Enrichment</h3>
+        <p>Automatically pull in and enrich data from your CRM, web, email, and other connected sources.</p>
+      </div>
+    </div>
+    <div class="helix-timeline-step left">
+      <div class="helix-timeline-marker">3</div>
+      <div class="helix-timeline-card">
+        <h3 style="color:#00ffc6;">Psychological Trigger Mapping</h3>
+        <p><strong>RepSpheres</strong> analyzes all available data to identify the psychological motivators and triggers most likely to drive action—leveraging a library of 150+ behavioral science principles.</p>
+      </div>
+    </div>
+    <div class="helix-timeline-step right">
+      <div class="helix-timeline-marker">4</div>
+      <div class="helix-timeline-card">
+        <h3 style="color:#8a4fff;">Automated Playbooks & Messaging</h3>
+        <p>Launch automations or receive suggested actions—personalized messaging, outreach, or tasks—algorithmically aligned to each target’s unique psychological fingerprint.</p>
+      </div>
+    </div>
+    <div class="helix-timeline-step left">
+      <div class="helix-timeline-marker">5</div>
+      <div class="helix-timeline-card">
+        <h3 style="color:#00ffc6;">Feedback & Optimization</h3>
+        <p>Results and engagement data flow back into the Sphere, powering continuous learning and smarter future actions.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// Animate helix timeline cards on scroll
+(function() {
+  function onScrollHelixTimeline() {
+    var steps = document.querySelectorAll('.helix-timeline-step');
+    var windowHeight = window.innerHeight;
+    steps.forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < windowHeight - 100) {
+        el.classList.add('visible');
+      } else {
+        el.classList.remove('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScrollHelixTimeline);
+  window.addEventListener('resize', onScrollHelixTimeline);
+  document.addEventListener('DOMContentLoaded', onScrollHelixTimeline);
+})();
+</script>
             <div style="font-size:1.5rem;margin-bottom:0.5rem;">⏰</div>
 
 
