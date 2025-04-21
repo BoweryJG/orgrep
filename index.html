@@ -1162,7 +1162,7 @@
 
     <section class="section" id="closing">
         <h2 class="section-title">Your Reps Are Already Good.<br>Let's Make Them Unstoppable.</h2>
-        <p>RepSpheres doesn't just power messaging. It engineers outcomes.</p>
+        
         <nav class="navbar">
   <div class="navbar-brand">
     <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1282,26 +1282,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="js/chatbot.js"></script>
 <script src="js/supabase-connection-test.js"></script>
 
-      const y = centerY + Math.sin(angle) * child.distance;
-      drawConnection(centerX, centerY, x, y, time, child.color[1]);
-    });
-    // Draw parent orb
-    drawBlob(centerX, centerY, baseRadius, time, '#00FFC6', '#7B42F6');
-    // Draw child orbs
-    childOrbs.forEach((child, i) => {
-      const angle = child.angle + Math.sin(time * 0.7 + i) * 0.18;
-      const x = centerX + Math.cos(angle) * child.distance;
-      const y = centerY + Math.sin(angle) * child.distance;
-      drawBlob(x, y, child.radius, time + i, child.color[0], child.color[1]);
-    });
-    // Animate
-    childOrbs.forEach(child => { child.angle += child.speed * 0.012; });
-    time += 0.018;
-    requestAnimationFrame(animate);
-  }
-  animate();
-});
-</script>
 <script>
 // Ripple effect for feature-card and moat-card
 function createRipple(event) {
