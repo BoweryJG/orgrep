@@ -104,29 +104,190 @@
   margin-right: auto;
 }
 
-/* --- Starry Background --- */
-.stars {
+/* Modal Styles */
+
+/* Stunning Chatbot Button Style */
+
+/* Floating Chatbot Button */
+.chatbot-fab {
   position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-.star {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 0 6px 2px #fff8, 0 0 16px 4px #7B42F699;
-  opacity: 0.7;
-  animation: twinkle 4s infinite alternate;
-}
-@keyframes twinkle {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
+  bottom: 32px;
+  right: 32px;
+  z-index: 10001;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  font-size: 1.1rem;
+  padding: 14px 32px;
 }
 
-@media (max-width: 900px) {
+/* Enhanced Chatbot Launcher Details */
+.chatbot-launcher-glass {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255,255,255,0.14);
+  border-radius: 50%;
+  box-shadow: 0 4px 18px 0 rgba(123,66,246,0.12), 0 1.5px 8px 0 #00FFC6aa;
+  backdrop-filter: blur(7px);
+  z-index: 1;
+}
+.chatbot-launcher-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 2.5px solid transparent;
+  background:
+    conic-gradient(from 0deg, #7B42F6, #00FFC6, #7B42F6 100%);
+  filter: blur(1.5px) brightness(1.15);
+  opacity: 0.85;
+  z-index: 0;
+  animation: chatbot-ring-spin 2.8s linear infinite;
+}
+@keyframes chatbot-ring-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* Chatbot Window */
+.chatbot-window {
+  position: fixed;
+  bottom: 88px;
+  right: 32px;
+  width: 340px;
+  max-width: 90vw;
+  background: #23232b;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  border: 2px solid #35354a;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 10002;
+  transition: opacity 0.25s, transform 0.25s;
+}
+.chatbot-window.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(30px) scale(0.98);
+}
+
+.chatbot-header {
+  background: #191926;
+  color: #fff;
+  padding: 14px 18px;
+  font-weight: 600;
+}
+
+/*
+  Always keep the logo flush left. Padding-left is removed on small screens.
+  The navbar-brand must not add margin/padding to the left.
+*/
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #23263a 0%, #191c2b 100%);
+  padding: 0.65rem 1.25rem 0.65rem 0; /* Remove left padding */
+  border-bottom: 1px solid #282c4a;
+  box-shadow: 0 2px 18px #0005;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  min-height: 58px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: 1.23em;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+} /* No left margin/padding for left alignment */
+
+.nav-links {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  color: #e0e0ff;
+  font-weight: 600;
+  font-size: 1.07em;
+  text-decoration: none;
+  padding: 0.32em 1.05em;
+  border-radius: 7px;
+  background: transparent;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  box-shadow: none;
+  border: none;
+}
+
+.nav-link:hover, .nav-link.nav-active {
+  background: linear-gradient(90deg, #5B3CFF 0%, #00E5FF 100%);
+  color: #fff;
+  box-shadow: 0 2px 12px #5b3cff44;
+}
+
+.cta-button {
+  background: linear-gradient(90deg, #00E5FF 0%, #5B3CFF 100%);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 0.48em 1.5em;
+  font-size: 1.08em;
+  box-shadow: 0 2px 12px #00e5ff33;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.12s;
+  outline: none;
+}
+.cta-button:hover {
+  background: linear-gradient(90deg, #5B3CFF 0%, #00E5FF 100%);
+  color: #fff;
+  box-shadow: 0 4px 18px #5b3cff55;
+  transform: translateY(-2px) scale(1.04);
+}
+
+#progressIndicator {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+/* Center and style hero title */
+.hero h1, .hero-title, h1.hero-title {
+  text-align: center;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 2.2rem 0 1.2rem 0;
+  letter-spacing: -0.01em;
+  background: linear-gradient(90deg, #00E5FF 0%, #5B3CFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Reduce excess space in hero */
+.hero {
+  padding-top: 2.2rem;
+  padding-bottom: 1.2rem;
+  margin-bottom: 0;
+
   .process-cards-section {
     flex-direction: column;
     align-items: center;

@@ -361,17 +361,6 @@ function createStarryBackground(starsContainer) {
 // (migrated to DOMContentLoaded)
 if (navbar) {
     const observer = new MutationObserver(() => {
-
-    });
-    observer.observe(navbar, { attributes: true, childList: true, subtree: true });
-}
-
-     // Enhance satellite content with inner elements and particles
-    const enhanceSatellites = () => {
-         satelliteContents.forEach(satellite => {
-             // Wrap text only if it hasn't been wrapped already
-             if (!satellite.querySelector('span')) {
-                const text = satellite.textContent.trim();
                 satellite.innerHTML = `<span>${text}</span>`; // Keep text wrapped
              } else {
                  // Remove any old particles before adding new ones
