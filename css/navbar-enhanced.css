@@ -1,21 +1,19 @@
 /* Enhanced Navbar Styles */
 .navbar {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background: linear-gradient(90deg, rgba(34,36,60,0.92) 0%, rgba(123,66,246,0.88) 100%);
-  backdrop-filter: blur(18px) saturate(120%);
-  box-shadow: 0 6px 32px 0 rgba(123,66,246,0.15), 0 1.5px 0 #7B42F6 inset;
-  border-bottom: 1.5px solid rgba(123,66,246,0.23);
-  border-radius: 0 0 20px 20px;
-  z-index: 100;
+  background: rgba(24, 26, 43, 0.82);
+  backdrop-filter: blur(10px) saturate(120%);
+  border-bottom: 1.5px solid rgba(123,66,246,0.09);
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
+  border-radius: 0 0 18px 18px;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   padding: 0.45rem 2.2rem 0.45rem 1.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 48px;
-  transition: background 0.3s, box-shadow 0.3s;
+  min-height: 52px;
+  z-index: 100;
 }
+
 
 .navbar .navbar-brand {
   display: flex;

@@ -1163,24 +1163,41 @@
     <section class="section" id="closing">
         <h2 class="section-title">Your Reps Are Already Good.<br>Let's Make Them Unstoppable.</h2>
         <p>RepSpheres doesn't just power messaging. It engineers outcomes.</p>
-        <button class="cta-button" style="margin-top: 2rem;">
-        <div class="footer-logo">
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="var(--accent-color)"/></svg>
-             <span style="margin-left: 0.5rem;">RepSpheres</span>
-        </div>
-        <div class="footer-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Cookies</a>
-            <a href="#">Contact</a>
-        </div>
-         <div class="copyright" style="font-size: 0.9rem; color: #aaaaaa;">
-            &copy; <span id="currentYear"></span> RepSpheres. All rights reserved.
-        </div>
-    </footer>
-
-
-     <div class="progress-indicator" id="progressIndicator">
+        <nav class="navbar">
+  <div class="navbar-brand">
+    <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
+      <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
+    </svg>
+    <span>RepSpheres</span>
+  </div>
+  <button class="navbar-toggle" aria-label="Toggle navigation">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+  <div class="nav-links">
+    <a href="/blog.html" class="nav-link">Blogs</a>
+    <a href="/podcast.html" class="nav-link">Podcasts</a>
+    <a href="/market.html" class="nav-link">Market iQ</a>
+    <a href="/dashboard/vault.html" class="nav-link">Intelligence Vault</a>
+  </div>
+  <button class="cta-button">Install</button>
+</nav>
+<script>
+const toggle = document.querySelector('.navbar-toggle');
+const links = document.querySelector('.nav-links');
+toggle.addEventListener('click', () => {
+  links.classList.toggle('open');
+  toggle.classList.toggle('open');
+});
+document.querySelectorAll('.nav-link').forEach(link => {
+  if (window.location.pathname === link.getAttribute('href')) {
+    link.classList.add('active');
+  }
+});
+</script>
+         <div class="progress-indicator" id="progressIndicator">
         <div class="progress-line"></div>
         <div class="progress-tracker" id="progressTracker"></div>
          <div class="progress-trail" id="progressTrail"></div>
