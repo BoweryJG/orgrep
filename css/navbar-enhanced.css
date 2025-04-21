@@ -28,8 +28,11 @@
 
 .navbar .logo {
   margin-right: 1rem;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 .navbar .nav-links {
@@ -44,13 +47,14 @@
   gap: 5px;
   font-size: 1.04rem;
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
   padding: 0.35rem 1.05rem;
   border-radius: 1.2rem;
   background: rgba(255,255,255,0.05);
   transition: background 0.22s, color 0.22s, box-shadow 0.22s;
   position: relative;
-  min-height: 36px;
+  min-height: 44px;
+  height: 44px;
   box-shadow: 0 1.5px 0 #7B42F6 inset;
   border: 1px solid rgba(123,66,246,0.09);
   overflow: hidden;
@@ -106,8 +110,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   background: none;
   border: none;
   cursor: pointer;
