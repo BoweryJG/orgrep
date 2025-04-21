@@ -31,19 +31,21 @@ priceFilter.addEventListener('input', () => {
 // --- Populate filters from Supabase ---
 async function fetchFilters() {
   // Fetch unique states from contacts table
-  const { data: contacts, error: contactsError } = await supabase.from('contacts').select('state, procedure');
+  const { data: contacts, error: contactsError } = await supabase.from('contacts').select('state');
   if (contactsError) {
     console.error('Error fetching contacts:', contactsError);
     return;
   }
-  // Extract unique states and procedures
+  // Extract unique states
   const uniqueStates = [...new Set(contacts.map(c => c.state).filter(Boolean))];
-  const uniqueProcedures = [...new Set(contacts.map(c => c.procedure).filter(Boolean))];
 
   stateFilter.innerHTML = '<option value="">All States</option>' +
     uniqueStates.map(state => `<option value="${state}">${state}</option>`).join('');
-  procedureFilter.innerHTML = '<option value="">All Procedures</option>' +
-    uniqueProcedures.map(proc => `<option value="${proc}">${proc}</option>`).join('');
+  // Hide or disable procedureFilter if it exists
+  if (procedureFilter) {
+    procedureFilter.innerHTML = '<option value="">(No Procedures)</option>';
+    procedureFilter.disabled = true;
+  }
 }
 fetchFilters();
 
