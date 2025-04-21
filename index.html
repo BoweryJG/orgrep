@@ -894,55 +894,8 @@
   .helix-timeline-card { min-width: 180px; max-width: 98vw; }
 }
 </style>
-<!-- Helix Timeline Section -->
-<div class="helix-timeline-container fade-in-on-scroll">
-  <svg class="helix-svg" width="120" height="900" viewBox="0 0 120 900" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 100%; min-height: 700px;">
-    <defs>
-      <linearGradient id="helixStroke" x1="0" y1="0" x2="120" y2="900" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#00ffc6"/>
-        <stop offset="1" stop-color="#7B42F6"/>
-      </linearGradient>
-    </defs>
-    <path id="helixPath" d="M60 40 C 90 80, 30 160, 60 200 C 90 240, 30 320, 60 360 C 90 400, 30 480, 60 520 C 90 560, 30 640, 60 680 C 90 720, 30 800, 60 840" stroke="url(#helixStroke)" stroke-width="6" fill="none" filter="url(#helixGlow)"/>
-    <filter id="helixGlow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </svg>
-  <div class="helix-timeline-steps">
-    <div class="helix-timeline-step left">
-      <div class="helix-timeline-marker">1</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#00ffc6;">Sphere Creation</h3>
-        <p>Create a Sphere for any target, account, or opportunity—this becomes your workspace for focused intelligence and engagement.</p>
-      </div>
-    </div>
-    <div class="helix-timeline-step left">
-      <div class="helix-timeline-marker">3</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#00ffc6;">Psychological Trigger Mapping</h3>
-        <p><strong>RepSpheres</strong> analyzes all available data to identify the psychological motivators and triggers most likely to drive action—leveraging a library of 150+ behavioral science principles.</p>
-      </div>
-    </div>
-    <div class="helix-timeline-step right">
-      <div class="helix-timeline-marker">4</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#8a4fff;">Automated Playbooks & Messaging</h3>
-        <p>Launch automations or receive suggested actions—personalized messaging, outreach, or tasks—algorithmically aligned to each target’s unique psychological fingerprint.</p>
-      </div>
-    </div>
-    <div class="helix-timeline-step left">
-      <div class="helix-timeline-marker">5</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#00ffc6;">Feedback & Optimization</h3>
-        <p>Results and engagement data flow back into the Sphere, powering continuous learning and smarter future actions.</p>
-      </div>
-    </div>
-  </div>
-</div>
+
+
 <script>
 // Animate helix timeline cards on scroll
 (function() {
