@@ -93,8 +93,49 @@
       .public-blog-search { margin: 1.3rem auto 0.7rem; }
     }
   </style>
+  <style>
+    .orb-bg-parent {
+      position: fixed;
+      right: -120px;
+      bottom: -120px;
+      width: 420px;
+      height: 420px;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.37;
+      filter: blur(1.5px) saturate(1.15);
+      animation: orbPulse 7s ease-in-out infinite, orbRotate 22s linear infinite;
+      transform-origin: 60% 60%;
+    }
+    @keyframes orbPulse {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.08) rotate(2deg); }
+    }
+    @keyframes orbRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
+  <svg class="orb-bg-parent" viewBox="0 0 200 200">
+    <defs>
+      <radialGradient id="orbParentGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+        <stop offset="0%" stop-color="#00FFC6" />
+        <stop offset="60%" stop-color="#8a4fff" />
+        <stop offset="100%" stop-color="#7B42F6" />
+      </radialGradient>
+      <filter id="orbParentGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" />
+        <feComposite in="blur" in2="SourceGraphic" operator="over" />
+        <feFlood flood-color="#8a4fff" flood-opacity=".5" result="glow" />
+        <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
+        <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
+      </filter>
+    </defs>
+    <circle cx="100" cy="100" r="95" fill="url(#orbParentGradient)" filter="url(#orbParentGlow)" />
+    <circle cx="100" cy="100" r="42" fill="#fff" opacity="0.13" />
+  </svg>
   <!-- SVG defs for gradients and filters (hidden, for nav icons/branding) -->
   <svg width="0" height="0" style="position:absolute;">
     <defs>
