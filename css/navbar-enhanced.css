@@ -20,13 +20,173 @@
 .navbar .navbar-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   font-size: 1.15rem;
   font-weight: 900;
   color: #fff;
   letter-spacing: 0.04em;
   text-shadow: 0 2px 12px #7B42F655;
 }
+
+.navbar .logo {
+  margin-right: 1rem;
+  width: 40px;
+  height: 40px;
+}
+
+.navbar .nav-links {
+  display: flex;
+  gap: 1.1rem;
+  transition: max-height 0.3s, opacity 0.3s;
+}
+
+.navbar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.04rem;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.35rem 1.05rem;
+  border-radius: 1.2rem;
+  background: rgba(255,255,255,0.05);
+  transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+  position: relative;
+  min-height: 36px;
+  box-shadow: 0 1.5px 0 #7B42F6 inset;
+  border: 1px solid rgba(123,66,246,0.09);
+  overflow: hidden;
+}
+
+.navbar .nav-link::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 5px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #00ffc6 0%, #7B42F6 100%);
+  opacity: 0;
+  transform: scaleX(0);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+  background: linear-gradient(90deg, #7B42F6 0%, #00FFC6 100%);
+  color: #181a2b;
+  box-shadow: 0 2px 12px #7B42F6aa;
+}
+
+.navbar .cta-button {
+  font-size: 0.93rem;
+  padding: 0.21rem 0.68rem;
+  border-radius: 0.95rem;
+  background: linear-gradient(90deg, #7B42F6, #00FFC6);
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 9px 0 rgba(123,66,246,0.13);
+  transition: background 0.3s;
+  margin-left: 0.35rem;
+}
+.navbar .cta-button:hover {
+  background: linear-gradient(90deg, #00FFC6, #7B42F6);
+  box-shadow: 0 0 18px #00FFC6cc;
+}
+
+/* Hamburger styles */
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 1.5rem;
+  z-index: 101;
+}
+.navbar-toggle .bar {
+  width: 22px;
+  height: 3px;
+  background: #fff;
+  margin: 3px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+.navbar-toggle.open .bar:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.navbar-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.navbar-toggle.open .bar:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (max-width: 900px) {
+  .navbar .nav-links {
+    gap: 0.5rem;
+  }
+  .navbar {
+    padding: 0.18rem 0.3rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .navbar .nav-links {
+    flex-direction: column;
+    background: rgba(24,26,43,0.98);
+    position: absolute;
+    top: 72px;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    box-shadow: 0 8px 32px #0006;
+    border-radius: 0 0 18px 18px;
+    z-index: 99;
+    transition: max-height 0.3s, opacity 0.3s;
+  }
+  .navbar .nav-links.open {
+    max-height: 400px;
+    opacity: 1;
+    padding-bottom: 1rem;
+  }
+  .navbar-toggle {
+    display: flex;
+  }
+  .navbar {
+    flex-direction: row;
+    min-height: 56px;
+  }
+}
+
+@keyframes nav-glow {
+  0% {
+    filter: drop-shadow(0 0 2px #7B42F633) drop-shadow(0 0 0px #00FFC622);
+  }
+  50% {
+    filter: drop-shadow(0 0 5px #00FFC622) drop-shadow(0 0 2px #7B42F633);
+  }
+  100% {
+    filter: drop-shadow(0 0 2px #7B42F633) drop-shadow(0 0 0px #00FFC622);
+  }
+}
+
+
 
 .navbar .nav-links {
   display: flex;
