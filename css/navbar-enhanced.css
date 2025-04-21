@@ -146,35 +146,74 @@
 }
 
 @media (max-width: 700px) {
-  .navbar .nav-links {
-    flex-direction: column;
-    background: rgba(24,26,43,0.98);
-    position: absolute;
-    top: 72px;
-    right: 0;
-    left: 0;
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+    padding: 0.18rem 0.3rem;
+    position: relative;
     width: 100vw;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    box-shadow: 0 8px 32px #0006;
-    border-radius: 0 0 18px 18px;
-    z-index: 99;
-    transition: max-height 0.3s, opacity 0.3s;
+    flex-wrap: nowrap;
   }
-  .navbar .nav-links.open {
-    max-height: 400px;
-    opacity: 1;
-    padding-bottom: 1rem;
+  .navbar .navbar-brand {
+    order: 1;
+    flex: 0 0 auto;
+    min-width: 0;
   }
   .navbar-toggle {
     display: flex;
+    order: 2;
+    margin: 0 1rem;
+    flex: 0 0 auto;
+    z-index: 102;
   }
-  .navbar {
+  .navbar .nav-links {
+    order: 3;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    position: static;
+    display: flex !important;
     flex-direction: row;
-    min-height: 56px;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    transition: none;
+  }
+  .navbar .nav-links.open {
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    left: 0; right: 0;
+    top: 100%;
+    width: 100vw;
+    background: rgba(24,26,43,0.98);
+    flex-direction: column;
+    gap: 0;
+    box-shadow: 0 8px 32px #0006;
+    border-radius: 0 0 18px 18px;
+    z-index: 99;
+    max-height: 400px;
+    padding-bottom: 1rem;
+    height: auto;
+    transition: max-height 0.3s, opacity 0.3s;
+  }
+  .navbar .cta-button {
+    order: 4;
+    margin-left: 0;
+    flex: 0 0 auto;
+  }
+  .navbar .nav-links, .navbar .cta-button, .navbar-toggle, .navbar .navbar-brand {
+    vertical-align: middle;
   }
 }
+
 
 @keyframes nav-glow {
   0% {
