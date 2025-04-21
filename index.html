@@ -807,8 +807,125 @@
 </style>
             <!-- SVG Helix Timeline Enhancement -->
 <style>
-.helix-timeline-container {
+/* Modern Timeline Cards - No Helix */
+.timeline-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  align-items: center;
+  margin: 4rem auto 5rem auto;
+  max-width: 900px;
+  width: 100%;
   position: relative;
+  z-index: 1;
+}
+.timeline-card-step {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2.5rem;
+  width: 100%;
+  position: relative;
+}
+.timeline-card-step.right {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.timeline-card-marker {
+  min-width: 48px;
+  min-height: 48px;
+  max-width: 48px;
+  max-height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#00ffc6 30%,#7b42f6 100%);
+  box-shadow: 0 0 16px 4px #7b42f6cc, 0 0 0 5px #00ffc633;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6em;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 0.25rem;
+}
+.timeline-card-content {
+  background: rgba(40,20,70,0.75);
+  border-radius: 18px;
+  box-shadow: 0 4px 28px 0 #7B42F688, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  backdrop-filter: blur(8px);
+  min-width: 260px;
+  max-width: 370px;
+  padding: 2.1rem 1.6rem;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+  transition: box-shadow 0.25s, transform 0.25s;
+  opacity: 1;
+  transform: none;
+}
+.timeline-card-content h3 {
+  margin-top: 0;
+  margin-bottom: 0.7em;
+  font-size: 1.32em;
+  color: #00ffc6;
+}
+.timeline-card-step.right .timeline-card-content h3 {
+  color: #8a4fff;
+}
+@media (max-width: 900px) {
+  .timeline-cards-container { max-width: 98vw; }
+  .timeline-card-content { min-width: 180px; max-width: 98vw; }
+  .timeline-card-step, .timeline-card-step.right {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.2rem;
+  }
+  .timeline-card-marker {
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+  }
+}
+</style>
+<div class="timeline-cards-container">
+  <div class="timeline-card-step left">
+    <div class="timeline-card-marker">1</div>
+    <div class="timeline-card-content">
+      <h3>Sphere Creation</h3>
+      <p>Create a Sphere for any target, account, or opportunity—this becomes your workspace for focused intelligence and engagement.</p>
+    </div>
+  </div>
+  <div class="timeline-card-step right">
+    <div class="timeline-card-marker">2</div>
+    <div class="timeline-card-content">
+      <h3>Data Ingestion &amp; Enrichment</h3>
+      <p>Automatically pull in and enrich data from your CRM, web, email, and other connected sources.</p>
+    </div>
+  </div>
+  <div class="timeline-card-step left">
+    <div class="timeline-card-marker">3</div>
+    <div class="timeline-card-content">
+      <h3>Psychological Trigger Mapping</h3>
+      <p><strong>RepSpheres</strong> analyzes all available data to identify the psychological motivators and triggers most likely to drive action—leveraging a library of 150+ behavioral science principles.</p>
+    </div>
+  </div>
+  <div class="timeline-card-step right">
+    <div class="timeline-card-marker">4</div>
+    <div class="timeline-card-content">
+      <h3>Automated Playbooks &amp; Messaging</h3>
+      <p>Launch automations or receive suggested actions—personalized messaging, outreach, or tasks—algorithmically aligned to each target’s unique psychological fingerprint.</p>
+    </div>
+  </div>
+  <div class="timeline-card-step left">
+    <div class="timeline-card-marker">5</div>
+    <div class="timeline-card-content">
+      <h3>Feedback &amp; Optimization</h3>
+      <p>Results and engagement data flow back into the Sphere, powering continuous learning and smarter future actions.</p>
+    </div>
+  </div>
+</div>
+
   width: 100%;
   min-height: 700px;
   display: flex;
