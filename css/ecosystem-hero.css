@@ -62,6 +62,20 @@
   font-size: 1.25rem;
   color: #fff;
   margin-bottom: 1.2em;
+  padding: 1.2em 1.7em;
+  background: rgba(24, 13, 51, 0.55);
+  border-radius: 1.3em;
+  box-shadow: 0 6px 32px 0 rgba(123,66,246,0.13), 0 1.5px 10px 0 rgba(0,255,198,0.08);
+  border: 1.5px solid rgba(0,255,198,0.18);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  display: inline-block;
+  max-width: 95%;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+.ecosystem-lead:hover {
+  box-shadow: 0 12px 36px 0 rgba(123,66,246,0.19), 0 2.5px 18px 0 rgba(0,255,198,0.13);
+  background: rgba(24, 13, 51, 0.70);
 }
 .ecosystem-highlight {
   color: #00ffc6;
