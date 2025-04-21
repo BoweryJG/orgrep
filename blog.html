@@ -118,24 +118,17 @@
   </style>
 </head>
 <body>
-  <svg class="orb-bg-parent" viewBox="0 0 200 200">
-    <defs>
-      <radialGradient id="orbParentGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
-        <stop offset="0%" stop-color="#00FFC6" />
-        <stop offset="60%" stop-color="#8a4fff" />
-        <stop offset="100%" stop-color="#7B42F6" />
-      </radialGradient>
-      <filter id="orbParentGlow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" />
-        <feComposite in="blur" in2="SourceGraphic" operator="over" />
-        <feFlood flood-color="#8a4fff" flood-opacity=".5" result="glow" />
-        <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
-        <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
-      </filter>
-    </defs>
-    <circle cx="100" cy="100" r="95" fill="url(#orbParentGradient)" filter="url(#orbParentGlow)" />
-    <circle cx="100" cy="100" r="42" fill="#fff" opacity="0.13" />
-  </svg>
+  <svg class="orb-bg-parent" viewBox="-100 -100 1000 1000" style="width:600px; height:600px; display:block; background:transparent; position:fixed; right:-120px; bottom:-120px; z-index:0; pointer-events:none; opacity:0.37; filter:blur(1.5px) saturate(1.15); animation: orbPulse 7s ease-in-out infinite, orbRotate 22s linear infinite; transform-origin: 60% 60%;">
+  <defs>
+    <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
+      <stop id="p0" offset="0%" stop-color="#00E5FF"/>
+      <stop id="p1" offset="100%" stop-color="#5B3CFF"/>
+      <stop id="p2" offset="50%" stop-color="#00E5FF"/>
+      <stop id="p3" offset="75%" stop-color="#5B3CFF"/>
+    </radialGradient>
+  </defs>
+  <path d="M400,500 C400,776.142 776.142,900 500,900 C223.858,900 100,776.142 100,500 C100,223.858 223.858,100 500,100 C776.142,100 900,223.858 900,500 C900,776.142 776.142,900 500,900 Z" fill="url(#parentGrad)" opacity="0.95"/>
+</svg>
   <!-- SVG defs for gradients and filters (hidden, for nav icons/branding) -->
   <svg width="0" height="0" style="position:absolute;">
     <defs>
