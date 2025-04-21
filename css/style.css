@@ -104,6 +104,28 @@
   margin-right: auto;
 }
 
+/* --- Starry Background --- */
+.stars {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 6px 2px #fff8, 0 0 16px 4px #7B42F699;
+  opacity: 0.7;
+  animation: twinkle 4s infinite alternate;
+}
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
 @media (max-width: 900px) {
   .process-cards-section {
     flex-direction: column;
