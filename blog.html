@@ -160,27 +160,32 @@ let orbState = {
 function draw3DOrb() {
   ctx.clearRect(0, 0, width, height);
   let points = [];
-  let noiseScale = 0.7, noiseSpeed = 0.10;
+  // Much more subtle, slow undulation
+  let noiseScale = 0.65, noiseSpeed = 0.045;
   for (let i = 0; i < POINTS; i++) {
     let angle = (Math.PI * 2 / POINTS) * i;
     let nx = Math.cos(angle), ny = Math.sin(angle);
-    let n = simplex2(nx * noiseScale + t*0.12, ny * noiseScale + t*0.13);
-    let r = orbState.r + n*9 + Math.sin(t*0.18 + i*0.17)*6;
+    // Only a little deviation from sphere, very slow
+    let n = simplex2(nx * noiseScale + t*noiseSpeed, ny * noiseScale + t*noiseSpeed);
+    let r = orbState.r + n*3.5 + Math.sin(t*0.09 + i*0.11)*2.2;
     points.push([
       orbState.cx + Math.cos(angle) * r,
       orbState.cy + Math.sin(angle) * r
     ]);
   }
-  // 3D gradient highlight
+  // Fluid, seamless color blending using angular sweep
   let grad = ctx.createRadialGradient(
-    orbState.cx + Math.cos(t*0.16)*38,
-    orbState.cy - Math.sin(t*0.19)*32,
-    28,
-    orbState.cx, orbState.cy, orbState.r*1.2
+    orbState.cx + Math.cos(t*0.09)*32,
+    orbState.cy - Math.sin(t*0.10)*28,
+    48,
+    orbState.cx, orbState.cy, orbState.r*1.18
   );
+  // More stops for water-like blending
   grad.addColorStop(0, '#00E5FF');
-  grad.addColorStop(0.32, '#8a4fff');
-  grad.addColorStop(0.62, '#23263a');
+  grad.addColorStop(0.22 + 0.08*Math.sin(t*0.13), '#00FFC6');
+  grad.addColorStop(0.38 + 0.07*Math.cos(t*0.08), '#8a4fff');
+  grad.addColorStop(0.55 + 0.07*Math.sin(t*0.11+1.1), '#7B42F6');
+  grad.addColorStop(0.72 + 0.06*Math.cos(t*0.09+2.2), '#23263a');
   grad.addColorStop(1, '#0a0e1a');
   ctx.save();
   ctx.beginPath();
