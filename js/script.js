@@ -135,8 +135,9 @@ function animateOrb() {
     // Adjust orbit radius calculation if needed, ensure parentRadius is correct
     const orbitRadius = parentRadius + 120 + i * 40;
     const x = parentCenter.x + Math.cos(angle) * orbitRadius;
+    const y = parentCenter.y + Math.sin(angle) * orbitRadius;
     const morphT = now * 0.0005 + i * 10;
-    const childPath = generateSuperSmoothBlob(x, parentCenter.y, childRadius, childPoints, morphT, childAmp, i);
+    const childPath = generateSuperSmoothBlob(x, y, childRadius, childPoints, morphT, childAmp, i);
 
     if(childOrbs[i]) {
         childOrbs[i].setAttribute("d", childPath);
