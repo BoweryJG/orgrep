@@ -106,6 +106,28 @@
   box-shadow: 0 0 18px #8a4fff55;
   opacity: 0.92;
 }
+.ecosystem-divider-motif {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.8em auto 1.6em auto;
+  animation: motif-fadein 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 3;
+  pointer-events: none;
+}
+.ecosystem-divider-motif svg {
+  filter: drop-shadow(0 0 18px #7B42F6aa);
+  animation: motif-bounce 2.8s infinite cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes motif-fadein {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes motif-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(7px) scale(1.07); }
+}
+
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
