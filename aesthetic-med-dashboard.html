@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetic Medicine Market Navigator (2015-2035)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --tertiary: #e74c3c;
+            --quaternary: #2ecc71;
+            --quinary: #9b59b6;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #c0392b;
+            --info: #3498db;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Header styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url('/api/placeholder/1000/300');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .timeline-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-controls button {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .timeline-controls button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .timeline-controls .year {
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 0 0.5rem;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        /* Main content styles */
+        main {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 1.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            padding-bottom: 1rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .card-header .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .card-body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-container {
+            width: 100%;
+            flex-grow: 1;
+            min-height: 250px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Static chart placeholders */
+        .chart-placeholder {
+            width: 100%;
+            height: 250px;
+            background-image: url('/api/placeholder/800/250');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark);
+            font-weight: bold;
+            position: relative;
+        }
+
+        .chart-placeholder::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            z-index: 1;
+        }
+
+        .chart-placeholder span {
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 18px;
+        }
+
+        /* Card positioning in grid */
+        .market-overview {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+
+        .market-overview .icon {
+            background: var(--info);
+        }
+
+        .market-segments {
+            grid-column: 2 / 4;
+            grid-row: 1 / 2;
+        }
+
+        .market-segments .icon {
+            background: var(--tertiary);
+        }
+
+        .top-procedures {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+        }
+
+        .top-procedures .icon {
+            background: var(--quaternary);
+        }
+
+        .regional-map {
+            grid-column: 2 / 4;
+            grid-row: 2 / 3;
+        }
+
+        .regional-map .icon {
+            background: var(--quinary);
+        }
+
+        .key-metrics {
+            grid-column: 1 / 4;
+            grid-row: 3 / 4;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .key-metrics:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-card .title {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card .change {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .metric-card .change.positive {
+            color: var(--success);
+        }
+
+        .metric-card .change.negative {
+            color: var(--danger);
+        }
+
+        /* Map styles */
+        .region-blocks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .region-block {
+            flex: 1;
+            min-width: 150px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+        }
+
+        .region-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .region-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .region-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .region-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .region-states {
+            margin-top: 10px;
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        /* Taxonomy section */
+        .taxonomy {
+            grid-column: 1 / 4;
+            grid-row: 4 / 5;
+            margin-top: 1.5rem;
+        }
+
+        .taxonomy-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .taxonomy-category {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .taxonomy-category h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .taxonomy-category h3 i {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .taxonomy-category:nth-child(1) h3 i {
+            background: var(--info);
+        }
+
+        .taxonomy-category:nth-child(2) h3 i {
+            background: var(--tertiary);
+        }
+
+        .taxonomy-category:nth-child(3) h3 i {
+            background: var(--quaternary);
+        }
+
+        .taxonomy-category:nth-child(4) h3 i {
+            background: var(--quinary);
+        }
+
+        .taxonomy-item {
+            margin-bottom: 0.8rem;
+        }
+
+        .taxonomy-item .item-name {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .taxonomy-item .item-details {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            padding-left: 1rem;
+        }
+
+        .taxonomy-item .item-details-item {
+            padding: 0.2rem 0;
+        }
+
+        /* Footer styles */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            main {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .market-overview {
+                grid-column: 1 / 2;
+            }
+
+            .market-segments {
+                grid-column: 2 / 3;
+            }
+
+            .top-procedures {
+                grid-column: 1 / 2;
+                grid-row: 2 / 3;
+            }
+
+            .regional-map {
+                grid-column: 2 / 3;
+                grid-row: 2 / 3;
+            }
+
+            .key-metrics {
+                grid-column: 1 / 3;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .taxonomy {
+                grid-column: 1 / 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .market-overview,
+            .market-segments,
+            .top-procedures,
+            .regional-map,
+            .key-metrics,
+            .taxonomy {
+                grid-column: 1 / 2;
+            }
+
+            .key-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <div class="logo">
+                <h1>Aesthetic Medicine Market Navigator</h1>
+                <p>Comprehensive market analysis from 2015 to 2035</p>
+            </div>
+            <div class="controls">
+                <div class="timeline-controls">
+                    <button id="prev-year"><i class="fas fa-chevron-left"></i></button>
+                    <div class="year">2025</div>
+                    <button id="next-year"><i class="fas fa-chevron-right"></i></button>
+                    <button id="play-pause"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Market Overview Card -->
+        <section class="card market-overview">
+            <div class="card-header">
+                <h2>Market Overview</h2>
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <div class="chart-placeholder">
+                        <span>Market Growth Trend</span>
+                    </div>
+                    <p style="margin-top: 1rem; text-align: center;">
+                        <strong>Total Market Size in 2025:</strong> $87.5 Billion<br>
+                        <span style="color: var(--success);">
+                            <i class="fas fa-arrow-up"></i> 8.7% from previous year
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Segments Card -->
+        <section class="card market-segments">
+            <div class="card-header">
+                <h2>Market Segments</h2>
+                <div class="icon"><i class="fas fa-layer-group"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <div class="chart-placeholder">
+                        <span>Segment Distribution</span>
+                    </div>
+                    <div style="margin-top: 1rem; width: 100%;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: #e74c3c; font-weight: 500;">Injectables</span>
+                            <span>45.0%</span>
+                        </div>
+                        <div style="height: 10px; background: #eee; border-radius: 5px; margin-bottom: 1rem;">
+                            <div style="width: 45%; height: 100%; background: #e74c3c; border-radius: 5px;"></div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: #2ecc71; font-weight: 500;">Energy-Based Devices</span>
+                            <span>25.1%</span>
+                        </div>
+                        <div style="height: 10px; background: #eee; border-radius: 5px; margin-bottom: 1rem;">
+                            <div style="width: 25.1%; height: 100%; background: #2ecc71; border-radius: 5px;"></div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: #9b59b6; font-weight: 500;">Surgical Procedures</span>
+                            <span>22.7%</span>
+                        </div>
+                        <div style="height: 10px; background: #eee; border-radius: 5px; margin-bottom: 1rem;">
+                            <div style="width: 22.7%; height: 100%; background: #9b59b6; border-radius: 5px;"></div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: #f39c12; font-weight: 500;">Skin & Hair Treatments</span>
+                            <span>7.2%</span>
+                        </div>
+                        <div style="height: 10px; background: #eee; border-radius: 5px;">
+                            <div style="width: 7.2%; height: 100%; background: #f39c12; border-radius: 5px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Procedures Card -->
+        <section class="card top-procedures">
+            <div class="card-header">
+                <h2>Top Procedures</h2>
+                <div class="icon"><i class="fas fa-trophy"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <div style="width: 100%;">
+                        <!-- Top procedure 1 -->
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="font-weight: 600;">EMSCULPT</span>
+                                <span style="color: var(--success); font-weight: 600;">24.8%</span>
+                            </div>
+                            <div style="height: 12px; background: #eee; border-radius: 6px;">
+                                <div style="width: 100%; height: 100%; background: #2ecc71; border-radius: 6px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Top procedure 2 -->
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="font-weight: 600;">HIFU</span>
+                                <span style="color: var(--info); font-weight: 600;">18.9%</span>
+                            </div>
+                            <div style="height: 12px; background: #eee; border-radius: 6px;">
+                                <div style="width: 76%; height: 100%; background: #3498db; border-radius: 6px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Top procedure 3 -->
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="font-weight: 600;">Hyaluronic Fillers</span>
+                                <span style="color: var(--quinary); font-weight: 600;">15.5%</span>
+                            </div>
+                            <div style="height: 12px; background: #eee; border-radius: 6px;">
+                                <div style="width: 62%; height: 100%; background: #9b59b6; border-radius: 6px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Top procedure 4 -->
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="font-weight: 600;">Botulinum Toxin</span>
+                                <span style="color: var(--tertiary); font-weight: 600;">13.2%</span>
+                            </div>
+                            <div style="height: 12px; background: #eee; border-radius: 6px;">
+                                <div style="width: 53%; height: 100%; background: #e74c3c; border-radius: 6px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Top procedure 5 -->
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="font-weight: 600;">RF Microneedling</span>
+                                <span style="color: var(--warning); font-weight: 600;">12.7%</span>
+                            </div>
+                            <div style="height: 12px; background: #eee; border-radius: 6px;">
+                                <div style="width: 51%; height: 100%; background: #f39c12; border-radius: 6px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Regional Map Card -->
+        <section class="card regional-map">
+            <div class="card-header">
+                <h2>Regional Insights</h2>
+                <div class="icon"><i class="fas fa-map-marked-alt"></i></div>
+            </div>
+            <div class="card-body">
+                <div class="region-blocks">
+                    <!-- Northeast Region -->
+                    <div class="region-block" style="background: #2980b9;">
+                        <div class="region-name">Northeast</div>
+                        <div class="region-value">7.2%</div>
+                        <div class="region-label">Market Penetration</div>
+                        <div class="region-states">States: ME, NH, VT, MA, RI, CT, NY, NJ, PA</div>
+                    </div>
+                    
+                    <!-- Southeast Region -->
+                    <div class="region-block" style="background: #3498db;">
+                        <div class="region-name">Southeast</div>
+                        <div class="region-value">6.5%</div>
+                        <div class="region-label">Market Penetration</div>
+                        <div class="region-states">States: DE, MD, VA, WV, NC, SC, GA, FL, AL, MS, KY, TN, AR, LA</div>
+                    </div>
+                    
+                    <!-- Midwest Region -->
+                    <div class="region-block" style="background: #1abc9c;">
+                        <div class="region-name">Midwest</div>
+                        <div class="region-value">4.8%</div>
+                        <div class="region-label">Market Penetration</div>
+                        <div class="region-states">States: OH, MI, IN, WI, IL, MN, IA, MO, ND, SD, NE, KS</div>
+                    </div>
+                    
+                    <!-- Southwest Region -->
+                    <div class="region-block" style="background: #16a085;">
+                        <div class="region-name">Southwest</div>
+                        <div class="region-value">5.9%</div>
+                        <div class="region-label">Market Penetration</div>
+                        <div class="region-states">States: TX, OK, NM, AZ</div>
+                    </div>
+                    
+                    <!-- West Region -->
+                    <div class="region-block" style="background: #2c3e50;">
+                        <div class="region-name">West</div>
+                        <div class="region-value">8.3%</div>
+                        <div class="region-label">Market Penetration</div>
+                        <div class="region-states">States: CO, WY, MT, ID, WA, OR, UT, NV, CA, AK, HI</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Metrics Cards -->
+        <section class="key-metrics">
+            <div class="metric-card" style="border-top: 4px solid var(--info);">
+                <div>
+                    <div class="title">TOTAL MARKET SIZE</div>
+                    <div class="value" id="market-size">$87.5B</div>
+                </div>
+                <div class="change positive"><i class="fas fa-arrow-up"></i> 8.7% from previous year</div>
+            </div>
+
+            <div class="metric-card" style="border-top: 4px solid var(--tertiary);">
+                <div>
+                    <div class="title">LARGEST SEGMENT</div>
+                    <div class="value" id="largest-segment">Injectables</div>
+                </div>
+                <div class="change positive"><i class="fas fa-arrow-up"></i> 12.3% growth</div>
+            </div>
+
+            <div class="metric-card" style="border-top: 4px solid var(--quaternary);">
+                <div>
+                    <div class="title">FASTEST GROWING PROCEDURE</div>
+                    <div class="value" id="fastest-procedure">EMSCULPT</div>
+                </div>
+                <div class="change positive"><i class="fas fa-arrow-up"></i> 24.8% growth</div>
+            </div>
+
+            <div class="metric-card" style="border-top: 4px solid var(--quinary);">
+                <div>
+                    <div class="title">REGIONAL LEADER</div>
+                    <div class="value" id="regional-leader">West</div>
+                </div>
+                <div class="change positive"><i class="fas fa-arrow-up"></i> 8.3% penetration</div>
+            </div>
+        </section>
+
+        <!-- Taxonomy Section -->
+        <section class="card taxonomy">
+            <div class="card-header">
+                <h2>Comprehensive Taxonomy of Aesthetic Procedures</h2>
+            </div>
+            <div class="taxonomy-container">
+                <!-- Injectables -->
+                <div class="taxonomy-category">
+                    <h3><i class="fas fa-syringe"></i> Injectables</h3>
+                    <div class="taxonomy-item">
+                        <div class="item-name">Neurotoxins</div>
+                        <div class="item-details">
+                            <div class="item-details-item">Botulinum Toxin Type A (Botox, Dysport, Xeomin, Jeuveau)</div>
+                        </div>
+                    </div>
+                    <div class="taxonomy-item">
+                        <div class="item-name">Dermal Fillers</div>
+                        <div class="item-details">
+                            <div class="item-details-item">Hyaluronic Acid Fillers (Juvederm, Restylane, Belotero)</div>
+                            <div class="item-details-item">Calcium Hydroxylapatite (Radiesse)</div>
+                            <div class="item-details-item">Poly-L-lactic Acid (Sculptra)</div>
+                            <div class="item-details-item">Polymethylmethacrylate (Bellafill)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Energy-Based Devices -->
+                <div class="taxonomy-category">
+                    <h3><i class="fas fa-bolt"></i> Energy-Based Devices</h3>
+                    <div class="taxonomy-item">
+                        <div class="item-name">Laser Treatments</div>
+                        <div class="item-details">
+                            <div class="item-details-item">Ablative Lasers (CO2, Er:YAG)</div>
+                            <div class="item-details-item">Non-Ablative Lasers (Nd:YAG, Alexandrite)</div>
+                            <div class="item-details-item">Fractional Lasers (Fraxel)</div>
+                            <div class="item-details-item">Q-Switched Lasers</div>
+                        </div>
+                    </div>
+                    <div class="taxonomy-item">
+                        <div class="item-name">Other Energy Devices</div>
+                        <div class="item-details">
+                            <div class="item-details-item">Intense Pulsed Light (IPL)</div>
+                            <div class="item-details-item">Radiofrequency (RF) Devices</div>
+                            <div class="item-details-item">Ultrasound-Based Devices (HIFU)</div>
+                            <div class="item-details-item">EMSCULPT (HIFEM Technology)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Surgical Procedures -->
+                <div class="taxonomy-category">
+                    <h3><i class="fas fa-user-md"></i> Surgical Procedures</h3>
+                    <div class="taxonomy-item">
+                        <div class="item-name">Body Contouring</div>
+                        <div class="item-details">
+                            <div class="item-details-item">Liposuction</div>
+                            <div class="item-details-item">Tummy Tuck (Abdominoplasty)</div>
+                            <div class="item-details-item">Body Lift</div>
+                        </div>
+                    </div>
+                    <div class="taxonomy-item">
+                        <div class="item-name">Breast Procedures</div>
+                        <div class="item-details">
+                            <div class="item-details-item">Augmentation</div>
+                            <div class="item-details-item">Reduction</div>
+                            <div class="item-details-item">Lift (Mastopexy)</div>
+                        </div>
+                    </div>
+                    <div class="taxonomy-item">
+                        <div class="item-name">Facial Surgeries</div>
+                        <div class="item-details">
+                            <div class="item-details-item">Facelift (Rhytidectomy)</div>
+                            <div class="item-details-item">Rhinoplasty</div>
+                            <div class="item-details-item">Blepharoplasty (Eyelid Surgery)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skin & Hair Treatments -->
+                <div class="taxonomy-category">
+                    <h3><i class="fas fa-leaf"></i> Skin & Hair Treatments</h3>
+                    <div class="taxonomy-item">
+                        <div class="item-name">Skin Treatments</div>
+                        <div class="item-details">
+                            <div class="item-details-item">Chemical Peels</div>
+                            <div class="item-details-item">Microdermabrasion</div>
+                            <div class="item-details-item">Tattoo Removal</div>
+                            <div class="item-details-item">Scar and Stretch Mark Treatments</div>
+                        </div>
+                    </div>
+                    <div class="taxonomy-item">
+                        <div class="item-name">Hair Treatments</div>
+                        <div class="item-details">
+                            <div class="item-details-item">Laser Hair Removal</div>
+                            <div class="item-details-item">Platelet-Rich Plasma (PRP) therapy</div>
+                            <div class="item-details-item">Hair transplant surgeries</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Aesthetic Medicine Market Navigator | Data sources: Industry reports, clinical studies, and market analyses | Last updated: April 2025</p>
+    </footer>
+
+    <script>
+        // Current year and animation state
+        let currentYear = 2025;
+        let isPlaying = false;
+        let animationInterval;
+        const minYear = 2015;
+        const maxYear = 2035;
+        const yearEl = document.querySelector('.year');
+        const playPauseBtn = document.getElementById('play-pause');
+        const prevYearBtn = document.getElementById('prev-year');
+        const nextYearBtn = document.getElementById('next-year');
+
+        // Market data for different years (simplified static version)
+        const marketData = {
+            2025: {
+                marketSize: "$87.5B",
+                yoyGrowth: "8.7%",
+                largestSegment: "Injectables",
+                segmentGrowth: "12.3%",
+                fastestProcedure: "EMSCULPT",
+                procedureGrowth: "24.8%",
+                regionalLeader: "West",
+                regionValue: "8.3%"
+            },
+            2026: {
+                marketSize: "$96.2B",
+                yoyGrowth: "9.9%",
+                largestSegment: "Injectables",
+                segmentGrowth: "10.2%",
+                fastestProcedure: "HIFU",
+                procedureGrowth: "22.5%",
+                regionalLeader: "West",
+                regionValue: "9.1%"
+            },
+            2027: {
+                marketSize: "$105.8B",
+                yoyGrowth: "10.0%",
+                largestSegment: "Injectables",
+                segmentGrowth: "9.4%",
+                fastestProcedure: "EMSCULPT",
+                procedureGrowth: "21.3%",
+                regionalLeader: "Northeast",
+                regionValue: "8.9%"
+            },
+            2028: {
+                marketSize: "$116.4B",
+                yoyGrowth: "10.0%",
+                largestSegment: "Injectables",
+                segmentGrowth: "10.1%",
+                fastestProcedure: "RF Microneedling",
+                procedureGrowth: "19.7%",
+                regionalLeader: "West",
+                regionValue: "9.5%"
+            },
+            2029: {
+                marketSize: "$128.0B",
+                yoyGrowth: "9.9%",
+                largestSegment: "Injectables",
+                segmentGrowth: "9.8%",
+                fastestProcedure: "HIFU",
+                procedureGrowth: "18.2%",
+                regionalLeader: "West",
+                regionValue: "10.2%"
+            },
+            2030: {
+                marketSize: "$140.8B",
+                yoyGrowth: "10.0%",
+                largestSegment: "Injectables",
+                segmentGrowth: "10.1%",
+                fastestProcedure: "EMSCULPT",
+                procedureGrowth: "17.5%",
+                regionalLeader: "Northeast",
+                regionValue: "10.8%"
+            }
+            // Other years could be added similarly
+        };
+
+        // Timeline control functions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial metrics
+            updateMetrics();
+            
+            // Timeline controls
+            playPauseBtn.addEventListener('click', togglePlayPause);
+            prevYearBtn.addEventListener('click', decrementYear);
+            nextYearBtn.addEventListener('click', incrementYear);
+        });
+
+        function togglePlayPause() {
+            isPlaying = !isPlaying;
+            
+            if (isPlaying) {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                animationInterval = setInterval(() => {
+                    if (currentYear < maxYear) {
+                        incrementYear();
+                    } else {
+                        togglePlayPause(); // Stop when reaching max year
+                    }
+                }, 1500);
+            } else {
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                clearInterval(animationInterval);
+            }
+        }
+
+        function incrementYear() {
+            if (currentYear < maxYear) {
+                currentYear++;
+                updateMetrics();
+            }
+        }
+
+        function decrementYear() {
+            if (currentYear > minYear) {
+                currentYear--;
+                updateMetrics();
+            }
+        }
+
+        function updateMetrics() {
+            // Update year display
+            yearEl.textContent = currentYear;
+            
+            // Flash the year text to indicate change
+            yearEl.style.color = 'rgba(255, 255, 255, 0.2)';
+            setTimeout(() => {
+                yearEl.style.color = 'white';
+            }, 300);
+            
+            // Update metrics based on the current year
+            const data = marketData[currentYear];
+            if (data) {
+                // Update market size
+                document.getElementById('market-size').textContent = data.marketSize;
+                // Update market size growth
+                const marketSizeChangeEl = document.querySelector('.metric-card:nth-child(1) .change');
+                marketSizeChangeEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${data.yoyGrowth} from previous year`;
+                
+                // Update largest segment
+                document.getElementById('largest-segment').textContent = data.largestSegment;
+                // Update segment growth
+                const segmentChangeEl = document.querySelector('.metric-card:nth-child(2) .change');
+                segmentChangeEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${data.segmentGrowth} growth`;
+                
+                // Update fastest procedure
+                document.getElementById('fastest-procedure').textContent = data.fastestProcedure;
+                // Update procedure growth
+                const procedureChangeEl = document.querySelector('.metric-card:nth-child(3) .change');
+                procedureChangeEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${data.procedureGrowth} growth`;
+                
+                // Update regional leader
+                document.getElementById('regional-leader').textContent = data.regionalLeader;
+                // Update region value
+                const regionChangeEl = document.querySelector('.metric-card:nth-child(4) .change');
+                regionChangeEl.innerHTML = `<i class="fas fa-arrow-up"></i> ${data.regionValue} penetration`;
+            }
+        }
+    </script>
+</body>
+</html>

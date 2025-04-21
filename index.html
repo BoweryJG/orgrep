@@ -276,17 +276,17 @@
         <div class="problem-card-container enhanced-problem-cards" style="display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;">
           <div class="problem-card glass-card">
             <div style="font-size:2.1rem;margin-bottom:0.7rem;">🧩</div>
-            <h3 style="margin-bottom:0.7rem;font-size:1.3rem;">Fragmented Tools</h3>
+            <h3"margin-bottom:0.7rem;font-size:1.3rem;">Fragmented Tools</h3>
             <p style="color:#d1c4e9;">Juggling too many platforms leads to confusion, wasted time, and critical insights slipping through the cracks.</p>
           </div>
           <div class="problem-card glass-card">
             <div style="font-size:2.1rem;margin-bottom:0.7rem;">⏳</div>
-            <h3 style="margin-bottom:0.7rem;font-size:1.3rem;">Momentum Killers</h3>
+            <h3"margin-bottom:0.7rem;font-size:1.3rem;">Momentum Killers</h3>
             <p style="color:#d1c4e9;">Every context switch and manual step drains energy and slows down the path from insight to closed deal.</p>
           </div>
           <div class="problem-card glass-card">
             <div style="font-size:2.1rem;margin-bottom:0.7rem;">🗣️</div>
-            <h3 style="margin-bottom:0.7rem;font-size:1.3rem;">One-Size-Fits-None</h3>
+            <h3"margin-bottom:0.7rem;font-size:1.3rem;">One-Size-Fits-None</h3>
             <p style="color:#d1c4e9;">Personalization is promised but rarely delivered—most outreach is bland, forgettable, and easy to ignore.</p>
           </div>
         </div>
@@ -559,7 +559,7 @@
   .problem-card-container { gap: 1.1rem !important; }
 }
 
-    .timeline-unified {
+    . {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -572,11 +572,11 @@
   position: relative;
 }
 /* Remove the connector line */
-.timeline-unified::before {
+.::before {
   display: none;
 }
-/* The following block was missing a selector; assuming it is for a pseudo-element, e.g., .timeline-unified::before */
-.timeline-unified::before {
+/* The following block was missing a selector; assuming it is for a pseudo-element, e.g., .::before */
+.::before {
   content: '';
   position: absolute;
   top: 2.5rem;
@@ -589,24 +589,24 @@
   z-index: 0;
 }
 @media (max-width: 1100px) {
-  .timeline-unified {
+  . {
     gap: 1.2rem;
     max-width: 98vw;
   }
 }
 @media (max-width: 900px) {
-  .timeline-unified {
+  . {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
     max-width: 98vw;
     padding: 0 0.3em;
   }
-  .timeline-unified::before {
+  .::before {
     display: none;
   }
 }
-    .timeline-unified .timeline-item {
+    . .timeline-item {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -623,7 +623,7 @@
   z-index: 1;
   margin-bottom: 2.5rem;
 }
-.timeline-unified .timeline-step {
+. .timeline-step {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -639,13 +639,13 @@
   flex-shrink: 0;
   margin-top: 0.25em;
 }
-.timeline-unified .timeline-content {
+. .timeline-content {
   flex: 1;
   text-align: left;
   color: #e0e0e0;
   font-size: 1.08em;
 }
-.timeline-unified .timeline-content h3 {
+. .timeline-content h3 {
   color: #b39ddb;
   font-size: 1.25em;
   margin-bottom: 0.5em;
@@ -653,11 +653,11 @@
   letter-spacing: 0.01em;
 }
 @media (max-width: 1100px) {
-  .timeline-unified {
+  . {
     max-width: 98vw;
     gap: 1.2rem 1.2rem;
   }
-  .timeline-unified .timeline-item {
+  . .timeline-item {
     min-width: 220px;
     max-width: 98vw;
     flex: 1 1 48%;
@@ -665,14 +665,14 @@
   }
 }
 @media (max-width: 900px) {
-  .timeline-unified {
+  . {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
     max-width: 98vw;
     padding: 0 0.3em;
   }
-  .timeline-unified .timeline-item {
+  . .timeline-item {
     max-width: 98vw;
     min-width: 0;
     flex: 1 1 100%;
@@ -680,22 +680,22 @@
     padding: 1.3em 0.7em;
     flex-direction: row;
   }
-  .timeline-unified .timeline-step {
+  . .timeline-step {
     margin-right: 1em;
   }
-  .timeline-unified .timeline-content {
+  . .timeline-content {
     text-align: center;
   }
-  .timeline-unified .timeline-content h3 {
+  . .timeline-content h3 {
     text-align: center;
   }
 }
 @media (max-width: 1100px) {
-  .timeline-unified {
+  . {
     max-width: 98vw;
     gap: 1.2rem 1.2rem;
   }
-  .timeline-unified .timeline-item {
+  . .timeline-item {
     min-width: 220px;
     max-width: 98vw;
     flex: 1 1 48%;
@@ -703,21 +703,21 @@
   }
 }
 @media (max-width: 900px) {
-  .timeline-unified {
+  . {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
     max-width: 98vw;
     padding: 0 0.3em;
   }
-  .timeline-unified .timeline-item {
+  . .timeline-item {
     max-width: 98vw;
     min-width: 0;
     flex: 1 1 100%;
     margin: 0 auto 1.5em auto;
   }
 }
-    .timeline-unified .timeline-marker {
+    . .timeline-marker {
       min-width: 18px;
       min-height: 18px;
       border-radius: 50%;
@@ -726,26 +726,26 @@
       margin-top: 0.7em;
       box-shadow: 0 0 10px #7B42F688;
     }
-    .timeline-unified .timeline-content {
+    . .timeline-content {
       flex: 1;
       text-align: left;
       color: #e0e0e0;
     }
     @media (max-width: 700px) {
-      .timeline-unified {
+      . {
         max-width: 98vw;
         padding: 0 0.3em;
       }
-      .timeline-unified .timeline-item {
+      . .timeline-item {
         flex-direction: column;
         align-items: center;
         max-width: 98vw;
         padding: 1em 0.5em;
       }
-      .timeline-unified .timeline-content {
+      . .timeline-content {
         text-align: center;
       }
-      .timeline-unified .timeline-marker {
+      . .timeline-marker {
         margin: 0 0 1em 0;
       }
     }
@@ -1018,69 +1018,6 @@
       </feMerge>
     </filter>
   </svg>
-  <div class="helix-timeline-steps">
-    <div class="helix-timeline-step left">
-      <div class="helix-timeline-marker">1</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#00ffc6;">Sphere Creation</h3>
-        <p>Create a Sphere for any target, account, or opportunity—this becomes your workspace for focused intelligence and engagement.</p>
-      </div>
-    </div>
-    <div class="helix-timeline-step right">
-      <div class="helix-timeline-marker">2</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#8a4fff;">Data Ingestion & Enrichment</h3>
-        <p>Automatically pull in and enrich data from your CRM, web, email, and other connected sources.</p>
-      </div>
-    </div>
-    <div class="helix-timeline-step left">
-      <div class="helix-timeline-marker">3</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#00ffc6;">Psychological Trigger Mapping</h3>
-        <p><strong>RepSpheres</strong> analyzes all available data to identify the psychological motivators and triggers most likely to drive action—leveraging a library of 150+ behavioral science principles.</p>
-      </div>
-    </div>
-    <div class="helix-timeline-step right">
-      <div class="helix-timeline-marker">4</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#8a4fff;">Automated Playbooks & Messaging</h3>
-        <p>Launch automations or receive suggested actions—personalized messaging, outreach, or tasks—algorithmically aligned to each target’s unique psychological fingerprint.</p>
-      </div>
-    </div>
-    <div class="helix-timeline-step left">
-      <div class="helix-timeline-marker">5</div>
-      <div class="helix-timeline-card">
-        <h3 style="color:#00ffc6;">Feedback & Optimization</h3>
-        <p>Results and engagement data flow back into the Sphere, powering continuous learning and smarter future actions.</p>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-// Animate helix timeline cards on scroll
-(function() {
-  function onScrollHelixTimeline() {
-    var steps = document.querySelectorAll('.helix-timeline-step');
-    var windowHeight = window.innerHeight;
-    steps.forEach(function(el) {
-      var rect = el.getBoundingClientRect();
-      if (rect.top < windowHeight - 100) {
-        el.classList.add('visible');
-      } else {
-        el.classList.remove('visible');
-      }
-    });
-  }
-  window.addEventListener('scroll', onScrollHelixTimeline);
-  window.addEventListener('resize', onScrollHelixTimeline);
-  document.addEventListener('DOMContentLoaded', onScrollHelixTimeline);
-})();
-</script>
-            
-
-
-</section>
-                
                 
           </div>
           <!-- Stunning SVG Wave Divider with Neon Glow and Orbs -->
@@ -1143,17 +1080,17 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem 2rem;align-items:stretch;">
       <div class="moat-card" style="background:rgba(123,66,246,0.15);border-radius:1.2em;padding:2.1em 1.2em 1.5em 1.2em;box-shadow:0 2px 18px 0 rgba(138,79,255,0.08);display:flex;flex-direction:column;align-items:center;">
         <div style="font-size:2.3em;margin-bottom:0.7em;">🔒</div>
-        <h3 style="font-size:1.22em;font-weight:700;margin-bottom:0.4em;">Limited Distribution</h3>
+        <h3"font-size:1.22em;font-weight:700;margin-bottom:0.4em;">Limited Distribution</h3>
         <p style="font-size:1.07em;opacity:0.93;">This system isn't mass distributed. It's reserved for elite teams who understand the power of true exclusivity.</p>
       </div>
       <div class="moat-card" style="background:rgba(0,255,198,0.10);border-radius:1.2em;padding:2.1em 1.2em 1.5em 1.2em;box-shadow:0 2px 18px 0 rgba(0,255,198,0.10);display:flex;flex-direction:column;align-items:center;">
         <div style="font-size:2.3em;margin-bottom:0.7em;">🛡️</div>
-        <h3 style="font-size:1.22em;font-weight:700;margin-bottom:0.4em;">Vertical Protection</h3>
+        <h3"font-size:1.22em;font-weight:700;margin-bottom:0.4em;">Vertical Protection</h3>
         <p style="font-size:1.07em;opacity:0.93;">One team per vertical. One license per region. That's how moats are built and competitive advantages are maintained.</p>
       </div>
       <div class="moat-card" style="background:rgba(123,66,246,0.12);border-radius:1.2em;padding:2.1em 1.2em 1.5em 1.2em;box-shadow:0 2px 18px 0 rgba(138,79,255,0.07);display:flex;flex-direction:column;align-items:center;">
         <div style="font-size:2.3em;margin-bottom:0.7em;">🧬</div>
-        <h3 style="font-size:1.22em;font-weight:700;margin-bottom:0.4em;">Proprietary Advantage</h3>
+        <h3"font-size:1.22em;font-weight:700;margin-bottom:0.4em;">Proprietary Advantage</h3>
         <p style="font-size:1.07em;opacity:0.93;">While competitors struggle with generic messaging, your team operates with psychological precision that can't be replicated.</p>
       </div>
     </div>
@@ -1164,40 +1101,40 @@
   <div style="max-width:950px;margin:0 auto;padding:0 1rem;">
     <h2 class="section-title" style="font-size:2.4rem;letter-spacing:0.01em;color:#fff;margin-bottom:0.7rem;text-shadow:0 0 18px #8a4fff99, 0 2px 8px #0002;">Deployment Timeline</h2>
     <div style="width:90px;height:5px;background:linear-gradient(90deg,#00ffc6,#7b42f6 80%);border-radius:3px;margin:0.7em auto 2.3em auto;box-shadow:0 0 18px #8a4fff77;"></div>
-    <div class="timeline-modern" style="display:flex;flex-direction:column;gap:2.5rem;position:relative;">
+    <div class="" style="display:flex;flex-direction:column;gap:2.5rem;position:relative;">
       <div style="position:absolute;left:32px;top:0;bottom:0;width:4px;background:linear-gradient(to bottom,#00ffc6,#7b42f6 90%);border-radius:2px;z-index:0;"></div>
       <div class="timeline-step" style="display:flex;align-items:flex-start;gap:1.5rem;position:relative;z-index:1;">
         <div style="flex-shrink:0;width:64px;height:64px;background:rgba(0,255,198,0.14);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2em;box-shadow:0 2px 10px 0 #00ffc644;margin-top:0.2em;">🧭</div>
         <div style="flex:1;">
-          <h3 style="font-size:1.18em;font-weight:700;margin-bottom:0.25em;color:#00ffc6;">Phase 1: Stack Audit & Trigger Mapping <span style="font-size:0.95em;color:#b39ddb;font-weight:400;">(Weeks 1-2)</span></h3>
+          <h3"font-size:1.18em;font-weight:700;margin-bottom:0.25em;color:#00ffc6;">Phase 1: Stack Audit & Trigger Mapping <span style="font-size:0.95em;color:#b39ddb;font-weight:400;">(Weeks 1-2)</span></h3>
           <p style="font-size:1.07em;opacity:0.93;">We analyze your existing tools and map your ideal customer's psychological triggers.</p>
         </div>
       </div>
       <div class="timeline-step" style="display:flex;align-items:flex-start;gap:1.5rem;position:relative;z-index:1;">
         <div style="flex-shrink:0;width:64px;height:64px;background:rgba(123,66,246,0.13);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2em;box-shadow:0 2px 10px 0 #8a4fff44;margin-top:0.2em;">🔗</div>
         <div style="flex:1;">
-          <h3 style="font-size:1.18em;font-weight:700;margin-bottom:0.25em;color:#8a4fff;">Phase 2: Territory Intelligence Sync <span style="font-size:0.95em;color:#b39ddb;font-weight:400;">(Weeks 3-4)</span></h3>
+          <h3"font-size:1.18em;font-weight:700;margin-bottom:0.25em;color:#8a4fff;">Phase 2: Territory Intelligence Sync <span style="font-size:0.95em;color:#b39ddb;font-weight:400;">(Weeks 3-4)</span></h3>
           <p style="font-size:1.07em;opacity:0.93;">We connect your data sources and begin enriching leads with psychological insights.</p>
         </div>
       </div>
       <div class="timeline-step" style="display:flex;align-items:flex-start;gap:1.5rem;position:relative;z-index:1;">
         <div style="flex-shrink:0;width:64px;height:64px;background:rgba(255,215,64,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2em;box-shadow:0 2px 10px 0 #ffd74044;margin-top:0.2em;">🚀</div>
         <div style="flex:1;">
-          <h3 style="font-size:1.18em;font-weight:700;margin-bottom:0.25em;color:#ffd740;">Phase 3: Content Engine Activation <span style="font-size:0.95em;color:#b39ddb;font-weight:400;">(Week 5)</span></h3>
+          <h3"font-size:1.18em;font-weight:700;margin-bottom:0.25em;color:#ffd740;">Phase 3: Content Engine Activation <span style="font-size:0.95em;color:#b39ddb;font-weight:400;">(Week 5)</span></h3>
           <p style="font-size:1.07em;opacity:0.93;">Your custom messaging library goes live, with personalized communications ready for deployment.</p>
         </div>
       </div>
       <div class="timeline-step" style="display:flex;align-items:flex-start;gap:1.5rem;position:relative;z-index:1;">
         <div style="flex-shrink:0;width:64px;height:64px;background:rgba(0,255,198,0.10);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2em;box-shadow:0 2px 10px 0 #00ffc644;margin-top:0.2em;">🎯</div>
         <div style="flex:1;">
-          <h3 style="font-size:1.18em;font-weight:700;margin-bottom:0.25em;color:#00ffc6;">Phase 4: Sales Coaching & Execution Loop <span style="font-size:0.95em;color:#b39ddb;font-weight:400;">(Week 6)</span></h3>
+          <h3"font-size:1.18em;font-weight:700;margin-bottom:0.25em;color:#00ffc6;">Phase 4: Sales Coaching & Execution Loop <span style="font-size:0.95em;color:#b39ddb;font-weight:400;">(Week 6)</span></h3>
           <p style="font-size:1.07em;opacity:0.93;">Your team receives training on the system and begins implementing trigger-based communications.</p>
         </div>
       </div>
       <div class="timeline-step" style="display:flex;align-items:flex-start;gap:1.5rem;position:relative;z-index:1;">
         <div style="flex-shrink:0;width:64px;height:64px;background:rgba(123,66,246,0.10);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2em;box-shadow:0 2px 10px 0 #8a4fff44;margin-top:0.2em;">🔄</div>
         <div style="flex:1;">
-          <h3 style="font-size:1.18em;font-weight:700;margin-bottom:0.25em;color:#8a4fff;">Phase 5: Continuous Optimization <span style="font-size:0.95em;color:#b39ddb;font-weight:400;">(Ongoing)</span></h3>
+          <h3"font-size:1.18em;font-weight:700;margin-bottom:0.25em;color:#8a4fff;">Phase 5: Continuous Optimization <span style="font-size:0.95em;color:#b39ddb;font-weight:400;">(Ongoing)</span></h3>
           <p style="font-size:1.07em;opacity:0.93;">We monitor results, refine triggers, and continuously improve the system's effectiveness.</p>
         </div>
       </div>
@@ -1210,7 +1147,7 @@
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; margin-top: 2rem;">
              <div style="flex: 0 0 150px; height: 150px; background-color: var(--purple-medium); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 3rem; color: white; font-weight: bold; box-shadow: 0 0 20px rgba(138, 79, 255, 0.4); margin: 0 auto 1rem;">JG</div>
             <div style="flex: 1; min-width: 250px;">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-color);">Jason Golden</h3>
+                <h3"font-size: 2rem; margin-bottom: 1rem; color: var(--accent-color);">Jason Golden</h3>
                 <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 1rem;">"I created RepSpheres to solve the fundamental disconnect between what we know about our prospects and how we communicate with them. Elite sales teams deserve tools that think, not just connect."</p>
                 <p>Founder & CEO, RepSpheres</p>
             </div>
