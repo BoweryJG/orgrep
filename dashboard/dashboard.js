@@ -31,7 +31,7 @@ priceFilter.addEventListener('input', () => {
 // --- Populate filters from Supabase ---
 async function fetchFilters() {
   // Fetch unique states from contacts table
-  const { data: contacts, error: contactsError } = await supabase.from('contacts').select('id, name, state, procedure');
+  const { data: contacts, error: contactsError } = await supabase.from('contacts').select('state, procedure');
   if (contactsError) {
     console.error('Error fetching contacts:', contactsError);
     return;
