@@ -36,6 +36,11 @@
 </svg>
       <span>RepSpheres</span>
     </div>
+    <button class="navbar-toggle" aria-label="Toggle navigation" type="button">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
     <div class="nav-links">
       <a href="/blog.html" class="nav-link"><span class="nav-icon" aria-hidden="true">📝</span> Blogs</a>
       <a href="/podcast.html" class="nav-link"><span class="nav-icon" aria-hidden="true">🎙️</span> Podcasts</a>
@@ -138,5 +143,18 @@
     }
     fetchMarketDetail();
   </script>
+<script>
+  // Hamburger menu toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.navbar-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (toggle && navLinks) {
+      toggle.addEventListener('click', function() {
+        toggle.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  });
+</script>
 </body>
 </html>

@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/css/ecosystem-hero.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RepSpheres: Elevating Elite Sales Teams with Precision Intelligence</title>
+    <link rel="icon" type="image/svg+xml" sizes="192x192" href="animated-orb.svg">
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/hero-impact.css">
+    <link rel="stylesheet" href="css/navbar-enhanced.css">
+    <link rel="stylesheet" href="css/orb-flash.css">
+</head>
+<body>
+    <!-- SVG defs for gradients and filters (hidden) -->
+    <svg width="0" height="0" style="position:absolute;">
+      <defs>
+        <!-- Dashboard vibrant gradient and glow -->
+        <linearGradient id="dashboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FF00FF" />
+          <stop offset="100%" stop-color="#00FFFF" />
+          <animate attributeName="x1" values="0%;100%;0%" dur="7s" repeatCount="indefinite" />
+          <animate attributeName="y1" values="0%;100%;0%" dur="5s" repeatCount="indefinite" />
+        </linearGradient>
+        <filter id="dashboardGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+          <feComposite in="blur" in2="SourceGraphic" operator="over" />
+          <feFlood flood-color="#FF00FF" flood-opacity=".8" result="glow" />
+          <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
+          <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
+        </filter>
+        <!-- Vault vibrant gradient and glow -->
+        <linearGradient id="vaultGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1FFFFF" />
+          <stop offset="100%" stop-color="#FF1493" />
+          <animate attributeName="x1" values="0%;100%;0%" dur="8s" repeatCount="indefinite" />
+          <animate attributeName="y1" values="0%;100%;0%" dur="6s" repeatCount="indefinite" />
+        </linearGradient>
+        <filter id="vaultGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+          <feComposite in="blur" in2="SourceGraphic" operator="over" />
+          <feFlood flood-color="#1FFFFF" flood-opacity=".8" result="glow" />
+          <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
+          <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
+        </filter>
+        <linearGradient id="blogGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FF6B00" />
+          <stop offset="100%" stop-color="#00AAFF" />
+        </linearGradient>
+        <linearGradient id="podcastGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00FF66" />
+          <stop offset="100%" stop-color="#FF0099" />
+        </linearGradient>
+        <linearGradient id="marketGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFFF00" />
+          <stop offset="100%" stop-color="#8A2BE2" />
+        </linearGradient>
+        <filter id="blogGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+          <feComposite in="blur" in2="SourceGraphic" operator="over" />
+          <feFlood flood-color="#00AAFF" flood-opacity=".8" result="glow" />
+          <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
+          <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
+        </filter>
+        <filter id="podcastGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+          <feComposite in="blur" in2="SourceGraphic" operator="over" />
+          <feFlood flood-color="#00FF66" flood-opacity=".8" result="glow" />
+          <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
+          <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
+        </filter>
+        <filter id="marketGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+          <feComposite in="blur" in2="SourceGraphic" operator="over" />
+          <feFlood flood-color="#FFFF00" flood-opacity=".8" result="glow" />
+          <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
+          <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
+        </filter>
+        <linearGradient id="chatbotGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#7B42F6" />
+          <stop offset="100%" stop-color="#00FFC6" />
+        </linearGradient>
+        <filter id="chatbotGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+          <feComposite in="blur" in2="SourceGraphic" operator="over" />
+          <feFlood flood-color="#7B42F6" flood-opacity=".8" result="glow" />
+          <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
+          <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
+        </filter>
+      </defs>
+    </svg>
+    <div class="stars" id="stars"></div>
+
+    <nav class="navbar compact-navbar">
+  <div class="navbar-brand">
+    <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:2;">
+      <defs>
+        <radialGradient id="orbLogoGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+          <stop offset="0%" stop-color="#00E5FF">
+            <animate attributeName="stop-color" values="#00E5FF; #00FFAA; #AAFF00; #FFAA00; #FF00AA; #AA00FF; #0055FF; #00E5FF" dur="120s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="85%" stop-color="#5B3CFF">
+            <animate attributeName="stop-color" values="#5B3CFF; #0055FF; #00E5FF; #00FFAA; #AAFF00; #FFAA00; #FF00AA; #AA00FF; #5B3CFF" dur="100s" repeatCount="indefinite" />
+            <animate attributeName="offset" values="85%;75%;80%;85%" dur="35s" repeatCount="indefinite" />
+          </stop>
+        </radialGradient>
+        <filter id="orbLogoGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="blur1" />
+          <feGaussianBlur stdDeviation="4.5" result="blur2" />
+          <feBlend mode="screen" in="blur1" in2="blur2" result="blendedGlow" />
+          <feComposite in="SourceGraphic" in2="blendedGlow" operator="over" />
+        </filter>
+      </defs>
+      <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
+      <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
+      <circle id="mini-orb" cx="12" cy="12" r="5" fill="url(#orbLogoGradient)" filter="url(#orbLogoGlow)" style="pointer-events:none;transition:opacity 0.6s cubic-bezier(.77,0,.18,1.09);"/>
+    </svg>
+    <span>RepSpheres</span>
+  </div>
+  <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+  <div class="nav-links" id="nav-links">
+
+        <a href="/blog.html" class="nav-link"><span class="nav-icon" aria-hidden="true"><svg width="32" height="32" viewBox="-30 -40 60 80" filter="url(#blogGlow)"><rect x="-30" y="-40" width="60" height="80" rx="5" fill="url(#blogGradient)" stroke="#ffffff" stroke-width="2"><animate attributeName="opacity" values="0.8;1;0.8" dur="3.5s" repeatCount="indefinite" /></rect><line x1="-15" y1="-25" x2="15" y2="-25" stroke="#ffffff" stroke-width="2.5" opacity="0.9"><animate attributeName="x2" values="15;22;15" dur="2s" repeatCount="indefinite" /><animate attributeName="stroke-width" values="2.5;3.5;2.5" dur="2s" repeatCount="indefinite" /></line><line x1="-15" y1="-15" x2="15" y2="-15" stroke="#ffffff" stroke-width="2.5" opacity="0.9"><animate attributeName="x2" values="15;25;15" dur="2s" begin="0.2s" repeatCount="indefinite" /><animate attributeName="stroke-width" values="2.5;3.5;2.5" dur="2s" begin="0.2s" repeatCount="indefinite" /></line><line x1="-15" y1="-5" x2="15" y2="-5" stroke="#ffffff" stroke-width="2.5" opacity="0.9"><animate attributeName="x2" values="15;20;15" dur="2s" begin="0.4s" repeatCount="indefinite" /><animate attributeName="stroke-width" values="2.5;3.5;2.5" dur="2s" begin="0.4s" repeatCount="indefinite" /></line><line x1="-15" y1="5" x2="15" y2="5" stroke="#ffffff" stroke-width="2.5" opacity="0.9"><animate attributeName="x2" values="15;23;15" dur="2s" begin="0.6s" repeatCount="indefinite" /><animate attributeName="stroke-width" values="2.5;3.5;2.5" dur="2s" begin="0.6s" repeatCount="indefinite" /></line><line x1="-15" y1="15" x2="15" y2="15" stroke="#ffffff" stroke-width="2.5" opacity="0.9"><animate attributeName="x2" values="15;21;15" dur="2s" begin="0.8s" repeatCount="indefinite" /><animate attributeName="stroke-width" values="2.5;3.5;2.5" dur="2s" begin="0.8s" repeatCount="indefinite" /></line><line x1="-15" y1="25" x2="15" y2="25" stroke="#ffffff" stroke-width="2.5" opacity="0.9"><animate attributeName="x2" values="15;24;15" dur="2s" begin="1s" repeatCount="indefinite" /><animate attributeName="stroke-width" values="2.5;3.5;2.5" dur="2s" begin="1s" repeatCount="indefinite" /></line><!-- Floating particles --><circle cx="-10" cy="-30" r="1.5" fill="#ffffff"><animate attributeName="cy" values="-30;30;-30" dur="8s" repeatCount="indefinite" /><animate attributeName="cx" values="-10;10;-10" dur="8s" repeatCount="indefinite" /><animate attributeName="opacity" values="1;0;1" dur="8s" repeatCount="indefinite" /></circle><circle cx="10" cy="-20" r="1.5" fill="#ffffff"><animate attributeName="cy" values="-20;30;-20" dur="7s" repeatCount="indefinite" /><animate attributeName="cx" values="10;-5;10" dur="7s" repeatCount="indefinite" /><animate attributeName="opacity" values="1;0;1" dur="7s" repeatCount="indefinite" /></circle><circle cx="0" cy="-15" r="1.5" fill="#ffffff"><animate attributeName="cy" values="-15;30;-15" dur="9s" repeatCount="indefinite" /><animate attributeName="cx" values="0;15;0" dur="9s" repeatCount="indefinite" /><animate attributeName="opacity" values="1;0;1" dur="9s" repeatCount="indefinite" /></circle><!-- Click ripple effect --><circle cx="0" cy="0" r="0" fill="#ffffff" opacity="0"><animate attributeName="r" values="0;40;0" dur="3s" begin="click" repeatCount="1" /><animate attributeName="opacity" values="0.6;0;0" dur="3s" begin="click" repeatCount="1" /></circle></svg></span> Blogs</a>
+        <a href="/podcast.html" class="nav-link"><span class="nav-icon" aria-hidden="true"><svg width="32" height="32" viewBox="-35 -35 70 70" filter="url(#podcastGlow)"><circle cx="0" cy="0" r="30" fill="url(#podcastGradient)" stroke="#ffffff" stroke-width="2"/><rect x="-7" y="-20" width="14" height="25" rx="7" fill="#ffffff" opacity="0.9"/><path d="M-7,5 C-7,16 7,16 7,5" stroke="#ffffff" stroke-width="2.5" fill="none"/><line x1="0" y1="5" x2="0" y2="15" stroke="#ffffff" stroke-width="2.5"/><path d="M-12,15 L12,15" stroke="#ffffff" stroke-width="2.5"/><path d="M-18,0 C-15,-10 -15,10 -18,0" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.6"/><path d="M18,0 C15,-10 15,10 18,0" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.6"/><path d="M-25,0 C-22,-15 -22,15 -25,0" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.5"/><path d="M25,0 C22,-15 22,15 25,0" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.5"/><circle cx="0" cy="0" r="0" stroke="#ffffff" stroke-width="1" fill="none" opacity="0"><animate attributeName="r" values="0;50;0" dur="4s" repeatCount="indefinite" /><animate attributeName="opacity" values="0;0.8;0" dur="4s" repeatCount="indefinite" /></circle></svg></span> Podcasts</a>
+         <a href="/market.html" class="nav-link"><span class="nav-icon" aria-hidden="true"><svg width="32" height="32" viewBox="-35 -35 70 70" filter="url(#marketGlow)"><rect x="-35" y="-35" width="70" height="70" rx="5" fill="url(#marketGradient)" stroke="#ffffff" stroke-width="2"><animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite" /></rect><!-- Charts --><path d="M-25,-15 L-15,-5 L-5,-20 L5,-10 L15,-25 L25,-8" stroke="#ffffff" stroke-width="3" fill="none"><animate attributeName="d" values="M-25,-15 L-15,-5 L-5,-20 L5,-10 L15,-25 L25,-8;M-25,-10 L-15,-18 L-5,-5 L5,-20 L15,-10 L25,-22;M-25,-15 L-15,-5 L-5,-20 L5,-10 L15,-25 L25,-8" dur="6s" repeatCount="indefinite" /><animate attributeName="stroke-width" values="3;4;3" dur="4s" repeatCount="indefinite" /></path><circle cx="-25" cy="-15" r="3.5" fill="#ffffff"><animate attributeName="cy" values="-15;-10;-15" dur="6s" repeatCount="indefinite" /><animate attributeName="r" values="3.5;4.5;3.5" dur="2s" repeatCount="indefinite" /></circle><circle cx="-15" cy="-5" r="3.5" fill="#ffffff"><animate attributeName="cy" values="-5;-18;-5" dur="6s" repeatCount="indefinite" /><animate attributeName="r" values="3.5;4.5;3.5" dur="2s" begin="0.3s" repeatCount="indefinite" /></circle><circle cx="-5" cy="-20" r="3.5" fill="#ffffff"><animate attributeName="cy" values="-20;-5;-20" dur="6s" repeatCount="indefinite" /><animate attributeName="r" values="3.5;4.5;3.5" dur="2s" begin="0.6s" repeatCount="indefinite" /></circle><circle cx="5" cy="-10" r="3.5" fill="#ffffff"><animate attributeName="cy" values="-10;-20;-10" dur="6s" repeatCount="indefinite" /><animate attributeName="r" values="3.5;4.5;3.5" dur="2s" begin="0.9s" repeatCount="indefinite" /></circle><circle cx="15" cy="-25" r="3.5" fill="#ffffff"><animate attributeName="cy" values="-25;-10;-25" dur="6s" repeatCount="indefinite" /><animate attributeName="r" values="3.5;4.5;3.5" dur="2s" begin="1.2s" repeatCount="indefinite" /></circle><circle cx="25" cy="-8" r="3.5" fill="#ffffff"><animate attributeName="cy" values="-8;-22;-8" dur="6s" repeatCount="indefinite" /><animate attributeName="r" values="3.5;4.5;3.5" dur="2s" begin="1.5s" repeatCount="indefinite" /></circle><!-- Bar chart --><rect x="-25" y="5" width="10" height="20" fill="#ffffff" opacity="0.9"><animate attributeName="height" values="20;15;28;20" dur="4s" repeatCount="indefinite" /><animate attributeName="y" values="5;10;-3;5" dur="4s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.9;1;0.9" dur="2s" repeatCount="indefinite" /></rect><rect x="-10" y="15" width="10" height="10" fill="#ffffff" opacity="0.9"><animate attributeName="height" values="10;22;7;10" dur="4.5s" repeatCount="indefinite" /><animate attributeName="y" values="15;3;18;15" dur="4.5s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.9;1;0.9" dur="2.5s" repeatCount="indefinite" /></rect><rect x="5" y="8" width="10" height="17" fill="#ffffff" opacity="0.9"><animate attributeName="height" values="17;8;24;17" dur="5s" repeatCount="indefinite" /><animate attributeName="y" values="8;17;1;8" dur="5s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" /></rect><rect x="20" y="10" width="10" height="15" fill="#ffffff" opacity="0.9"><animate attributeName="height" values="15;25;5;15" dur="4s" repeatCount="indefinite" /><animate attributeName="y" values="10;0;20;10" dur="4s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.9;1;0.9" dur="2s" repeatCount="indefinite" /></rect><!-- Data particles --><circle cx="-20" cy="0" r="1.5" fill="#ffffff" opacity="0.8"><animate attributeName="cx" values="-20;20;-20" dur="7s" repeatCount="indefinite" /><animate attributeName="cy" values="0;-15;0" dur="7s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.8;1;0.8" dur="7s" repeatCount="indefinite" /></circle><circle cx="15" cy="-10" r="1.5" fill="#ffffff" opacity="0.8"><animate attributeName="cx" values="15;-15;15" dur="8s" repeatCount="indefinite" /><animate attributeName="cy" values="-10;10;-10" dur="8s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.8;1;0.8" dur="8s" repeatCount="indefinite" /></circle><circle cx="0" cy="15" r="1.5" fill="#ffffff" opacity="0.8"><animate attributeName="cx" values="0;-20;0" dur="6s" repeatCount="indefinite" /><animate attributeName="cy" values="15;-5;15" dur="6s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.8;1;0.8" dur="6s" repeatCount="indefinite" /></circle></svg></span> Market iQ</a>
+        <a href="/workspace.html" class="nav-link"><span class="nav-icon" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2" fill="#7B42F6"/><path d="M16 3v4M8 3v4" stroke="#00FFC6"/><rect x="1" y="5" width="22" height="15" rx="3" stroke="#7B42F6" stroke-width="2" fill="none"/></svg></span> Workspace</a>
+        <a href="/dashboard/vault.html" class="nav-link"><span class="nav-icon" aria-hidden="true"><svg width="32" height="32" viewBox="-35 -35 70 70" filter="url(#vaultGlow)"><rect x="-35" y="-35" width="70" height="70" rx="5" fill="url(#vaultGradient)" stroke="#ffffff" stroke-width="2"><animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite" /></rect><!-- Vault door outline --><rect x="-25" y="-25" width="50" height="50" rx="3" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.9"><animate attributeName="stroke-width" values="2;3;2" dur="3s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.9;1;0.9" dur="4s" repeatCount="indefinite" /></rect><!-- Vault handle --><circle cx="15" cy="0" r="8" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.9"><animate attributeName="r" values="8;9;8" dur="4s" repeatCount="indefinite" /><animate attributeName="stroke-width" values="2.5;3.5;2.5" dur="3s" repeatCount="indefinite" /><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="15s" repeatCount="indefinite" /></circle><!-- Lock mechanism --><circle cx="15" cy="0" r="3" fill="#ffffff" opacity="0.9"><animate attributeName="r" values="3;4;3" dur="2s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.9;1;0.9" dur="2s" repeatCount="indefinite" /></circle><!-- Brain/Intelligence symbol --><path d="M-13,-5 C-15,-15 -5,-20 0,-15 C5,-20 15,-15 13,-5 C18,0 15,10 10,15 C5,18 -5,18 -10,15 C-15,10 -18,0 -13,-5" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.9"><animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" /><animate attributeName="stroke-width" values="2;2.5;2" dur="3s" repeatCount="indefinite" /><animate attributeName="d" values="M-13,-5 C-15,-15 -5,-20 0,-15 C5,-20 15,-15 13,-5 C18,0 15,10 10,15 C5,18 -5,18 -10,15 C-15,10 -18,0 -13,-5;M-12,-5 C-14,-14 -5,-18 0,-13 C5,-18 14,-14 12,-5 C17,0 14,9 9,13 C5,16 -5,16 -9,13 C-14,9 -17,0 -12,-5;M-13,-5 C-15,-15 -5,-20 0,-15 C5,-20 15,-15 13,-5 C18,0 15,10 10,15 C5,18 -5,18 -10,15 C-15,10 -18,0 -13,-5" dur="10s" repeatCount="indefinite" /></path></svg></span> Vault</a>
+      </div>
+  <button id="login-btn" class="cta-button dropdown-btn">
+    Sign Up / Login
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+      <div id="login-dropdown" class="dropdown hidden">
+        <button id="google-signin-btn" class="dropdown-item">
+          <span style="display:flex;align-items:center;gap:10px;">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" style="width:22px;height:22px;vertical-align:middle;filter: drop-shadow(0 0 4px var(--neon-purple));">
+            <span style="font-weight:600;letter-spacing:0.01em;">Sign in with Google</span>
+          </span>
+        </button>
+      </div>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Only run if Supabase is available
+        if (!window.supabase) return;
+
+        // Restore Supabase credentials and client
+        const SUPABASE_URL = 'https://cbopynuvhcymbumjnvay.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
+        const _supabase = window.supabase;
+
+        // Show admin dropdown if user is admin
+        const adminEmail = 'jasonwilliamgolden@gmail.com';
+        _supabase.auth.getUser().then(({ data: { user } }) => {
+          if (user && user.email === adminEmail) {
+            var navAdmin = document.getElementById('nav-admin');
+            if (navAdmin) navAdmin.style.display = 'flex';
+          }
+        });
+
+        // Dropdown toggle logic (safe)
+        var adminDropdownButton = document.getElementById('admin-dropdown-btn');
+        var adminDropdown = document.getElementById('admin-dropdown');
+
+        if (adminDropdownButton && adminDropdown) {
+          adminDropdownButton.onclick = function(e) {
+            e.stopPropagation();
+            adminDropdown.classList.toggle('hidden');
+          };
+          document.body.onclick = function() {
+            adminDropdown.classList.add('hidden');
+          };
+          adminDropdown.onclick = function(e) {
+            e.stopPropagation();
+          };
+        }
+        // If elements are missing, do nothing (no errors)
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var navToggle = document.getElementById('navbar-toggle');
+        var navLinks = document.getElementById('nav-links');
+        if (navToggle && navLinks) {
+          navToggle.addEventListener('click', function () {
+            var isOpen = navLinks.classList.toggle('open');
+            navToggle.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          });
+          // Close nav on mobile after clicking a link
+          navLinks.querySelectorAll('.nav-link').forEach(function(link) {
+            link.addEventListener('click', function () {
+              if (window.innerWidth <= 700 && navLinks.classList.contains('open')) {
+                navLinks.classList.remove('open');
+                navToggle.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+              }
+            });
+          });
+        }
+      });
+    </script>
+
+    <section class="hero-impact" id="hero">
+      <div class="hero-orb-bg">
+        <svg id="orbSVG" viewBox="-100 -100 1000 1000" style="width:600px; height:600px; display:block; background:transparent; position:relative; z-index:1;">
+          <defs>
+              <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
+                <stop id="p0" offset="0%" stop-color="#00E5FF"/>
+                <stop id="p1" offset="100%" stop-color="#5B3CFF"/>
+                <stop id="p2" offset="50%" stop-color="#00E5FF"/>
+                <stop id="p3" offset="75%" stop-color="#5B3CFF"/>
+              </radialGradient>
+              <radialGradient id="childGrad0" cx="50%" cy="50%" r="70%">
+                <stop id="c0s0" offset="0%" stop-color="#B3D8FF"/>
+                <stop id="c0s1" offset="100%" stop-color="#0A192F"/>
+              </radialGradient>
+              <radialGradient id="childGrad1" cx="50%" cy="50%" r="70%">
+                <stop id="c1s0" offset="0%" stop-color="#C6FFD9"/>
+                <stop id="c1s1" offset="100%" stop-color="#145A32"/>
+              </radialGradient>
+              <radialGradient id="childGrad2" cx="50%" cy="50%" r="70%">
+                <stop id="c2s0" offset="0%" stop-color="#FFB3C9"/>
+                <stop id="c2s1" offset="100%" stop-color="#7B1F3A"/>
+              </radialGradient>
+              <radialGradient id="childGrad3" cx="50%" cy="50%" r="70%">
+                <stop id="c3s0" offset="0%" stop-color="#E0D1FF"/>
+                <stop id="c3s1" offset="100%" stop-color="#311B4F"/>
+              </radialGradient>
+              <radialGradient id="childGrad4" cx="50%" cy="50%" r="70%">
+                <stop id="c4s0" offset="0%" stop-color="#FFF5B3"/>
+                <stop id="c4s1" offset="100%" stop-color="#4B3800"/>
+              </radialGradient>
+
+            </defs>
+            <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
+            <g id="children"></g>
+        </svg>
+      </div>
+      <div class="hero-content">
+        <h1>
+          Sales<br>
+          <span class="gradient-text">Intelligence</span><br>
+          <span class="hero-evolved">Evolved</span>
+        </h1>
+        <p class="hero-subhead">
+          Give your team the unfair advantage of AI-driven psychology—decode what makes buyers say “yes,” eliminate guesswork, and engineer success at every stage of the sales journey.
+        </p>
+        <button class="cta-button hero-cta">Start Winning More Deals</button>
+      </div>
+    </section>
+
+    <!-- Stunning SVG Wave Divider with Neon Glow and Orbs -->
+    <div class="hero-wave-divider">
+      <svg viewBox="0 0 1440 260" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:180px;display:block;position:relative;z-index:10;">
+        <defs>
+          <linearGradient id="waveGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00ffc6" stop-opacity="0.85"/>
+            <stop offset="35%" stop-color="#7B42F6" stop-opacity="0.85"/>
+            <stop offset="90%" stop-color="#20144a" stop-opacity="1"/>
+          </linearGradient>
+          <linearGradient id="waveStroke" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#00ffc6"/>
+            <stop offset="50%" stop-color="#7B42F6"/>
+            <stop offset="100%" stop-color="#00ffc6"/>
+          </linearGradient>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="16" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <filter id="orbGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="12" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <!-- Main Wave Shape -->
+        <path d="M0,110 Q480,260 960,110 T1440,170 V260 H0 Z" fill="url(#waveGradient)" filter="url(#glow)"/>
+        <!-- Feather/fade overlay for smoother blend -->
+
+        <!-- Neon Stroke on Crest -->
+        <path d="M0,110 Q480,260 960,110 T1440,170" fill="none" stroke="url(#waveStroke)" stroke-width="10" filter="url(#glow)"/>
+
+      </svg>
+    </div>
+
+    <section class="section problem-section" id="problem" style="background: linear-gradient(135deg, #1a1333 0%, #7B42F6 100%); padding: 7rem 2rem 6rem 2rem; color: #fff;">
+      <div style="max-width:950px;margin:0 auto;text-align:center;">
+        <h2 class="section-title enhanced-title" style="color:#fff;letter-spacing:0.01em; font-size:2.8rem; position:relative;">What’s Holding Elite Sales Teams Back?
+  <span class="gradient-underline"></span>
+</h2>
+        <p class="section-intro" style="font-size:1.3em;max-width:700px;margin:1.5em auto 2.2em auto;line-height:1.7; color:#e0e0e0;">
+          Even the best sales teams hit a wall—buried under disconnected tools, generic messaging, and missed opportunities. <strong>The real cost?</strong> Lost deals, wasted effort, and burnout.
+        </p>
+        <div class="problem-card-container enhanced-problem-cards" style="display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;">
+          <div class="problem-card glass-card">
+            <div style="font-size:2.1rem;margin-bottom:0.7rem;">🧩</div>
+            <h3"margin-bottom:0.7rem;font-size:1.3rem;">Fragmented Tools</h3>
+            <p style="color:#d1c4e9;">Juggling too many platforms leads to confusion, wasted time, and critical insights slipping through the cracks.</p>
+          </div>
+          <div class="problem-card glass-card">
+            <div style="font-size:2.1rem;margin-bottom:0.7rem;">⏳</div>
+            <h3"margin-bottom:0.7rem;font-size:1.3rem;">Momentum Killers</h3>
+            <p style="color:#d1c4e9;">Every context switch and manual step drains energy and slows down the path from insight to closed deal.</p>
+          </div>
+          <div class="problem-card glass-card">
+            <div style="font-size:2.1rem;margin-bottom:0.7rem;">🗣️</div>
+            <h3"margin-bottom:0.7rem;font-size:1.3rem;">One-Size-Fits-None</h3>
+            <p style="color:#d1c4e9;">Personalization is promised but rarely delivered—most outreach is bland, forgettable, and easy to ignore.</p>
+          </div>
+        </div>
+        <p style="margin-top:2.2em;font-size:1.1em;color:#b39ddb;">It's time to break through the plateau. <strong>RepSpheres</strong> unifies, personalizes, and accelerates every step.</p>
+      </div>
+      
+      </div>
+      <div class="parallax" style="background: linear-gradient(135deg, #361d5a 0%, #8a4fff 100%); position:relative; overflow:hidden;">
+        <!-- Stars background for "Meet Your Competitive Edge" section -->
+        <div class="stars"></div>
+        <div class="parallax-content" style="position:relative;z-index:2;">
+  <div class="stars"></div>
+          <div class="parallax-inner">
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+              <div style="margin-bottom:1.2rem;">
+                <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation:spin 5s linear infinite;filter:drop-shadow(0 0 32px #00ffc6cc) drop-shadow(0 0 18px #8a4fff99);">
+  <defs>
+    <linearGradient id="circleStrokeGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00ffc6"/>
+      <stop offset="100%" stop-color="#7B42F6"/>
+    </linearGradient>
+    <radialGradient id="circleGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ffc6" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#7B42F6" stop-opacity="0.2"/>
+    </radialGradient>
+    <animateTransform attributeName="gradientTransform" type="rotate" from="0 0.5 0.5" to="360 0.5 0.5" dur="4s" repeatCount="indefinite"/>
+  </defs>
+                  <circle cx="35" cy="35" r="32" stroke="#00FFC6" stroke-width="4" fill="none"/>
+                  <circle cx="35" cy="35" r="22" stroke="#8a4fff" stroke-width="3" fill="none"/>
+                  <circle cx="35" cy="35" r="10" fill="#8a4fff"/>
+                </svg>
+              </div>
+              <h2 class="enhanced-title" style="font-size:3.2rem;letter-spacing:0.01em;color:#fff;line-height:1.1;margin-bottom:0.7rem;position:relative;">Give Your Sales Team an Unfair Advantage.<span class="gradient-underline"></span></h2>
+              <p style="font-size:1.45rem;max-width:700px;margin:0 auto 2.2em auto;line-height:1.6;color:#e0e0e0;">
+                Give your team the power to move faster, personalize smarter, and close deals others miss—powered by psychological science and AI.
+              </p>
+              <div style="display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;">
+                <div class="glass-card" style="margin-bottom:1.2rem;">
+                  <div style="font-size:1.7rem;margin-bottom:0.6rem;">⚡</div>
+                  <div style="font-weight:600;font-size:1.1rem;margin-bottom:0.3rem;">Instant Buyer Insights</div>
+                  <div style="color:#b39ddb;">Know exactly what motivates each prospect—no guesswork, just results.</div>
+                </div>
+                <div class="glass-card" style="margin-bottom:1.2rem;">
+                  <div style="font-size:1.7rem;margin-bottom:0.6rem;">🤖</div>
+                  <div style="font-weight:600;font-size:1.1rem;margin-bottom:0.3rem;">Personalization at Scale</div>
+                  <div style="color:#b39ddb;">Deliver messaging that feels tailor-made, every time, automatically.</div>
+                </div>
+                <div class="glass-card" style="margin-bottom:1.2rem;">
+                  <div style="font-size:1.7rem;margin-bottom:0.6rem;">🚀</div>
+                  <div style="font-weight:600;font-size:1.1rem;margin-bottom:0.3rem;">Seamless Automation</div>
+                  <div style="color:#b39ddb;">Connect your tools, automate the busywork, and let your reps focus on selling.</div>
+                </div>
+              </div>
+              <div style="text-align:center;margin-top:2.2rem;">
+                <button class="cta-button hero-cta">Start Winning More Deals</button>
+              </div>
+
+                <circle cx="35" cy="35" r="32" stroke="#00FFC6" stroke-width="4" fill="none"/>
+                <circle cx="35" cy="35" r="22" stroke="#8a4fff" stroke-width="3" fill="none"/>
+                <circle cx="35" cy="35" r="10" fill="#8a4fff"/>
+              </svg>
+            </div>
+
+          </div>
+        </div>
+        <style>
+.enhanced-title {
+  text-align: center;
+  position: relative;
+}
+.gradient-underline {
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 0.7em auto 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  box-shadow: 0 0 18px #8a4fff77;
+  animation: gradient-move 2.5s linear infinite alternate;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(40, 20, 70, 0.55);
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+  padding: 2.2rem 1.6rem;
+  max-width: 320px;
+  min-width: 260px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.glass-card:hover {
+  box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
+  transform: translateY(-8px) scale(1.025);
+}
+@media (max-width: 700px) {
+  .gradient-underline { width: 60px; height: 4px; }
+  .problem-card-container { gap: 1.1rem !important; }
+}
+
+          @keyframes spin { to { transform: rotate(360deg); } }
+          @media (max-width: 700px) {
+            .parallax-content h2 { font-size:2.1rem !important; }
+            .parallax-content p { font-size:1.1rem !important; }
+          }
+        .enhanced-title {
+  text-align: center;
+  position: relative;
+}
+.gradient-underline {
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 0.7em auto 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  box-shadow: 0 0 18px #8a4fff77;
+  animation: gradient-move 2.5s linear infinite alternate;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(40, 20, 70, 0.55);
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.glass-card:hover {
+  box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
+  transform: translateY(-8px) scale(1.025);
+}
+@media (max-width: 700px) {
+  .gradient-underline { width: 60px; height: 4px; }
+  .problem-card-container { gap: 1.1rem !important; }
+}
+</style>
+      </div>
+
+        <div style="height:32px;"></div>
+<!-- Neon SVG Divider -->
+<div style="width:100%;margin:32px 0 38px 0;">
+  <svg width="100%" height="28" viewBox="0 0 1440 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+    <defs>
+      <linearGradient id="neon-border" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#00ffc6"/>
+        <stop offset="1" stop-color="#7B42F6"/>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="10" width="1440" height="8" rx="4" fill="url(#neon-border)" filter="url(#neon-glow)"/>
+    <filter id="neon-glow" x="-40" y="-40" width="1520" height="88">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </svg>
+</div>
+<div style="height:36px;"></div>
+<!-- Redesigned Spheres Ecosystem Hero Section -->
+<section class="ecosystem-hero">
+  <div class="ecosystem-bg"></div>
+  <div class="ecosystem-fade"></div>
+  <div class="ecosystem-content">
+    <h2 class="ecosystem-eyebrow">Why settle for generic outreach?</h2>
+    <h1 class="ecosystem-title">
+      Spheres Ecosystem
+      <span class="ecosystem-underline"></span>
+    </h1>
+    <p class="ecosystem-lead">
+      RepSpheres connects to <span class="ecosystem-highlight">leading LLMs (OpenAI, Anthropic, Google Gemini, Mistral, and more)</span> and proprietary models—plus 100+ APIs—to orchestrate intelligence, outreach, and learning in real time.
+    </p>
+    <p class="ecosystem-support">
+      The animation below visualizes how data and AI connect throughout your workflow.
+    </p>
+    <!-- Animated Divider Motif -->
+    <div class="ecosystem-divider-motif">
+      <svg width="66" height="32" viewBox="0 0 66 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="dividerGradient" x1="0" y1="0" x2="66" y2="0" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#00ffc6"/>
+            <stop offset="1" stop-color="#7B42F6"/>
+          </linearGradient>
+        </defs>
+        <path d="M3 3L33 29L63 3" stroke="url(#dividerGradient)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+        <filter id="glow" x="-10" y="-10" width="86" height="52">
+          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </svg>
+    </div>
+    <section class="timeline-section-glass">
+
+  </div>
+</section>
+<!-- End Redesigned Spheres Ecosystem Hero Section -->
+
+        <section class="section timeline-triggers-section" id="timeline" style="background: linear-gradient(135deg, #1a1333 0%, #7B42F6 100%); color: #fff; padding: 6rem 2rem 0 2rem; position: relative; overflow: hidden;" data-component-name="<section />">
+  <style>
+.enhanced-title {
+  text-align: center;
+  position: relative;
+}
+.gradient-underline {
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 0.7em auto 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  box-shadow: 0 0 18px #8a4fff77;
+  animation: gradient-move 2.5s linear infinite alternate;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(40, 20, 70, 0.55);
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+  padding: 2.2rem 1.6rem;
+  max-width: 320px;
+  min-width: 260px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.glass-card:hover {
+  box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
+  transform: translateY(-8px) scale(1.025);
+}
+@media (max-width: 700px) {
+  .gradient-underline { width: 60px; height: 4px; }
+  .problem-card-container { gap: 1.1rem !important; }
+}
+
+    . {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 2.5em auto !important;
+  gap: 2.5rem 2.5rem;
+  position: relative;
+}
+/* Remove the connector line */
+.::before {
+  display: none;
+}
+/* The following block was missing a selector; assuming it is for a pseudo-element, e.g., .::before */
+.::before {
+  content: '';
+  position: absolute;
+  top: 2.5rem;
+  bottom: 2.5rem;
+  left: 50%;
+  width: 4px;
+  background: linear-gradient(180deg, #7B42F6 0%, #00ffc6 100%);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+@media (max-width: 1100px) {
+  . {
+    gap: 1.2rem;
+    max-width: 98vw;
+  }
+}
+@media (max-width: 900px) {
+  . {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 98vw;
+    padding: 0 0.3em;
+  }
+  .::before {
+    display: none;
+  }
+}
+    . .timeline-item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 0 1 47%;
+  min-width: 340px;
+  max-width: 500px;
+  margin: 0;
+  background: rgba(30,18,60,0.95);
+  border-radius: 18px;
+  box-shadow: 0 2px 18px 0 rgba(123,66,246,0.13);
+  padding: 2em 2em 2em 2em;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 2.5rem;
+}
+. .timeline-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #7B42F6 0%, #00ffc6 100%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2em;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px #7B42F688;
+  margin-right: 1.3em;
+  flex-shrink: 0;
+  margin-top: 0.25em;
+}
+. .timeline-content {
+  flex: 1;
+  text-align: left;
+  color: #e0e0e0;
+  font-size: 1.08em;
+}
+. .timeline-content h3 {
+  color: #b39ddb;
+  font-size: 1.25em;
+  margin-bottom: 0.5em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+@media (max-width: 1100px) {
+  . {
+    max-width: 98vw;
+    gap: 1.2rem 1.2rem;
+  }
+  . .timeline-item {
+    min-width: 220px;
+    max-width: 98vw;
+    flex: 1 1 48%;
+    padding: 1.3em 1em;
+  }
+}
+@media (max-width: 900px) {
+  . {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 98vw;
+    padding: 0 0.3em;
+  }
+  . .timeline-item {
+    max-width: 98vw;
+    min-width: 0;
+    flex: 1 1 100%;
+    margin: 0 auto 1.5em auto;
+    padding: 1.3em 0.7em;
+    flex-direction: row;
+  }
+  . .timeline-step {
+    margin-right: 1em;
+  }
+  . .timeline-content {
+    text-align: center;
+  }
+  . .timeline-content h3 {
+    text-align: center;
+  }
+}
+@media (max-width: 1100px) {
+  . {
+    max-width: 98vw;
+    gap: 1.2rem 1.2rem;
+  }
+  . .timeline-item {
+    min-width: 220px;
+    max-width: 98vw;
+    flex: 1 1 48%;
+    padding: 1.3em 1em;
+  }
+}
+@media (max-width: 900px) {
+  . {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 98vw;
+    padding: 0 0.3em;
+  }
+  . .timeline-item {
+    max-width: 98vw;
+    min-width: 0;
+    flex: 1 1 100%;
+    margin: 0 auto 1.5em auto;
+  }
+}
+    . .timeline-marker {
+      min-width: 18px;
+      min-height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#7B42F6,#00ffc6);
+      margin-right: 1.2em;
+      margin-top: 0.7em;
+      box-shadow: 0 0 10px #7B42F688;
+    }
+    . .timeline-content {
+      flex: 1;
+      text-align: left;
+      color: #e0e0e0;
+    }
+    @media (max-width: 700px) {
+      . {
+        max-width: 98vw;
+        padding: 0 0.3em;
+      }
+      . .timeline-item {
+        flex-direction: column;
+        align-items: center;
+        max-width: 98vw;
+        padding: 1em 0.5em;
+      }
+      . .timeline-content {
+        text-align: center;
+      }
+      . .timeline-marker {
+        margin: 0 0 1em 0;
+      }
+    }
+    .trigger-card-row {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      margin-bottom: 2.5em;
+    }
+    .trigger-card-row .feature-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    @media (max-width: 700px) {
+      .trigger-card-row {
+        gap: 1.1rem;
+      }
+    }
+  .enhanced-title {
+  text-align: center;
+  position: relative;
+}
+.gradient-underline {
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 0.7em auto 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
+  box-shadow: 0 0 18px #8a4fff77;
+  animation: gradient-move 2.5s linear infinite alternate;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(40, 20, 70, 0.55);
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.glass-card:hover {
+  box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
+  transform: translateY(-8px) scale(1.025);
+}
+@media (max-width: 700px) {
+  .gradient-underline { width: 60px; height: 4px; }
+  .problem-card-container { gap: 1.1rem !important; }
+}
+</style>
+            <!-- SVG Helix Timeline Enhancement -->
+<style>
+/* Modern Timeline Cards - No Helix */
+.timeline-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  align-items: center;
+  margin: 4rem auto 5rem auto;
+  max-width: 900px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-card-step {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+  justify-content: center;
+}
+.timeline-card-marker {
+  min-width: 48px;
+  min-height: 48px;
+  max-width: 48px;
+  max-height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#00ffc6 30%,#7b42f6 100%);
+  box-shadow: 0 0 16px 4px #7b42f6cc, 0 0 0 5px #00ffc633;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6em;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 0.25rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+.timeline-card-content {
+  background: rgba(40,20,70,0.75);
+  border-radius: 18px;
+  box-shadow: 0 4px 28px 0 #7B42F688, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  backdrop-filter: blur(8px);
+  min-width: 260px;
+  max-width: 370px;
+  padding: 2.1rem 1.6rem;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+  transition: box-shadow 0.25s, transform 0.25s;
+  opacity: 1;
+  transform: none;
+}
+.timeline-card-step.left .timeline-card-content {
+  margin-right: 60px;
+  margin-left: 0;
+  text-align: right;
+}
+.timeline-card-step.right .timeline-card-content {
+  margin-left: 60px;
+  margin-right: 0;
+  text-align: left;
+}
+.timeline-card-step.left {
+  flex-direction: row;
+}
+.timeline-card-step.right {
+  flex-direction: row-reverse;
+}
+@media (max-width: 900px) {
+  .timeline-cards-container { max-width: 98vw; }
+  .timeline-card-content { min-width: 180px; max-width: 98vw; margin: 0 !important; text-align: left !important; }
+  .timeline-card-step, .timeline-card-step.right, .timeline-card-step.left {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.2rem;
+  }
+  .timeline-card-marker {
+    position: static;
+    left: auto;
+    transform: none;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+  }
+}
+
+.timeline-card-step {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2.5rem;
+  width: 100%;
+  position: relative;
+}
+.timeline-card-step.right {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.timeline-card-marker {
+  min-width: 48px;
+  min-height: 48px;
+  max-width: 48px;
+  max-height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#00ffc6 30%,#7b42f6 100%);
+  box-shadow: 0 0 16px 4px #7b42f6cc, 0 0 0 5px #00ffc633;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6em;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 0.25rem;
+}
+.timeline-card-content {
+  background: rgba(40,20,70,0.75);
+  border-radius: 18px;
+  box-shadow: 0 4px 28px 0 #7B42F688, 0 0 0 2px #00ffc655;
+  border: 1.5px solid rgba(123,66,246,0.25);
+  backdrop-filter: blur(8px);
+  min-width: 260px;
+  max-width: 370px;
+  padding: 2.1rem 1.6rem;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+  transition: box-shadow 0.25s, transform 0.25s;
+  opacity: 1;
+  transform: none;
+}
+.timeline-card-content h3 {
+  margin-top: 0;
+  margin-bottom: 0.7em;
+  font-size: 1.32em;
+  color: #00ffc6;
+}
+.timeline-card-step.right .timeline-card-content h3 {
+  color: #8a4fff;
+}
+@media (max-width: 900px) {
+  .timeline-cards-container { max-width: 98vw; }
+  .timeline-card-content { min-width: 180px; max-width: 98vw; }
+  .timeline-card-step, .timeline-card-step.right {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.2rem;
+  }
+  .timeline-card-marker {
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+  }
+}
+</style>
+<div class="timeline-cards-container">
+  <div class="timeline-card-step left">
+    <div class="timeline-card-marker">1</div>
+    <div class="timeline-card-content">
+      <h3>Sphere Creation</h3>
+      <p>Create a Sphere for any target, account, or opportunity—this becomes your workspace for focused intelligence and engagement.</p>
+    </div>
+  </div>
+  <div class="timeline-card-step right">
+    <div class="timeline-card-marker">2</div>
+    <div class="timeline-card-content">
+      <h3>Data Ingestion &amp; Enrichment</h3>
+      <p>Automatically pull in and enrich data from your CRM, web, email, and other connected sources.</p>
+    </div>
+  </div>
+  <div class="timeline-card-step left">
+    <div class="timeline-card-marker">3</div>
+    <div class="timeline-card-content">
+      <h3>Psychological Trigger Mapping</h3>
+      <p><strong>RepSpheres</strong> analyzes all available data to identify the psychological motivators and triggers most likely to drive action—leveraging a library of 150+ behavioral science principles.</p>
+    </div>
+  </div>
+  <div class="timeline-card-step right">
+    <div class="timeline-card-marker">4</div>
+    <div class="timeline-card-content">
+      <h3>Automated Playbooks &amp; Messaging</h3>
+      <p>Launch automations or receive suggested actions—personalized messaging, outreach, or tasks—algorithmically aligned to each target’s unique psychological fingerprint.</p>
+    </div>
+  </div>
+  <div class="timeline-card-step left">
+    <div class="timeline-card-marker">5</div>
+    <div class="timeline-card-content">
+      <h3>Feedback &amp; Optimization</h3>
+      <p>Results and engagement data flow back into the Sphere, powering continuous learning and smarter future actions.</p>
+    </div>
+  </div>
+</div>
+</section>
+<!-- Stunning SVG Wave Divider with Neon Glow and Orbs -->
+<svg viewBox="0 0 1440 260" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100vw;height:260px;display:block;position:absolute;left:0;bottom:0;z-index:11;">
+  <defs>
+    <linearGradient id="waveGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00ffc6" stop-opacity="0.85"/>
+      <stop offset="35%" stop-color="#7B42F6" stop-opacity="0.85"/>
+      <stop offset="90%" stop-color="#20144a" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="waveStroke" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00ffc6"/>
+      <stop offset="50%" stop-color="#7B42F6"/>
+      <stop offset="100%" stop-color="#00ffc6"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="orbGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Main Wave Shape -->
+  <path d="M0,110 Q480,260 960,110 T1440,170 V260 H0 Z" fill="url(#waveGradient)" filter="url(#glow)"/>
+  <!-- Neon Stroke on Crest -->
+  <path d="M0,110 Q480,260 960,110 T1440,170" fill="none" stroke="url(#waveStroke)" stroke-width="10" filter="url(#glow)"/>
+  <!-- Floating Orbs/Stars removed for cleaner wave divider -->
+</svg>
+    </circle>
+    <circle cx="950" cy="195" r="13" fill="#fff" fill-opacity="0.75" filter="url(#orbGlow)">
+      <animate attributeName="cy" values="195;160;195" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+</div>
+
+</section>
+
+
+
+<section class="section moat-section" id="exclusivity" style="background: linear-gradient(120deg, #1a1333 0%, #7B42F6 100%); color: #fff; padding: 6rem 2rem 5rem 2rem; position:relative;z-index:1;">
+  <div style="max-width:950px;margin:0 auto;padding:0 1rem;">
+    <h2 class="section-title" style="font-size:2.5rem;letter-spacing:0.01em;color:#fff;margin-bottom:0.7rem;text-shadow:0 0 18px #8a4fff99, 0 2px 8px #0002;">The Strategic Moat – Exclusive Licensing</h2>
+    <div style="width:90px;height:5px;background:linear-gradient(90deg,#00ffc6,#7b42f6 80%);border-radius:3px;margin:0.7em auto 2.3em auto;box-shadow:0 0 18px #8a4fff77;"></div>
+    <div class="moat-cards-bg">
+  <div class="moat-cards-grid">
+      <div class="moat-card moat-card-purple">
+  <div class="moat-card-icon moat-card-icon-animate">🔒</div>
+  <h3 class="moat-card-title moat-title-animate">Limited Distribution</h3>
+  <p>This system isn't mass distributed. It's reserved for elite teams who understand the power of true exclusivity.</p>
+</div>
+      <div class="moat-card moat-card-green">
+  <div class="moat-card-icon moat-card-icon-animate">🛡️</div>
+  <h3 class="moat-card-title moat-title-animate">Vertical Protection</h3>
+  <p>One team per vertical. One license per region. That's how moats are built and competitive advantages are maintained.</p>
+</div>
+      <div class="moat-card moat-card-blue">
+  <div class="moat-card-icon moat-card-icon-animate">🧬</div>
+  <h3 class="moat-card-title moat-title-animate">Proprietary Advantage</h3>
+  <p>While competitors struggle with generic messaging, your team operates with psychological precision that can't be replicated.</p>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="section deployment-section" id="deployment" style="background: none; color: #fff; padding: 6rem 2rem 5rem 2rem; position:relative;z-index:1;">
+  <div style="max-width:950px;margin:0 auto;padding:0 1rem;">
+    <h2 class="section-title" style="font-size:2.4rem;letter-spacing:0.01em;color:#fff;margin-bottom:0.7rem;text-shadow:0 0 18px #8a4fff99, 0 2px 8px #0002;">Deployment Timeline</h2>
+    <div style="width:90px;height:5px;background:linear-gradient(90deg,#00ffc6,#7b42f6 80%);border-radius:3px;margin:0.7em auto 2.3em auto;box-shadow:0 0 18px #8a4fff77;"></div>
+    <div class="ecosystem-timeline">
+      <div class="ecosystem-timeline-line"></div>
+      <div class="ecosystem-timeline-step">
+        <div class="ecosystem-timeline-marker-wrap">
+          <div class="ecosystem-timeline-marker" style="background:linear-gradient(135deg,#00ffc6 0%,#7B42F6 100%);">1</div>
+          <div class="ecosystem-timeline-connector"></div>
+        </div>
+        <div class="ecosystem-timeline-card glass-card">
+          <h3>Phase 1: Stack Audit & Trigger Mapping <span class="ecosystem-timeline-phase">(Weeks 1-2)</span></h3>
+          <p>We analyze your existing tools and map your ideal customer's psychological triggers.</p>
+        </div>
+      </div>
+      <div class="ecosystem-timeline-step">
+        <div class="ecosystem-timeline-marker-wrap">
+          <div class="ecosystem-timeline-marker" style="background:linear-gradient(135deg,#7B42F6 0%,#00ffc6 100%);">2</div>
+          <div class="ecosystem-timeline-connector"></div>
+        </div>
+        <div class="ecosystem-timeline-card glass-card">
+          <h3>Phase 2: Territory Intelligence Sync <span class="ecosystem-timeline-phase">(Weeks 3-4)</span></h3>
+          <p>We connect your data sources and begin enriching leads with psychological insights.</p>
+        </div>
+      </div>
+      <div class="ecosystem-timeline-step">
+        <div class="ecosystem-timeline-marker-wrap">
+          <div class="ecosystem-timeline-marker" style="background:linear-gradient(135deg,#ffd740 0%,#7B42F6 100%);color:#2d1a44;">3</div>
+          <div class="ecosystem-timeline-connector"></div>
+        </div>
+        <div class="ecosystem-timeline-card glass-card">
+          <h3>Phase 3: Content Engine Activation <span class="ecosystem-timeline-phase">(Week 5)</span></h3>
+          <p>Your custom messaging library goes live, with personalized communications ready for deployment.</p>
+        </div>
+      </div>
+      <div class="ecosystem-timeline-step">
+        <div class="ecosystem-timeline-marker-wrap">
+          <div class="ecosystem-timeline-marker" style="background:linear-gradient(135deg,#00ffc6 0%,#ffd740 100%);color:#2d1a44;">4</div>
+          <div class="ecosystem-timeline-connector"></div>
+        </div>
+        <div class="ecosystem-timeline-card glass-card">
+          <h3>Phase 4: Sales Coaching & Execution Loop <span class="ecosystem-timeline-phase">(Week 6)</span></h3>
+          <p>Your team receives training on the system and begins implementing trigger-based communications.</p>
+        </div>
+      </div>
+      <div class="ecosystem-timeline-step">
+        <div class="ecosystem-timeline-marker-wrap">
+          <div class="ecosystem-timeline-marker" style="background:linear-gradient(135deg,#7B42F6 0%,#00ffc6 100%);">5</div>
+          <div class="ecosystem-timeline-connector"></div>
+        </div>
+        <div class="ecosystem-timeline-card glass-card">
+          <h3>Phase 5: Continuous Optimization <span class="ecosystem-timeline-phase">(Ongoing)</span></h3>
+          <p>We monitor results, refine triggers, and continuously improve the system's effectiveness.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Final Call-To-Action (CTA) Section -->
+    <section class="section cta-section" id="final-cta" style="background: linear-gradient(120deg, #7B42F6 0%, #00ffc6 100%); color: #fff; padding: 4.5rem 2rem 4.5rem 2rem; margin-top:3rem; border-radius: 32px; box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655; max-width: 900px; margin-left:auto; margin-right:auto; text-align:center;">
+      <h2 class="cta-title" style="font-size:2.5rem;letter-spacing:0.01em;margin-bottom:0.7rem;">Ready to Transform Your Sales Team?</h2>
+      <p style="font-size:1.35rem;max-width:600px;margin:0 auto 2.2em auto;line-height:1.6;color:#e0e0e0;">Take the first step toward elite sales performance.<br>Schedule a call with our team to discover how RepSpheres can elevate your results.</p>
+      <a href="#schedule" class="cta-button hero-cta" style="font-size:1.3rem;padding:1.1em 2.7em 1.1em 2.7em;margin-top:1.2em;box-shadow:0 0 32px 8px #00ffc6cc,0 4px 32px 0 #7B42F6AA;">Schedule a Call</a>
+    </section>
+  </div>
+</section>
+
+    <section class="section" id="closing">
+        <h2 class="section-title">Your Reps Are Already Great.<br>Let's Make Them Unstoppable.</h2>
+        
+        <nav class="navbar">
+  <div class="navbar-brand">
+    <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
+      <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
+    </svg>
+    <span>RepSpheres</span>
+  </div>
+  <button class="navbar-toggle" aria-label="Toggle navigation">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+  <div class="nav-links">
+    <a href="/blog.html" class="nav-link">Blogs</a>
+    <a href="/podcast.html" class="nav-link">Podcasts</a>
+    <a href="/market.html" class="nav-link">Market iQ</a>
+    <a href="/dashboard/vault.html" class="nav-link">Intelligence Vault</a>
+  </div>
+</nav>
+<script>
+const toggle = document.querySelector('.navbar-toggle');
+const links = document.querySelector('.nav-links');
+toggle.addEventListener('click', () => {
+  links.classList.toggle('open');
+  toggle.classList.toggle('open');
+});
+document.querySelectorAll('.nav-link').forEach(link => {
+  if (window.location.pathname === link.getAttribute('href')) {
+    link.classList.add('active');
+  }
+});
+</script>
+         <div class="progress-indicator" id="progressIndicator">
+        <div class="progress-line"></div>
+        <div class="progress-tracker" id="progressTracker"></div>
+         <div class="progress-trail" id="progressTrail"></div>
+        </div>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="js/script.js" defer></script>
+
+    <!-- Supabase Google Auth Modal -->
+    <div id="login-modal" class="hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <h2>Sign in with Google</h2>
+        <button id="google-signin-btn">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" style="width:24px;vertical-align:middle;margin-right:8px;">
+          Sign in with Google
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Supabase client
+    const SUPABASE_URL = 'https://cbopynuvhcymbumjnvay.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
+    const _supabase = window.supabase;
+
+    const loginBtn = document.getElementById('login-btn');
+    const loginDropdown = document.getElementById('login-dropdown');
+    const googleBtn = document.getElementById('google-signin-btn');
+
+    function showDropdown(e) {
+      e.stopPropagation();
+      loginDropdown.classList.toggle('hidden');
+    }
+    function hideDropdown() {
+      if (!loginDropdown.classList.contains('hidden')) {
+        loginDropdown.classList.add('hidden');
+      }
+    }
+    function signOutHandler(e) {
+      e.stopPropagation();
+      _supabase.auth.signOut().then(() => location.reload());
+    }
+
+    // Always attach these listeners ONCE
+    loginBtn.removeEventListener('click', showDropdown);
+    loginBtn.removeEventListener('click', signOutHandler);
+    loginBtn.addEventListener('click', showDropdown);
+    document.addEventListener('click', hideDropdown);
+    googleBtn.addEventListener('click', async () => {
+      const { error } = await _supabase.auth.signInWithOAuth({ provider: 'google' });
+      if (error) alert('Error signing in: ' + error.message);
+    });
+
+    // Only update button text and mode, not listeners
+    function updateLoginButton(session) {
+      if (session?.user) {
+        loginBtn.textContent = `Hello, ${session.user.user_metadata.full_name || 'User'} (Sign out)`;
+        loginDropdown.classList.add('hidden');
+        loginBtn.removeEventListener('click', showDropdown);
+        loginBtn.addEventListener('click', signOutHandler);
+      } else {
+        loginBtn.textContent = 'Sign Up / Login';
+        loginDropdown.classList.add('hidden');
+        loginBtn.removeEventListener('click', signOutHandler);
+        loginBtn.addEventListener('click', showDropdown);
+      }
+    }
+
+    // Initial state
+    _supabase.auth.getSession().then(({ data: { session } }) => updateLoginButton(session));
+    // Listen for auth changes
+    _supabase.auth.onAuthStateChange((event, session) => updateLoginButton(session));
+});
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/scroll-animations.js"></script>
+<script src="js/chatbot.js"></script>
+<!-- <script src="js/supabase-connection-test.js"></script> -->
+
+<script>
+// Ripple effect for feature-card and moat-card
+function createRipple(event) {
+  const card = event.currentTarget;
+  let ripple = card.querySelector('.ripple');
+  if (!ripple) return;
+  ripple.classList.remove('animate');
+  const rect = card.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  ripple.style.width = ripple.style.height = size + 'px';
+  ripple.style.left = (event.clientX - rect.left - size/2) + 'px';
+  ripple.style.top = (event.clientY - rect.top - size/2) + 'px';
+  ripple.classList.add('animate');
+  card.classList.add('rippling');
+  setTimeout(() => {
+    ripple.classList.remove('animate');
+    card.classList.remove('rippling');
+  }, 500);
+}
+
+document.querySelectorAll('.feature-card, .moat-card, .timeline-step').forEach(card => {
+  card.addEventListener('click', createRipple);
+});
+</script>
+</body>
+</html>
