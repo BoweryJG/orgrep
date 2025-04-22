@@ -17,6 +17,28 @@
   gap: 1.2rem;
 }
 
+.navbar > * {
+  flex-shrink: 0;
+}
+
+.navbar .nav-links {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.7rem;
+  transition: max-height 0.3s, opacity 0.3s;
+}
+
+.navbar .navbar-brand {
+  flex-shrink: 0;
+}
+
+.navbar-toggle {
+  flex-shrink: 0;
+}
+
 
 .navbar .navbar-brand {
   display: flex;
