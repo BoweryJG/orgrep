@@ -35,7 +35,7 @@
             }
             window.addEventListener('resize', resizeStarfield);
             // Star config
-            const STAR_COUNT = 400;
+            const STAR_COUNT = 40;
             let stars = [];
             const starColors = [
                 '#ffffff','#f8f8ff','#fffafa','#ffd700','#ffa500','#ff8c00','#ffffff','#fffafa','#fffafa','#ffffff','#40e0d0'
@@ -47,8 +47,8 @@
                     let radius = Math.random() * 1.2 + 0.2;
                     let x = Math.random() * canvas.width;
                     let y = Math.random() * canvas.height;
-                    let vx = (Math.random() - 0.5) * 0.08;
-                    let vy = Math.random() * 0.2 + 0.02;
+                    let vx = (Math.random() - 0.5) * 0.04;
+                    let vy = Math.random() * 0.1 + 0.01;
                     let opacity = Math.random() * 0.6 + 0.4;
                     stars.push({ x, y, vx, vy, radius, color, opacity });
                 }
@@ -61,8 +61,7 @@
                     ctx.beginPath();
                     ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
                     ctx.fillStyle = star.color;
-                    ctx.shadowColor = star.color;
-                    ctx.shadowBlur = 8;
+                    ctx.shadowBlur = 0; // No glow for max speed
                     ctx.fill();
                     ctx.restore();
                 }
@@ -79,6 +78,15 @@
                     }
                     if (Math.random() < 0.012) {
                         star.opacity = Math.random() * 0.6 + 0.4;
+                    }
+                }
+                drawStars();
+                setTimeout(animateStars, 33); // ~30fps
+            }
+            resizeStarfield();
+            animateStars();
+        });
+    </script>
                     }
                 }
                 drawStars();
