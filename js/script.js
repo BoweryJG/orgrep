@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
      // --- Initialization Functions ---
 
-    // Ultra-Optimized Canvas-Based Starfield
+    // Lag-Free Canvas Starfield (max performance)
 function startCanvasStarfield() {
     const canvas = document.getElementById('stars-canvas');
     if (!canvas) return;
@@ -311,7 +311,7 @@ function startCanvasStarfield() {
     let height = window.innerHeight;
     canvas.width = width;
     canvas.height = height;
-    const numStars = 80;
+    const numStars = 40;
     const stars = [];
     for (let i = 0; i < numStars; i++) {
         stars.push({
@@ -319,10 +319,9 @@ function startCanvasStarfield() {
             y: Math.random() * height,
             r: Math.random() * 1.2 + 0.3,
             o: Math.random() * 0.5 + 0.5,
-            vx: (Math.random() - 0.5) * 0.03,
-            vy: (Math.random() - 0.5) * 0.03,
-            tw: Math.random() * Math.PI * 2,
-            glow: Math.random() < 0.18 // Only ~15% of stars glow
+            vx: (Math.random() - 0.5) * 0.02,
+            vy: (Math.random() - 0.5) * 0.02,
+            tw: Math.random() * Math.PI * 2
         });
     }
     function draw() {
@@ -332,14 +331,8 @@ function startCanvasStarfield() {
             ctx.beginPath();
             ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
             ctx.fillStyle = '#fff';
-            if (star.glow) {
-                ctx.shadowColor = '#fff';
-                ctx.shadowBlur = 8;
-            } else {
-                ctx.shadowBlur = 0;
-            }
+            ctx.shadowBlur = 0; // No glow
             ctx.fill();
-            ctx.shadowBlur = 0;
             star.x += star.vx;
             star.y += star.vy;
             star.tw += 0.02 + Math.random() * 0.01;
@@ -350,7 +343,7 @@ function startCanvasStarfield() {
             if (star.y > height) star.y = 0;
         }
         ctx.globalAlpha = 1;
-        requestAnimationFrame(draw);
+        setTimeout(draw, 33); // ~30fps
     }
     draw();
     window.addEventListener('resize', () => {
