@@ -1,390 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/hero-impact.css">
-  <link rel="stylesheet" href="/css/navbar-enhanced.css">
-  <link rel="stylesheet" href="/css/orb-flash.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blogs - RepSpheres</title>
-  <link rel="stylesheet" href="/css/navbar-enhanced.css">
-  <link rel="stylesheet" href="/css/public-dashboard.css">
+  <title>Blog Manager - OllieiQ Admin</title>
+  <link rel="stylesheet" href="/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <style>
-    .public-blog-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin: 2.5rem auto 2rem; max-width: 1100px; }
-    .public-blog-card { background: #23263a; border-radius: 14px; box-shadow: 0 4px 18px #0007; padding: 1.5rem 1.3rem; transition: box-shadow 0.18s; position: relative; }
-    .public-blog-card:hover { box-shadow: 0 8px 32px #7B42F6aa; }
-    .public-blog-title { font-size: 1.2rem; font-weight: bold; color: var(--accent-color); margin-bottom: 0.4rem; }
-    .public-blog-meta { color: #aaa; font-size: 0.97rem; margin-bottom: 0.7rem; }
-    .public-blog-summary { color: #eee; margin-bottom: 0.7rem; }
-    .public-blog-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-    .public-blog-tag { background: #7B42F6; color: #fff; border-radius: 8px; padding: 0.13rem 0.7rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.01em; }
-    .public-blog-author { font-size: 0.94rem; color: #00FFC6; font-weight: 600; }
-    .public-blog-date { font-size: 0.93rem; color: #bbb; margin-left: 0.7rem; }
-    .public-blog-featured { border: 2px solid #00FFC6; box-shadow: 0 0 18px #00FFC688; }
-    .public-blog-search { margin: 2rem auto 1rem; max-width: 500px; display: flex; }
-    .public-blog-search input { flex: 1; padding: 0.7rem 1rem; border-radius: 8px 0 0 8px; border: none; font-size: 1rem; }
-    .public-blog-search button { border-radius: 0 8px 8px 0; border: none; background: #7B42F6; color: #fff; font-weight: 600; padding: 0 1.2rem; cursor: pointer; }
-  </style>
-  <style>
-    body {
-      background: linear-gradient(120deg, #232526 0%, #353b48 100%) !important;
-      min-height: 100vh;
-      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-      color: #e6e6e6;
-    }
-    .frosted-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(30,34,54,0.55);
-      pointer-events: none;
-      z-index: 0;
-      backdrop-filter: blur(4px);
-    }
-    .navbar.compact-navbar {
-      background: rgba(30,34,54,0.82);
-      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      backdrop-filter: blur(8px);
-    }
-    .public-blog-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.5rem;
-      margin: 3.5rem auto 2rem;
-      max-width: 1100px;
-    }
-    .public-blog-card {
-      background: rgba(30,34,54,0.85);
-      border-radius: 18px;
-      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 2.2rem 1.6rem 1.7rem 1.6rem;
-      margin-bottom: 0.7rem;
-      transition: box-shadow 0.18s, border 0.18s;
-      position: relative;
-    }
-    .public-blog-card:hover {
-      box-shadow: 0 8px 40px #7B42F6aa;
-      border: 1.5px solid #7B42F6;
-    }
-    .public-blog-title {
-      font-size: 1.18rem;
-      font-weight: 600;
-      color: #e6e6e6;
-      margin-bottom: 0.4rem;
-      letter-spacing: 0.01em;
-    }
-    .public-blog-meta { color: #bdbdbd; font-size: 0.97rem; margin-bottom: 0.7rem; }
-    .public-blog-summary { color: #e8e8e8; margin-bottom: 0.7rem; }
-    .public-blog-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-    .public-blog-tag { background: #353b48; color: #fff; border-radius: 8px; padding: 0.13rem 0.7rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.01em; }
-    .public-blog-author { font-size: 0.94rem; color: #7B42F6; font-weight: 600; }
-    .public-blog-date { font-size: 0.93rem; color: #bbb; margin-left: 0.7rem; }
-    .public-blog-featured { border: 2px solid #7B42F6; box-shadow: 0 0 18px #7B42F688; }
-    .public-blog-search { margin: 2.5rem auto 1.2rem; max-width: 540px; display: flex; }
-    .public-blog-search input { flex: 1; padding: 0.85rem 1.1rem; border-radius: 10px 0 0 10px; border: none; font-size: 1.04rem; background: rgba(30,34,54,0.7); color: #e6e6e6; }
-    .public-blog-search button { border-radius: 0 10px 10px 0; border: none; background: #7B42F6; color: #fff; font-weight: 600; padding: 0 1.3rem; cursor: pointer; font-size: 1.04rem; }
-    @media (max-width: 700px) {
-      .public-blog-list { gap: 1.2rem; }
-      .public-blog-card { padding: 1.3rem 0.7rem; }
-      .public-blog-search { margin: 1.3rem auto 0.7rem; }
-    }
-  </style>
-  <style>
-    .orb-bg-parent {
-      position: fixed;
-      right: -120px;
-      bottom: -120px;
-      width: 420px;
-      height: 420px;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.37;
-      filter: blur(1.5px) saturate(1.15);
-      animation: orbPulse 7s ease-in-out infinite, orbRotate 22s linear infinite;
-      transform-origin: 60% 60%;
-    }
-    @keyframes orbPulse {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.08) rotate(2deg); }
-    }
-    @keyframes orbRotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
-</head>
-<body>
-  <nav class="menu-bar">
-    <a href="market.html" class="menu-btn">🏠 Home</a>
-  </nav>
-  <canvas id="blog-orb-canvas" width="340" height="340" style="position:fixed; right:40px; bottom:40px; width:320px; height:320px; z-index:0; pointer-events:none; opacity:0.37; filter:blur(1.2px) saturate(1.12);"></canvas>
-<script>
-// --- Simplex noise implementation for organic movement ---
-// Adapted from https://github.com/josephg/noisejs (MIT License, trimmed for brevity)
-(function(){
-function Grad(x, y, z) { this.x = x; this.y = y; this.z = z; }
-Grad.prototype.dot2 = function(x, y) { return this.x*x+this.y*y; };
-var grad3 = [new Grad(1,1,0),new Grad(-1,1,0),new Grad(1,-1,0),new Grad(-1,-1,0),new Grad(1,0,1),new Grad(-1,0,1),new Grad(1,0,-1),new Grad(-1,0,-1),new Grad(0,1,1),new Grad(0,-1,1),new Grad(0,1,-1),new Grad(0,-1,-1)];
-var p = [151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,190,6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,88,237,149,56,87,174,20,125,136,171,168,68,175,74,165,71,134,139,48,27,166,77,146,158,231,83,111,229,122,60,211,133,230,220,105,92,41,55,46,245,40,244,102,143,54,65,25,63,161,1,216,80,73,209,76,132,187,208,89,18,169,200,196,135,130,116,188,159,86,164,100,109,198,173,186,3,64,52,217,226,250,124,123,5,202,38,147,118,126,255,82,85,212,207,206,59,227,47,16,58,17,182,189,28,42,223,183,170,213,119,248,152,2,44,154,163,70,221,153,101,155,167,43,172,9,129,22,39,253,19,98,108,110,79,113,224,232,178,185,112,104,218,246,97,228,251,34,242,193,238,210,144,12,191,179,162,241,81,51,145,235,249,14,239,107,49,192,214,31,181,199,106,157,184,84,204,176,115,121,50,45,127,4,150,254,138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180];
-var perm = new Array(512); var gradP = new Array(512);
-for(var i=0; i<512; i++) { perm[i]=p[i&255]; gradP[i]=grad3[perm[i]%12]; }
-function simplex2(xin, yin) {
-  var n0, n1, n2; var F2 = 0.5*(Math.sqrt(3)-1);
-  var s = (xin+yin)*F2; var i = Math.floor(xin+s); var j = Math.floor(yin+s);
-  var G2 = (3-Math.sqrt(3))/6; var t = (i+j)*G2; var X0 = i-t; var Y0 = j-t;
-  var x0 = xin-X0; var y0 = yin-Y0;
-  var i1, j1; if(x0>y0){i1=1;j1=0;}else{i1=0;j1=1;}
-  var x1 = x0-i1+G2; var y1 = y0-j1+G2; var x2 = x0-1+2*G2; var y2 = y0-1+2*G2;
-  var ii=i&255, jj=j&255; var gi0=gradP[ii+perm[jj]], gi1=gradP[ii+i1+perm[jj+j1]], gi2=gradP[ii+1+perm[jj+1]];
-  var t0=0.5-x0*x0-y0*y0; n0=t0<0?0.0:(t0*t0)*gi0.dot2(x0,y0);
-  var t1=0.5-x1*x1-y1*y1; n1=t1<0?0.0:(t1*t1)*gi1.dot2(x1,y1);
-  var t2=0.5-x2*x2-y2*y2; n2=t2<0?0.0:(t2*t2)*gi2.dot2(x2,y2);
-  return 70.0*(n0+n1+n2);
-}
-// --- END Simplex noise ---
-const canvas = document.getElementById('blog-orb-canvas');
-const ctx = canvas.getContext('2d');
-let width = canvas.width, height = canvas.height;
-let t = 0;
-const POINTS = 48;
-let orbState = {
-  cx: width/2,
-  cy: height/2,
-  r: 120,
-  tx: width/2,
-  ty: height/2,
-  vx: 0,
-  vy: 0
-};
-function draw3DOrb() {
-  ctx.clearRect(0, 0, width, height);
-  let points = [];
-  // Much more subtle, slow undulation
-  let noiseScale = 0.65, noiseSpeed = 0.045;
-  for (let i = 0; i < POINTS; i++) {
-    let angle = (Math.PI * 2 / POINTS) * i;
-    let nx = Math.cos(angle), ny = Math.sin(angle);
-    // Only a little deviation from sphere, very slow
-    let n = simplex2(nx * noiseScale + t*noiseSpeed, ny * noiseScale + t*noiseSpeed);
-    let r = orbState.r + n*3.5 + Math.sin(t*0.09 + i*0.11)*2.2;
-    points.push([
-      orbState.cx + Math.cos(angle) * r,
-      orbState.cy + Math.sin(angle) * r
-    ]);
-  }
-  // Fluid, seamless color blending using angular sweep
-  let grad = ctx.createRadialGradient(
-    orbState.cx + Math.cos(t*0.09)*32,
-    orbState.cy - Math.sin(t*0.10)*28,
-    48,
-    orbState.cx, orbState.cy, orbState.r*1.18
-  );
-  // More stops for water-like blending
-  grad.addColorStop(0, '#00E5FF');
-  grad.addColorStop(0.22 + 0.08*Math.sin(t*0.13), '#00FFC6');
-  grad.addColorStop(0.38 + 0.07*Math.cos(t*0.08), '#8a4fff');
-  grad.addColorStop(0.55 + 0.07*Math.sin(t*0.11+1.1), '#7B42F6');
-  grad.addColorStop(0.72 + 0.06*Math.cos(t*0.09+2.2), '#23263a');
-  grad.addColorStop(1, '#0a0e1a');
-  ctx.save();
-  ctx.beginPath();
-  for (let i = 0; i < POINTS; i++) {
-    let [x, y] = points[i];
-    if(i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  }
-  ctx.closePath();
-  ctx.fillStyle = grad;
-  ctx.globalAlpha = 0.98;
-  ctx.shadowColor = '#8a4fff';
-  ctx.shadowBlur = 48;
-  ctx.fill();
-  ctx.restore();
-  // Subtle moving specular highlight
-  ctx.save();
-  let hx = orbState.cx + Math.cos(t*0.16+1.1)*orbState.r*0.62;
-  let hy = orbState.cy - Math.sin(t*0.19+1.1)*orbState.r*0.54;
-  let highlightGrad = ctx.createRadialGradient(hx, hy, 2, hx, hy, 38);
-  highlightGrad.addColorStop(0, 'rgba(255,255,255,0.16)');
-  highlightGrad.addColorStop(1, 'rgba(255,255,255,0)');
-  ctx.globalAlpha = 0.38;
-  ctx.beginPath();
-  ctx.arc(hx, hy, 38, 0, Math.PI*2);
-  ctx.fillStyle = highlightGrad;
-  ctx.fill();
-  ctx.restore();
-  // Subtle shadow for depth
-  ctx.save();
-  let sx = orbState.cx - Math.cos(t*0.19+1.7)*orbState.r*0.75;
-  let sy = orbState.cy + Math.sin(t*0.13+1.7)*orbState.r*0.69;
-  let shadowGrad = ctx.createRadialGradient(sx, sy, 2, sx, sy, 54);
-  shadowGrad.addColorStop(0, 'rgba(0,0,0,0.22)');
-  shadowGrad.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.globalAlpha = 0.32;
-  ctx.beginPath();
-  ctx.arc(sx, sy, 54, 0, Math.PI*2);
-  ctx.fillStyle = shadowGrad;
-  ctx.fill();
-  ctx.restore();
-}
-function animate() {
-  // Orb moves on its own, very slowly and organically
-  orbState.tx += Math.sin(t * 0.09) * 0.04;
-  orbState.ty += Math.cos(t * 0.07) * 0.03;
-  // Smoothly approach target
-  orbState.vx += (orbState.tx - orbState.cx) * 0.018;
-  orbState.vy += (orbState.ty - orbState.cy) * 0.018;
-  orbState.vx *= 0.93;
-  orbState.vy *= 0.93;
-  orbState.cx += orbState.vx;
-  orbState.cy += orbState.vy;
-  draw3DOrb();
-  t += 0.0085; // much slower
-  requestAnimationFrame(animate);
-}
-function nudgeOrb(e) {
-  let x, y;
-  if (e.touches && e.touches.length) {
-    x = e.touches[0].clientX - canvas.getBoundingClientRect().left;
-    y = e.touches[0].clientY - canvas.getBoundingClientRect().top;
-  } else {
-    x = e.clientX - canvas.getBoundingClientRect().left;
-    y = e.clientY - canvas.getBoundingClientRect().top;
-  }
-  // Only nudge if pointer is reasonably close to orb
-  if (Math.abs(x - orbState.cx) < 180 && Math.abs(y - orbState.cy) < 180) {
-    orbState.tx += (x - orbState.cx) * 0.22 + (Math.random()-0.5)*7;
-    orbState.ty += (y - orbState.cy) * 0.22 + (Math.random()-0.5)*7;
-  }
-}
-window.addEventListener('mousemove', nudgeOrb, {passive:true});
-window.addEventListener('touchmove', nudgeOrb, {passive:true});
-window.addEventListener('resize', () => {
-  canvas.width = width = 340;
-  canvas.height = height = 340;
-  orbState.cx = width/2;
-  orbState.cy = height/2;
-  orbState.tx = width/2;
-  orbState.ty = height/2;
-});
-animate();
-})();
-</script>
-  <!-- SVG defs for gradients and filters (hidden, for nav icons/branding) -->
-  <svg width="0" height="0" style="position:absolute;">
-    <defs>
-      <linearGradient id="dashboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#FF00FF" />
-        <stop offset="100%" stop-color="#00FFFF" />
-        <animate attributeName="x1" values="0%;100%;0%" dur="7s" repeatCount="indefinite" />
-        <animate attributeName="y1" values="0%;100%;0%" dur="5s" repeatCount="indefinite" />
-      </linearGradient>
-      <filter id="dashboardGlow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-        <feComposite in="blur" in2="SourceGraphic" operator="over" />
-        <feFlood flood-color="#FF00FF" flood-opacity=".8" result="glow" />
-        <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
-        <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
-      </filter>
-      <linearGradient id="vaultGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#1FFFFF" />
-        <stop offset="100%" stop-color="#FF1493" />
-        <animate attributeName="x1" values="0%;100%;0%" dur="8s" repeatCount="indefinite" />
-        <animate attributeName="y1" values="0%;100%;0%" dur="6s" repeatCount="indefinite" />
-      </linearGradient>
-      <filter id="vaultGlow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-        <feComposite in="blur" in2="SourceGraphic" operator="over" />
-        <feFlood flood-color="#1FFFFF" flood-opacity=".8" result="glow" />
-        <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
-        <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
-      </filter>
-    </defs>
-  </svg>
-  <nav class="navbar compact-navbar">
-    <div class="navbar-brand">
-  <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
-    <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
-  </svg>
-  <span>RepSpheres</span>
-      <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:2;">
-        <defs>
-          <radialGradient id="orbLogoGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
-            <stop offset="0%" stop-color="#00FFC6" />
-            <stop offset="100%" stop-color="#8a4fff" />
-          </radialGradient>
-        </defs>
-        <circle cx="12" cy="12" r="10" fill="url(#orbLogoGradient)" filter="url(#dashboardGlow)" />
-        <circle cx="12" cy="12" r="5" fill="#fff" />
-      </svg>
-      <span style="margin-left:0.5em;font-weight:600;font-size:1.25em;letter-spacing:0.01em;">Blog</span>
-    </div>
-    <div class="nav-links">
-      <a href="/blog.html" class="nav-link">Blogs</a>
-      <a href="/podcast.html" class="nav-link">Podcasts</a>
-      <a href="/market.html" class="nav-link">Market iQ</a>
-      <a href="/workspace.html" class="nav-link"><span class="nav-icon" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2" fill="#7B42F6"/><path d="M16 3v4M8 3v4" stroke="#00FFC6"/><rect x="1" y="5" width="22" height="15" rx="3" stroke="#7B42F6" stroke-width="2" fill="none"/></svg></span> Workspace</a>
-      <a href="/dashboard/vault.html" class="nav-link">Vault</a>
-    </div>
-  </nav>
-  <div class="public-blog-search">
-    <input type="text" id="blog-search-input" placeholder="Search blogs by title, tag, or author...">
-    <button id="blog-search-btn">Search</button>
-  </div>
-  <section class="public-blog-list" id="public-blog-list">
-    <!-- Blog cards will be rendered here -->
-  </section>
   <script>
     const supabaseUrl = 'https://cbopynuvhcymbumjnvay.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
-    const { createClient } = window.supabase;
-    const supabase = createClient(supabaseUrl, supabaseKey);
-    async function fetchBlogs(query) {
-      let blogsQuery = supabase
-        .from('blog_posts')
-        .select('*')
-        .not('published_at', 'is', null)
-        .order('created_at', { ascending: false });
-      if (query) {
-        blogsQuery = blogsQuery.ilike('title', `%${query}%`);
-      }
-      const { data, error } = await blogsQuery;
-      if (error) {
-        document.getElementById('public-blog-list').innerHTML = '<div style="color:#ff6b6b">Failed to load blogs.</div>';
-        return;
-      }
-      renderBlogs(data || []);
-    }
-    function renderBlogs(blogs) {
-      const container = document.getElementById('public-blog-list');
-      if (!blogs.length) { container.innerHTML = '<div style="color:#bbb">No blogs found.</div>'; return; }
-      container.innerHTML = blogs.map((blog, idx) => `
-        <a class="public-blog-card${idx === 0 ? ' public-blog-featured' : ''}" href="/blog-detail.html?id=${blog.id}" style="text-decoration:none;color:inherit;">
-          <div class="public-blog-title">${blog.title}</div>
-          <div class="public-blog-meta">
-            <span class="public-blog-author">${blog.author || 'Unknown'}</span>
-            <span class="public-blog-date">${new Date(blog.created_at).toLocaleDateString()}</span>
-          </div>
-          <div class="public-blog-summary">${blog.summary || (blog.body ? blog.body.slice(0, 120) + '...' : '')}</div>
-          <div class="public-blog-tags">
-            ${(blog.tags||[]).map(tag => `<span class="public-blog-tag">${tag}</span>`).join(' ')}
-          </div>
-        </div>
-      `).join('');
-    }
-    document.getElementById('blog-search-btn').onclick = () => {
-      const query = document.getElementById('blog-search-input').value;
-      fetchBlogs(query);
-    };
-    document.getElementById('blog-search-input').addEventListener('keyup', e => { if (e.key === 'Enter') document.getElementById('blog-search-btn').click(); });
-    fetchBlogs();
+    const supabase = window.supabase;
+    const adminEmail = 'jasonwilliamgolden@gmail.com';
   </script>
-
-</body> <!-- End of unified style -->
-
+  <script src="../js/dashboard-protect.js"></script>
+  <style>
+    .blog-manager-box { max-width: 600px; margin: 5rem auto; background: #23263a; padding: 2rem 2.5rem; border-radius: 12px; box-shadow: 0 4px 24px #000a; }
+    .blog-list { margin-top: 2rem; }
+    .blog-item { background: #191c2b; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+    .blog-title { font-weight: bold; color: var(--accent-color); }
+    .blog-body { color: #eee; margin-top: 0.5rem; }
+    .blog-form { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .blog-form input, .blog-form textarea { padding: 0.7rem; border-radius: 6px; border: none; font-size: 1rem; }
+    .blog-form button { background: #8a4fff; color: #fff; border: none; border-radius: 6px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 0.5rem; }
+    .blog-form button:hover { background: #b347ff; }
+    #blog-error { color: #ff6b6b; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
+        <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
+      </svg>
+      <span>OllieiQ Admin</span>
+    </div>
+    <div class="nav-links">
+      <a href="/dashboard/" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="/dashboard/blog.html" class="nav-link"><span class="nav-icon">📝</span> Blogs</a>
+      <a href="/dashboard/podcast.html" class="nav-link"><span class="nav-icon">🎙️</span> Podcasts</a>
+      <a href="/workspace.html" class="nav-link"><span class="nav-icon" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2" fill="#7B42F6"/><path d="M16 3v4M8 3v4" stroke="#00FFC6"/><rect x="1" y="5" width="22" height="15" rx="3" stroke="#7B42F6" stroke-width="2" fill="none"/></svg></span> Workspace</a>
+      <a href="/dashboard/vault.html" class="nav-link">Vault</a>
+      <a href="/dashboard/market.html" class="nav-link"><span class="nav-icon">📈</span> Market iQ</a>
+    </div>
+    <button class="cta-button" onclick="logout()">Logout</button>
+  </nav>
+  <div class="dashboard-box">
+    <h2>Blog Manager</h2>
+    <form class="blog-form" id="blog-form">
+      <input type="text" id="blog-title" placeholder="Blog Title" required />
+      <textarea id="blog-body" placeholder="Blog Content" rows="5" required></textarea>
+      <button type="submit">Add Blog Post</button>
+      <div id="blog-error"></div>
+    </form>
+    <div class="blog-list" id="blog-list">
+      <!-- Blog posts will be loaded here -->
+    </div>
+  </div>
+  <script src="../js/blog-manager.js"></script>
+</body>
 </html>
