@@ -302,33 +302,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
      // --- Initialization Functions ---
 
-    // Create twinkling stars
-    // Create twinkling stars (original starfield)
-function createStarryBackground(starsContainer) {
-    if (!starsContainer) return;
-    starsContainer.innerHTML = '';
-    const fragment = document.createDocumentFragment();
-    for (let i = 0; i < CONFIG.numStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        const size = getRandom(1, 3);
-        const brightness = getRandom(0.4, 0.9);
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        star.style.opacity = brightness.toString();
-        star.style.left = `${getRandom(0, 100)}%`;
-        star.style.top = `${getRandom(0, 100)}%`;
-        star.style.animationDelay = `${getRandom(0, 8)}s`;
-        star.style.animationDuration = `${getRandom(2, 5)}s`;
-        fragment.appendChild(star);
+    // Optimized Canvas-Based Starfield
+function startCanvasStarfield() {
+    const canvas = document.getElementById('stars-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    const numStars = 150;
+    const stars = [];
+    for (let i = 0; i < numStars; i++) {
+        stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: Math.random() * 1.3 + 0.2,
+            o: Math.random() * 0.5 + 0.5,
+            vx: (Math.random() - 0.5) * 0.05,
+            vy: (Math.random() - 0.5) * 0.05,
+            tw: Math.random() * Math.PI * 2
+        });
     }
-    starsContainer.appendChild(fragment);
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+        for (let star of stars) {
+            ctx.globalAlpha = star.o * (0.7 + 0.3 * Math.sin(star.tw));
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+            ctx.fillStyle = '#fff';
+            ctx.shadowColor = '#fff';
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            star.x += star.vx;
+            star.y += star.vy;
+            star.tw += 0.02 + Math.random() * 0.01;
+            // Wrap around
+            if (star.x < 0) star.x = width;
+            if (star.x > width) star.x = 0;
+            if (star.y < 0) star.y = height;
+            if (star.y > height) star.y = 0;
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+    }
+    draw();
+    window.addEventListener('resize', () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+    });
 }
+document.addEventListener('DOMContentLoaded', startCanvasStarfield);
+
 
     // --- FORCE STARS TO SHOW IN ALL .stars DIVS ON PAGE LOAD ---
     function populateStarsInAllSections() {
         // Only target .stars inside .parallax (the neon section)
         document.querySelectorAll('.parallax .stars').forEach(starsDiv => {
+            // Removed DOM-based starfield code
             createStarryBackgroundFor(starsDiv);
             starsDiv.style.opacity = '1';
             starsDiv.style.display = 'block';
