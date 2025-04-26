@@ -114,14 +114,14 @@
                     const colorRoll = Math.random();
                     let colorIndex;
                     
-                    if (colorRoll < 0.70) {
-                        // 70% white stars (0-2, 7-9)
+                    if (colorRoll < 0.95) {
+                        // 95% white stars (0-2, 7-9)
                         colorIndex = Math.floor(Math.random() * 3);
                         if (Math.random() < 0.6) {
                             colorIndex += 7; // Use the repeated white colors more frequently
                         }
                     } else {
-                        // 30% fire stars (3-6)
+                        // 5% fire stars (3-6)
                         colorIndex = Math.floor(Math.random() * 4) + 3;
                     }
                     
