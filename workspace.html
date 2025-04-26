@@ -6,8 +6,45 @@
   <title>Sphere oS</title>
   <link rel="stylesheet" href="/css/navbar-enhanced.css" />
   <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .menu-btn {
+      margin: 40px 0 24px 0;
+      padding: 14px 32px;
+      background: linear-gradient(90deg, #8a61ff 60%, #3498db 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 2px 12px rgba(138,97,255,0.12);
+      transition: background 0.18s, box-shadow 0.18s;
+      letter-spacing: 0.03em;
+      display: inline-block;
+    }
+    .menu-btn:hover {
+      background: linear-gradient(90deg, #6a40d7 60%, #217dbb 100%);
+      box-shadow: 0 4px 24px rgba(138,97,255,0.17);
+    }
+    .menu-bar {
+      width: 100vw;
+      background: rgba(138,97,255,0.07);
+      padding: 0.7rem 0 0.7rem 2vw;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(138,97,255,0.07);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+  </style>
 </head>
 <body>
+  <nav class="menu-bar">
+    <a href="market.html" class="menu-btn">🏠 Home</a>
+  </nav>
   <nav class="navbar compact-navbar">
     <div class="navbar-brand">
       <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,5 +80,6 @@
       ></iframe>
     </div>
   </main>
+
 </body>
 </html>
