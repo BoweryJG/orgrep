@@ -82,6 +82,144 @@
     }
     .logout-btn:hover { background: #d43b4f; }
   </style>
+</head>
+<body>
+  <nav class="navbar admin-nav">
+    <a href="/blog.html">Blogs</a>
+    <a href="/podcast.html">Podcasts</a>
+    <a href="/market.html">Market iQ</a>
+    <a href="/dashboard/vault.html">Vault</a>
+    <button class="logout-btn" onclick="handleLogout()">Logout</button>
+  </nav>
+  <div class="admin-dashboard-container">
+    <h1 style="text-align:center; margin-bottom:2.5rem;">Welcome, Admin</h1>
+    <div class="admin-section">
+      <h2>Manage Blogs</h2>
+      <div class="admin-actions">
+        <button class="admin-action-btn" onclick="location.href='/dashboard/blog-admin.html'">View All</button>
+        <button class="admin-action-btn" onclick="location.href='/dashboard/create-blog.html'">Create New</button>
+      </div>
+    </div>
+    <div class="admin-section">
+      <h2>Manage Podcasts</h2>
+      <div class="admin-actions">
+        <button class="admin-action-btn" onclick="location.href='/dashboard/podcast-admin.html'">View All</button>
+        <button class="admin-action-btn" onclick="location.href='/dashboard/create-podcast.html'">Create New</button>
+      </div>
+    </div>
+    <div class="admin-section">
+      <h2>Manage Market iQ</h2>
+      <div class="admin-actions">
+        <button class="admin-action-btn" onclick="location.href='/dashboard/market-admin.html'">View All</button>
+        <button class="admin-action-btn" onclick="location.href='/dashboard/create-market.html'">Create New</button>
+      </div>
+    </div>
+    <div class="admin-section">
+      <h2>Workspace</h2>
+      <div class="admin-actions">
+        <button class="admin-action-btn" onclick="location.href='/dashboard/workspace-admin.html'">Workspace Control</button>
+      </div>
+    </div>
+    <div class="admin-section">
+      <h2>Vault</h2>
+      <div class="admin-actions">
+        <button class="admin-action-btn" onclick="location.href='/dashboard/vault.html'">Open Vault</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function handleLogout() {
+      // Example: clear Supabase session and redirect
+      supabase.auth.signOut().then(() => {
+        window.location.href = '/login.html';
+      });
+    }
+  </script>
+</body>
+</html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/navbar-enhanced.css">
+  <link rel="stylesheet" href="/css/orb-flash.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    // Initialize Supabase client for admin dashboard
+    const supabase = supabase.createClient(
+      'https://cbopynuvhcymbumjnvay.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU'
+    );
+  </script>
+  <style>
+    body { background: #191c28; color: #fff; font-family: system-ui, sans-serif; margin: 0; }
+    .admin-dashboard-container {
+      max-width: 900px;
+      margin: 3rem auto;
+      background: #24273a;
+      border-radius: 16px;
+      box-shadow: 0 6px 32px #000b;
+      padding: 2.5rem 2.5rem 2rem 2.5rem;
+    }
+    .admin-section {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #333a;
+    }
+    .admin-section:last-child { border-bottom: none; }
+    .admin-section h2 {
+      margin-top: 0;
+      margin-bottom: 0.7rem;
+      color: #64c8ff;
+      font-size: 1.5rem;
+    }
+    .admin-actions {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-top: 0.7rem;
+    }
+    .admin-action-btn {
+      background: #64c8ff;
+      color: #191c28;
+      border: none;
+      border-radius: 6px;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .admin-action-btn:hover { background: #3eb6f7; }
+    .admin-nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .admin-nav a {
+      color: #64c8ff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+    .admin-nav a:hover { text-decoration: underline; }
+    .logout-btn {
+      background: #ff4f64;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 1.5rem;
+      transition: background 0.2s;
+    }
+    .logout-btn:hover { background: #d43b4f; }
+  </style>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
