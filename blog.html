@@ -118,6 +118,9 @@
   </style>
 </head>
 <body>
+  <nav class="menu-bar">
+    <a href="market.html" class="menu-btn">🏠 Home</a>
+  </nav>
   <canvas id="blog-orb-canvas" width="340" height="340" style="position:fixed; right:40px; bottom:40px; width:320px; height:320px; z-index:0; pointer-events:none; opacity:0.37; filter:blur(1.2px) saturate(1.12);"></canvas>
 <script>
 // --- Simplex noise implementation for organic movement ---
@@ -381,5 +384,7 @@ animate();
     document.getElementById('blog-search-input').addEventListener('keyup', e => { if (e.key === 'Enter') document.getElementById('blog-search-btn').click(); });
     fetchBlogs();
   </script>
+
 </body> <!-- End of unified style -->
+
 </html>
