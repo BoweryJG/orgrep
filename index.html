@@ -13,9 +13,16 @@
     <link rel="stylesheet" href="css/orb-flash.css">
 </head>
 <body>
-    <canvas id="starfield"></canvas>
-<section class="hero-impact" id="hero" style="position:relative;">
-  <svg id="orbSVG" style="width:100px; height:100px; position:absolute; top:0; right:0; margin-right:2vw; margin-top:1em; display:block;" viewBox="0 0 400 400">
+  <canvas id="starfield"></canvas>
+  <div class="main-container" style="max-width:1200px; margin:0 auto; position:relative; min-height:100vh;">
+    <header>
+      <nav class="navbar compact-navbar">
+        <!-- Navbar content here (already present in your file) -->
+      </nav>
+    </header>
+    <main>
+      <section class="hero-impact" id="hero" style="position:relative; min-height:400px; padding-top:3em;">
+        <svg id="orbSVG" style="width:100px; height:100px; position:absolute; top:0; right:0; margin-right:2vw; margin-top:1em; display:block;" viewBox="0 0 400 400">
       <g id="particles"></g>
       <defs>
         <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
