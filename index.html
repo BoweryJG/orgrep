@@ -22,7 +22,7 @@
     </header>
     <main>
       <section class="hero-impact" id="hero" style="position:relative; min-height:400px; padding-top:3em;">
-        <svg id="orbSVG" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;" viewBox="0 0 400 400">
+        <svg id="orbSVG" style="width:400px; height:400px; position:absolute; left:50%; top:0; transform:translateX(-50%); z-index:0; pointer-events:none;" viewBox="0 0 400 400">
   <g id="particles"></g>
   <defs>
     <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
@@ -81,16 +81,6 @@
         </radialGradient>
         <radialGradient id="childGrad4" cx="50%" cy="50%" r="70%">
           <stop id="c4s0" offset="0%" stop-color="#FFF5B3"/>
-          <stop id="c4s1" offset="100%" stop-color="#4B3800"/>
-        </radialGradient>
-      </defs>
-      <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
-      <g id="children"></g>
-    </svg>
-  </div>
-  <!-- The main hero title should follow below this div -->
-    </svg>
-    <script>
 // --- Utility functions ---
 function lerp(a, b, t) { return a + (b - a) * t; }
 function hslToHex(h, s, l) {
