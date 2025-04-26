@@ -35,7 +35,7 @@
             }
             window.addEventListener('resize', resizeStarfield);
             // Star config
-            const STAR_COUNT = 400;
+            const STAR_COUNT = 120;
             let stars = [];
             const starColors = [
                 '#ffffff','#f8f8ff','#fffafa','#ffd700','#ffa500','#ff8c00','#ffffff','#fffafa','#fffafa','#ffffff','#40e0d0'
@@ -62,7 +62,7 @@
                     ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
                     ctx.fillStyle = star.color;
                     ctx.shadowColor = star.color;
-                    ctx.shadowBlur = 8;
+                    ctx.shadowBlur = 2;
                     ctx.fill();
                     ctx.restore();
                 }
