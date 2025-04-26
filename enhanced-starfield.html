@@ -63,10 +63,10 @@
             });
             
             // Star configuration
-            const STAR_COUNT = 400; // Increased star count
+            const STAR_COUNT = 400;
             let stars = [];
             
-            // Enhanced color palette - mostly whites and fire oranges with very minimal blue/turquoise
+            // Simplified color palette - only whites and fire colors
             const starColors = [
                 '#ffffff', // Pure white
                 '#f8f8ff', // Ghost white
@@ -74,11 +74,10 @@
                 '#ffd700', // Gold
                 '#ffa500', // Orange
                 '#ff8c00', // Dark orange
+                '#ff4500', // OrangeRed
                 '#ffffff', // White (repeated for higher frequency)
                 '#fffafa', // Snow white (repeated for higher frequency)
-                '#fffafa', // Snow white (repeated again for even higher frequency)
                 '#ffffff', // White (repeated again for even higher frequency)
-                '#40e0d0'  // Single turquoise (very minimal)
             ];
             
             // Initialize stars
@@ -116,20 +115,14 @@
                     let colorIndex;
                     
                     if (colorRoll < 0.70) {
-                        // 70% white stars (0-2, 6-9)
+                        // 70% white stars (0-2, 7-9)
                         colorIndex = Math.floor(Math.random() * 3);
                         if (Math.random() < 0.6) {
-                            colorIndex += 6; // Use the repeated white colors more frequently
+                            colorIndex += 7; // Use the repeated white colors more frequently
                         }
-                    } else if (colorRoll < 0.98) {
-                        // 28% fire stars (3-5)
-                        colorIndex = Math.floor(Math.random() * 3) + 3;
                     } else {
-                        // 2% turquoise stars (10) - very minimal presence
-                        colorIndex = 10;
-                        
-                        // Make turquoise stars much smaller
-                        star.size = star.size * 0.5;
+                        // 30% fire stars (3-6)
+                        colorIndex = Math.floor(Math.random() * 4) + 3;
                     }
                     
                     star.color = starColors[colorIndex];
@@ -261,20 +254,6 @@
                 const speed = Math.random() * 5 + 3;
                 const lifespan = 30;
                 
-                // Determine color profile - almost entirely fire, with very rare turquoise
-                const colorRoll = Math.random();
-                let isFirey, isTurquoise;
-                
-                if (colorRoll < 0.98) {
-                    // 98% fire shooting stars
-                    isFirey = true;
-                    isTurquoise = false;
-                } else {
-                    // 2% turquoise shooting stars (very minimal)
-                    isFirey = false;
-                    isTurquoise = true;
-                }
-                
                 let frame = 0;
                 
                 function drawShootingStar() {
@@ -294,19 +273,11 @@
                         currentY - Math.sin(angle) * length * (1 - progress)
                     );
                     
-                    if (isFirey) {
-                        // Fiery gradient
-                        gradient.addColorStop(0, `rgba(255, 255, 255, ${1 - progress})`);
-                        gradient.addColorStop(0.3, `rgba(255, 200, 50, ${0.7 * (1 - progress)})`);
-                        gradient.addColorStop(0.6, `rgba(255, 100, 50, ${0.5 * (1 - progress)})`);
-                        gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
-                    } else {
-                        // Turquoise gradient (very minimal presence)
-                        gradient.addColorStop(0, `rgba(255, 255, 255, ${1 - progress})`);
-                        gradient.addColorStop(0.3, `rgba(64, 224, 208, ${0.6 * (1 - progress)})`);
-                        gradient.addColorStop(0.6, `rgba(64, 224, 208, ${0.3 * (1 - progress)})`);
-                        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-                    }
+                    // Fiery gradient
+                    gradient.addColorStop(0, `rgba(255, 255, 255, ${1 - progress})`);
+                    gradient.addColorStop(0.3, `rgba(255, 200, 50, ${0.7 * (1 - progress)})`);
+                    gradient.addColorStop(0.6, `rgba(255, 100, 50, ${0.5 * (1 - progress)})`);
+                    gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
                     
                     // Draw the shooting star trail
                     ctx.beginPath();
@@ -335,24 +306,15 @@
                         ctx.beginPath();
                         ctx.arc(finalX, finalY, Math.random() * 1 + 0.5, 0, Math.PI * 2);
                         
-                        // Particle colors
-                        if (isFirey) {
-                            const fireColors = [
-                                `rgba(255, 255, 255, ${0.8 * (1 - progress)})`,
-                                `rgba(255, 250, 250, ${0.7 * (1 - progress)})`,
-                                `rgba(255, 215, 0, ${0.6 * (1 - progress)})`,
-                                `rgba(255, 165, 0, ${0.5 * (1 - progress)})`
-                            ];
-                            ctx.fillStyle = fireColors[Math.floor(Math.random() * fireColors.length)];
-                        } else {
-                            const turquoiseColors = [
-                                `rgba(255, 255, 255, ${0.8 * (1 - progress)})`,
-                                `rgba(240, 255, 255, ${0.7 * (1 - progress)})`,
-                                `rgba(64, 224, 208, ${0.4 * (1 - progress)})`,
-                                `rgba(64, 224, 208, ${0.3 * (1 - progress)})`
-                            ];
-                            ctx.fillStyle = turquoiseColors[Math.floor(Math.random() * turquoiseColors.length)];
-                        }
+                        // Particle colors - fire colors only
+                        const fireColors = [
+                            `rgba(255, 255, 255, ${0.8 * (1 - progress)})`,
+                            `rgba(255, 250, 250, ${0.7 * (1 - progress)})`,
+                            `rgba(255, 215, 0, ${0.6 * (1 - progress)})`,
+                            `rgba(255, 165, 0, ${0.5 * (1 - progress)})`,
+                            `rgba(255, 69, 0, ${0.4 * (1 - progress)})`
+                        ];
+                        ctx.fillStyle = fireColors[Math.floor(Math.random() * fireColors.length)];
                         
                         ctx.fill();
                     }
@@ -414,7 +376,7 @@
                     );
                     
                     ctx.beginPath();
-                    ctx.arc(currentX, currentY, size * (1 - progress * 0.5), 0, Math.PI * 2);
+                    ctx.arc(currentX, currentY, particleSize * (1 - progress * 0.5), 0, Math.PI * 2);
                     ctx.fillStyle = colors[colorIndex];
                     ctx.fill();
                 }
