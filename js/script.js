@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
      // --- Initialization Functions ---
 
-    // Optimized Canvas-Based Starfield
+    // Ultra-Optimized Canvas-Based Starfield
 function startCanvasStarfield() {
     const canvas = document.getElementById('stars-canvas');
     if (!canvas) return;
@@ -311,17 +311,18 @@ function startCanvasStarfield() {
     let height = window.innerHeight;
     canvas.width = width;
     canvas.height = height;
-    const numStars = 150;
+    const numStars = 80;
     const stars = [];
     for (let i = 0; i < numStars; i++) {
         stars.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            r: Math.random() * 1.3 + 0.2,
+            r: Math.random() * 1.2 + 0.3,
             o: Math.random() * 0.5 + 0.5,
-            vx: (Math.random() - 0.5) * 0.05,
-            vy: (Math.random() - 0.5) * 0.05,
-            tw: Math.random() * Math.PI * 2
+            vx: (Math.random() - 0.5) * 0.03,
+            vy: (Math.random() - 0.5) * 0.03,
+            tw: Math.random() * Math.PI * 2,
+            glow: Math.random() < 0.18 // Only ~15% of stars glow
         });
     }
     function draw() {
@@ -331,8 +332,12 @@ function startCanvasStarfield() {
             ctx.beginPath();
             ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
             ctx.fillStyle = '#fff';
-            ctx.shadowColor = '#fff';
-            ctx.shadowBlur = 8;
+            if (star.glow) {
+                ctx.shadowColor = '#fff';
+                ctx.shadowBlur = 8;
+            } else {
+                ctx.shadowBlur = 0;
+            }
             ctx.fill();
             ctx.shadowBlur = 0;
             star.x += star.vx;
