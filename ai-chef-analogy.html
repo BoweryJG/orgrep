@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Understanding AI Models: The Chef Analogy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f5f5f7 0%, #e0e7ff 100%);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: hidden;
+    }
+    .svg-container {
+      margin-top: 48px;
+      box-shadow: 0 12px 40px rgba(138,97,255,0.12), 0 1.5px 8px rgba(52,152,219,0.10);
+      border-radius: 32px;
+      overflow: hidden;
+      background: white;
+      transition: box-shadow 0.2s;
+      max-width: 820px;
+      width: 95vw;
+    }
+    .svg-container svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: linear-gradient(180deg, #f5f5f7 80%, #8B4513 100%);
+    }
+    .explanation {
+      max-width: 700px;
+      margin: 40px auto 0 auto;
+      padding: 32px 28px 28px 28px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(138,97,255,0.10);
+      font-size: 1.15rem;
+      line-height: 1.7;
+      text-align: center;
+    }
+    .explanation h2 {
+      margin-top: 0;
+      color: #8a61ff;
+      font-size: 2.1rem;
+      letter-spacing: 0.01em;
+    }
+    .explanation ul {
+      text-align: left;
+      margin: 24px 0 0 0;
+      padding: 0 0 0 20px;
+    }
+    .explanation li {
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+    .back-btn {
+      margin: 40px 0 24px 0;
+      padding: 14px 32px;
+      background: linear-gradient(90deg, #8a61ff 60%, #3498db 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 2px 12px rgba(138,97,255,0.12);
+      transition: background 0.18s, box-shadow 0.18s;
+      letter-spacing: 0.03em;
+    }
+    .back-btn:hover {
+      background: linear-gradient(90deg, #6a40d7 60%, #217dbb 100%);
+      box-shadow: 0 4px 24px rgba(138,97,255,0.17);
+    }
+    @media (max-width: 900px) {
+      .svg-container { max-width: 99vw; }
+      .explanation { padding: 18px 6vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="svg-container">
+    <!-- SVG Analogy Visual -->
+    <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background -->
+      <rect x="0" y="0" width="800" height="600" fill="#f5f5f7" />
+      <!-- Desk Surface -->
+      <rect x="0" y="400" width="800" height="200" fill="#8B4513" />
+      <rect x="0" y="400" width="800" height="200" fill="#8B4513" opacity="0.7" />
+      <!-- Header -->
+      <text x="400" y="50" text-anchor="middle" font-family="Arial" font-size="28" font-weight="bold" fill="#333333">
+        Understanding AI Models: The Chef Analogy
+      </text>
+      <text x="400" y="80" text-anchor="middle" font-family="Arial" font-size="16" fill="#666666">
+        Why different AI models produce different results
+      </text>
+      <!-- Rolodex Base -->
+      <rect x="250" y="350" width="300" height="100" rx="10" ry="10" fill="#555555" stroke="#333333" stroke-width="2" />
+      <rect x="270" y="370" width="260" height="60" rx="5" ry="5" fill="#444444" />
+      <!-- Rolodex Cylinder -->
+      <ellipse cx="400" cy="350" rx="150" ry="20" fill="#666666" />
+      <ellipse cx="400" cy="350" rx="145" ry="15" fill="#555555" />
+      <!-- Interactive Cards -->
+      <!-- Card 1 - The Ingredients -->
+      <g>
+        <rect x="300" y="230" width="200" height="150" rx="10" ry="10" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2" filter="url(#shadow)">
+          <animate attributeName="y" values="350;230;350" dur="15s" begin="0s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+        </rect>
+        <rect x="310" y="240" width="180" height="20" rx="5" ry="5" fill="#3498db">
+          <animate attributeName="y" values="360;240;360" dur="15s" begin="0s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+        </rect>
+        <text x="400" y="255" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="white">
+          <animate attributeName="y" values="375;255;375" dur="15s" begin="0s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          The Ingredients
+        </text>
+        <text x="400" y="280" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="400;280;400" dur="15s" begin="0s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          Just like chefs shop at the same
+        </text>
+        <text x="400" y="300" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="420;300;420" dur="15s" begin="0s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          supermarkets, AI models train
+        </text>
+        <text x="400" y="320" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="440;320;440" dur="15s" begin="0s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          on similar data from books, 
+        </text>
+        <text x="400" y="340" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="460;340;460" dur="15s" begin="0s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          websites, and images.
+        </text>
+      </g>
+      <!-- Card 2 - The Recipe -->
+      <g>
+        <rect x="300" y="230" width="200" height="150" rx="10" ry="10" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2" filter="url(#shadow)">
+          <animate attributeName="y" values="350;230;350" dur="15s" begin="3s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+        </rect>
+        <rect x="310" y="240" width="180" height="20" rx="5" ry="5" fill="#2ecc71">
+          <animate attributeName="y" values="360;240;360" dur="15s" begin="3s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+        </rect>
+        <text x="400" y="255" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="white">
+          <animate attributeName="y" values="375;255;375" dur="15s" begin="3s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          The Recipe
+        </text>
+        <text x="400" y="280" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="400;280;400" dur="15s" begin="3s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          Each AI model uses a unique
+        </text>
+        <text x="400" y="300" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="420;300;420" dur="15s" begin="3s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          "recipe" (algorithm) to process
+        </text>
+        <text x="400" y="320" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="440;320;440" dur="15s" begin="3s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          data, just like chefs follow
+        </text>
+        <text x="400" y="340" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="460;340;460" dur="15s" begin="3s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          different recipes.
+        </text>
+      </g>
+      <!-- Card 3 - The Chef's Touch -->
+      <g>
+        <rect x="300" y="230" width="200" height="150" rx="10" ry="10" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2" filter="url(#shadow)">
+          <animate attributeName="y" values="350;230;350" dur="15s" begin="6s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+        </rect>
+        <rect x="310" y="240" width="180" height="20" rx="5" ry="5" fill="#e74c3c">
+          <animate attributeName="y" values="360;240;360" dur="15s" begin="6s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+        </rect>
+        <text x="400" y="255" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="white">
+          <animate attributeName="y" values="375;255;375" dur="15s" begin="6s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          The Chef's Touch
+        </text>
+        <text x="400" y="280" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="400;280;400" dur="15s" begin="6s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          Top AI models are fine-tuned by
+        </text>
+        <text x="400" y="300" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="420;300;420" dur="15s" begin="6s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          experienced teams, similar to
+        </text>
+        <text x="400" y="320" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="440;320;440" dur="15s" begin="6s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          how master chefs add their
+        </text>
+        <text x="400" y="340" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="460;340;460" dur="15s" begin="6s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          personal touch to dishes.
+        </text>
+      </g>
+      <!-- Card 4 - The Specialties -->
+      <g>
+        <rect x="300" y="230" width="200" height="150" rx="10" ry="10" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2" filter="url(#shadow)">
+          <animate attributeName="y" values="350;230;350" dur="15s" begin="9s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+        </rect>
+        <rect x="310" y="240" width="180" height="20" rx="5" ry="5" fill="#9b59b6">
+          <animate attributeName="y" values="360;240;360" dur="15s" begin="9s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+        </rect>
+        <text x="400" y="255" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="white">
+          <animate attributeName="y" values="375;255;375" dur="15s" begin="9s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          The Specialties
+        </text>
+        <text x="400" y="280" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="400;280;400" dur="15s" begin="9s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          Some AI models specialize in
+        </text>
+        <text x="400" y="300" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="420;300;420" dur="15s" begin="9s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          specific tasks like images or
+        </text>
+        <text x="400" y="320" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="440;320;440" dur="15s" begin="9s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          text, just as some chefs excel
+        </text>
+        <text x="400" y="340" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="460;340;460" dur="15s" begin="9s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          at Italian or French cuisine.
+        </text>
+      </g>
+      <!-- Card 5 - The Restaurant -->
+      <g>
+        <rect x="300" y="230" width="200" height="150" rx="10" ry="10" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2" filter="url(#shadow)">
+          <animate attributeName="y" values="350;230;350" dur="15s" begin="12s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+        </rect>
+        <rect x="310" y="240" width="180" height="20" rx="5" ry="5" fill="#f1c40f">
+          <animate attributeName="y" values="360;240;360" dur="15s" begin="12s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+        </rect>
+        <text x="400" y="255" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="white">
+          <animate attributeName="y" values="375;255;375" dur="15s" begin="12s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          The Restaurant
+        </text>
+        <text x="400" y="280" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="400;280;400" dur="15s" begin="12s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          Companies that develop AI are
+        </text>
+        <text x="400" y="300" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="420;300;420" dur="15s" begin="12s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          like restaurant brands, each
+        </text>
+        <text x="400" y="320" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="440;320;440" dur="15s" begin="12s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          with their own style, standards,
+        </text>
+        <text x="400" y="340" text-anchor="middle" font-family="Arial" font-size="12" fill="#333333">
+          <animate attributeName="y" values="460;340;460" dur="15s" begin="12s" repeatCount="indefinite" 
+                   keyTimes="0;0.1;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline" />
+          and signature dishes.
+        </text>
+      </g>
+      <!-- Restaurant/AI Models Comparison -->
+      <g transform="translate(100, 520)">
+        <rect x="0" y="0" width="600" height="60" rx="5" ry="5" fill="rgba(255,255,255,0.8)" />
+        <text x="20" y="20" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">Restaurant World</text>
+        <text x="160" y="20" font-family="Arial" font-size="14" fill="#333333">→</text>
+        <text x="190" y="20" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">AI World</text>
+        <text x="20" y="45" font-family="Arial" font-size="14" fill="#333333">Chef, Ingredients, Recipe</text>
+        <text x="160" y="45" font-family="Arial" font-size="14" fill="#333333">→</text>
+        <text x="190" y="45" font-family="Arial" font-size="14" fill="#333333">Engineers, Data, Algorithms</text>
+        <text x="380" y="32" font-family="Arial" font-size="12" fill="#666666" font-style="italic">
+          Similar inputs, different results!
+        </text>
+      </g>
+      <!-- Chef and AI Engineer Icons -->
+      <g transform="translate(35, 245)">
+        <!-- Chef Hat -->
+        <path d="M30,40 C30,20 0,20 0,40 L0,50 L60,50 L60,40 C60,20 30,20 30,40" fill="white" stroke="#333333" stroke-width="2" />
+        <rect x="0" y="50" width="60" height="10" fill="white" stroke="#333333" stroke-width="2" />
+        <!-- Chef Body -->
+        <rect x="10" y="60" width="40" height="50" rx="5" ry="5" fill="#e74c3c" />
+        <circle cx="30" cy="95" r="20" fill="#e74c3c" />
+      </g>
+      <g transform="translate(700, 245)">
+        <!-- Computer Screen -->
+        <rect x="-40" y="0" width="40" height="30" rx="3" ry="3" fill="#333333" />
+        <rect x="-37" y="3" width="34" height="24" rx="1" ry="1" fill="#3498db" />
+        <!-- AI Engineer -->
+        <rect x="-35" y="35" width="30" height="40" rx="5" ry="5" fill="#2ecc71" />
+        <circle cx="-20" cy="65" r="15" fill="#2ecc71" />
+      </g>
+      <!-- Filter Effects -->
+      <defs>
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="3" dy="3" stdDeviation="2" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+    </svg>
+  </div>
+  <div class="explanation">
+    <h2>Understanding AI Models: The Chef Analogy</h2>
+    <p>
+      Just like chefs can shop at the same supermarkets but create different dishes using their own recipes and techniques, AI models are trained on similar data but use unique algorithms and fine-tuning from their creators. That’s why different models can produce different results, even when given the same inputs!
+    </p>
+    <ul>
+      <li><strong>The Ingredients:</strong> The data AI models are trained on (books, websites, images).</li>
+      <li><strong>The Recipe:</strong> The algorithms and methods used to process data.</li>
+      <li><strong>The Chef's Touch:</strong> Fine-tuning and expertise from the team behind each model.</li>
+      <li><strong>The Specialties:</strong> Some models excel at specific tasks, just like chefs specialize in certain cuisines.</li>
+      <li><strong>The Restaurant:</strong> Companies and brands that create their own signature AI models.</li>
+    </ul>
+    <p>
+      <em>Similar inputs, different results—just like in the kitchen!</em>
+    </p>
+  </div>
+  <a href="market.html" class="back-btn">← Back to Dashboard</a>
+</body>
+</html>
