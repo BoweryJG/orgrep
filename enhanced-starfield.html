@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Full Screen Star Field Animation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <script>
+        // Wait for DOM to be ready
+        window.onload = function() {
+            // Get canvas and context
+            const canvas = document.getElementById('starfield');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size to window size
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Resize on window resize
+            window.addEventListener('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initStars(); // Reinitialize stars on resize
+            });
+            
+            // Mouse position tracking
+            let mouse = {
+                x: undefined,
+                y: undefined,
+                radius: 100
+            };
+            
+            // Update mouse position on move
+            window.addEventListener('mousemove', function(event) {
+                mouse.x = event.x;
+                mouse.y = event.y;
+            });
+            
+            // Handle touch for mobile
+            window.addEventListener('touchmove', function(event) {
+                event.preventDefault();
+                mouse.x = event.touches[0].clientX;
+                mouse.y = event.touches[0].clientY;
+            }, { passive: false });
+            
+            // Reset mouse position when mouse leaves
+            window.addEventListener('mouseout', function() {
+                mouse.x = undefined;
+                mouse.y = undefined;
+            });
+            
+            // Star configuration
+            const STAR_COUNT = 400; // Increased star count
+            let stars = [];
+            
+            // Enhanced color palette - mostly whites and fire oranges with very minimal blue/turquoise
+            const starColors = [
+                '#ffffff', // Pure white
+                '#f8f8ff', // Ghost white
+                '#fffafa', // Snow white
+                '#ffd700', // Gold
+                '#ffa500', // Orange
+                '#ff8c00', // Dark orange
+                '#ffffff', // White (repeated for higher frequency)
+                '#fffafa', // Snow white (repeated for higher frequency)
+                '#fffafa', // Snow white (repeated again for even higher frequency)
+                '#ffffff', // White (repeated again for even higher frequency)
+                '#40e0d0'  // Single turquoise (very minimal)
+            ];
+            
+            // Initialize stars
+            function initStars() {
+                stars = [];
+                for (let i = 0; i < STAR_COUNT; i++) {
+                    // Create new star
+                    const star = {};
+                    
+                    // Position randomly on canvas
+                    star.x = Math.random() * canvas.width;
+                    star.y = Math.random() * canvas.height;
+                    
+                    // Random velocities, primarily downward
+                    star.vx = 0;
+                    star.vy = 0.1 + Math.random() * 0.2;
+                    
+                    // Store original velocity for resets
+                    star.originalVx = star.vx;
+                    star.originalVy = star.vy;
+                    
+                    // Depth creates parallax effect
+                    star.depth = Math.random() * 3 + 0.2;
+                    
+                    // Size based on depth (smaller = further away)
+                    star.size = (Math.random() * 0.3 + 0.1) * star.depth;
+                    
+                    // Twinkling effect properties
+                    star.twinkleRate = Math.random() * 0.01 + 0.001;
+                    star.twinkleOffset = Math.random() * Math.PI * 2;
+                    star.brightness = Math.random() * 0.3 + 0.7;
+                    
+                    // Color selection weighted by type
+                    const colorRoll = Math.random();
+                    let colorIndex;
+                    
+                    if (colorRoll < 0.70) {
+                        // 70% white stars (0-2, 6-9)
+                        colorIndex = Math.floor(Math.random() * 3);
+                        if (Math.random() < 0.6) {
+                            colorIndex += 6; // Use the repeated white colors more frequently
+                        }
+                    } else if (colorRoll < 0.98) {
+                        // 28% fire stars (3-5)
+                        colorIndex = Math.floor(Math.random() * 3) + 3;
+                    } else {
+                        // 2% turquoise stars (10) - very minimal presence
+                        colorIndex = 10;
+                        
+                        // Make turquoise stars much smaller
+                        star.size = star.size * 0.5;
+                    }
+                    
+                    star.color = starColors[colorIndex];
+                    star.colorIndex = colorIndex;
+                    
+                    // For mouse interaction
+                    star.friction = 0.8;
+                    star.ease = 0.05;
+                    
+                    stars.push(star);
+                }
+            }
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Clear canvas with slight trail effect
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Current time for animations
+                const now = performance.now() * 0.001;
+                
+                // Update and draw stars
+                stars.forEach(star => {
+                    // Apply velocity - simplified movement, cleaner downward direction
+                    star.y += star.vy * star.depth;
+                    
+                    // Apply a very small horizontal drift based on depth
+                    star.x += (Math.random() - 0.5) * 0.1 * star.depth;
+                    
+                    // Reset if off screen
+                    if (star.y > canvas.height) {
+                        star.y = 0;
+                        star.x = Math.random() * canvas.width;
+                        // Reset velocity
+                        star.vx = star.originalVx;
+                        star.vy = star.originalVy;
+                    }
+                    
+                    // Mouse interaction
+                    if (mouse.x !== undefined && mouse.y !== undefined) {
+                        // Calculate distance to mouse
+                        const dx = star.x - mouse.x;
+                        const dy = star.y - mouse.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        // Apply repulsion if within mouse radius
+                        if (distance < mouse.radius) {
+                            const force = (1 - distance / mouse.radius) * 2;
+                            const angle = Math.atan2(dy, dx);
+                            
+                            // Repel from mouse
+                            star.vx += Math.cos(angle) * force * 0.2;
+                            star.vy += Math.sin(angle) * force * 0.2;
+                        }
+                    }
+                    
+                    // Apply friction to return to normal movement
+                    star.vx *= star.friction;
+                    star.vy = star.vy * star.friction + star.originalVy * star.ease;
+                    
+                    // Calculate twinkling
+                    star.twinkle = Math.sin(now * star.twinkleRate + star.twinkleOffset);
+                    star.currentSize = star.size * (0.8 + 0.2 * Math.abs(star.twinkle));
+                    star.currentBrightness = star.brightness * (0.8 + 0.2 * Math.abs(star.twinkle));
+                    
+                    // Convert hex color to rgba
+                    let r, g, b;
+                    const hex = star.color.slice(1);
+                    r = parseInt(hex.slice(0, 2), 16);
+                    g = parseInt(hex.slice(2, 4), 16);
+                    b = parseInt(hex.slice(4, 6), 16);
+                    
+                    // Draw basic star
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.currentSize, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${star.currentBrightness})`;
+                    ctx.fill();
+                    
+                    // For larger/brighter stars, add additional effects based on color type
+                    if (star.size > 0.3 && Math.random() < 0.5) { // Reduced threshold, made more subtle
+                        // Draw rays for larger stars
+                        const rayLength = star.currentSize * 3;
+                        
+                        // Draw cross rays
+                        ctx.beginPath();
+                        ctx.moveTo(star.x - rayLength, star.y);
+                        ctx.lineTo(star.x + rayLength, star.y);
+                        ctx.moveTo(star.x, star.y - rayLength);
+                        ctx.lineTo(star.x, star.y + rayLength);
+                        
+                        // Ray gradient
+                        const rayGradient = ctx.createLinearGradient(
+                            star.x - rayLength, star.y,
+                            star.x + rayLength, star.y
+                        );
+                        rayGradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
+                        rayGradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${star.currentBrightness * 0.5})`);
+                        rayGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                        
+                        ctx.strokeStyle = rayGradient;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                });
+                
+                // Add occasional shooting stars
+                if (Math.random() < 0.005) {
+                    // Create a shooting star
+                    createShootingStar();
+                }
+                
+                // Add occasional falling particles
+                if (Math.random() < 0.02) {
+                    // Create a falling particle
+                    createFallingParticle();
+                }
+            }
+            
+            // Shooting star effect
+            function createShootingStar() {
+                // Star parameters
+                const x = Math.random() * canvas.width;
+                const y = 0;
+                const length = Math.random() * 100 + 50;
+                const angle = Math.PI / 2 + (Math.random() * 0.2 - 0.1); // Mostly downward
+                const speed = Math.random() * 5 + 3;
+                const lifespan = 30;
+                
+                // Determine color profile - almost entirely fire, with very rare turquoise
+                const colorRoll = Math.random();
+                let isFirey, isTurquoise;
+                
+                if (colorRoll < 0.98) {
+                    // 98% fire shooting stars
+                    isFirey = true;
+                    isTurquoise = false;
+                } else {
+                    // 2% turquoise shooting stars (very minimal)
+                    isFirey = false;
+                    isTurquoise = true;
+                }
+                
+                let frame = 0;
+                
+                function drawShootingStar() {
+                    if (frame >= lifespan) return;
+                    
+                    frame++;
+                    requestAnimationFrame(drawShootingStar);
+                    
+                    const progress = frame / lifespan;
+                    const currentX = x + Math.cos(angle) * speed * frame;
+                    const currentY = y + Math.sin(angle) * speed * frame;
+                    
+                    // Create tail gradient
+                    const gradient = ctx.createLinearGradient(
+                        currentX, currentY,
+                        currentX - Math.cos(angle) * length * (1 - progress),
+                        currentY - Math.sin(angle) * length * (1 - progress)
+                    );
+                    
+                    if (isFirey) {
+                        // Fiery gradient
+                        gradient.addColorStop(0, `rgba(255, 255, 255, ${1 - progress})`);
+                        gradient.addColorStop(0.3, `rgba(255, 200, 50, ${0.7 * (1 - progress)})`);
+                        gradient.addColorStop(0.6, `rgba(255, 100, 50, ${0.5 * (1 - progress)})`);
+                        gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
+                    } else {
+                        // Turquoise gradient (very minimal presence)
+                        gradient.addColorStop(0, `rgba(255, 255, 255, ${1 - progress})`);
+                        gradient.addColorStop(0.3, `rgba(64, 224, 208, ${0.6 * (1 - progress)})`);
+                        gradient.addColorStop(0.6, `rgba(64, 224, 208, ${0.3 * (1 - progress)})`);
+                        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                    }
+                    
+                    // Draw the shooting star trail
+                    ctx.beginPath();
+                    ctx.moveTo(currentX, currentY);
+                    ctx.lineTo(
+                        currentX - Math.cos(angle) * length * (1 - progress),
+                        currentY - Math.sin(angle) * length * (1 - progress)
+                    );
+                    ctx.strokeStyle = gradient;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    
+                    // Add small particles trailing off
+                    for (let i = 0; i < 3; i++) {
+                        const particleProgress = Math.random();
+                        const particleX = currentX - Math.cos(angle) * length * particleProgress * (1 - progress);
+                        const particleY = currentY - Math.sin(angle) * length * particleProgress * (1 - progress);
+                        
+                        // Random offset
+                        const offsetAngle = Math.random() * Math.PI * 2;
+                        const offsetDist = Math.random() * 5 * (1 - progress);
+                        const finalX = particleX + Math.cos(offsetAngle) * offsetDist;
+                        const finalY = particleY + Math.sin(offsetAngle) * offsetDist;
+                        
+                        // Draw the particle
+                        ctx.beginPath();
+                        ctx.arc(finalX, finalY, Math.random() * 1 + 0.5, 0, Math.PI * 2);
+                        
+                        // Particle colors
+                        if (isFirey) {
+                            const fireColors = [
+                                `rgba(255, 255, 255, ${0.8 * (1 - progress)})`,
+                                `rgba(255, 250, 250, ${0.7 * (1 - progress)})`,
+                                `rgba(255, 215, 0, ${0.6 * (1 - progress)})`,
+                                `rgba(255, 165, 0, ${0.5 * (1 - progress)})`
+                            ];
+                            ctx.fillStyle = fireColors[Math.floor(Math.random() * fireColors.length)];
+                        } else {
+                            const turquoiseColors = [
+                                `rgba(255, 255, 255, ${0.8 * (1 - progress)})`,
+                                `rgba(240, 255, 255, ${0.7 * (1 - progress)})`,
+                                `rgba(64, 224, 208, ${0.4 * (1 - progress)})`,
+                                `rgba(64, 224, 208, ${0.3 * (1 - progress)})`
+                            ];
+                            ctx.fillStyle = turquoiseColors[Math.floor(Math.random() * turquoiseColors.length)];
+                        }
+                        
+                        ctx.fill();
+                    }
+                }
+                
+                // Start drawing the shooting star
+                drawShootingStar();
+            }
+            
+            // Falling particle effect
+            function createFallingParticle() {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height * 0.3; // Top third
+                const size = Math.random() * 1 + 0.3;
+                const speed = Math.random() * 1 + 0.5;
+                const lifespan = Math.floor(Math.random() * 100) + 50;
+                
+                // Determine color scheme - almost entirely fire, with very rare turquoise
+                const useTransitionColors = Math.random() < 0.02; // 2% chance of turquoise colors
+                
+                // Color palettes
+                const fireColors = [
+                    'rgba(255, 255, 255, 0.8)',
+                    'rgba(255, 250, 250, 0.7)', // Snow white
+                    'rgba(255, 215, 0, 0.6)',   // Gold
+                    'rgba(255, 165, 0, 0.5)',   // Orange
+                    'rgba(255, 140, 0, 0.4)',   // Dark orange
+                ];
+                
+                const turquoiseColors = [
+                    'rgba(255, 255, 255, 0.8)',
+                    'rgba(240, 255, 255, 0.7)', // Lightest cyan
+                    'rgba(64, 224, 208, 0.4)',  // Turquoise (reduced opacity)
+                ];
+                
+                const colors = useTransitionColors ? turquoiseColors : fireColors;
+                
+                // Make transition color particles smaller
+                let particleSize = size;
+                if (useTransitionColors) {
+                    particleSize = size * 0.5;
+                }
+                let frame = 0;
+                
+                function drawParticle() {
+                    if (frame >= lifespan) return;
+                    
+                    frame++;
+                    requestAnimationFrame(drawParticle);
+                    
+                    const progress = frame / lifespan;
+                    const currentY = y + speed * frame;
+                    const currentX = x + Math.sin(frame * 0.05) * 0.5; // Slight side-to-side
+                    
+                    // Fade through colors as particle falls
+                    const colorIndex = Math.min(
+                        Math.floor(progress * colors.length),
+                        colors.length - 1
+                    );
+                    
+                    ctx.beginPath();
+                    ctx.arc(currentX, currentY, size * (1 - progress * 0.5), 0, Math.PI * 2);
+                    ctx.fillStyle = colors[colorIndex];
+                    ctx.fill();
+                }
+                
+                // Start drawing the particle
+                drawParticle();
+            }
+            
+            // Initialize stars and start animation
+            initStars();
+            animate();
+        };
+    </script>
+</body>
+</html>
