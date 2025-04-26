@@ -493,28 +493,39 @@
 
     <nav class="navbar compact-navbar">
   <div class="navbar-brand">
-    <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:2;">
-      <defs>
-        <radialGradient id="orbLogoGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
-          <stop offset="0%" stop-color="#00E5FF">
-            <animate attributeName="stop-color" values="#00E5FF; #00FFAA; #AAFF00; #FFAA00; #FF00AA; #AA00FF; #0055FF; #00E5FF" dur="120s" repeatCount="indefinite" />
-          </stop>
-          <stop offset="85%" stop-color="#5B3CFF">
-            <animate attributeName="stop-color" values="#5B3CFF; #0055FF; #00E5FF; #00FFAA; #AAFF00; #FFAA00; #FF00AA; #AA00FF; #5B3CFF" dur="100s" repeatCount="indefinite" />
-            <animate attributeName="offset" values="85%;75%;80%;85%" dur="35s" repeatCount="indefinite" />
-          </stop>
-        </radialGradient>
-        <filter id="orbLogoGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2.5" result="blur1" />
-          <feGaussianBlur stdDeviation="4.5" result="blur2" />
-          <feBlend mode="screen" in="blur1" in2="blur2" result="blendedGlow" />
-          <feComposite in="SourceGraphic" in2="blendedGlow" operator="over" />
-        </filter>
-      </defs>
-      <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
-      <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
-      <circle id="mini-orb" cx="12" cy="12" r="5" fill="url(#orbLogoGradient)" filter="url(#orbLogoGlow)" style="pointer-events:none;transition:opacity 0.6s cubic-bezier(.77,0,.18,1.09);"/>
-    </svg>
+    <svg id="orbSVG" style="width:80px;height:80px;position:relative;z-index:2;pointer-events:none;" viewBox="0 0 800 800">
+  <g id="particles"></g>
+  <defs>
+    <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
+      <stop id="p0" offset="0%" stop-color="#00E5FF"/>
+      <stop id="p1" offset="100%" stop-color="#5B3CFF"/>
+      <stop id="p2" offset="50%" stop-color="#00E5FF"/>
+      <stop id="p3" offset="75%" stop-color="#5B3CFF"/>
+    </radialGradient>
+    <radialGradient id="childGrad0" cx="50%" cy="50%" r="70%">
+      <stop id="c0s0" offset="0%" stop-color="#B3D8FF"/>
+      <stop id="c0s1" offset="100%" stop-color="#0A192F"/>
+    </radialGradient>
+    <radialGradient id="childGrad1" cx="50%" cy="50%" r="70%">
+      <stop id="c1s0" offset="0%" stop-color="#C6FFD9"/>
+      <stop id="c1s1" offset="100%" stop-color="#145A32"/>
+    </radialGradient>
+    <radialGradient id="childGrad2" cx="50%" cy="50%" r="70%">
+      <stop id="c2s0" offset="0%" stop-color="#FFB3C9"/>
+      <stop id="c2s1" offset="100%" stop-color="#7B1F3A"/>
+    </radialGradient>
+    <radialGradient id="childGrad3" cx="50%" cy="50%" r="70%">
+      <stop id="c3s0" offset="0%" stop-color="#E0D1FF"/>
+      <stop id="c3s1" offset="100%" stop-color="#311B4F"/>
+    </radialGradient>
+    <radialGradient id="childGrad4" cx="50%" cy="50%" r="70%">
+      <stop id="c4s0" offset="0%" stop-color="#FFF5B3"/>
+      <stop id="c4s1" offset="100%" stop-color="#4B3800"/>
+    </radialGradient>
+  </defs>
+  <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
+  <g id="children"></g>
+</svg>
     <span>RepSpheres</span>
   </div>
   <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation" aria-expanded="false">
