@@ -305,6 +305,531 @@
             fill: #fff;
         }
     </style>
+</head>
+<body>
+    <div class="stars-container">
+        <div class="stars"></div>
+    </div>
+    <div class="landscape"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">RepSphere iOS</div>
+            <div class="github-stars">
+                <svg viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+                32.8k Downloads
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="card">
+                    <div class="card-title">
+                        <span>Top AI Models</span>
+                        <span class="btn-small">View All</span>
+                    </div>
+                    
+                    <div class="rolodex" id="rolodex">
+                        <!-- Rolodex cards will be added by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">
+                        <span>Quick Actions</span>
+                    </div>
+                    <button class="btn" style="width: 100%; margin-bottom: 10px;">New Chat</button>
+                    <button class="btn" style="width: 100%; margin-bottom: 10px;">New Document</button>
+                    <button class="btn" style="width: 100%; background: rgba(255,255,255,0.2);">iOS Settings</button>
+                </div>
+            </div>
+            
+            <div class="center-panel">
+                <div class="iframe-container">
+                    <div class="iframe-placeholder">
+                        <div>Your RepSphere iframe will be loaded here</div>
+                        <div class="terminal-mockup" id="terminal">
+                            <!-- Terminal lines will be added by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-panel">
+                <div class="card">
+                    <div class="card-title">
+                        <span>Saved Files</span>
+                        <span class="btn-small">Manage</span>
+                    </div>
+                    
+                    <div class="file-cabinet" id="file-cabinet">
+                        <div class="drawer">
+                            <div class="drawer-label">Uploaded Docs</div>
+                            <div class="drawer-handle"></div>
+                        </div>
+                        <div class="drawer">
+                            <div class="drawer-label">Created Docs</div>
+                            <div class="drawer-handle"></div>
+                        </div>
+                        <div class="drawer">
+                            <div class="drawer-label">Strategies</div>
+                            <div class="drawer-handle"></div>
+                        </div>
+                        <!-- File animation elements will be added by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">
+                        <span>iOS Usage Analytics</span>
+                    </div>
+                    <div style="height: 150px; background: rgba(255,255,255,0.05); border-radius: 8px; margin-top: 10px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;">
+                        <div>Daily active users: 1,847</div>
+                        <div>Documents created today: 326</div>
+                        <div>iOS app rating: 4.8/5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Models for the rolodex
+        const models = [
+            { name: "GPT-4o", provider: "OpenAI" },
+            { name: "Gemini Ultra", provider: "Google" },
+            { name: "Claude 3.7 Sonnet", provider: "Anthropic" },
+            { name: "DeepSeq", provider: "DeepMind" },
+            { name: "Quinn", provider: "Cohere" },
+            { name: "Qwen", provider: "Alibaba" },
+            { name: "Claude Diffusion", provider: "Anthropic" },
+            { name: "Midjourney v6", provider: "Midjourney" },
+            { name: "Perplexity", provider: "Perplexity AI" },
+            { name: "Llama 3 70B", provider: "Meta" }
+        ];
+        
+        // Code lines for the terminal effect
+        const codeLines = [
+            "$ repsphere connect --model=claude-3-opus",
+            "Initializing connection...",
+            "Connection established",
+            ">>> import numpy as np",
+            ">>> import torch",
+            ">>> model = await load_model('mixtral-8x7b')",
+            "Model loaded successfully",
+            ">>> response = model.generate('Explain quantum computing')",
+            "Generating response...",
+            ">>> tokens_processed: 1024",
+            ">>> tokens_generated: 512",
+            ">>> print(response.summary())",
+            "Response: Quantum computing leverages quantum...",
+            ">>> model.save_response('./outputs/response_01.json')",
+            "Response saved successfully",
+            ">>> model.visualize_attention()",
+            "Generating visualization...",
+            ">>> train_loss: 0.0342, val_loss: 0.0385",
+            ">>> model.export('optimized', quantize=True)",
+            "Model exported successfully",
+            "$ repsphere benchmark --model=all --task=reasoning",
+            "Running benchmark...",
+            "Claude 3.7 Sonnet: 92.7/100",
+            "GPT-4o: 91.3/100",
+            "Gemini Pro: 89.1/100",
+            "$ repsphere stats --month=current",
+            "Total: $12.37",
+            ">>> from repsphere import Sphere",
+            ">>> sphere = Sphere(api_key='...')",
+            ">>> models = sphere.list_models()",
+            ">>> for m in models: print(m.name)",
+            "$ repsphere deploy --ios-integration"
+        ];
+        
+        // Setup terminal animation
+        function setupTerminal() {
+            const terminal = document.getElementById('terminal');
+            terminal.innerHTML = '';
+            
+            for (let i = 0; i < codeLines.length; i++) {
+                const line = document.createElement('p');
+                line.className = 'terminal-line';
+                line.textContent = codeLines[i];
+                line.style.animationDelay = `${i * 0.5}s`;
+                terminal.appendChild(line);
+            }
+        }
+        
+        // Setup rolodex animation
+        function setupRolodex() {
+            const rolodex = document.getElementById('rolodex');
+            rolodex.innerHTML = '';
+            
+            models.forEach((model, index) => {
+                const card = document.createElement('div');
+                card.className = 'rolodex-card';
+                card.style.zIndex = models.length - index;
+                card.style.transform = `rotateX(${index * 36}deg) translateZ(${150 - index * 15}px)`;
+                
+                const modelName = document.createElement('div');
+                modelName.className = 'model-name';
+                modelName.textContent = model.name;
+                
+                const modelProvider = document.createElement('div');
+                modelProvider.className = 'model-provider';
+                modelProvider.textContent = model.provider;
+                
+                card.appendChild(modelName);
+                card.appendChild(modelProvider);
+                rolodex.appendChild(card);
+            });
+            
+            // Animate the rolodex
+            let currentIndex = 0;
+            setInterval(() => {
+                const cards = rolodex.querySelectorAll('.rolodex-card');
+                cards.forEach((card, index) => {
+                    const newIndex = (index + 1) % cards.length;
+                    card.style.transform = `rotateX(${newIndex * 36}deg) translateZ(${150 - newIndex * 15}px)`;
+                    card.style.zIndex = models.length - newIndex;
+                });
+            }, 3000);
+        }
+        
+        // Setup file cabinet animation
+        function setupFileCabinet() {
+            const fileCabinet = document.getElementById('file-cabinet');
+            
+            for (let i = 0; i < 5; i++) {
+                const file = document.createElement('div');
+                file.className = 'file-animation';
+                file.style.setProperty('--file-index', i);
+                fileCabinet.appendChild(file);
+            }
+            
+            // Make drawers interactive
+            const drawers = document.querySelectorAll('.drawer');
+            drawers.forEach(drawer => {
+                drawer.addEventListener('click', () => {
+                    drawer.style.height = drawer.style.height === '120px' ? '60px' : '120px';
+                });
+            });
+        }
+        
+        // Initialize everything when the page loads
+        window.addEventListener('load', () => {
+            setupTerminal();
+            setupRolodex();
+            setupFileCabinet();
+        });
+    </script>
+</body>
+</html>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RepSphere iOS Dashboard</title>
+    <style>
+        :root {
+            --primary: #8a61ff;
+            --text-primary: #ffffff;
+            --bg-dark: #0a0a16;
+            --card-bg: rgba(30, 30, 50, 0.7);
+            --animation-duration: 15s;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 230px 50px, #ffffff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 250px 250px;
+            animation: twinkling 15s linear infinite;
+        }
+        
+        @keyframes twinkling {
+            from { transform: translateY(0); }
+            to { transform: translateY(250px); }
+        }
+        
+        .landscape {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 180px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23131320' d='M0,224L48,218.7C96,213,192,203,288,181.3C384,160,480,128,576,128C672,128,768,160,864,165.3C960,171,1056,149,1152,149.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            gap: 20px;
+            flex: 1;
+            z-index: 2;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .center-panel {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .iframe-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background: var(--card-bg);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .iframe-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            background: linear-gradient(45deg, #1e1e38, #14142a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+        }
+        
+        .terminal-mockup {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            padding: 10px;
+            font-family: monospace;
+            color: #00ff41;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        .terminal-line {
+            margin: 0;
+            padding: 2px 0;
+            animation: slideUp var(--animation-duration) linear infinite;
+            white-space: nowrap;
+            transform: translateY(0);
+        }
+        
+        @keyframes slideUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(-100%); }
+        }
+        
+        /* Rolodex styles */
+        .rolodex {
+            position: relative;
+            height: 250px;
+            perspective: 1000px;
+            margin-bottom: 10px;
+        }
+        
+        .rolodex-card {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background: rgba(30, 30, 60, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            box-sizing: border-box;
+            backface-visibility: hidden;
+            transition: transform 0.8s ease-out;
+            transform-origin: center top;
+            top: 50px;
+            transform: rotateX(0deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .model-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .model-provider {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* File cabinet styles */
+        .file-cabinet {
+            height: 350px;
+            perspective: 1000px;
+            position: relative;
+        }
+        
+        .drawer {
+            height: 60px;
+            margin-bottom: 10px;
+            background: linear-gradient(180deg, #2a2a45 0%, #1e1e38 100%);
+            border-radius: 5px;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .drawer:hover {
+            transform: translateZ(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .drawer-handle {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 10px;
+            width: 50px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+        
+        .drawer-label {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .file-animation {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238a61ff'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3C/svg%3E") no-repeat center;
+            background-size: contain;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fileDrop 5s infinite;
+            animation-delay: calc(var(--file-index) * 1.5s);
+        }
+        
+        @keyframes fileDrop {
+            0% { top: -60px; opacity: 0; }
+            10% { opacity: 1; }
+            50% { top: 350px; opacity: 1; }
+            51% { opacity: 0; }
+            100% { top: -60px; opacity: 0; }
+        }
+        
+        /* Button styles */
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+        
+        .btn:hover {
+            background: #9d7aff;
+        }
+        
+        .github-stars {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .github-stars svg {
+            width: 16px;
+            height: 16px;
+            fill: #fff;
+        }
+    </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Market iQ - RepSpheres</title>
   <link rel="stylesheet" href="/css/navbar-enhanced.css">
