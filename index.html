@@ -13,6 +13,81 @@
     <link rel="stylesheet" href="css/orb-flash.css">
 </head>
 <body>
+    <canvas id="starfield"></canvas>
+    <style>
+      #starfield {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        z-index: 0;
+        pointer-events: none;
+        display: block;
+      }
+      body { background: #000 !important; }
+    </style>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('starfield');
+            const ctx = canvas.getContext('2d');
+            function resizeStarfield() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initStars();
+            }
+            window.addEventListener('resize', resizeStarfield);
+            // Star config
+            const STAR_COUNT = 400;
+            let stars = [];
+            const starColors = [
+                '#ffffff','#f8f8ff','#fffafa','#ffd700','#ffa500','#ff8c00','#ffffff','#fffafa','#fffafa','#ffffff','#40e0d0'
+            ];
+            function initStars() {
+                stars = [];
+                for (let i = 0; i < STAR_COUNT; i++) {
+                    let color = starColors[Math.floor(Math.random() * starColors.length)];
+                    let radius = Math.random() * 1.2 + 0.2;
+                    let x = Math.random() * canvas.width;
+                    let y = Math.random() * canvas.height;
+                    let vx = (Math.random() - 0.5) * 0.08;
+                    let vy = Math.random() * 0.2 + 0.02;
+                    let opacity = Math.random() * 0.6 + 0.4;
+                    stars.push({ x, y, vx, vy, radius, color, opacity });
+                }
+            }
+            function drawStars() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let star of stars) {
+                    ctx.save();
+                    ctx.globalAlpha = star.opacity;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+                    ctx.fillStyle = star.color;
+                    ctx.shadowColor = star.color;
+                    ctx.shadowBlur = 8;
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+            function animateStars() {
+                for (let star of stars) {
+                    star.x += star.vx;
+                    star.y += star.vy;
+                    if (star.x < 0) star.x = canvas.width;
+                    if (star.x > canvas.width) star.x = 0;
+                    if (star.y > canvas.height) {
+                        star.y = 0;
+                        star.x = Math.random() * canvas.width;
+                    }
+                    if (Math.random() < 0.012) {
+                        star.opacity = Math.random() * 0.6 + 0.4;
+                    }
+                }
+                drawStars();
+                requestAnimationFrame(animateStars);
+            }
+            resizeStarfield();
+            animateStars();
+        });
+    </script>
     <!-- SVG defs for gradients and filters (hidden) -->
     <svg width="0" height="0" style="position:absolute;">
       <defs>
