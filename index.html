@@ -420,9 +420,10 @@
         
 
         const parentMorphT = now * 0.0004;
-        // Restore to preferred small, organic orb state
-        const parentR = 62 * scale; // Small orb, tightly fits title
-        const parentAmp = 0.38 * scale; // Organic but not excessive morphing
+        // Dynamically set orb radius based on headline size
+        const parentR = (window._dynamicOrbRadius || 62) * scale;
+        // Limit morphing so orb never shrinks inside text
+        const parentAmp = Math.min(0.18 * scale, parentR * 0.22); // Small morphing, never excessive
         const parentPath = generateSuperSmoothBlob(
           window.parentCenter.x, 
           window.parentCenter.y, 
