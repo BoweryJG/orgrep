@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/orb-flash.css">
 </head>
 <body>
-    <canvas id="starfield"></canvas>
     <!-- SVG defs for gradients and filters (hidden) -->
     <svg width="0" height="0" style="position:absolute;">
       <defs>
@@ -1309,14 +1308,6 @@ document.querySelectorAll('.feature-card, .moat-card, .timeline-step').forEach(c
   card.addEventListener('click', createRipple);
 });
 </script>
-<script>
-// --- Enhanced Starfield Background (from enhanced-starfield.html) ---
-window.addEventListener('DOMContentLoaded', function() {
-    const canvas = document.getElementById('starfield');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
     resizeCanvas();
