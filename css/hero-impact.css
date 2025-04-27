@@ -8,7 +8,7 @@
   overflow: hidden;
   background: transparent;
 }
-.hero-orb-bg {
+
   position: absolute;
   left: 50%; top: 50%;
   transform: translate(-50%, -50%);
@@ -60,7 +60,7 @@
   background: linear-gradient(90deg, #00FFC6, #7B42F6);
 }
 @media (max-width: 700px) {
-  .hero-orb-bg svg {
+  
     width: 320px !important;
     height: 320px !important;
   }

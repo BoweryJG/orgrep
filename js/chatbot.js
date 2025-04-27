@@ -1,9 +1,9 @@
-// OllieiQ chatbot with animated orb launcher
+
 
 console.log("OllieiQ chatbot script loaded");
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Use the animated orb SVG as the launcher (must exist in HTML with id 'ollie-orb')
+  
   let launcher = document.getElementById('ollie-launcher');
   if (!launcher) {
     launcher = document.createElement('div');

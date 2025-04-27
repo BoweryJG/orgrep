@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/hero-impact.css">
     <link rel="stylesheet" href="css/navbar-enhanced.css">
-    <link rel="stylesheet" href="css/orb-flash.css">
 </head>
 <body>
     <!-- SVG defs for gradients and filters (hidden) -->
@@ -77,45 +76,12 @@
           <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
           <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
         </filter>
-        <linearGradient id="chatbotGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#7B42F6" />
-          <stop offset="100%" stop-color="#00FFC6" />
-        </linearGradient>
-        <filter id="chatbotGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-          <feComposite in="blur" in2="SourceGraphic" operator="over" />
-          <feFlood flood-color="#7B42F6" flood-opacity=".8" result="glow" />
-          <feComposite in="glow" in2="blur" operator="in" result="coloredBlur" />
-          <feComposite in="SourceGraphic" in2="coloredBlur" operator="over" />
-        </filter>
       </defs>
     </svg>
     <div class="stars" id="stars"></div>
 
     <nav class="navbar compact-navbar">
   <div class="navbar-brand">
-    <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:2;">
-      <defs>
-        <radialGradient id="orbLogoGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
-          <stop offset="0%" stop-color="#00E5FF">
-            <animate attributeName="stop-color" values="#00E5FF; #00FFAA; #AAFF00; #FFAA00; #FF00AA; #AA00FF; #0055FF; #00E5FF" dur="120s" repeatCount="indefinite" />
-          </stop>
-          <stop offset="85%" stop-color="#5B3CFF">
-            <animate attributeName="stop-color" values="#5B3CFF; #0055FF; #00E5FF; #00FFAA; #AAFF00; #FFAA00; #FF00AA; #AA00FF; #5B3CFF" dur="100s" repeatCount="indefinite" />
-            <animate attributeName="offset" values="85%;75%;80%;85%" dur="35s" repeatCount="indefinite" />
-          </stop>
-        </radialGradient>
-        <filter id="orbLogoGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2.5" result="blur1" />
-          <feGaussianBlur stdDeviation="4.5" result="blur2" />
-          <feBlend mode="screen" in="blur1" in2="blur2" result="blendedGlow" />
-          <feComposite in="SourceGraphic" in2="blendedGlow" operator="over" />
-        </filter>
-      </defs>
-      <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
-      <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
-      <circle id="mini-orb" cx="12" cy="12" r="5" fill="url(#orbLogoGradient)" filter="url(#orbLogoGlow)" style="pointer-events:none;transition:opacity 0.6s cubic-bezier(.77,0,.18,1.09);"/>
-    </svg>
     <span>RepSpheres</span>
   </div>
   <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation" aria-expanded="false">
