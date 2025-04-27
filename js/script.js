@@ -302,11 +302,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
      // --- Initialization Functions ---
 
-    
-
-
-        });
-    }
 
 // If navbar or logo layout changes dynamically (e.g., by JS or menu toggle), re-align
 // (migrated to DOMContentLoaded)
