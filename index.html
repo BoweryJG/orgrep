@@ -416,23 +416,34 @@
         // Move and constrain title with orb
         const titleEl = document.getElementById('orbTitle');
         if (titleEl) {
-          // Get the current morph radius at this point in time
-          const morphOffset = parentAmp * Math.sin(parentMorphT * 2 * Math.PI);
-          const effectiveRadius = parentR + morphOffset;
+          // Calculate smooth position with organic drift
+          const driftScale = 0.15;
+          const driftX = Math.sin(now * 0.0001) * parentR * driftScale;
+          const driftY = Math.cos(now * 0.00015) * parentR * driftScale;
           
-          // Calculate title position
-          titleEl.style.left = window.parentCenter.x + 'px';
-          titleEl.style.top = window.parentCenter.y + 'px';
+          // Update position with drift
+          const posX = window.parentCenter.x + driftX;
+          const posY = window.parentCenter.y + driftY;
           
-          // Get title dimensions
+          // Get the current morph state
+          const morphPhase = Math.sin(parentMorphT * 2 * Math.PI);
+          const effectiveRadius = parentR * (1 + morphPhase * 0.1);
+          
+          // Get title dimensions and calculate scale
           const titleRect = titleEl.getBoundingClientRect();
           const titleDiag = Math.hypot(titleRect.width, titleRect.height) / 2;
-          const padding = Math.max(20, effectiveRadius * 0.1); // Dynamic padding based on radius
+          const minScale = 0.5; // Never scale smaller than 50%
+          const padding = effectiveRadius * 0.2; // 20% of radius as padding
           
-          // Scale title to stay within morphing boundary
-          const scale = Math.min(1, (effectiveRadius - padding) / titleDiag);
-          titleEl.style.transform = `translate(-50%, -50%) scale(${scale})`;
-          }
+          // Calculate scale to fit within morphing boundary
+          const targetScale = Math.max(minScale, (effectiveRadius - padding) / titleDiag);
+          
+          // Apply position and scale with smooth transition
+          titleEl.style.transition = 'transform 0.5s ease-out';
+          titleEl.style.left = `${posX}px`;
+          titleEl.style.top = `${posY}px`;
+          titleEl.style.transform = `translate(-50%, -50%) scale(${targetScale})`;
+        }
         }
         
         // Children orbs
@@ -496,7 +507,8 @@
                 <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
                 <g id="children"></g>
               </svg>
-              <h1 id="orbTitle" class="orb-title-headline" style="position: absolute; transform: translate(-50%, -50%); z-index: 2; font-size: 1.15rem; max-width: 92px; text-align: center; margin: 0; padding: 0;">
+              <div class="orb-container" style="position: relative; width: 100%; height: 100vh; overflow: hidden;">
+              <h1 id="orbTitle" class="orb-title-headline" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; font-size: 4.5rem; text-align: center; margin: 0; padding: 0; white-space: nowrap; pointer-events: none; color: #fff; text-shadow: 0 0 20px rgba(0,255,198,0.5);">
                 Sales<br>
                 <span class="gradient-text">Intelligence</span><br>
                 <span class="hero-evolved">Evolved</span>
