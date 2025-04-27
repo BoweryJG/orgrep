@@ -362,45 +362,50 @@
           requestAnimationFrame(animate);
           return;
         }
-        lastFrameTime = timestamp;
+        lastFrameTime = performance.now();
         
         const now = performance.now();
-        const scale = window.orbScale || 1;
-        
-        // Animate parent gradient (fluid, spectrum, multi-stop)
-        const parentStops = [
-          { id: "p0", phase: 0 },
-          { id: "p1", phase: Math.PI * 0.5 },
-          { id: "p2", phase: Math.PI },
-          { id: "p3", phase: Math.PI * 1.5 }
-        ];
-        
-        const baseHue = (now * 0.01) % 360;
-        for (let i = 0; i < parentStops.length; i++) {
-          // Each stop cycles hue with a phase offset for a symphony effect
-          const stop = parentStops[i];
-          const hue = (baseHue + 60 * Math.sin(now * 0.00015 + stop.phase)) % 360;
-          const sat = 80 + 10 * Math.sin(now * 0.0002 + stop.phase);
-          const light = 60 + 10 * Math.cos(now * 0.00018 + stop.phase);
-          document.getElementById(stop.id).setAttribute("stop-color", hslToHex(hue, sat, light));
-        }
-        
-        // Parent orb animation with organic drift and more pronounced morphing
-        window.parentCenter = {x: px, y: py};
-        
-        const parentMorphT = now * 0.0004;
-        // Use dynamic radius and limited morphing
+        const center = window.parentCenterBase;
         const parentR = window._dynamicOrbRadius;
-        const parentAmp = Math.min(0.18, parentR * 0.22);
+        
+        // Very subtle morphing for parent orb
+        const morphT = now * 0.0002;
+        const morphAmp = parentR * 0.02;
         const parentPath = generateSuperSmoothBlob(
-          window.parentCenter.x, 
-          window.parentCenter.y, 
-          parentR, 
-          64, 
-          parentMorphT, 
-          parentAmp
+          center.x,
+          center.y,
+          parentR,
+          64,
+          morphT,
+          morphAmp
         );
         parentOrb.setAttribute('d', parentPath);
+        
+        // Animate child orbs
+        const children = document.getElementById('children');
+        children.innerHTML = '';
+        
+        const childCount = 5;
+        for (let i = 0; i < childCount; i++) {
+          const angle = (i / childCount) * Math.PI * 2 + now * 0.0002;
+          const distance = parentR * 1.8;
+          const x = center.x + Math.cos(angle) * distance;
+          const y = center.y + Math.sin(angle) * distance;
+          const r = parentR * 0.2;
+          
+          const childPath = generateSuperSmoothBlob(
+            x, y, r,
+            32,
+            now * 0.0003 + i,
+            r * 0.1
+          );
+          
+          const child = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          child.setAttribute('d', childPath);
+          child.setAttribute('fill', `url(#${childGradIds[i]})`);
+          child.setAttribute('opacity', '0.9');
+          children.appendChild(child);
+        }
         
         // Calculate parent orb position with minimal drift
         const driftScale = 0.01; // Very subtle drift
@@ -490,7 +495,7 @@
                 <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
                 <g id="children"></g>
               </svg>
-              <div class="hero-section" style="height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+              <div class="hero-section" style="height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; background: #0a0b1a; overflow: hidden;">
               <div class="orb-container" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
                 <svg id="orbCanvas" style="width: 100%; height: 100%; position: absolute;">                  
                   <defs>
