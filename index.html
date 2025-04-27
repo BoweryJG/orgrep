@@ -419,8 +419,8 @@
           
           // Position and animate each child to orbit around the parent
           // Each child has its own orbit speed and distance
-          // Increase orbit speed by 2-3x and vary by child index
-          const angle = (Math.PI * 2 * i / childCount) + (now * 0.0005 * (0.7 + i * 0.15));
+          // Moderate orbit speed - faster than original but not too fast
+          const angle = (Math.PI * 2 * i / childCount) + (now * 0.0003 * (0.6 + i * 0.1));
           
           // Ensure minimum safe distance to prevent overlap with parent orb
           // Parent orb radius is 100 * scale, child orb radius is 36 * scale
