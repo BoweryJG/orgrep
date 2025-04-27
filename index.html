@@ -372,107 +372,92 @@
         svg.setAttribute('width', vw);
         svg.setAttribute('height', vh);
       }
-      const childGradIds = ["childGrad0", "childGrad1", "childGrad2", "childGrad3", "childGrad4"];
-      
+      // Initialize SVG elements
+      const childGradIds = ['childGrad0', 'childGrad1', 'childGrad2', 'childGrad3', 'childGrad4'];
+      const childrenGroup = document.getElementById('children');
+      const parentOrb = document.getElementById('parentOrb');
+      const childOrbs = [];
+
       // Create child orbs
       for (let i = 0; i < childCount; i++) {
-        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("fill", `url(#${childGradIds[i]})`);
-        path.setAttribute("opacity", "0.95");
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('fill', `url(#${childGradIds[i]})`);
+        path.setAttribute('opacity', '0.95');
         childrenGroup.appendChild(path);
         childOrbs.push(path);
       }
-      
+
       // Animation loop with performance optimization for mobile
       let lastFrameTime = 0;
       const targetFPS = window.innerWidth < 768 ? 30 : 60; // Lower FPS on mobile
       const frameInterval = 1000 / targetFPS;
-      
+
       function animate(timestamp) {
         // Skip frames to maintain target FPS
         if (timestamp - lastFrameTime < frameInterval) {
           requestAnimationFrame(animate);
           return;
         }
-        lastFrameTime = performance.now();
-        
+        lastFrameTime = timestamp;
+
         const now = performance.now();
         const center = window.parentCenterBase;
         const parentR = window._dynamicOrbRadius;
-        
-        // Very subtle morphing for parent orb
-        const morphT = now * 0.0002;
-        const morphAmp = parentR * 0.02;
+
+        // Calculate drift
+        const driftScale = 0.01;
+        const driftX = Math.sin(now * 0.0001) * parentR * driftScale;
+        const driftY = Math.cos(now * 0.00015) * parentR * driftScale;
+
+        // Update parent orb position
+        window.parentCenter = {
+          x: center.x + driftX,
+          y: center.y + driftY
+        };
+
+        // Generate parent orb path
+        const morphTime = now * 0.0002;
+        const parentMorphAmp = parentR * 0.03;
         const parentPath = generateSuperSmoothBlob(
-          center.x,
-          center.y,
+          window.parentCenter.x,
+          window.parentCenter.y,
           parentR,
           64,
-          morphT,
-          morphAmp
+          morphTime,
+          parentMorphAmp
         );
         parentOrb.setAttribute('d', parentPath);
-        
-        // Animate child orbs
-        const children = document.getElementById('children');
-        children.innerHTML = '';
-        
-        const childCount = 5;
+
+        // Update child orbs
         for (let i = 0; i < childCount; i++) {
           const angle = (i / childCount) * Math.PI * 2 + now * 0.0002;
           const distance = parentR * 1.8;
           const x = center.x + Math.cos(angle) * distance;
           const y = center.y + Math.sin(angle) * distance;
           const r = parentR * 0.2;
-          
+
           const childPath = generateSuperSmoothBlob(
             x, y, r,
             32,
             now * 0.0003 + i,
             r * 0.1
           );
-          
-          const child = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          child.setAttribute('d', childPath);
-          child.setAttribute('fill', `url(#${childGradIds[i]})`);
-          child.setAttribute('opacity', '0.9');
-          children.appendChild(child);
-        }
-        
-        // Calculate parent orb position with minimal drift
-        const driftScale = 0.01; // Very subtle drift
-        const driftX = Math.sin(now * 0.0001) * parentR * driftScale;
-        const driftY = Math.cos(now * 0.00015) * parentR * driftScale;
-        
-        // Update parent orb position
-        window.parentCenter = {
-          x: window.parentCenterBase.x + driftX,
-          y: window.parentCenterBase.y + driftY
-        };
-        
-        // Generate parent orb path with subtle morphing
-        const morphTime = now * 0.0002; // Slower morphing
-        const morphAmp = parentR * 0.03; // Very subtle morphing
-        
-        // Generate and update the parent orb path
-        parentOrb.setAttribute('d', generateSuperSmoothBlob(
-          window.parentCenter.x,
-          window.parentCenter.y,
-          parentR,
-          64,
-          morphTime,
-          morphAmp
-        ));
-        }
-        }
-        
-        // Children orbs
-        for (let i = 0; i < childCount; i++) {
-          // Dynamic color family for each child
+
+          childOrbs[i].setAttribute('d', childPath);
+
+          // Update colors
           const colorFamily = getDynamicColorFamily(i, now);
-          document.getElementById(`c${i}s0`).setAttribute("stop-color", colorFamily[0]);
-          document.getElementById(`c${i}s1`).setAttribute("stop-color", colorFamily[1]);
-          
+          document.getElementById(`c${i}s0`).setAttribute('stop-color', colorFamily[0]);
+          document.getElementById(`c${i}s1`).setAttribute('stop-color', colorFamily[1]);
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      // Start animation and handle resize
+      window.addEventListener('resize', adjustSVGSize);
+      adjustSVGSize();
+      requestAnimationFrame(animate);
           // Position and animate each child to orbit around the parent
           // Each child has its own orbit speed and distance
           // Slightly faster orbit speed as requested
@@ -500,17 +485,14 @@
             parentMorphT + i * 0.5, 
             0.3 * scale // childAmp - reduced morphing
           );
-          
           childOrbs[i].setAttribute("d", childPath);
         }
-        
         requestAnimationFrame(animate);
       }
-      
+
       // Start animation
       requestAnimationFrame(animate);
-      </script>
-  
+    </script>
     </div>
 
     <section class="hero-impact" id="hero" style="background: transparent !important;">
@@ -897,70 +879,70 @@
   .problem-card-container { gap: 1.1rem !important; }
 }
 
-    . {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto 2.5em auto !important;
-  gap: 2.5rem 2.5rem;
-  position: relative;
-}
-/* Remove the connector line */
-.::before {
-  display: none;
-}
-/* The following block was missing a selector; assuming it is for a pseudo-element, e.g., .::before */
-.::before {
-  content: '';
-  position: absolute;
-  top: 2.5rem;
-  bottom: 2.5rem;
-  left: 50%;
-  width: 4px;
-  background: linear-gradient(180deg, #7B42F6 0%, #00ffc6 100%);
-  border-radius: 2px;
-  transform: translateX(-50%);
-  z-index: 0;
-}
-@media (max-width: 1100px) {
-  . {
-    gap: 1.2rem;
-    max-width: 98vw;
-  }
-}
-@media (max-width: 900px) {
-  . {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    max-width: 98vw;
-    padding: 0 0.3em;
-  }
-  .::before {
-    display: none;
-  }
-}
-    . .timeline-item {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex: 0 1 47%;
-  min-width: 340px;
-  max-width: 500px;
-  margin: 0;
-  background: rgba(30,18,60,0.95);
-  border-radius: 18px;
-  box-shadow: 0 2px 18px 0 rgba(123,66,246,0.13);
-  padding: 2em 2em 2em 2em;
-  position: relative;
-  z-index: 1;
-  margin-bottom: 2.5rem;
-}
+    .ecosystem-timeline {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: stretch;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 2.5em auto !important;
+      gap: 2.5rem 2.5rem;
+      position: relative;
+    }
+
+    .ecosystem-timeline::before {
+      content: '';
+      position: absolute;
+      top: 2.5rem;
+      bottom: 2.5rem;
+      left: 50%;
+      width: 4px;
+      background: linear-gradient(180deg, #7B42F6 0%, #00ffc6 100%);
+      border-radius: 2px;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    .timeline-item {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex: 0 1 47%;
+      min-width: 340px;
+      max-width: 500px;
+      margin: 0;
+      background: rgba(30,18,60,0.95);
+      border-radius: 18px;
+      box-shadow: 0 2px 18px 0 rgba(123,66,246,0.13);
+      padding: 2em;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 1100px) {
+      .ecosystem-timeline {
+        gap: 1.2rem;
+        max-width: 98vw;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .ecosystem-timeline {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        max-width: 98vw;
+        padding: 0 0.3em;
+      }
+
+      .ecosystem-timeline::before {
+        display: none;
+      }
+    }
 .timeline-step {
   display: flex;
   align-items: center;
@@ -1055,49 +1037,66 @@
     margin: 0 auto 1.5em auto;
   }
 }
-  margin: 0.7em auto 0 auto;
-  border-radius: 3px;
-  background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
-  box-shadow: 0 0 18px #8a4fff77;
-  animation: gradient-move 2.5s linear infinite alternate;
-}
-@keyframes gradient-move {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-.glass-card {
-  backdrop-filter: blur(12px);
-  background: rgba(40, 20, 70, 0.55);
-  border-radius: 22px;
-  box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
-  border: 1.5px solid rgba(123,66,246,0.25);
-  transition: box-shadow 0.25s, transform 0.25s;
-  position: relative;
-  overflow: hidden;
-}
-.glass-card:hover {
-  box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
-  transform: translateY(-8px) scale(1.025);
-}
-@media (max-width: 700px) {
-  .gradient-underline { width: 60px; height: 4px; }
-  .problem-card-container { gap: 1.1rem !important; }
-}
-</style>
-            <!-- SVG Helix Timeline Enhancement -->
-<style>
-/* Modern Timeline Cards - No Helix */
-.timeline-cards-container {
-  display: flex;
-  flex-direction: column;
-  gap: 3.5rem;
-  align-items: center;
-  margin: 4rem auto 5rem auto;
-  max-width: 900px;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-}
+    .gradient-underline {
+      margin: 0.7em auto 0 auto;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #00ffc6, #7b42f6 80%);
+      box-shadow: 0 0 18px #8a4fff77;
+      animation: gradient-move 2.5s linear infinite alternate;
+      background-size: 200% 100%;
+    }
+
+    @keyframes gradient-move {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .glass-card {
+      backdrop-filter: blur(12px);
+      background: rgba(40, 20, 70, 0.55);
+      border-radius: 22px;
+      box-shadow: 0 4px 32px 0 #7B42F6AA, 0 0 0 2px #00ffc655;
+      border: 1.5px solid rgba(123, 66, 246, 0.25);
+      transition: box-shadow 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+      padding: 2.2rem 1.6rem;
+      max-width: 320px;
+      min-width: 260px;
+      flex: 1 1 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 0 32px 8px #00ffc6cc, 0 4px 32px 0 #7B42F6AA;
+      transform: translateY(-8px) scale(1.025);
+    }
+
+    @media (max-width: 700px) {
+      .gradient-underline {
+        width: 60px;
+        height: 4px;
+      }
+      .problem-card-container {
+        gap: 1.1rem !important;
+      }
+    }
+
+    /* Modern Timeline Cards */
+    .timeline-cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+      align-items: center;
+      margin: 4rem auto 5rem auto;
+      max-width: 900px;
+      position: relative;
+      width: 100%;
+      z-index: 1;
+    }
 
 .timeline-card-step {
   display: flex;
