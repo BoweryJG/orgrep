@@ -439,18 +439,10 @@
 
 body {
   position: relative;
-}
-#stars-canvas {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: 0;
-  pointer-events: none;
-  display: block;
-}
-    background: linear-gradient(135deg, var(--deep-black) 0%, var(--purple-dark) 100%);
-    color: var(--text-color);
-    overflow-x: hidden;
-    line-height: 1.6;
+  background: linear-gradient(135deg, var(--deep-black) 0%, var(--purple-dark) 100%);
+  color: var(--text-color);
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
 /* --- Starry Background --- */
