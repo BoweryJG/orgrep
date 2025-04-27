@@ -306,23 +306,22 @@
         svg.setAttribute('width', '100%');
         svg.setAttribute('height', '100%');
         
-        // Position the parent orb to be centered ONLY over the three title lines
-        // "Sales Intelligence Evolved" - not including the subtitle
+        // Position the parent orb to be centered and large enough to contain the title
+        // "Sales Intelligence Evolved" will fit inside the orb
         let parentX, parentY;
         
         // Horizontal position: centered
         parentX = vw * 0.5;
         
-        // Vertical position: aligned with just the three title lines
-        // Move it higher to focus only on the main title, not the subtitle
+        // Vertical position: centered in the hero area
         if (vw < 480) {
-          // Mobile: higher position
+          // Mobile: centered position
           parentY = vh * 0.35;
         } else if (vw < 768) {
-          // Tablet: higher position
+          // Tablet: centered position
           parentY = vh * 0.38;
         } else {
-          // Desktop: higher position
+          // Desktop: centered position
           parentY = vh * 0.38;
         }
         
@@ -404,8 +403,10 @@
         }
         
         const parentMorphT = now * 0.0004;
-        const parentR = 100 * scale;
-        const parentAmp = 1.0 * scale; // Much more pronounced morphing (5x more than before)
+        // Make the parent orb large enough to contain the title text
+        // Increased radius to ensure the title fits inside
+        const parentR = 180 * scale; // Larger radius to contain the title
+        const parentAmp = 0.8 * scale; // Slightly less pronounced morphing to maintain title containment
         const parentPath = generateSuperSmoothBlob(
           window.parentCenter.x, 
           window.parentCenter.y, 
@@ -429,9 +430,9 @@
           const angle = (Math.PI * 2 * i / childCount) + (now * 0.00035 * (0.6 + i * 0.1));
           
           // Ensure minimum safe distance to prevent overlap with parent orb
-          // Parent orb radius is 100 * scale, child orb radius is 36 * scale
+          // Parent orb radius is now 180 * scale, child orb radius is 36 * scale
           // Add buffer to ensure they never overlap even with morphing
-          const parentRadius = 100 * scale;
+          const parentRadius = 180 * scale;
           const childRadius = 36 * scale;
           const safeMinDistance = parentRadius + childRadius + 50 * scale; // Extra 50px buffer
           
@@ -465,14 +466,16 @@
 
     <section class="hero-impact" id="hero">
       
-      <!-- Content Layer - Centered title only -->
-      <div class="hero-visual-layout" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; position: relative; z-index: 1;">
-        <div class="hero-content">
-          <h1 style="text-align: center; font-size: 4.5rem; margin-bottom: 0;">
-            Sales<br>
-            <span class="gradient-text">Intelligence</span><br>
-            <span class="hero-evolved">Evolved</span>
-          </h1>
+      <!-- Content Layer - Title inside the orb -->
+      <div class="hero-visual-layout" style="min-height: 100vh; position: relative; z-index: 1;">
+        <div id="title-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; pointer-events: none;">
+          <div class="hero-content" style="position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+            <h1 style="text-align: center; font-size: 3.5rem; margin-bottom: 0; color: #fff; text-shadow: 0 0 15px rgba(0,0,0,0.5);">
+              Sales<br>
+              <span class="gradient-text">Intelligence</span><br>
+              <span class="hero-evolved">Evolved</span>
+            </h1>
+          </div>
         </div>
       </div>
       
