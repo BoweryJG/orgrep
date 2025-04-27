@@ -291,7 +291,7 @@
         // Use viewport size for SVG
         const vw = window.innerWidth;
         const vh = window.innerHeight;
-        // For hero section, we want the orbs positioned in the top right
+        // Center the orbs behind the title
         const parentRadius = 100;
         const childRadius = 36;
         const maxOrbit = parentRadius + 120 + (childCount - 1) * 40;
@@ -306,24 +306,25 @@
         svg.setAttribute('width', '100%');
         svg.setAttribute('height', '100%');
         
-        // Position the parent orb in the top right for desktop
-        // More centered for mobile
+        // Position the parent orb centered behind the title
         let parentX, parentY;
         if (vw < 480) {
-          // Mobile: center more
+          // Mobile: center
           parentX = vw * 0.5;
-          parentY = vh * 0.3;
+          parentY = vh * 0.35;
         } else if (vw < 768) {
-          // Tablet: slightly right
-          parentX = vw * 0.65;
+          // Tablet: center
+          parentX = vw * 0.5;
           parentY = vh * 0.35;
         } else {
-          // Desktop: top right
-          parentX = vw * 0.75;
-          parentY = vh * 0.3;
+          // Desktop: center
+          parentX = vw * 0.5;
+          parentY = vh * 0.35;
         }
         
         window.parentCenter = {x: parentX, y: parentY};
+        window.parentCenterBase = {x: parentX, y: parentY}; // For drift animation
+        window.viewportSize = {vw, vh}; // Store for calculations
         window.orbScale = scale;
       }
       
@@ -379,10 +380,17 @@
           document.getElementById(stop.id).setAttribute("stop-color", hslToHex(hue, sat, light));
         }
         
-        // Parent orb animation
+        // Parent orb animation with organic drift and more pronounced morphing
+        // Animate parent orb's position with slow, organic drift
+        const {vw, vh} = window.viewportSize || {vw: window.innerWidth, vh: window.innerHeight};
+        // Safe zone: parent can drift within screen center
+        const px = window.parentCenterBase.x + Math.sin(now * 0.00011) * vw * 0.05 + Math.cos(now * 0.00007) * vw * 0.04;
+        const py = window.parentCenterBase.y + Math.cos(now * 0.00009) * vh * 0.04 + Math.sin(now * 0.00016) * vh * 0.03;
+        window.parentCenter = {x: px, y: py};
+        
         const parentMorphT = now * 0.0004;
         const parentR = 100 * scale;
-        const parentAmp = 0.2 * scale;
+        const parentAmp = 1.0 * scale; // Much more pronounced morphing (5x more than before)
         const parentPath = generateSuperSmoothBlob(
           window.parentCenter.x, 
           window.parentCenter.y, 
