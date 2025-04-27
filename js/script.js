@@ -1,4 +1,16 @@
 // --- Orb Animation Code ---
+
+// Fix for missing progressIndicator element
+document.addEventListener('DOMContentLoaded', function() {
+  // Create a dummy progressIndicator if it doesn't exist to prevent errors
+  if (!document.getElementById('progressIndicator')) {
+    const dummyIndicator = document.createElement('div');
+    dummyIndicator.id = 'progressIndicator';
+    dummyIndicator.style.display = 'none';
+    document.body.appendChild(dummyIndicator);
+    console.log('Created dummy progressIndicator to prevent errors');
+  }
+});
 // --- Utility functions ---
 function lerp(a, b, t) { return a + (b - a) * t; }
 function hslToHex(h, s, l) {
