@@ -33,9 +33,9 @@
   position: absolute;
 }
 
-/* Make parent orb more vibrant with enhanced glow */
+/* Make parent orb more vibrant */
 #parentOrb {
-  filter: drop-shadow(0 0 20px rgba(255, 183, 0, 0.8));
+  /* filter: drop-shadow(0 0 20px rgba(255, 183, 0, 0.8)); */
   opacity: 1 !important;
 }
 

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!-- saved from url=(0090)file:///Users/jasonsmacbookpro2022/Bowery/clients/orgrep/repspheres_header_orb_family.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Animated Orbs - Minimal Working Version</title>
+  <style>
+    body {
+
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    svg {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none; /* SVG doesn't block scrolling/touch */
+      touch-action: none;
+    }
+  </style>
+</head>
+<body>
+<svg id="orbSVG" width="1920" height="958" viewBox="0 0 1920 958">
+  <g id="particles"></g>
+  <defs>
+    <radialgradient id="parentGrad" cx="50%" cy="50%" r="70%">
+      <stop id="p0" offset="0%" stop-color="#9d56ec"></stop>
+      <stop id="p1" offset="100%" stop-color="#6bb5f7"></stop>
+      <stop id="p2" offset="50%" stop-color="#8c39e9"></stop>
+      <stop id="p3" offset="75%" stop-color="#d92886"></stop>
+    </radialgradient>
+    <radialgradient id="childGrad0" cx="50%" cy="50%" r="70%">
+      <stop id="c0s0" offset="0%" stop-color="#a3bf43"></stop>
+      <stop id="c0s1" offset="100%" stop-color="#a4bf44"></stop>
+    </radialgradient>
+    <radialgradient id="childGrad1" cx="50%" cy="50%" r="70%">
+      <stop id="c1s0" offset="0%" stop-color="#0eb79a"></stop>
+      <stop id="c1s1" offset="100%" stop-color="#2eed35"></stop>
+    </radialgradient>
+    <radialgradient id="childGrad2" cx="50%" cy="50%" r="70%">
+      <stop id="c2s0" offset="0%" stop-color="#111399"></stop>
+      <stop id="c2s1" offset="100%" stop-color="#1ed6ee"></stop>
+    </radialgradient>
+    <radialgradient id="childGrad3" cx="50%" cy="50%" r="70%">
+      <stop id="c3s0" offset="0%" stop-color="#a03cd4"></stop>
+      <stop id="c3s1" offset="100%" stop-color="#9c4adb"></stop>
+    </radialgradient>
+    <radialgradient id="childGrad4" cx="50%" cy="50%" r="70%">
+      <stop id="c4s0" offset="0%" stop-color="#d542a1"></stop>
+      <stop id="c4s1" offset="100%" stop-color="#841a3e"></stop>
+    </radialgradient>
+  </defs>
+  <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95" d="M1126.22,507.20 C1126.10,510.68 1125.91,514.12 1125.71,517.60 C1125.50,521.07 1125.28,524.54 1125.00,528.05 C1124.72,531.57 1124.44,535.12 1124.03,538.71 C1123.62,542.30 1123.19,545.95 1122.55,549.61 C1121.91,553.27 1121.20,557.00 1120.21,560.68 C1119.22,564.35 1118.08,568.08 1116.63,571.66 C1115.18,575.24 1113.50,578.82 1111.53,582.18 C1109.55,585.54 1107.29,588.82 1104.77,591.81 C1102.25,594.80 1099.43,597.62 1096.43,600.13 C1093.43,602.65 1090.14,604.91 1086.76,606.88 C1083.38,608.84 1079.77,610.51 1076.14,611.93 C1072.51,613.35 1068.72,614.46 1064.97,615.38 C1061.21,616.30 1057.38,616.94 1053.60,617.45 C1049.82,617.96 1046.03,618.25 1042.29,618.45 C1038.54,618.65 1034.82,618.68 1031.14,618.64 C1027.45,618.61 1023.80,618.46 1020.16,618.23 C1016.52,617.99 1012.92,617.68 1009.32,617.24 C1005.73,616.80 1002.15,616.29 998.60,615.61 C995.05,614.93 991.50,614.14 988.02,613.17 C984.53,612.19 981.06,611.07 977.68,609.75 C974.30,608.43 970.97,606.93 967.75,605.25 C964.54,603.57 961.39,601.68 958.39,599.65 C955.38,597.61 952.48,595.38 949.71,593.04 C946.94,590.70 944.30,588.18 941.77,585.59 C939.24,583.00 936.84,580.27 934.52,577.48 C932.21,574.69 930.01,571.80 927.89,568.85 C925.77,565.90 923.74,562.88 921.79,559.78 C919.85,556.68 917.97,553.51 916.22,550.25 C914.47,547.00 912.78,543.66 911.28,540.23 C909.77,536.80 908.36,533.27 907.19,529.67 C906.02,526.07 904.99,522.36 904.27,518.61 C903.55,514.87 903.04,511.02 902.86,507.20 C902.68,503.38 902.77,499.48 903.20,495.68 C903.63,491.88 904.38,488.05 905.41,484.38 C906.45,480.70 907.83,477.07 909.41,473.61 C911.00,470.15 912.91,466.80 914.94,463.61 C916.97,460.43 919.25,457.41 921.59,454.51 C923.92,451.62 926.43,448.89 928.94,446.25 C931.44,443.60 934.04,441.10 936.62,438.64 C939.19,436.17 941.80,433.81 944.40,431.44 C947.01,429.08 949.61,426.76 952.25,424.45 C954.89,422.13 957.52,419.82 960.25,417.54 C962.98,415.26 965.74,412.97 968.62,410.78 C971.51,408.59 974.47,406.41 977.58,404.40 C980.68,402.39 983.91,400.44 987.26,398.74 C990.61,397.04 994.10,395.46 997.68,394.19 C1001.26,392.92 1004.98,391.86 1008.73,391.11 C1012.47,390.36 1016.33,389.89 1020.16,389.71 C1023.99,389.53 1027.88,389.65 1031.70,390.04 C1035.52,390.42 1039.35,391.10 1043.08,391.99 C1046.81,392.88 1050.50,394.04 1054.09,395.35 C1057.68,396.67 1061.20,398.21 1064.61,399.88 C1068.03,401.54 1071.37,403.39 1074.60,405.34 C1077.84,407.30 1080.99,409.40 1084.03,411.62 C1087.07,413.83 1090.02,416.17 1092.84,418.64 C1095.66,421.11 1098.39,423.70 1100.94,426.42 C1103.49,429.15 1105.93,432.01 1108.15,434.99 C1110.38,437.97 1112.45,441.09 1114.29,444.31 C1116.12,447.52 1117.77,450.87 1119.18,454.28 C1120.58,457.68 1121.76,461.19 1122.73,464.71 C1123.70,468.24 1124.42,471.83 1124.99,475.40 C1125.56,478.97 1125.90,482.56 1126.14,486.12 C1126.38,489.67 1126.44,493.22 1126.45,496.73 C1126.46,500.24 1126.35,503.72 1126.22,507.20Z"></path>
+  <g id="children"><path d="M1183.90,700.98 C1183.33,702.75 1182.56,704.44 1181.84,706.06 C1181.12,707.68 1180.32,709.20 1179.59,710.72 C1178.86,712.23 1178.15,713.68 1177.47,715.16 C1176.79,716.64 1176.17,718.10 1175.50,719.60 C1174.83,721.10 1174.20,722.64 1173.44,724.15 C1172.68,725.67 1171.90,727.23 1170.95,728.69 C1170.00,730.15 1168.95,731.62 1167.75,732.93 C1166.56,734.24 1165.21,735.48 1163.77,736.54 C1162.33,737.61 1160.74,738.54 1159.11,739.31 C1157.49,740.09 1155.75,740.70 1154.01,741.20 C1152.27,741.70 1150.47,742.05 1148.68,742.31 C1146.88,742.57 1145.06,742.72 1143.23,742.78 C1141.41,742.84 1139.57,742.81 1137.75,742.65 C1135.92,742.50 1134.08,742.26 1132.28,741.85 C1130.49,741.43 1128.69,740.90 1126.99,740.19 C1125.30,739.47 1123.63,738.59 1122.12,737.55 C1120.61,736.51 1119.18,735.28 1117.92,733.96 C1116.66,732.65 1115.55,731.15 1114.56,729.65 C1113.57,728.15 1112.76,726.53 1111.99,724.95 C1111.22,723.38 1110.60,721.77 1109.95,720.19 C1109.30,718.62 1108.73,717.08 1108.11,715.53 C1107.49,713.98 1106.86,712.46 1106.22,710.89 C1105.58,709.32 1104.89,707.76 1104.28,706.11 C1103.67,704.45 1103.02,702.75 1102.57,700.98 C1102.11,699.21 1101.70,697.34 1101.55,695.49 C1101.40,693.63 1101.40,691.69 1101.68,689.84 C1101.96,687.99 1102.48,686.12 1103.21,684.40 C1103.94,682.68 1104.95,681.02 1106.08,679.52 C1107.20,678.03 1108.56,676.67 1109.95,675.44 C1111.34,674.20 1112.88,673.13 1114.39,672.13 C1115.91,671.13 1117.48,670.27 1119.03,669.44 C1120.58,668.60 1122.13,667.85 1123.68,667.12 C1125.24,666.38 1126.78,665.69 1128.35,665.05 C1129.93,664.41 1131.51,663.79 1133.14,663.28 C1134.76,662.78 1136.42,662.32 1138.10,662.01 C1139.79,661.70 1141.52,661.49 1143.23,661.43 C1144.95,661.37 1146.70,661.46 1148.41,661.66 C1150.12,661.85 1151.83,662.20 1153.51,662.62 C1155.19,663.03 1156.84,663.57 1158.49,664.15 C1160.13,664.73 1161.75,665.38 1163.38,666.09 C1165.00,666.80 1166.63,667.54 1168.24,668.39 C1169.85,669.24 1171.48,670.13 1173.04,671.17 C1174.59,672.22 1176.16,673.35 1177.56,674.64 C1178.95,675.93 1180.31,677.37 1181.41,678.94 C1182.50,680.50 1183.47,682.25 1184.14,684.03 C1184.81,685.82 1185.25,687.77 1185.44,689.67 C1185.63,691.57 1185.52,693.56 1185.27,695.44 C1185.01,697.33 1184.47,699.21 1183.90,700.98Z" fill="url(#childGrad0)" opacity="0.95"></path><path d="M789.81,617.18 C790.00,618.86 790.24,620.56 790.34,622.30 C790.44,624.04 790.52,625.83 790.40,627.61 C790.28,629.39 790.06,631.23 789.61,632.98 C789.17,634.73 788.55,636.49 787.75,638.12 C786.95,639.75 785.94,641.33 784.82,642.76 C783.70,644.20 782.39,645.53 781.04,646.74 C779.69,647.96 778.21,649.05 776.71,650.06 C775.21,651.07 773.64,651.97 772.05,652.81 C770.46,653.64 768.83,654.40 767.17,655.06 C765.51,655.72 763.82,656.33 762.09,656.79 C760.37,657.25 758.60,657.62 756.83,657.82 C755.06,658.01 753.25,658.08 751.48,657.96 C749.72,657.84 747.93,657.54 746.23,657.10 C744.53,656.66 742.85,656.02 741.26,655.32 C739.68,654.62 738.16,653.75 736.69,652.89 C735.23,652.02 733.85,651.07 732.45,650.14 C731.06,649.22 729.73,648.28 728.34,647.34 C726.95,646.41 725.57,645.50 724.14,644.53 C722.71,643.55 721.23,642.60 719.79,641.50 C718.34,640.41 716.83,639.28 715.47,637.98 C714.11,636.67 712.74,635.25 711.62,633.70 C710.50,632.14 709.48,630.41 708.77,628.63 C708.05,626.85 707.55,624.90 707.33,623.00 C707.11,621.09 707.18,619.09 707.45,617.18 C707.73,615.28 708.29,613.37 708.96,611.58 C709.62,609.80 710.52,608.08 711.42,606.45 C712.33,604.82 713.37,603.30 714.39,601.82 C715.41,600.34 716.48,598.95 717.54,597.59 C718.60,596.22 719.66,594.90 720.77,593.62 C721.87,592.33 722.98,591.06 724.16,589.86 C725.35,588.66 726.57,587.49 727.88,586.43 C729.19,585.36 730.58,584.35 732.02,583.48 C733.47,582.60 735.00,581.83 736.56,581.16 C738.12,580.50 739.75,579.97 741.39,579.50 C743.02,579.04 744.69,578.69 746.37,578.38 C748.06,578.07 749.75,577.83 751.48,577.63 C753.21,577.44 754.96,577.27 756.75,577.20 C758.53,577.12 760.37,577.06 762.21,577.17 C764.05,577.27 765.95,577.43 767.79,577.81 C769.63,578.20 771.52,578.71 773.26,579.47 C775.00,580.22 776.72,581.18 778.23,582.33 C779.73,583.48 781.13,584.88 782.29,586.37 C783.46,587.87 784.43,589.59 785.22,591.30 C786.00,593.01 786.56,594.87 787.03,596.66 C787.49,598.45 787.75,600.29 788.02,602.05 C788.28,603.81 788.43,605.54 788.62,607.23 C788.81,608.93 788.98,610.56 789.18,612.22 C789.37,613.88 789.61,615.50 789.81,617.18Z" fill="url(#childGrad1)" opacity="0.95"></path><path d="M821.65,321.82 C821.84,323.68 821.80,325.62 821.57,327.48 C821.34,329.33 820.86,331.20 820.27,332.98 C819.67,334.76 818.88,336.49 818.01,338.14 C817.15,339.79 816.15,341.37 815.10,342.88 C814.05,344.39 812.91,345.84 811.71,347.21 C810.52,348.58 809.25,349.90 807.91,351.11 C806.57,352.31 805.15,353.45 803.66,354.44 C802.17,355.43 800.58,356.32 798.96,357.04 C797.33,357.75 795.62,358.32 793.91,358.73 C792.21,359.14 790.44,359.37 788.72,359.51 C787.00,359.65 785.28,359.61 783.59,359.55 C781.91,359.50 780.26,359.33 778.63,359.20 C776.99,359.07 775.40,358.90 773.76,358.76 C772.13,358.63 770.51,358.53 768.83,358.39 C767.14,358.26 765.42,358.18 763.65,357.98 C761.88,357.77 760.04,357.57 758.23,357.15 C756.42,356.74 754.53,356.23 752.79,355.49 C751.05,354.74 749.30,353.81 747.77,352.67 C746.25,351.54 744.82,350.16 743.64,348.66 C742.47,347.17 741.49,345.45 740.73,343.70 C739.97,341.96 739.45,340.06 739.08,338.20 C738.70,336.35 738.56,334.43 738.47,332.58 C738.39,330.73 738.47,328.89 738.55,327.10 C738.63,325.30 738.80,323.56 738.97,321.82 C739.14,320.09 739.34,318.39 739.59,316.68 C739.85,314.98 740.11,313.28 740.49,311.60 C740.87,309.92 741.30,308.23 741.88,306.60 C742.45,304.97 743.13,303.34 743.95,301.80 C744.77,300.27 745.72,298.77 746.78,297.39 C747.83,296.00 749.03,294.69 750.28,293.47 C751.52,292.25 752.87,291.13 754.25,290.06 C755.63,288.99 757.08,288.00 758.55,287.05 C760.03,286.10 761.54,285.20 763.11,284.35 C764.67,283.51 766.28,282.68 767.95,281.98 C769.62,281.29 771.36,280.62 773.14,280.16 C774.92,279.69 776.78,279.32 778.63,279.20 C780.47,279.09 782.38,279.14 784.20,279.45 C786.03,279.75 787.86,280.30 789.55,281.03 C791.25,281.76 792.88,282.75 794.37,283.82 C795.86,284.88 797.22,286.16 798.49,287.42 C799.76,288.68 800.88,290.05 802.00,291.36 C803.11,292.67 804.12,294.00 805.17,295.28 C806.22,296.56 807.25,297.79 808.32,299.04 C809.40,300.28 810.51,301.48 811.63,302.77 C812.74,304.06 813.92,305.34 815.00,306.76 C816.07,308.17 817.18,309.65 818.09,311.25 C818.99,312.84 819.84,314.55 820.44,316.32 C821.03,318.08 821.47,319.96 821.65,321.82Z" fill="url(#childGrad2)" opacity="0.95"></path><path d="M1094.90,234.34 C1094.79,236.17 1094.58,237.99 1094.27,239.79 C1093.97,241.58 1093.59,243.37 1093.09,245.11 C1092.58,246.84 1091.99,248.58 1091.25,250.22 C1090.51,251.87 1089.65,253.48 1088.65,254.97 C1087.65,256.46 1086.50,257.88 1085.26,259.16 C1084.02,260.44 1082.63,261.60 1081.22,262.64 C1079.80,263.68 1078.28,264.58 1076.77,265.42 C1075.26,266.27 1073.71,266.98 1072.18,267.70 C1070.65,268.42 1069.12,269.06 1067.58,269.74 C1066.04,270.41 1064.52,271.09 1062.94,271.75 C1061.36,272.42 1059.78,273.12 1058.11,273.74 C1056.44,274.35 1054.71,274.98 1052.92,275.42 C1051.13,275.85 1049.25,276.23 1047.39,276.35 C1045.53,276.46 1043.58,276.41 1041.73,276.09 C1039.89,275.76 1038.03,275.19 1036.33,274.40 C1034.63,273.61 1033.00,272.54 1031.54,271.36 C1030.09,270.19 1028.78,268.76 1027.61,267.33 C1026.43,265.90 1025.43,264.31 1024.49,262.78 C1023.54,261.24 1022.75,259.65 1021.95,258.11 C1021.15,256.56 1020.43,255.04 1019.70,253.52 C1018.97,252.00 1018.25,250.52 1017.55,248.99 C1016.86,247.46 1016.15,245.95 1015.53,244.36 C1014.91,242.78 1014.30,241.16 1013.84,239.49 C1013.39,237.82 1013.00,236.08 1012.80,234.34 C1012.59,232.60 1012.52,230.80 1012.61,229.04 C1012.70,227.27 1012.96,225.48 1013.34,223.74 C1013.72,221.99 1014.26,220.27 1014.88,218.58 C1015.49,216.90 1016.23,215.25 1017.04,213.63 C1017.85,212.01 1018.74,210.41 1019.72,208.86 C1020.69,207.32 1021.74,205.78 1022.91,204.33 C1024.08,202.89 1025.33,201.45 1026.71,200.19 C1028.10,198.93 1029.61,197.72 1031.21,196.74 C1032.82,195.77 1034.57,194.93 1036.36,194.36 C1038.14,193.78 1040.05,193.42 1041.92,193.28 C1043.78,193.14 1045.71,193.27 1047.55,193.53 C1049.38,193.79 1051.20,194.31 1052.92,194.84 C1054.64,195.37 1056.28,196.08 1057.87,196.72 C1059.46,197.36 1060.96,198.07 1062.47,198.70 C1063.98,199.32 1065.43,199.92 1066.94,200.48 C1068.46,201.05 1069.97,201.54 1071.54,202.09 C1073.11,202.65 1074.73,203.15 1076.34,203.81 C1077.96,204.47 1079.64,205.17 1081.21,206.05 C1082.78,206.94 1084.37,207.95 1085.78,209.13 C1087.18,210.31 1088.52,211.67 1089.63,213.15 C1090.75,214.62 1091.71,216.27 1092.47,217.96 C1093.23,219.65 1093.78,221.47 1094.19,223.28 C1094.60,225.09 1094.81,226.97 1094.93,228.81 C1095.05,230.65 1095.01,232.51 1094.90,234.34Z" fill="url(#childGrad3)" opacity="0.95"></path><path d="M1431.86,499.29 C1431.83,501.03 1431.67,502.80 1431.36,504.50 C1431.05,506.21 1430.57,507.91 1430.01,509.54 C1429.44,511.17 1428.72,512.75 1427.96,514.28 C1427.21,515.82 1426.34,517.29 1425.48,518.75 C1424.61,520.22 1423.70,521.63 1422.76,523.07 C1421.83,524.51 1420.89,525.95 1419.88,527.40 C1418.86,528.85 1417.84,530.33 1416.68,531.76 C1415.53,533.18 1414.31,534.65 1412.94,535.96 C1411.57,537.26 1410.08,538.55 1408.46,539.59 C1406.85,540.62 1405.07,541.54 1403.25,542.15 C1401.44,542.75 1399.47,543.14 1397.56,543.24 C1395.64,543.35 1393.65,543.15 1391.77,542.77 C1389.89,542.39 1388.03,541.70 1386.29,540.94 C1384.55,540.19 1382.90,539.20 1381.33,538.24 C1379.77,537.27 1378.33,536.19 1376.91,535.16 C1375.50,534.14 1374.17,533.09 1372.84,532.08 C1371.50,531.07 1370.21,530.10 1368.90,529.09 C1367.60,528.09 1366.28,527.12 1365.00,526.06 C1363.72,525.00 1362.42,523.93 1361.22,522.73 C1360.02,521.54 1358.83,520.28 1357.79,518.91 C1356.74,517.54 1355.78,516.07 1354.96,514.54 C1354.14,513.01 1353.45,511.37 1352.88,509.71 C1352.31,508.05 1351.89,506.32 1351.55,504.59 C1351.22,502.85 1351.00,501.07 1350.86,499.29 C1350.72,497.51 1350.66,495.70 1350.70,493.88 C1350.74,492.07 1350.84,490.22 1351.09,488.39 C1351.33,486.56 1351.66,484.69 1352.18,482.89 C1352.70,481.09 1353.34,479.27 1354.20,477.60 C1355.05,475.92 1356.09,474.28 1357.30,472.84 C1358.50,471.40 1359.93,470.07 1361.43,468.95 C1362.94,467.84 1364.64,466.91 1366.34,466.15 C1368.04,465.39 1369.86,464.85 1371.62,464.38 C1373.37,463.92 1375.16,463.65 1376.89,463.36 C1378.61,463.07 1380.29,462.90 1381.96,462.66 C1383.62,462.42 1385.22,462.20 1386.85,461.94 C1388.49,461.68 1390.10,461.36 1391.77,461.09 C1393.45,460.82 1395.15,460.49 1396.90,460.31 C1398.66,460.14 1400.48,459.96 1402.29,460.02 C1404.11,460.08 1405.99,460.24 1407.78,460.65 C1409.56,461.06 1411.37,461.67 1413.03,462.48 C1414.68,463.28 1416.27,464.33 1417.70,465.50 C1419.13,466.67 1420.43,468.05 1421.59,469.47 C1422.75,470.90 1423.76,472.47 1424.68,474.04 C1425.59,475.61 1426.37,477.26 1427.10,478.89 C1427.82,480.53 1428.46,482.19 1429.03,483.86 C1429.60,485.53 1430.12,487.20 1430.53,488.90 C1430.95,490.60 1431.31,492.32 1431.54,494.06 C1431.76,495.79 1431.89,497.55 1431.86,499.29Z" fill="url(#childGrad4)" opacity="0.95"></path></g>
+</svg>
+<script>
+// --- Utility functions ---
+function lerp(a, b, t) { return a + (b - a) * t; }
+function hslToHex(h, s, l) {
+  h /= 360; s /= 100; l /= 100;
+  let r, g, b;
+  if (s === 0) { r = g = b = l; }
+  else {
+    const hue2rgb = (p, q, t) => {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1/6) return p + (q - p) * 6 * t;
+      if (t < 1/2) return q;
+      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+      return p;
+    };
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    r = hue2rgb(p, q, h + 1/3);
+    g = hue2rgb(p, q, h);
+    b = hue2rgb(p, q, h - 1/3);
+  }
+  return "#" + [r, g, b].map(x => Math.round(x * 255).toString(16).padStart(2, "0")).join("");
+}
+function lerpColor(a, b, t) {
+  const ah = parseInt(a.replace('#', ''), 16), bh = parseInt(b.replace('#', ''), 16);
+  const ar = (ah >> 16) & 0xff, ag = (ah >> 8) & 0xff, ab = ah & 0xff;
+  const br = (bh >> 16) & 0xff, bg = (bh >> 8) & 0xff, bb = bh & 0xff;
+  const rr = Math.round(ar + (br - ar) * t);
+  const rg = Math.round(ag + (bg - ag) * t);
+  const rb = Math.round(ab + (bb - ab) * t);
+  return '#' + ((1 << 24) + (rr << 16) + (rg << 8) + rb).toString(16).slice(1);
+}
+function generateSuperSmoothBlob(cx, cy, r, points, t, amp=1, phase=0) {
+  const pts = [];
+  for (let i = 0; i < points; i++) {
+    const angle = (Math.PI * 2 * i) / points;
+    const noise =
+      Math.sin(angle * 3 + t * 0.7 + phase) * 4 * amp +
+      Math.sin(angle * 5 - t * 1.1 + phase) * 2 * amp +
+      Math.sin(angle * 2 + t * 1.7 + phase) * 1.2 * amp;
+    const rad = r + noise;
+    pts.push({
+      x: cx + Math.cos(angle) * rad,
+      y: cy + Math.sin(angle) * rad
+    });
+  }
+  let d = "";
+  for (let i = 0; i < points; i++) {
+    const p0 = pts[(i - 1 + points) % points];
+    const p1 = pts[i];
+    const p2 = pts[(i + 1) % points];
+    const p3 = pts[(i + 2) % points];
+    if (i === 0) {
+      d += `M${p1.x.toFixed(2)},${p1.y.toFixed(2)}`;
+    }
+    const c1x = p1.x + (p2.x - p0.x) / 6;
+    const c1y = p1.y + (p2.y - p0.y) / 6;
+    const c2x = p2.x - (p3.x - p1.x) / 6;
+    const c2y = p2.y - (p3.y - p1.y) / 6;
+    d += ` C${c1x.toFixed(2)},${c1y.toFixed(2)} ${c2x.toFixed(2)},${c2y.toFixed(2)} ${p2.x.toFixed(2)},${p2.y.toFixed(2)}`;
+  }
+  d += "Z";
+  return d;
+}
+
+const childCount = 5;
+// --- Dynamic Color Families ---
+function getDynamicColorFamily(i, now) {
+  // Each orb gets a unique base hue, animated over time
+  const baseHue = (i * 67 + now * 0.018) % 360;
+  const hue2 = (baseHue + 40 + 20 * Math.sin(now * 0.0007 + i)) % 360;
+  const sat = 80 + 10 * Math.sin(now * 0.0005 + i);
+  const light1 = 60 + 10 * Math.cos(now * 0.0004 + i * 2);
+  const light2 = 35 + 15 * Math.sin(now * 0.0006 + i * 3);
+  return [hslToHex(baseHue, sat, light1), hslToHex(hue2, sat, light2)];
+}
+// parentCenter will be set dynamically below
+const parentRadius = 100;
+const childRadius = 36;
+const childPoints = 48;
+const childAmp = 0.5;
+const childGradIds = [
+  "childGrad0", "childGrad1", "childGrad2", "childGrad3", "childGrad4"
+];
+// --- Dynamically resize SVG to fit all orbs ---
+function adjustSVGSize() {
+  // Use viewport size for SVG
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  // Store for later
+  window.viewportSize = {vw, vh};
+  // Orbit radii: parentRadius + 120 + i*40 (i = 0..childCount-1)
+  const maxChildIndex = childCount - 1;
+  const maxOrbit = parentRadius + 120 + maxChildIndex * 40;
+  const maxReach = maxOrbit + childRadius + 8; // +8 for morphing amplitude margin
+  // Fit orbs within the smallest viewport dimension
+  const minDim = Math.min(vw, vh);
+  const scale = minDim / (maxReach * 2);
+  const size = maxReach * 2 * scale;
+  const svg = document.getElementById('orbSVG');
+  svg.setAttribute('width', vw);
+  svg.setAttribute('height', vh);
+  svg.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
+  // Update parentCenter so it's always in the middle
+  window.parentCenterBase = window.parentCenter = {x: vw/2, y: vh/2};
+  window.orbScale = scale;
+}
+adjustSVGSize();
+window.addEventListener('resize', adjustSVGSize);
+
+const childrenGroup = document.getElementById('children');
+const childOrbs = [];
+
+// --- Orb State Management ---
+const orbStates = [];
+const parentOrb = document.getElementById('parentOrb');
+
+// Helper to create default orb state
+function makeOrbState() {
+  return {
+    drag: 0, // vertical drag offset (from scroll)
+    dragTarget: 0, // target drag value
+    dragV: 0, // velocity for wobble
+    squash: 0, // squash from click
+    squashTarget: 0,
+    squashV: 0,
+    mouseDir: 0, // directionality for mouseover (radians)
+    mouseDirTarget: 0,
+    mouseDirV: 0,
+    wobble: 0, // phase for recovery wobble
+    lastUpdate: performance.now(),
+  };
+}
+// --- Orb Morph Personalities ---
+const orbMorphDirections = [];
+const orbMorphSpeeds = [];
+// Parent orb: slowest, morphs mostly vertical
+orbMorphDirections.push(Math.PI / 2); // 90deg (vertical)
+orbMorphSpeeds.push(0.012);
+// Children: varied directions and speeds
+for (let i = 0; i < childCount; i++) {
+  // Angle: spread from vertical to diagonal, with some randomness
+  const angle = Math.PI / 2 + (i - (childCount - 1) / 2) * (Math.PI / 8) + (Math.random() - 0.5) * (Math.PI / 12);
+  orbMorphDirections.push(angle);
+  // Speed: slower for inner, slightly faster for outer (but all slow)
+  orbMorphSpeeds.push(0.014 + i * 0.004 + Math.random() * 0.003);
+}
+// Parent orb state
+orbStates.push(makeOrbState());
+// Children orb states
+for (let i = 0; i < childCount; i++) {
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("fill", `url(#${childGradIds[i]})`);
+  path.setAttribute("opacity", "0.95");
+  childrenGroup.appendChild(path);
+  childOrbs.push(path);
+  orbStates.push(makeOrbState());
+}
+
+// --- Scroll/Drag Gravity Effect ---
+let lastWheelTime = 0;
+window.addEventListener('wheel', (e) => {
+  // e.deltaY: positive for down, negative for up
+  const now = performance.now();
+  const dt = Math.max(1, now - lastWheelTime);
+  lastWheelTime = now;
+  // Velocity: stronger for faster scrolls, but overall effect is much softer
+  const velocity = Math.max(-80, Math.min(80, e.deltaY / dt * 120));
+  // Set dragTarget for all orbs, each along its own morph direction
+  orbStates.forEach((state, i) => {
+    // Project drag along this orb's unique direction
+    const angle = orbMorphDirections[i];
+    state.dragTarget += Math.sin(angle) * velocity * 1.8 + Math.cos(angle) * velocity * 0.7;
+  });
+  // Prevent page scroll
+  e.preventDefault();
+}, { passive: false });
+
+// --- Animation Interpolation Helpers ---
+function approach(current, target, speed) {
+  return current + (target - current) * speed;
+}
+function dampedSpring(current, target, velocity, stiffness, damping) {
+  // Simple spring physics for wobble
+  const force = (target - current) * stiffness;
+  velocity += force;
+  velocity *= damping;
+  current += velocity;
+  return [current, velocity];
+}
+function animate() {
+  // Animate parent gradient (fluid, spectrum, multi-stop)
+  const parentStops = [
+    { id: "p0", phase: 0 },
+    { id: "p1", phase: Math.PI * 0.5 },
+    { id: "p2", phase: Math.PI },
+    { id: "p3", phase: Math.PI * 1.5 }
+  ];
+  const now = performance.now();
+  const baseHue = (now * 0.01) % 360;
+  for (let i = 0; i < parentStops.length; i++) {
+    // Each stop cycles hue with a phase offset for a symphony effect
+    const stop = parentStops[i];
+    const hue = (baseHue + 60 * Math.sin(now * 0.00015 + stop.phase)) % 360;
+    const sat = 80 + 10 * Math.sin(now * 0.0002 + stop.phase);
+    const light = 60 + 10 * Math.cos(now * 0.00018 + stop.phase);
+    document.getElementById(stop.id).setAttribute("stop-color", hslToHex(hue, sat, light));
+  }
+
+  // --- Animate orb morph states (drag gravity, squash, mouseDir, wobble) ---
+  for (let i = 0; i < orbStates.length; i++) {
+    const state = orbStates[i];
+    // Each orb has a unique springiness and damping (slower for parent, varied for children)
+    const spring = 0.045 * (1 + orbMorphSpeeds[i]); // lower = slower
+    const damping = 0.90 - orbMorphSpeeds[i] * 0.33; // higher = longer wobble
+    [state.drag, state.dragV] = dampedSpring(state.drag, state.dragTarget, state.dragV, spring, damping);
+    // Wobble on release (slower phase for more dissolution)
+    if (Math.abs(state.dragTarget) < 0.1 && Math.abs(state.drag) > 0.1) {
+      state.wobble += 0.04 + orbMorphSpeeds[i] * 0.9; // slower, unique for each orb
+      state.drag += Math.sin(state.wobble) * Math.max(0, Math.abs(state.drag) * 0.13 * (1 + orbMorphSpeeds[i]));
+    } else if (Math.abs(state.dragTarget) < 0.1) {
+      state.wobble = 0; // reset when at rest
+    }
+    // Decay dragTarget very slowly for beautiful dissolution
+    state.dragTarget = approach(state.dragTarget, 0, 0.018 + orbMorphSpeeds[i] * 0.6);
+    // (Squash & mouseDir to be handled in next steps)
+  }
+
+  // --- Parent orb ---
+  const parentState = orbStates[0];
+  const parentMorphT = now * 0.0004;
+  const parentDrag = parentState.drag;
+  // Morph: drag stretches along its direction, so project drag
+  const parentAngle = orbMorphDirections[0];
+  const parentDx = Math.cos(parentAngle) * parentDrag;
+  const parentDy = Math.sin(parentAngle) * parentDrag;
+  const scale = window.orbScale || 1;
+
+  // --- Animate parent orb's position with slow, organic drift ---
+  const {vw, vh} = window.viewportSize || {vw: 800, vh: 800};
+  // Safe zone: parent can drift within 20% of screen center
+  const px = window.parentCenterBase.x + Math.sin(now * 0.00011) * vw * 0.09 + Math.cos(now * 0.00007) * vw * 0.07;
+  const py = window.parentCenterBase.y + Math.cos(now * 0.00009) * vh * 0.08 + Math.sin(now * 0.00016) * vh * 0.06;
+  window.parentCenter = {x: px, y: py};
+
+  const parentR = (parentRadius + parentDrag * 0.15) * scale;
+  const parentAmp = (1 + Math.abs(parentDrag) * 0.008) * scale;
+  const parentPath = generateSuperSmoothBlob(px + parentDx * scale, py + parentDy * scale, parentR, 64, parentMorphT, parentAmp);
+  parentOrb.setAttribute('d', parentPath);
+
+  // --- Children ---
+  // --- Render children orbs in correct z-order ---
+  let behind = [], front = [];
+  const parentY = window.parentCenter.y;
+  childrenGroup.innerHTML = '';
+  for (let i = 0; i < childCount; i++) {
+    const state = orbStates[i + 1];
+    // Animate dynamic color family for each orb
+    const fam = getDynamicColorFamily(i, now);
+    const tcol = 0.5 + 0.5 * Math.sin(now * 0.0005 + i);
+    document.getElementById(`c${i}s0`).setAttribute("stop-color", lerpColor(fam[0], fam[1], tcol));
+    document.getElementById(`c${i}s1`).setAttribute("stop-color", lerpColor(fam[1], fam[0], tcol));
+
+    // --- Animate dynamic, space-filling child orbits ---
+    // Each child has its own orbit phase, amplitude, and eccentricity
+    const baseAngle = (now * 0.00022 + i * (2 * Math.PI / childCount));
+    // Orbit radius breathes and wobbles independently
+    const {vw, vh} = window.viewportSize || {vw: 800, vh: 800};
+    const parentR = (parentRadius + state.drag * 0.15) * (window.orbScale || 1);
+    // Max allowed: from edge of parent to edge of screen
+    const minEdge = Math.min(
+      window.parentCenter.x,
+      vw - window.parentCenter.x,
+      window.parentCenter.y,
+      vh - window.parentCenter.y
+    );
+    const maxChildOrbit = Math.max(40, minEdge - parentR - childRadius * (window.orbScale || 1) - 16);
+    // Animate orbit radius: base + unique slow sine + unique noise
+    const orbitPhase = now * (0.00012 + 0.00007 * i) + i * 1.13;
+    const orbitWobble = Math.sin(orbitPhase) * 0.18 + Math.cos(orbitPhase * 0.7) * 0.09;
+    const minOrbit = parentR + childRadius * (window.orbScale || 1) + 12;
+    let rawOrbit = (parentR + 60 + (i * 0.71 + 1.4) * maxChildOrbit / childCount) * (0.7 + 0.23 * orbitWobble);
+    const orbitRadius = Math.max(rawOrbit, minOrbit);
+    const ellipseA = orbitRadius * 1.3 * (0.97 + 0.07 * Math.sin(now * 0.00013 + i));
+    const ellipseB = orbitRadius * 1.1 * (0.97 + 0.07 * Math.cos(now * 0.00016 + i * 2));
+    const angle = baseAngle + Math.sin(now * 0.00009 + i * 1.7) * 0.22;
+    const dragAngle = orbMorphDirections[i + 1];
+    const dx = Math.cos(dragAngle) * state.drag;
+    const dy = Math.sin(dragAngle) * state.drag;
+    const x = window.parentCenter.x + Math.cos(angle) * ellipseA + dx;
+    const y = window.parentCenter.y + Math.sin(angle) * ellipseB + dy;
+    const scale = window.orbScale || 1;
+    const cR = (childRadius + state.drag * 0.08) * scale;
+    const cAmp = (childAmp + Math.abs(state.drag) * 0.006) * scale;
+    const morphT = now * 0.0005 + i * 10;
+    const childPath = generateSuperSmoothBlob(x * scale + (1 - scale) * window.parentCenter.x, y * scale + (1 - scale) * window.parentCenter.y, cR, childPoints, morphT, cAmp, i);
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", childPath);
+    path.setAttribute("fill", `url(#${childGradIds[i]})`);
+    // Fade out as dragTarget increases, but trigger instant dissolve/appear
+    const fadeStart = 40, fadeEnd = 340;
+    const fade = Math.min(1, Math.max(0, (fadeEnd - Math.abs(state.dragTarget)) / (fadeEnd - fadeStart)));
+    // Track last visible state
+    if (state.wasVisible === undefined) state.wasVisible = fade > 0.5;
+    // Start dissolving into particles as soon as fade < 0.5
+    if (fade < 0.5 && fade > 0.05) {
+      const color = lerpColor(fam[0], fam[1], tcol);
+      // Emit more particles as fade approaches zero
+      const emission = Math.ceil((0.5 - fade) * 12); // up to 6 particles per frame
+      emitParticles(x, y, color, emission, i, now);
+      path.setAttribute("opacity", fade * 0.95);
+    }
+    // If orb just became invisible, emit a final burst and hide
+    else if (state.wasVisible && fade <= 0.05) {
+      const color = lerpColor(fam[0], fam[1], tcol);
+      emitParticles(x, y, color, 12, i, now); // big burst
+      path.setAttribute("opacity", 0);
+      state.wasVisible = false;
+    }
+    // If orb just became visible, emit appear particles and show
+    else if (!state.wasVisible && fade > 0.05) {
+      const color = lerpColor(fam[0], fam[1], tcol);
+      emitParticles(x, y, color, 9, i, now);
+      path.setAttribute("opacity", fade * 0.95);
+      state.wasVisible = true;
+    } else {
+      // Normal fade
+      path.setAttribute("opacity", fade * 0.95);
+    }
+    childrenGroup.appendChild(path);
+  }
+  // Animate and render particles
+  animateParticles();
+  requestAnimationFrame(animate);
+}
+// --- Cosmic particle system ---
+const particlesGroup = document.getElementById('particles');
+let particles = [];
+
+function animateParticles() {
+  // Update and render particles
+  particles = particles.filter(p => p.life > 0);
+  particlesGroup.innerHTML = '';
+  for (const p of particles) {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vx *= 0.98;
+    p.vy *= 0.98;
+    p.life -= p.decay;
+    p.opacity = Math.max(0, p.life);
+    const circ = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circ.setAttribute("cx", p.x);
+    circ.setAttribute("cy", p.y);
+    circ.setAttribute("r", p.r * p.opacity);
+    circ.setAttribute("fill", p.color);
+    circ.setAttribute("opacity", p.opacity * 0.7);
+    particlesGroup.appendChild(circ);
+  }
+}
+
+function emitParticles(x, y, color, count = 3, i = 0, now = 0) {
+  for (let j = 0; j < count; j++) {
+    // Add a sparkle: random hue offset
+    let h = (i * 67 + now * 0.018) % 360 + (Math.random() - 0.5) * 24; // sparkle
+    let s = 85 + Math.random() * 10;
+    let l = 55 + Math.random() * 20;
+    const particleColor = hslToHex(h, s, l);
+    const angle = Math.random() * 2 * Math.PI;
+    const speed = 0.4 + Math.random() * 0.7; // slower
+    const vx = Math.cos(angle) * speed;
+    const vy = Math.sin(angle) * speed;
+    particles.push({
+      x, y,
+      vx, vy,
+      r: 1.1 + Math.random() * 1.2, // much smaller
+      life: 0.6, // fades faster
+      decay: 0.025 + Math.random() * 0.015, // fades faster
+      color: particleColor,
+      opacity: 0.45 // more subtle
+    });
+  }
+}
+animate();
+</script>
+
+</body></html>
