@@ -389,17 +389,17 @@
         // Parent orb animation with organic drift and more pronounced morphing
         // Animate parent orb's position with slow, organic drift
         const {vw, vh} = window.viewportSize || {vw: window.innerWidth, vh: window.innerHeight};
-        // Keep the parent orb absolutely fixed behind the title with almost no drift
-        // Use extremely tiny drift values to ensure title never exceeds orb borders
-        const px = window.parentCenterBase.x + Math.sin(now * 0.00011) * vw * 0.002 + Math.cos(now * 0.00007) * vw * 0.001;
-        const py = window.parentCenterBase.y + Math.cos(now * 0.00009) * vh * 0.002 + Math.sin(now * 0.00016) * vh * 0.001;
+        // Keep the parent orb absolutely fixed behind the title with no drift
+        // Use zero drift to ensure title never exceeds orb borders
+        const px = window.parentCenterBase.x;
+        const py = window.parentCenterBase.y;
         window.parentCenter = {x: px, y: py};
         
 
         const parentMorphT = now * 0.0004;
-        // Make the parent orb match the size in the first image
-        const parentR = 140 * scale; // Larger size to match the first image
-        const parentAmp = 0.6 * scale; // Moderate morphing for visual interest
+        // Make the parent orb smaller but still large enough to contain the title
+        const parentR = 90 * scale; // Smaller size
+        const parentAmp = 0.3 * scale; // Minimal morphing to ensure title never exceeds borders
         const parentPath = generateSuperSmoothBlob(
           window.parentCenter.x, 
           window.parentCenter.y, 
@@ -423,10 +423,10 @@
           const angle = (Math.PI * 2 * i / childCount) + (now * 0.00035 * (0.6 + i * 0.1));
           
           // Ensure minimum safe distance to prevent overlap with parent orb
-          // Parent orb radius is 140 * scale, child orb radius is 36 * scale
+          // Parent orb radius is 90 * scale, child orb radius is 18 * scale
           // Add buffer to ensure they never overlap even with morphing
-          const parentRadius = 140 * scale;
-          const childRadius = 36 * scale;
+          const parentRadius = 90 * scale;
+          const childRadius = 18 * scale; // Half the original size
           const safeMinDistance = parentRadius + childRadius + 50 * scale; // Extra 50px buffer
           
           // Vary the distances to create a natural solar system effect
@@ -439,10 +439,10 @@
           
           const childPath = generateSuperSmoothBlob(
             x, y, 
-            36 * scale, // childRadius 
+            18 * scale, // childRadius - half the original size
             48, // childPoints
             parentMorphT + i * 0.5, 
-            0.5 * scale // childAmp
+            0.3 * scale // childAmp - reduced morphing
           );
           
           childOrbs[i].setAttribute("d", childPath);
@@ -463,7 +463,7 @@
       <div class="hero-visual-layout" style="min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 1;">
         <div class="hero-content" style="text-align: center; max-width: 900px; padding: 0 20px; position: relative;">
           <!-- Title positioned directly on top of the orb -->
-          <h1 style="margin-bottom: 1.5rem; position: relative; z-index: 5; font-size: 3.2rem; max-width: 320px; margin-left: auto; margin-right: auto; margin-top: -50px;">
+          <h1 style="margin-bottom: 1.5rem; position: relative; z-index: 5; font-size: 2.2rem; max-width: 180px; margin-left: auto; margin-right: auto; margin-top: -30px;">
             Sales<br>
             <span class="gradient-text">Intelligence</span><br>
             <span class="hero-evolved">Evolved</span>
