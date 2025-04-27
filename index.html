@@ -419,12 +419,20 @@
           
           // Position and animate each child to orbit around the parent
           // Each child has its own orbit speed and distance
-          const angle = (Math.PI * 2 * i / childCount) + (now * 0.0002 * (0.2 + i * 0.05));
-          // Vary the distances to create a more natural solar system effect
-          // First child closest, last child furthest
-          const baseDistance = 120 * scale;
-          const distanceMultiplier = 1 + (i * 0.3); // Increase distance for each child
-          const distance = baseDistance * distanceMultiplier;
+          // Increase orbit speed by 2-3x and vary by child index
+          const angle = (Math.PI * 2 * i / childCount) + (now * 0.0005 * (0.7 + i * 0.15));
+          
+          // Ensure minimum safe distance to prevent overlap with parent orb
+          // Parent orb radius is 100 * scale, child orb radius is 36 * scale
+          // Add buffer to ensure they never overlap even with morphing
+          const parentRadius = 100 * scale;
+          const childRadius = 36 * scale;
+          const safeMinDistance = parentRadius + childRadius + 50 * scale; // Extra 50px buffer
+          
+          // Vary the distances to create a natural solar system effect
+          // First child closest (but still outside safe zone), last child furthest
+          const orbitSpacing = 60 * scale; // Space between orbits
+          const distance = safeMinDistance + (i * orbitSpacing);
           // Calculate position based on angle and distance from parent
           const x = window.parentCenter.x + Math.cos(angle) * distance;
           const y = window.parentCenter.y + Math.sin(angle) * distance;
