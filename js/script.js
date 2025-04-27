@@ -302,90 +302,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
      // --- Initialization Functions ---
 
-    // Lag-Free Canvas Starfield (max performance)
-function startCanvasStarfield() {
-    const canvas = document.getElementById('stars-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-    const numStars = 40;
-    const stars = [];
-    for (let i = 0; i < numStars; i++) {
-        stars.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            r: Math.random() * 1.2 + 0.3,
-            o: Math.random() * 0.5 + 0.5,
-            vx: (Math.random() - 0.5) * 0.02,
-            vy: (Math.random() - 0.5) * 0.02,
-            tw: Math.random() * Math.PI * 2
-        });
-    }
-    function draw() {
-        ctx.clearRect(0, 0, width, height);
-        for (let star of stars) {
-            ctx.globalAlpha = star.o * (0.7 + 0.3 * Math.sin(star.tw));
-            ctx.beginPath();
-            ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-            ctx.fillStyle = '#fff';
-            ctx.shadowBlur = 0; // No glow
-            ctx.fill();
-            star.x += star.vx;
-            star.y += star.vy;
-            star.tw += 0.02 + Math.random() * 0.01;
-            // Wrap around
-            if (star.x < 0) star.x = width;
-            if (star.x > width) star.x = 0;
-            if (star.y < 0) star.y = height;
-            if (star.y > height) star.y = 0;
-        }
-        ctx.globalAlpha = 1;
-        setTimeout(draw, 33); // ~30fps
-    }
-    draw();
-    window.addEventListener('resize', () => {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-    });
-}
-document.addEventListener('DOMContentLoaded', startCanvasStarfield);
+    
 
 
-    // --- FORCE STARS TO SHOW IN ALL .stars DIVS ON PAGE LOAD ---
-    function populateStarsInAllSections() {
-        // Only target .stars inside .parallax (the neon section)
-        document.querySelectorAll('.parallax .stars').forEach(starsDiv => {
-            // Removed DOM-based starfield code
-            createStarryBackgroundFor(starsDiv);
-            starsDiv.style.opacity = '1';
-            starsDiv.style.display = 'block';
-        });
-    }
-    function forcePopulateStars() {
-    const firstStarsDiv = document.querySelector('.stars');
-    if (firstStarsDiv) {
-        createStarryBackground(firstStarsDiv);
-        firstStarsDiv.style.opacity = '1';
-        firstStarsDiv.style.display = 'block';
-    }
-}
-    document.addEventListener('DOMContentLoaded', forcePopulateStars);
-    window.addEventListener('resize', forcePopulateStars);
-    // Fallback: try again after short delay in case something overwrites
-    setTimeout(forcePopulateStars, 1000);
-    setTimeout(forcePopulateStars, 3000);
-
-    function populateStarsInAllSections() {
-        // Only target .stars inside .parallax (the neon section)
-        document.querySelectorAll('.parallax .stars').forEach(starsDiv => {
-            createStarryBackgroundFor(starsDiv);
-            starsDiv.style.opacity = '1';
-            starsDiv.style.display = 'block';
         });
     }
 
