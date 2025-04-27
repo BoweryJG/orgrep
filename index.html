@@ -331,7 +331,7 @@
         window.parentCenter = {x: parentX, y: parentY};
         // Store viewport size for calculations
         window.viewportSize = {vw, vh};
-        window.orbScale = scale;
+        window.orbScale = scale * 0.75;
       }
       
       adjustSVGSize();
@@ -408,6 +408,13 @@
         );
         parentOrb.setAttribute('d', parentPath);
         
+        // Move title with orb
+        const titleEl = document.getElementById('orbTitle');
+        if (titleEl) {
+          titleEl.style.left = window.parentCenter.x + 'px';
+          titleEl.style.top  = window.parentCenter.y + 'px';
+        }
+        
         // Children orbs
         for (let i = 0; i < childCount; i++) {
           // Dynamic color family for each child
@@ -469,7 +476,7 @@
                 <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
                 <g id="children"></g>
               </svg>
-              <h1 class="orb-title-headline" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; font-size: 1.15rem; max-width: 92px; text-align: center; margin: 0; padding: 0;">
+              <h1 id="orbTitle" class="orb-title-headline" style="position: absolute; transform: translate(-50%, -50%) scale(0.75); transform-origin: center; z-index: 2; font-size: 1.15rem; max-width: 92px; text-align: center; margin: 0; padding: 0;">
                 Sales<br>
                 <span class="gradient-text">Intelligence</span><br>
                 <span class="hero-evolved">Evolved</span>
