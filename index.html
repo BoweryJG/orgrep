@@ -172,41 +172,99 @@
     </script>
 
     <section class="hero-impact" id="hero">
-      <!-- Orbs Background Layer - Positioned above and to the right of title -->
+      <!-- Heading Orb - Positioned above and to the right of title -->
       <div class="hero-orbs-bg">
-        <svg id="orbSVG" viewBox="-100 -100 1000 1000" style="width:300px; height:300px; display:block; position:absolute; top:20%; right:15%; z-index:0; pointer-events:none;">
+        <svg id="orbSVG" style="width:300px; height:300px; display:block; position:absolute; top:20%; right:15%; z-index:0; pointer-events:none;">
           <defs>
-              <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
-                <stop id="p0" offset="0%" stop-color="#00E5FF"/>
-                <stop id="p1" offset="100%" stop-color="#5B3CFF"/>
-                <stop id="p2" offset="50%" stop-color="#00E5FF"/>
-                <stop id="p3" offset="75%" stop-color="#5B3CFF"/>
-              </radialGradient>
-              <radialGradient id="childGrad0" cx="50%" cy="50%" r="70%">
-                <stop id="c0s0" offset="0%" stop-color="#B3D8FF"/>
-                <stop id="c0s1" offset="100%" stop-color="#0A192F"/>
-              </radialGradient>
-              <radialGradient id="childGrad1" cx="50%" cy="50%" r="70%">
-                <stop id="c1s0" offset="0%" stop-color="#C6FFD9"/>
-                <stop id="c1s1" offset="100%" stop-color="#145A32"/>
-              </radialGradient>
-              <radialGradient id="childGrad2" cx="50%" cy="50%" r="70%">
-                <stop id="c2s0" offset="0%" stop-color="#FFB3C9"/>
-                <stop id="c2s1" offset="100%" stop-color="#7B1F3A"/>
-              </radialGradient>
-              <radialGradient id="childGrad3" cx="50%" cy="50%" r="70%">
-                <stop id="c3s0" offset="0%" stop-color="#E0D1FF"/>
-                <stop id="c3s1" offset="100%" stop-color="#311B4F"/>
-              </radialGradient>
-              <radialGradient id="childGrad4" cx="50%" cy="50%" r="70%">
-                <stop id="c4s0" offset="0%" stop-color="#FFF5B3"/>
-                <stop id="c4s1" offset="100%" stop-color="#4B3800"/>
-              </radialGradient>
-            </defs>
-            <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
-            <g id="children"></g>
+            <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
+              <stop id="p0" offset="0%" stop-color="#00E5FF"/>
+              <stop id="p1" offset="100%" stop-color="#5B3CFF"/>
+              <stop id="p2" offset="50%" stop-color="#00E5FF"/>
+              <stop id="p3" offset="75%" stop-color="#5B3CFF"/>
+            </radialGradient>
+          </defs>
+          <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
         </svg>
       </div>
+      
+      <!-- Add the headingorb animation script -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          function generateSuperSmoothBlob(cx, cy, r, points, t, amp=1, phase=0) {
+            const pts = [];
+            for (let i = 0; i < points; i++) {
+              const angle = (Math.PI * 2 * i) / points;
+              const noise =
+                Math.sin(angle * 3 + t * 0.7 + phase) * 4 * amp +
+                Math.sin(angle * 5 - t * 1.1 + phase) * 2 * amp +
+                Math.sin(angle * 2 + t * 1.7 + phase) * 1.2 * amp;
+              const rad = r + noise;
+              pts.push({
+                x: cx + Math.cos(angle) * rad,
+                y: cy + Math.sin(angle) * rad
+              });
+            }
+            let d = "";
+            for (let i = 0; i < points; i++) {
+              const p0 = pts[(i - 1 + points) % points];
+              const p1 = pts[i];
+              const p2 = pts[(i + 1) % points];
+              const p3 = pts[(i + 2) % points];
+              if (i === 0) {
+                d += `M${p1.x.toFixed(2)},${p1.y.toFixed(2)}`;
+              }
+              const c1x = p1.x + (p2.x - p0.x) / 6;
+              const c1y = p1.y + (p2.y - p0.y) / 6;
+              const c2x = p2.x - (p3.x - p1.x) / 6;
+              const c2y = p2.y - (p3.y - p1.y) / 6;
+              d += ` C${c1x.toFixed(2)},${c1y.toFixed(2)} ${c2x.toFixed(2)},${c2y.toFixed(2)} ${p2.x.toFixed(2)},${p2.y.toFixed(2)}`;
+            }
+            d += "Z";
+            return d;
+          }
+
+          const parentRadius = 40;
+          const orbMorphDirection = Math.PI / 2;
+          const orbMorphSpeed = 0.012;
+          
+          function makeOrbState() {
+            return {
+              time: 0,
+              parentCenter: { x: 150, y: 150 },
+              parentPath: "",
+              parentHue: 190,
+              parentHueTarget: 190,
+              parentHueVelocity: 0
+            };
+          }
+          
+          const orbState = makeOrbState();
+          const parentOrb = document.getElementById('parentOrb');
+          
+          function animate() {
+            orbState.time += 0.016;
+            
+            // Generate parent orb path
+            orbState.parentPath = generateSuperSmoothBlob(
+              orbState.parentCenter.x,
+              orbState.parentCenter.y,
+              parentRadius,
+              12,
+              orbState.time,
+              0.2
+            );
+            
+            // Apply the path to the SVG
+            if (parentOrb) {
+              parentOrb.setAttribute('d', orbState.parentPath);
+            }
+            
+            requestAnimationFrame(animate);
+          }
+          
+          animate();
+        });
+      </script>
       
       <!-- Content Layer - Centered title -->
       <div class="hero-visual-layout" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
