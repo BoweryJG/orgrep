@@ -395,17 +395,11 @@
         const py = window.parentCenterBase.y + Math.cos(now * 0.00009) * vh * 0.01 + Math.sin(now * 0.00016) * vh * 0.005;
         window.parentCenter = {x: px, y: py};
         
-        // Update the title position to follow the parent orb
-        const titleElement = document.getElementById('dynamic-title');
-        if (titleElement) {
-          titleElement.style.left = px + 'px';
-          titleElement.style.top = py + 'px';
-        }
-        
+
         const parentMorphT = now * 0.0004;
-        // Make the parent orb just large enough to cover the three title lines
-        const parentR = 120 * scale; // Original smaller size to match just the title
-        const parentAmp = 1.0 * scale; // Original morphing amount
+        // Make the parent orb smaller, just enough for a visual accent
+        const parentR = 80 * scale; // Much smaller size
+        const parentAmp = 0.8 * scale; // Slightly reduced morphing to keep it compact
         const parentPath = generateSuperSmoothBlob(
           window.parentCenter.x, 
           window.parentCenter.y, 
@@ -429,9 +423,9 @@
           const angle = (Math.PI * 2 * i / childCount) + (now * 0.00035 * (0.6 + i * 0.1));
           
           // Ensure minimum safe distance to prevent overlap with parent orb
-          // Parent orb radius is 120 * scale, child orb radius is 36 * scale
+          // Parent orb radius is 80 * scale, child orb radius is 36 * scale
           // Add buffer to ensure they never overlap even with morphing
-          const parentRadius = 120 * scale;
+          const parentRadius = 80 * scale;
           const childRadius = 36 * scale;
           const safeMinDistance = parentRadius + childRadius + 50 * scale; // Extra 50px buffer
           
@@ -465,15 +459,22 @@
 
     <section class="hero-impact" id="hero">
       
-      <!-- Content Layer - Original layout with everything together -->
-      <div class="hero-visual-layout" style="display: flex; justify-content: center; align-items: center; min-height: 90vh; position: relative; z-index: 1;">
-        <div class="hero-content">
-          <h1 style="text-align: center;">
-            Sales<br>
-            <span class="gradient-text">Intelligence</span><br>
-            <span class="hero-evolved">Evolved</span>
-          </h1>
-          <p class="hero-subhead" style="text-align: center;">
+      <!-- Content Layer with title anchored to parent orb -->
+      <div class="hero-visual-layout" style="min-height: 90vh; position: relative; z-index: 1;">
+        <!-- Title positioned to match parent orb location -->
+        <div id="title-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+          <div id="dynamic-title" class="hero-content" style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+            <h1 style="margin: 0 0 0.5em 0;">
+              Sales<br>
+              <span class="gradient-text">Intelligence</span><br>
+              <span class="hero-evolved">Evolved</span>
+            </h1>
+          </div>
+        </div>
+        
+        <!-- Subtitle and CTA positioned below -->
+        <div style="position: absolute; top: 50%; left: 0; width: 100%; text-align: center;">
+          <p class="hero-subhead" style="text-align: center; max-width: 800px; margin: 0 auto 2rem auto;">
             Give your team the unfair advantage of AI-driven psychology—decode what makes buyers say "yes," eliminate guesswork, and engineer success at every stage of the sales journey.
           </p>
           <button class="cta-button hero-cta" style="margin: 0 auto;">Start Winning More Deals</button>
