@@ -33,9 +33,10 @@
   position: absolute;
 }
 
-/* Make parent orb more visible */
+/* Make parent orb more vibrant with enhanced glow */
 #parentOrb {
-  filter: drop-shadow(0 0 10px rgba(138, 79, 255, 0.5));
+  filter: drop-shadow(0 0 20px rgba(255, 183, 0, 0.8));
+  opacity: 1 !important;
 }
 
 /* Enhance particle effects */
