@@ -405,8 +405,8 @@
         const parentMorphT = now * 0.0004;
         // Make the parent orb large enough to contain the title text
         // Increased radius to ensure the title fits inside
-        const parentR = 180 * scale; // Larger radius to contain the title
-        const parentAmp = 0.8 * scale; // Slightly less pronounced morphing to maintain title containment
+        const parentR = 220 * scale; // Even larger radius to fully contain the title
+        const parentAmp = 0.6 * scale; // Less pronounced morphing to maintain title containment
         const parentPath = generateSuperSmoothBlob(
           window.parentCenter.x, 
           window.parentCenter.y, 
@@ -430,9 +430,9 @@
           const angle = (Math.PI * 2 * i / childCount) + (now * 0.00035 * (0.6 + i * 0.1));
           
           // Ensure minimum safe distance to prevent overlap with parent orb
-          // Parent orb radius is now 180 * scale, child orb radius is 36 * scale
+          // Parent orb radius is now 220 * scale, child orb radius is 36 * scale
           // Add buffer to ensure they never overlap even with morphing
-          const parentRadius = 180 * scale;
+          const parentRadius = 220 * scale;
           const childRadius = 36 * scale;
           const safeMinDistance = parentRadius + childRadius + 50 * scale; // Extra 50px buffer
           
@@ -466,16 +466,15 @@
 
     <section class="hero-impact" id="hero">
       
-      <!-- Content Layer - Title inside the orb -->
+      <!-- Content Layer - Title properly centered inside the orb -->
       <div class="hero-visual-layout" style="min-height: 100vh; position: relative; z-index: 1;">
-        <div id="title-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; pointer-events: none;">
-          <div class="hero-content" style="position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
-            <h1 style="text-align: center; font-size: 3.5rem; margin-bottom: 0; color: #fff; text-shadow: 0 0 15px rgba(0,0,0,0.5);">
-              Sales<br>
-              <span class="gradient-text">Intelligence</span><br>
-              <span class="hero-evolved">Evolved</span>
-            </h1>
-          </div>
+        <!-- The title is positioned in the exact center of the viewport, matching the orb position -->
+        <div class="hero-content" style="position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%); z-index: 2; text-align: center;">
+          <h1 style="font-size: 3.2rem; margin: 0; color: #fff; text-shadow: 0 0 15px rgba(0,0,0,0.5);">
+            Sales<br>
+            <span class="gradient-text">Intelligence</span><br>
+            <span class="hero-evolved">Evolved</span>
+          </h1>
         </div>
       </div>
       
