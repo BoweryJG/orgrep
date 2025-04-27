@@ -413,36 +413,25 @@
         );
         parentOrb.setAttribute('d', parentPath);
         
-        // Move and constrain title with orb
+        // Get title position to center orb behind it
         const titleEl = document.getElementById('orbTitle');
         if (titleEl) {
-          // Calculate smooth position with organic drift
-          const driftScale = 0.15;
+          const titleRect = titleEl.getBoundingClientRect();
+          const titleCenter = {
+            x: titleRect.left + titleRect.width / 2,
+            y: titleRect.top + titleRect.height / 2
+          };
+          
+          // Add very subtle drift to orb position
+          const driftScale = 0.02;
           const driftX = Math.sin(now * 0.0001) * parentR * driftScale;
           const driftY = Math.cos(now * 0.00015) * parentR * driftScale;
           
-          // Update position with drift
-          const posX = window.parentCenter.x + driftX;
-          const posY = window.parentCenter.y + driftY;
-          
-          // Get the current morph state
-          const morphPhase = Math.sin(parentMorphT * 2 * Math.PI);
-          const effectiveRadius = parentR * (1 + morphPhase * 0.1);
-          
-          // Get title dimensions and calculate scale
-          const titleRect = titleEl.getBoundingClientRect();
-          const titleDiag = Math.hypot(titleRect.width, titleRect.height) / 2;
-          const minScale = 0.5; // Never scale smaller than 50%
-          const padding = effectiveRadius * 0.2; // 20% of radius as padding
-          
-          // Calculate scale to fit within morphing boundary
-          const targetScale = Math.max(minScale, (effectiveRadius - padding) / titleDiag);
-          
-          // Apply position and scale with smooth transition
-          titleEl.style.transition = 'transform 0.5s ease-out';
-          titleEl.style.left = `${posX}px`;
-          titleEl.style.top = `${posY}px`;
-          titleEl.style.transform = `translate(-50%, -50%) scale(${targetScale})`;
+          // Update orb center to follow title
+          window.parentCenter = {
+            x: titleCenter.x + driftX,
+            y: titleCenter.y + driftY
+          };
         }
         }
         
@@ -507,10 +496,11 @@
                 <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
                 <g id="children"></g>
               </svg>
-              <div class="orb-container" style="position: relative; width: 100%; height: 100vh; overflow: hidden;">
-              <h1 id="orbTitle" class="orb-title-headline" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; font-size: 4.5rem; text-align: center; margin: 0; padding: 0; white-space: nowrap; pointer-events: none; color: #fff; text-shadow: 0 0 20px rgba(0,255,198,0.5);">
-                Sales<br>
-                <span class="gradient-text">Intelligence</span><br>
+              <div class="hero-content" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding-top: 4rem;">
+              <h1 id="orbTitle" class="orb-title-headline" style="position: relative; text-align: center; font-size: 3.8rem; margin: 0; padding: 0; color: #fff; text-shadow: 0 0 20px rgba(0,255,198,0.5); line-height: 1.2;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                <span>Sales</span>
+                <span class="gradient-text">Intelligence</span>
                 <span class="hero-evolved">Evolved</span>
               </h1>
             </div>
