@@ -391,10 +391,10 @@
         // Parent orb animation with organic drift and more pronounced morphing
         // Animate parent orb's position with slow, organic drift
         const {vw, vh} = window.viewportSize || {vw: window.innerWidth, vh: window.innerHeight};
-        // Safe zone: parent can drift within a small area around the title
-        // Use smaller drift values to keep it closer to the title
-        const px = window.parentCenterBase.x + Math.sin(now * 0.00011) * vw * 0.03 + Math.cos(now * 0.00007) * vw * 0.02;
-        const py = window.parentCenterBase.y + Math.cos(now * 0.00009) * vh * 0.02 + Math.sin(now * 0.00016) * vh * 0.015;
+        // Keep the parent orb strictly behind the title with minimal drift
+        // Use extremely small drift values to ensure it never leaves the title area
+        const px = window.parentCenterBase.x + Math.sin(now * 0.00011) * vw * 0.01 + Math.cos(now * 0.00007) * vw * 0.005;
+        const py = window.parentCenterBase.y + Math.cos(now * 0.00009) * vh * 0.01 + Math.sin(now * 0.00016) * vh * 0.005;
         window.parentCenter = {x: px, y: py};
         
         const parentMorphT = now * 0.0004;
@@ -417,9 +417,15 @@
           document.getElementById(`c${i}s0`).setAttribute("stop-color", colorFamily[0]);
           document.getElementById(`c${i}s1`).setAttribute("stop-color", colorFamily[1]);
           
-          // Position and animate each child
+          // Position and animate each child to orbit around the parent
+          // Each child has its own orbit speed and distance
           const angle = (Math.PI * 2 * i / childCount) + (now * 0.0002 * (0.2 + i * 0.05));
-          const distance = (120 + i * 40) * scale;
+          // Vary the distances to create a more natural solar system effect
+          // First child closest, last child furthest
+          const baseDistance = 120 * scale;
+          const distanceMultiplier = 1 + (i * 0.3); // Increase distance for each child
+          const distance = baseDistance * distanceMultiplier;
+          // Calculate position based on angle and distance from parent
           const x = window.parentCenter.x + Math.cos(angle) * distance;
           const y = window.parentCenter.y + Math.sin(angle) * distance;
           
