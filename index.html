@@ -389,9 +389,14 @@
         // Parent orb animation with organic drift and more pronounced morphing
         // Animate parent orb's position with slow, organic drift
         const {vw, vh} = window.viewportSize || {vw: window.innerWidth, vh: window.innerHeight};
-        // Center orb in SVG viewBox
-        const px = window._dynamicOrbRadius;
-        const py = window._dynamicOrbRadius;
+        // Calculate smooth orb center position
+        const baseX = window._dynamicOrbRadius;
+        const baseY = window._dynamicOrbRadius;
+        // Add subtle organic movement
+        const driftX = Math.sin(now * 0.0001) * 5;
+        const driftY = Math.cos(now * 0.00015) * 5;
+        const px = baseX + driftX;
+        const py = baseY + driftY;
         window.parentCenter = {x: px, y: py};
         
         const parentMorphT = now * 0.0004;
@@ -408,11 +413,26 @@
         );
         parentOrb.setAttribute('d', parentPath);
         
-        // Move title with orb
+        // Move and constrain title with orb
         const titleEl = document.getElementById('orbTitle');
         if (titleEl) {
+          // Get the current morph radius at this point in time
+          const morphOffset = parentAmp * Math.sin(parentMorphT * 2 * Math.PI);
+          const effectiveRadius = parentR + morphOffset;
+          
+          // Calculate title position
           titleEl.style.left = window.parentCenter.x + 'px';
-          titleEl.style.top  = window.parentCenter.y + 'px';
+          titleEl.style.top = window.parentCenter.y + 'px';
+          
+          // Get title dimensions
+          const titleRect = titleEl.getBoundingClientRect();
+          const titleDiag = Math.hypot(titleRect.width, titleRect.height) / 2;
+          const padding = Math.max(20, effectiveRadius * 0.1); // Dynamic padding based on radius
+          
+          // Scale title to stay within morphing boundary
+          const scale = Math.min(1, (effectiveRadius - padding) / titleDiag);
+          titleEl.style.transform = `translate(-50%, -50%) scale(${scale})`;
+          }
         }
         
         // Children orbs
