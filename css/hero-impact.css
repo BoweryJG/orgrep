@@ -24,7 +24,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 70vh;
 }
 
 .hero-visual-layout {
@@ -36,10 +35,11 @@
 }
 
 .orb-container {
-  margin-bottom: 1.5rem;
-  align-self: flex-end;
-  margin-right: 10vw;
+  margin-bottom: -1.2rem;
+  margin-top: 0;
+  align-self: center;
   position: static;
+  transform: translateX(40px);
   border: none;
   background: none;
   padding: 0;
