@@ -306,25 +306,24 @@
         svg.setAttribute('width', '100%');
         svg.setAttribute('height', '100%');
         
-        // Position the parent orb to align with "Sales Intelligence Evolved"
-        // which is typically centered horizontally and at around 40-45% of viewport height
+        // Position the parent orb to be centered ONLY over the three title lines
+        // "Sales Intelligence Evolved" - not including the subtitle
         let parentX, parentY;
         
         // Horizontal position: centered
         parentX = vw * 0.5;
         
-        // Vertical position: aligned with the title
-        // For desktop, this is typically around 40-45% of viewport height
-        // For mobile, it might be slightly higher due to responsive layout
+        // Vertical position: aligned with just the three title lines
+        // Move it higher to focus only on the main title, not the subtitle
         if (vw < 480) {
-          // Mobile: slightly higher
-          parentY = vh * 0.42;
+          // Mobile: higher position
+          parentY = vh * 0.35;
         } else if (vw < 768) {
-          // Tablet: middle
-          parentY = vh * 0.45;
+          // Tablet: higher position
+          parentY = vh * 0.38;
         } else {
-          // Desktop: aligned with title
-          parentY = vh * 0.45;
+          // Desktop: higher position
+          parentY = vh * 0.38;
         }
         
         // Store the base position (anchor point)
@@ -419,8 +418,8 @@
           
           // Position and animate each child to orbit around the parent
           // Each child has its own orbit speed and distance
-          // Moderate orbit speed - faster than original but not too fast
-          const angle = (Math.PI * 2 * i / childCount) + (now * 0.0003 * (0.6 + i * 0.1));
+          // Slightly faster orbit speed as requested
+          const angle = (Math.PI * 2 * i / childCount) + (now * 0.00035 * (0.6 + i * 0.1));
           
           // Ensure minimum safe distance to prevent overlap with parent orb
           // Parent orb radius is 100 * scale, child orb radius is 36 * scale
