@@ -389,8 +389,31 @@
         // Parent orb animation with organic drift and more pronounced morphing
         // Animate parent orb's position with slow, organic drift
         const {vw, vh} = window.viewportSize || {vw: window.innerWidth, vh: window.innerHeight};
-        // Keep the parent orb absolutely fixed behind the title with no drift
-        // Use zero drift to ensure title never exceeds orb borders
+        // Dynamically center orb behind title
+        const title = document.querySelector('.hero-content h1');
+        const orbContainer = document.querySelector('.orb-container');
+        if (title && orbContainer) {
+          // Get bounding boxes
+          const titleRect = title.getBoundingClientRect();
+          const orbRect = orbContainer.getBoundingClientRect();
+          // Calculate center of title relative to orb container
+          const cx = (titleRect.left + titleRect.right) / 2 - orbRect.left;
+          const cy = (titleRect.top + titleRect.bottom) / 2 - orbRect.top;
+          window.parentCenterBase = {x: cx, y: cy};
+
+          // Ensure title never exceeds orb border (with padding)
+          const orbRadius = 62; // px, not scaled yet
+          const minPadding = 8; // px
+          let titleRectCurrent = title.getBoundingClientRect();
+          let titleDiag = Math.sqrt(titleRectCurrent.width * titleRectCurrent.width + titleRectCurrent.height * titleRectCurrent.height) / 2;
+          let maxW = parseFloat(window.getComputedStyle(title).maxWidth);
+          while (titleDiag + minPadding > orbRadius && maxW > 48) {
+            maxW -= 2;
+            title.style.maxWidth = maxW + 'px';
+            titleRectCurrent = title.getBoundingClientRect();
+            titleDiag = Math.sqrt(titleRectCurrent.width * titleRectCurrent.width + titleRectCurrent.height * titleRectCurrent.height) / 2;
+          }
+        }
         const px = window.parentCenterBase.x;
         const py = window.parentCenterBase.y;
         window.parentCenter = {x: px, y: py};
