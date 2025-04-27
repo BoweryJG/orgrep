@@ -172,16 +172,16 @@
     </script>
 
     <section class="hero-impact" id="hero">
-      <!-- Header Orb - Positioned above and to the right of title -->
+      <!-- Responsive Orbs Background Layer -->
       <div class="hero-orbs-bg">
-        <svg id="orbSVG" style="width:300px; height:300px; display:block; position:absolute; top:20%; right:15%; z-index:0; pointer-events:none;">
+        <svg id="orbSVG" style="width:100%; height:100%; display:block; position:absolute; top:0; left:0; z-index:0; pointer-events:none;">
           <g id="particles"></g>
           <defs>
             <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
-              <stop id="p0" offset="0%" stop-color="#7CFC00"/>
-              <stop id="p1" offset="100%" stop-color="#32CD32"/>
-              <stop id="p2" offset="50%" stop-color="#7CFC00"/>
-              <stop id="p3" offset="75%" stop-color="#32CD32"/>
+              <stop id="p0" offset="0%" stop-color="#00E5FF"/>
+              <stop id="p1" offset="100%" stop-color="#5B3CFF"/>
+              <stop id="p2" offset="50%" stop-color="#00E5FF"/>
+              <stop id="p3" offset="75%" stop-color="#5B3CFF"/>
             </radialGradient>
             <radialGradient id="childGrad0" cx="50%" cy="50%" r="70%">
               <stop id="c0s0" offset="0%" stop-color="#B3D8FF"/>
@@ -209,161 +209,8 @@
         </svg>
       </div>
       
-      <!-- Header orb animation script -->
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          // --- Utility functions ---
-          function lerp(a, b, t) { return a + (b - a) * t; }
-          function hslToHex(h, s, l) {
-            h /= 360; s /= 100; l /= 100;
-            let r, g, b;
-            if (s === 0) { r = g = b = l; }
-            else {
-              const hue2rgb = (p, q, t) => {
-                if (t < 0) t += 1;
-                if (t > 1) t -= 1;
-                if (t < 1/6) return p + (q - p) * 6 * t;
-                if (t < 1/2) return q;
-                if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-                return p;
-              };
-              const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-              const p = 2 * l - q;
-              r = hue2rgb(p, q, h + 1/3);
-              g = hue2rgb(p, q, h);
-              b = hue2rgb(p, q, h - 1/3);
-            }
-            return "#" + [r, g, b].map(x => Math.round(x * 255).toString(16).padStart(2, "0")).join("");
-          }
-          function lerpColor(a, b, t) {
-            const ah = parseInt(a.replace('#', ''), 16), bh = parseInt(b.replace('#', ''), 16);
-            const ar = (ah >> 16) & 0xff, ag = (ah >> 8) & 0xff, ab = ah & 0xff;
-            const br = (bh >> 16) & 0xff, bg = (bh >> 8) & 0xff, bb = bh & 0xff;
-            const rr = Math.round(ar + (br - ar) * t);
-            const rg = Math.round(ag + (bg - ag) * t);
-            const rb = Math.round(ab + (bb - ab) * t);
-            return '#' + ((1 << 24) + (rr << 16) + (rg << 8) + rb).toString(16).slice(1);
-          }
-          
-          function generateSuperSmoothBlob(cx, cy, r, points, t, amp=1, phase=0) {
-            const pts = [];
-            for (let i = 0; i < points; i++) {
-              const angle = (Math.PI * 2 * i) / points;
-              const noise =
-                Math.sin(angle * 3 + t * 0.7 + phase) * 4 * amp +
-                Math.sin(angle * 5 - t * 1.1 + phase) * 2 * amp +
-                Math.sin(angle * 2 + t * 1.7 + phase) * 1.2 * amp;
-              const rad = r + noise;
-              pts.push({
-                x: cx + Math.cos(angle) * rad,
-                y: cy + Math.sin(angle) * rad
-              });
-            }
-            let d = "";
-            for (let i = 0; i < points; i++) {
-              const p0 = pts[(i - 1 + points) % points];
-              const p1 = pts[i];
-              const p2 = pts[(i + 1) % points];
-              const p3 = pts[(i + 2) % points];
-              if (i === 0) {
-                d += `M${p1.x.toFixed(2)},${p1.y.toFixed(2)}`;
-              }
-              const c1x = p1.x + (p2.x - p0.x) / 6;
-              const c1y = p1.y + (p2.y - p0.y) / 6;
-              const c2x = p2.x - (p3.x - p1.x) / 6;
-              const c2y = p2.y - (p3.y - p1.y) / 6;
-              d += ` C${c1x.toFixed(2)},${c1y.toFixed(2)} ${c2x.toFixed(2)},${c2y.toFixed(2)} ${p2.x.toFixed(2)},${p2.y.toFixed(2)}`;
-            }
-            d += "Z";
-            return d;
-          }
-
-          // Configuration
-          const childCount = 5;
-          const parentRadius = 60;
-          const childRadius = 20;
-          const childPoints = 12;
-          const childAmp = 0.5;
-          
-          // Get DOM elements
-          const childrenGroup = document.getElementById('children');
-          const childOrbs = [];
-          const parentOrb = document.getElementById('parentOrb');
-          const particlesGroup = document.getElementById('particles');
-          
-          // Create child orbs
-          for (let i = 0; i < childCount; i++) {
-            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            path.setAttribute("fill", `url(#childGrad${i})`);
-            path.setAttribute("opacity", "0.9");
-            childrenGroup.appendChild(path);
-            childOrbs.push(path);
-          }
-          
-          // Animation state
-          const orbState = {
-            time: 0,
-            parentCenter: { x: 150, y: 150 },
-            parentPath: "",
-            childPoints: []
-          };
-          
-          // Initialize child points
-          for (let i = 0; i < childCount; i++) {
-            orbState.childPoints.push({
-              angle: (Math.PI * 2 * i) / childCount,
-              speed: 0.2 + Math.random() * 0.3,
-              distance: 80 + Math.random() * 40,
-              phase: Math.random() * Math.PI * 2
-            });
-          }
-          
-          // Animation loop
-          function animate() {
-            orbState.time += 0.016;
-            
-            // Generate parent orb path
-            orbState.parentPath = generateSuperSmoothBlob(
-              orbState.parentCenter.x,
-              orbState.parentCenter.y,
-              parentRadius,
-              12,
-              orbState.time,
-              0.2
-            );
-            
-            // Apply the path to the SVG
-            if (parentOrb) {
-              parentOrb.setAttribute('d', orbState.parentPath);
-            }
-            
-            // Animate child orbs
-            for (let i = 0; i < childCount; i++) {
-              const point = orbState.childPoints[i];
-              point.angle += point.speed * 0.01;
-              
-              const x = orbState.parentCenter.x + Math.cos(point.angle) * point.distance;
-              const y = orbState.parentCenter.y + Math.sin(point.angle) * point.distance;
-              
-              const childPath = generateSuperSmoothBlob(
-                x, y, childRadius, childPoints, 
-                orbState.time, childAmp, point.phase
-              );
-              
-              if (childOrbs[i]) {
-                childOrbs[i].setAttribute("d", childPath);
-              }
-            }
-            
-            requestAnimationFrame(animate);
-          }
-          
-          animate();
-        });
-      </script>
-      
       <!-- Content Layer - Centered title -->
-      <div class="hero-visual-layout" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+      <div class="hero-visual-layout" style="display: flex; justify-content: center; align-items: center; min-height: 90vh; position: relative; z-index: 1;">
         <div class="hero-content">
           <h1 style="text-align: center;">
             Sales<br>
@@ -377,6 +224,224 @@
         </div>
       </div>
     </section>
+
+    <!-- Add responsive orb animation script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // --- Utility functions ---
+        function lerp(a, b, t) { return a + (b - a) * t; }
+        function hslToHex(h, s, l) {
+          h /= 360; s /= 100; l /= 100;
+          let r, g, b;
+          if (s === 0) { r = g = b = l; }
+          else {
+            const hue2rgb = (p, q, t) => {
+              if (t < 0) t += 1;
+              if (t > 1) t -= 1;
+              if (t < 1/6) return p + (q - p) * 6 * t;
+              if (t < 1/2) return q;
+              if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+              return p;
+            };
+            const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            const p = 2 * l - q;
+            r = hue2rgb(p, q, h + 1/3);
+            g = hue2rgb(p, q, h);
+            b = hue2rgb(p, q, h - 1/3);
+          }
+          return "#" + [r, g, b].map(x => Math.round(x * 255).toString(16).padStart(2, "0")).join("");
+        }
+        function lerpColor(a, b, t) {
+          const ah = parseInt(a.replace('#', ''), 16), bh = parseInt(b.replace('#', ''), 16);
+          const ar = (ah >> 16) & 0xff, ag = (ah >> 8) & 0xff, ab = ah & 0xff;
+          const br = (bh >> 16) & 0xff, bg = (bh >> 8) & 0xff, bb = bh & 0xff;
+          const rr = Math.round(ar + (br - ar) * t);
+          const rg = Math.round(ag + (bg - ag) * t);
+          const rb = Math.round(ab + (bb - ab) * t);
+          return '#' + ((1 << 24) + (rr << 16) + (rg << 8) + rb).toString(16).slice(1);
+        }
+        
+        function generateSuperSmoothBlob(cx, cy, r, points, t, amp=1, phase=0) {
+          const pts = [];
+          for (let i = 0; i < points; i++) {
+            const angle = (Math.PI * 2 * i) / points;
+            const noise =
+              Math.sin(angle * 3 + t * 0.7 + phase) * 4 * amp +
+              Math.sin(angle * 5 - t * 1.1 + phase) * 2 * amp +
+              Math.sin(angle * 2 + t * 1.7 + phase) * 1.2 * amp;
+            const rad = r + noise;
+            pts.push({
+              x: cx + Math.cos(angle) * rad,
+              y: cy + Math.sin(angle) * rad
+            });
+          }
+          let d = "";
+          for (let i = 0; i < points; i++) {
+            const p0 = pts[(i - 1 + points) % points];
+            const p1 = pts[i];
+            const p2 = pts[(i + 1) % points];
+            const p3 = pts[(i + 2) % points];
+            if (i === 0) {
+              d += `M${p1.x.toFixed(2)},${p1.y.toFixed(2)}`;
+            }
+            const c1x = p1.x + (p2.x - p0.x) / 6;
+            const c1y = p1.y + (p2.y - p0.y) / 6;
+            const c2x = p2.x - (p3.x - p1.x) / 6;
+            const c2y = p2.y - (p3.y - p1.y) / 6;
+            d += ` C${c1x.toFixed(2)},${c1y.toFixed(2)} ${c2x.toFixed(2)},${c2y.toFixed(2)} ${p2.x.toFixed(2)},${p2.y.toFixed(2)}`;
+          }
+          d += "Z";
+          return d;
+        }
+
+        // --- Responsive sizing ---
+        function getResponsiveScale() {
+          // Base scale on viewport width for consistent sizing across devices
+          const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+          if (vw < 480) return 0.6; // Mobile
+          if (vw < 768) return 0.8; // Tablet
+          return 1.0; // Desktop
+        }
+
+        // --- Responsive positioning ---
+        function getOrbPosition() {
+          const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+          const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+          
+          // On mobile, position more centered
+          if (vw < 480) {
+            return {
+              x: vw * 0.5,  // Center horizontally
+              y: vh * 0.3   // Higher up vertically
+            };
+          }
+          
+          // On tablet, slightly to the right
+          if (vw < 768) {
+            return {
+              x: vw * 0.6,  // Slightly right of center
+              y: vh * 0.35  // Higher up vertically
+            };
+          }
+          
+          // On desktop, more to the right
+          return {
+            x: vw * 0.7,    // Right side
+            y: vh * 0.4     // Upper portion
+          };
+        }
+
+        // Configuration with responsive adjustments
+        const scale = getResponsiveScale();
+        const position = getOrbPosition();
+        const childCount = 5;
+        const parentRadius = 60 * scale;
+        const childRadius = 20 * scale;
+        const childPoints = 12;
+        const childAmp = 0.5;
+        
+        // Get DOM elements
+        const childrenGroup = document.getElementById('children');
+        const childOrbs = [];
+        const parentOrb = document.getElementById('parentOrb');
+        const particlesGroup = document.getElementById('particles');
+        
+        // Create child orbs
+        for (let i = 0; i < childCount; i++) {
+          const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          path.setAttribute("fill", `url(#childGrad${i})`);
+          path.setAttribute("opacity", "0.9");
+          childrenGroup.appendChild(path);
+          childOrbs.push(path);
+        }
+        
+        // Animation state
+        const orbState = {
+          time: 0,
+          parentCenter: position,
+          parentPath: "",
+          childPoints: []
+        };
+        
+        // Initialize child points
+        for (let i = 0; i < childCount; i++) {
+          orbState.childPoints.push({
+            angle: (Math.PI * 2 * i) / childCount,
+            speed: 0.2 + Math.random() * 0.3,
+            distance: (80 + Math.random() * 40) * scale,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+        
+        // Animation loop with performance optimization for mobile
+        let lastFrameTime = 0;
+        const targetFPS = window.innerWidth < 768 ? 30 : 60; // Lower FPS on mobile
+        const frameInterval = 1000 / targetFPS;
+        
+        function animate(timestamp) {
+          // Skip frames to maintain target FPS
+          if (timestamp - lastFrameTime < frameInterval) {
+            requestAnimationFrame(animate);
+            return;
+          }
+          lastFrameTime = timestamp;
+          
+          orbState.time += 0.016;
+          
+          // Generate parent orb path
+          orbState.parentPath = generateSuperSmoothBlob(
+            orbState.parentCenter.x,
+            orbState.parentCenter.y,
+            parentRadius,
+            12,
+            orbState.time,
+            0.2
+          );
+          
+          // Apply the path to the SVG
+          if (parentOrb) {
+            parentOrb.setAttribute('d', orbState.parentPath);
+          }
+          
+          // Animate child orbs
+          for (let i = 0; i < childCount; i++) {
+            const point = orbState.childPoints[i];
+            point.angle += point.speed * 0.01;
+            
+            const x = orbState.parentCenter.x + Math.cos(point.angle) * point.distance;
+            const y = orbState.parentCenter.y + Math.sin(point.angle) * point.distance;
+            
+            const childPath = generateSuperSmoothBlob(
+              x, y, childRadius, childPoints, 
+              orbState.time, childAmp, point.phase
+            );
+            
+            if (childOrbs[i]) {
+              childOrbs[i].setAttribute("d", childPath);
+            }
+          }
+          
+          requestAnimationFrame(animate);
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+          const newScale = getResponsiveScale();
+          const newPosition = getOrbPosition();
+          
+          // Update orb positioning and sizing
+          orbState.parentCenter = newPosition;
+          
+          // Update child orbit distances
+          for (let i = 0; i < childCount; i++) {
+            orbState.childPoints[i].distance = (80 + Math.random() * 40) * newScale;
+          }
+        });
+        
+        // Start animation
+        requestAnimationFrame(animate);
+      });
+    </script>
 
     <!-- Stunning SVG Wave Divider with Neon Glow and Orbs -->
     <div class="hero-wave-divider">
@@ -1290,63 +1355,7 @@
         
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Supabase client
-    const SUPABASE_URL = 'https://cbopynuvhcymbumjnvay.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib3B5bnV2aGN5bWJ1bWpudmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUxNzMsImV4cCI6MjA1OTU3MTE3M30.UZElMkoHugIt984RtYWyfrRuv2rB67opQdCrFVPCfzU';
-    const _supabase = window.supabase;
 
-    const loginBtn = document.getElementById('login-btn');
-    const loginDropdown = document.getElementById('login-dropdown');
-    const googleBtn = document.getElementById('google-signin-btn');
-
-    function showDropdown(e) {
-      e.stopPropagation();
-      loginDropdown.classList.toggle('hidden');
-    }
-    function hideDropdown() {
-      if (!loginDropdown.classList.contains('hidden')) {
-        loginDropdown.classList.add('hidden');
-      }
-    }
-    function signOutHandler(e) {
-      e.stopPropagation();
-      _supabase.auth.signOut().then(() => location.reload());
-    }
-
-    // Always attach these listeners ONCE
-    loginBtn.removeEventListener('click', showDropdown);
-    loginBtn.removeEventListener('click', signOutHandler);
-    loginBtn.addEventListener('click', showDropdown);
-    document.addEventListener('click', hideDropdown);
-    googleBtn.addEventListener('click', async () => {
-      const { error } = await _supabase.auth.signInWithOAuth({ provider: 'google' });
-      if (error) alert('Error signing in: ' + error.message);
-    });
-
-    // Only update button text and mode, not listeners
-    function updateLoginButton(session) {
-      if (session?.user) {
-        loginBtn.textContent = `Hello, ${session.user.user_metadata.full_name || 'User'} (Sign out)`;
-        loginDropdown.classList.add('hidden');
-        loginBtn.removeEventListener('click', showDropdown);
-        loginBtn.addEventListener('click', signOutHandler);
-      } else {
-        loginBtn.textContent = 'Sign Up / Login';
-        loginDropdown.classList.add('hidden');
-        loginBtn.removeEventListener('click', signOutHandler);
-        loginBtn.addEventListener('click', showDropdown);
-      }
-    }
-
-    // Initial state
-    _supabase.auth.getSession().then(({ data: { session } }) => updateLoginButton(session));
-    // Listen for auth changes
-    _supabase.auth.onAuthStateChange((event, session) => updateLoginButton(session));
-});
-</script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
 <script src="js/supabase-client.js"></script>
