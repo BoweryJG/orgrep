@@ -459,25 +459,23 @@
 
     <section class="hero-impact" id="hero">
       
-      <!-- Content Layer with title anchored to parent orb -->
-      <div class="hero-visual-layout" style="min-height: 90vh; position: relative; z-index: 1;">
-        <!-- Title positioned to match parent orb location -->
-        <div id="title-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-          <div id="dynamic-title" class="hero-content" style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-            <h1 style="margin: 0 0 0.5em 0;">
-              Sales<br>
-              <span class="gradient-text">Intelligence</span><br>
-              <span class="hero-evolved">Evolved</span>
-            </h1>
-          </div>
-        </div>
-        
-        <!-- Subtitle and CTA positioned below -->
-        <div style="position: absolute; top: 50%; left: 0; width: 100%; text-align: center;">
-          <p class="hero-subhead" style="text-align: center; max-width: 800px; margin: 0 auto 2rem auto;">
+      <!-- Clean, properly centered layout -->
+      <div class="hero-visual-layout" style="min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 1;">
+        <div class="hero-content" style="text-align: center; max-width: 900px; padding: 0 20px;">
+          <!-- Title centered with the orb -->
+          <h1 style="margin-bottom: 1.5rem;">
+            Sales<br>
+            <span class="gradient-text">Intelligence</span><br>
+            <span class="hero-evolved">Evolved</span>
+          </h1>
+          
+          <!-- Subtitle with proper spacing -->
+          <p class="hero-subhead" style="margin: 0 auto 2rem; max-width: 800px; line-height: 1.6;">
             Give your team the unfair advantage of AI-driven psychology—decode what makes buyers say "yes," eliminate guesswork, and engineer success at every stage of the sales journey.
           </p>
-          <button class="cta-button hero-cta" style="margin: 0 auto;">Start Winning More Deals</button>
+          
+          <!-- CTA button -->
+          <button class="cta-button hero-cta">Start Winning More Deals</button>
         </div>
       </div>
     </section>
