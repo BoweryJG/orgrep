@@ -291,11 +291,11 @@
         // Use viewport size for SVG
         const vw = window.innerWidth;
         const vh = window.innerHeight;
-        // Center the orbs behind the title
-        const parentRadius = 100;
-        const childRadius = 36;
-        const maxOrbit = parentRadius + 120 + (childCount - 1) * 40;
-        const maxReach = maxOrbit + childRadius + 8; // +8 for morphing amplitude margin
+        
+        // Find the hero title position to anchor the orb to it
+        // We're targeting the "Sales Intelligence Evolved" text
+        // Since we can't directly access DOM elements, we'll estimate its position
+        // based on the viewport size and typical layout
         
         // Calculate the scale based on viewport size
         let scale = 1.0;
@@ -306,25 +306,33 @@
         svg.setAttribute('width', '100%');
         svg.setAttribute('height', '100%');
         
-        // Position the parent orb centered behind the title
+        // Position the parent orb to align with "Sales Intelligence Evolved"
+        // which is typically centered horizontally and at around 40-45% of viewport height
         let parentX, parentY;
+        
+        // Horizontal position: centered
+        parentX = vw * 0.5;
+        
+        // Vertical position: aligned with the title
+        // For desktop, this is typically around 40-45% of viewport height
+        // For mobile, it might be slightly higher due to responsive layout
         if (vw < 480) {
-          // Mobile: center
-          parentX = vw * 0.5;
-          parentY = vh * 0.35;
+          // Mobile: slightly higher
+          parentY = vh * 0.42;
         } else if (vw < 768) {
-          // Tablet: center
-          parentX = vw * 0.5;
-          parentY = vh * 0.35;
+          // Tablet: middle
+          parentY = vh * 0.45;
         } else {
-          // Desktop: center
-          parentX = vw * 0.5;
-          parentY = vh * 0.35;
+          // Desktop: aligned with title
+          parentY = vh * 0.45;
         }
         
+        // Store the base position (anchor point)
+        window.parentCenterBase = {x: parentX, y: parentY};
+        // Initial position is the same as base
         window.parentCenter = {x: parentX, y: parentY};
-        window.parentCenterBase = {x: parentX, y: parentY}; // For drift animation
-        window.viewportSize = {vw, vh}; // Store for calculations
+        // Store viewport size for calculations
+        window.viewportSize = {vw, vh};
         window.orbScale = scale;
       }
       
@@ -383,9 +391,10 @@
         // Parent orb animation with organic drift and more pronounced morphing
         // Animate parent orb's position with slow, organic drift
         const {vw, vh} = window.viewportSize || {vw: window.innerWidth, vh: window.innerHeight};
-        // Safe zone: parent can drift within screen center
-        const px = window.parentCenterBase.x + Math.sin(now * 0.00011) * vw * 0.05 + Math.cos(now * 0.00007) * vw * 0.04;
-        const py = window.parentCenterBase.y + Math.cos(now * 0.00009) * vh * 0.04 + Math.sin(now * 0.00016) * vh * 0.03;
+        // Safe zone: parent can drift within a small area around the title
+        // Use smaller drift values to keep it closer to the title
+        const px = window.parentCenterBase.x + Math.sin(now * 0.00011) * vw * 0.03 + Math.cos(now * 0.00007) * vw * 0.02;
+        const py = window.parentCenterBase.y + Math.cos(now * 0.00009) * vh * 0.02 + Math.sin(now * 0.00016) * vh * 0.015;
         window.parentCenter = {x: px, y: py};
         
         const parentMorphT = now * 0.0004;
