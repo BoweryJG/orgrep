@@ -81,24 +81,24 @@
     <div class="stars" id="stars"></div>
 
     <nav class="navbar compact-navbar">
-  <div class="navbar-brand">
-    <span>RepSpheres</span>
-  </div>
-  <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation" aria-expanded="false">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-  </button>
-  <div class="nav-links" id="nav-links">
-    <a href="/blog.html" class="nav-link">Blogs</a>
-    <a href="/podcast.html" class="nav-link">Podcasts</a>
-    <a href="/dashboard/vault.html" class="nav-link">Intelligence Vault</a>
-    <a href="/workspace.html" class="nav-link">Sphere oS</a>
-  </div>
-  <button id="login-btn" class="cta-button dropdown-btn">
-    Sign Up / Login
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
+      <div class="navbar-brand">
+        <span>RepSpheres</span>
+      </div>
+      <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="/blog.html" class="nav-link">Blogs</a>
+        <a href="/podcast.html" class="nav-link">Podcasts</a>
+        <a href="/dashboard/vault.html" class="nav-link">Intelligence Vault</a>
+        <a href="/workspace.html" class="nav-link">Sphere oS</a>
+      </div>
+      <button id="login-btn" class="cta-button dropdown-btn">
+        Sign Up / Login
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
       <div id="login-dropdown" class="dropdown hidden">
         <button id="google-signin-btn" class="dropdown-item">
           <span style="display:flex;align-items:center;gap:10px;">
@@ -172,8 +172,9 @@
     </script>
 
     <section class="hero-impact" id="hero">
-      <div class="hero-orb-bg">
-        <svg id="orbSVG" viewBox="-100 -100 1000 1000" style="width:600px; height:600px; display:block; background:transparent; position:relative; z-index:1;">
+      <!-- Orbs Background Layer - Positioned above and to the right of title -->
+      <div class="hero-orbs-bg">
+        <svg id="orbSVG" viewBox="-100 -100 1000 1000" style="width:300px; height:300px; display:block; position:absolute; top:20%; right:15%; z-index:0; pointer-events:none;">
           <defs>
               <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
                 <stop id="p0" offset="0%" stop-color="#00E5FF"/>
@@ -201,28 +202,24 @@
                 <stop id="c4s0" offset="0%" stop-color="#FFF5B3"/>
                 <stop id="c4s1" offset="100%" stop-color="#4B3800"/>
               </radialGradient>
-
             </defs>
-      <div class="hero-orbs-bg">
-  <svg width="120" height="120" viewBox="0 0 320 320" style="display:block;position:absolute;top:10%;right:12%;z-index:0;pointer-events:none;" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <!-- (SVG gradient/filter definitions here, or reference existing ones) -->
-    </defs>
-    <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
-    <g id="children"></g>
-  </svg>
-</div>
-<div class="hero-visual-layout">
-  <div class="hero-content">
-        <h1>
-          Sales<br>
-          <span class="gradient-text">Intelligence</span><br>
-          <span class="hero-evolved">Evolved</span>
-        </h1>
-        <p class="hero-subhead">
-          Give your team the unfair advantage of AI-driven psychology—decode what makes buyers say “yes,” eliminate guesswork, and engineer success at every stage of the sales journey.
-        </p>
-        <button class="cta-button hero-cta">Start Winning More Deals</button>
+            <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
+            <g id="children"></g>
+        </svg>
+      </div>
+      
+      <!-- Content Layer - Centered title -->
+      <div class="hero-visual-layout" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div class="hero-content">
+          <h1 style="text-align: center;">
+            Sales<br>
+            <span class="gradient-text">Intelligence</span><br>
+            <span class="hero-evolved">Evolved</span>
+          </h1>
+          <p class="hero-subhead" style="text-align: center;">
+            Give your team the unfair advantage of AI-driven psychology—decode what makes buyers say “yes,” eliminate guesswork, and engineer success at every stage of the sales journey.
+          </p>
+          <button class="cta-button hero-cta" style="margin: 0 auto;">Start Winning More Deals</button>
         </div>
       </div>
     </section>
@@ -1137,58 +1134,7 @@
     <section class="section" id="closing">
         <h2 class="section-title">Your Reps Are Already Great.<br>Let's Make Them Unstoppable.</h2>
         
-        <nav class="navbar">
-  <div class="navbar-brand">
-    <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" stroke="var(--accent-color)" stroke-width="2"/>
-      <circle cx="12" cy="12" r="5" fill="var(--accent-color)"/>
-    </svg>
-    <span>RepSpheres</span>
-  </div>
-  <button class="navbar-toggle" aria-label="Toggle navigation">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-  </button>
-  <div class="nav-links">
-    <a href="/blog.html" class="nav-link">Blogs</a>
-    <a href="/podcast.html" class="nav-link">Podcasts</a>
-    <a href="/dashboard/vault.html" class="nav-link">Intelligence Vault</a>
-  </div>
-</nav>
-<script>
-const toggle = document.querySelector('.navbar-toggle');
-const links = document.querySelector('.nav-links');
-toggle.addEventListener('click', () => {
-  links.classList.toggle('open');
-  toggle.classList.toggle('open');
-});
-document.querySelectorAll('.nav-link').forEach(link => {
-  if (window.location.pathname === link.getAttribute('href')) {
-    link.classList.add('active');
-  }
-});
-</script>
-         <div class="progress-indicator" id="progressIndicator">
-        <div class="progress-line"></div>
-        <div class="progress-tracker" id="progressTracker"></div>
-         <div class="progress-trail" id="progressTrail"></div>
-        </div>
-
-    <!-- Link to the external JavaScript file -->
-    <script src="js/script.js" defer></script>
-
-    <!-- Supabase Google Auth Modal -->
-    <div id="login-modal" class="hidden">
-      <div class="modal-backdrop"></div>
-      <div class="modal-content">
-        <h2>Sign in with Google</h2>
-        <button id="google-signin-btn">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" style="width:24px;vertical-align:middle;margin-right:8px;">
-          Sign in with Google
-        </button>
-      </div>
-    </div>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
