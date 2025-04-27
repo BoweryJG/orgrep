@@ -36,13 +36,13 @@
 }
 
 .orb-container {
-  position: absolute;
-  top: -60px;
-  right: 10vw;
-  z-index: 3;
-  border: 2px dashed #ff00ff; /* DEBUG: Remove after confirming position */
-  background: rgba(255,255,255,0.02);
-  padding: 8px;
+  margin-bottom: 1.5rem;
+  align-self: flex-end;
+  margin-right: 10vw;
+  position: static;
+  border: none;
+  background: none;
+  padding: 0;
 }
 .hero-content h1 {
   font-size: 3.5rem;
