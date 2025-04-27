@@ -206,42 +206,109 @@
         <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
         <g id="children"></g>
       </svg>
-      
-      <script>
-      // --- Utility functions ---
-      function lerp(a, b, t) { return a + (b - a) * t; }
-      function hslToHex(h, s, l) {
-        h /= 360; s /= 100; l /= 100;
-        let r, g, b;
-        if (s === 0) { r = g = b = l; }
-        else {
-          const hue2rgb = (p, q, t) => {
-            if (t < 0) t += 1;
-            if (t > 1) t -= 1;
-            if (t < 1/6) return p + (q - p) * 6 * t;
-            if (t < 1/2) return q;
-            if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-            return p;
-          };
-          const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-          const p = 2 * l - q;
-          r = hue2rgb(p, q, h + 1/3);
-          g = hue2rgb(p, q, h);
-          b = hue2rgb(p, q, h - 1/3);
+      <style>
+        :root {
+          --primary: #00ffc6;
+          --secondary: #7b42f6;
+          --dark: #0a0b1a;
         }
-        return "#" + [r, g, b].map(x => Math.round(x * 255).toString(16).padStart(2, "0")).join("");
+
+        body {
+          margin: 0;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          background: var(--dark);
+          color: #fff;
+          overflow-x: hidden;
+        }
+
+        .hero-section {
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .orb-container {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .title-container {
+          position: relative;
+          z-index: 2;
+          text-align: center;
+        }
+
+        .hero-title {
+          font-size: 4.5rem;
+          font-weight: 700;
+          margin: 0;
+          padding: 0;
+          line-height: 1.1;
+          text-shadow: 0 0 30px rgba(0,255,198,0.4);
+        }
+
+        .gradient-text {
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-size: 1.2em;
+          display: block;
+        }
+
+        .title-word {
+          display: block;
+        }
+
+        .evolved {
+          font-size: 0.9em;
+        }
+      </style>
+      <script>
+
+      // Color conversion utilities
+      function hslToHex(h, s, l) {
+        s /= 100;
+        l /= 100;
+        const hue2rgb = (p, q, t) => {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1/6) return p + (q - p) * 6 * t;
+          if (t < 1/2) return q;
+          if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+          return p;
+        };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        const r = hue2rgb(p, q, (h / 360 + 1/3) % 1);
+        const g = hue2rgb(p, q, (h / 360) % 1);
+        const b = hue2rgb(p, q, (h / 360 - 1/3) % 1);
+        return '#' + [r, g, b].map(x => Math.round(x * 255).toString(16).padStart(2, '0')).join('');
       }
+
       function lerpColor(a, b, t) {
-        const ah = parseInt(a.replace('#', ''), 16), bh = parseInt(b.replace('#', ''), 16);
-        const ar = (ah >> 16) & 0xff, ag = (ah >> 8) & 0xff, ab = ah & 0xff;
-        const br = (bh >> 16) & 0xff, bg = (bh >> 8) & 0xff, bb = bh & 0xff;
+        const ah = parseInt(a.replace('#', ''), 16);
+        const bh = parseInt(b.replace('#', ''), 16);
+        const ar = (ah >> 16) & 0xff;
+        const ag = (ah >> 8) & 0xff;
+        const ab = ah & 0xff;
+        const br = (bh >> 16) & 0xff;
+        const bg = (bh >> 8) & 0xff;
+        const bb = bh & 0xff;
         const rr = Math.round(ar + (br - ar) * t);
         const rg = Math.round(ag + (bg - ag) * t);
         const rb = Math.round(ab + (bb - ab) * t);
         return '#' + ((1 << 24) + (rr << 16) + (rg << 8) + rb).toString(16).slice(1);
       }
-      
-      function generateSuperSmoothBlob(cx, cy, r, points, t, amp=1, phase=0) {
+
+      // Blob generation
+      function generateSuperSmoothBlob(cx, cy, r, points, t, amp = 1, phase = 0) {
         const pts = [];
         for (let i = 0; i < points; i++) {
           const angle = (Math.PI * 2 * i) / points;
@@ -255,29 +322,32 @@
             y: cy + Math.sin(angle) * rad
           });
         }
-        let d = "";
+
+        let d = '';
         for (let i = 0; i < points; i++) {
           const p0 = pts[(i - 1 + points) % points];
           const p1 = pts[i];
           const p2 = pts[(i + 1) % points];
           const p3 = pts[(i + 2) % points];
+
           if (i === 0) {
             d += `M${p1.x.toFixed(2)},${p1.y.toFixed(2)}`;
           }
+
           const c1x = p1.x + (p2.x - p0.x) / 6;
           const c1y = p1.y + (p2.y - p0.y) / 6;
           const c2x = p2.x - (p3.x - p1.x) / 6;
           const c2y = p2.y - (p3.y - p1.y) / 6;
           d += ` C${c1x.toFixed(2)},${c1y.toFixed(2)} ${c2x.toFixed(2)},${c2y.toFixed(2)} ${p2.x.toFixed(2)},${p2.y.toFixed(2)}`;
         }
-        d += "Z";
+        d += 'Z';
         return d;
       }
 
+      // Dynamic color families
       const childCount = 5;
-      // --- Dynamic Color Families ---
+
       function getDynamicColorFamily(i, now) {
-        // Each orb gets a unique base hue, animated over time
         const baseHue = (i * 67 + now * 0.018) % 360;
         const hue2 = (baseHue + 40 + 20 * Math.sin(now * 0.0007 + i)) % 360;
         const sat = 80 + 10 * Math.sin(now * 0.0005 + i);
@@ -286,60 +356,22 @@
         return [hslToHex(baseHue, sat, light1), hslToHex(hue2, sat, light2)];
       }
 
-      // --- Responsive sizing ---
+      // Responsive sizing
       function adjustSVGSize() {
         const vw = window.innerWidth;
         const vh = window.innerHeight;
-        
-        // Calculate orb size based on viewport
         const minDimension = Math.min(vw, vh);
-        const orbSize = minDimension * 0.45; // 45% of smallest viewport dimension
-        
-        // Center coordinates
+        const orbSize = minDimension * 0.45;
         const centerX = vw / 2;
-        const centerY = vh * 0.5; // Center vertically
+        const centerY = vh / 2;
         
-        // Update SVG viewBox
-        const orbCanvas = document.getElementById('orbCanvas');
-        orbCanvas.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
-        svg.setAttribute('width', '100%');
-        svg.setAttribute('height', '100%');
+        window.parentCenterBase = { x: centerX, y: centerY };
+        window._dynamicOrbRadius = orbSize / 2;
         
-        // Position the parent orb to precisely align with the title
-        // "Sales Intelligence Evolved" - centered exactly
-        let parentX, parentY;
-        
-        // Horizontal position: centered
-        parentX = vw * 0.5;
-        
-        // Vertical position: precisely centered under the title
-        if (vw < 480) {
-          // Mobile: centered position
-          parentY = vh * 0.31;
-        } else if (vw < 768) {
-          // Tablet: centered position
-          parentY = vh * 0.33;
-        } else {
-          // Desktop: centered position
-          parentY = vh * 0.33;
-        }
-        
-        // Store the base position (anchor point)
-        window.parentCenterBase = {x: parentX, y: parentY};
-        // Initial position is the same as base
-        window.parentCenter = {x: parentX, y: parentY};
-        // Store viewport size for calculations
-        window.viewportSize = {vw, vh};
-        window.orbScale = scale * 0.75;
+        const svg = document.getElementById('orbSVG');
+        svg.setAttribute('width', vw);
+        svg.setAttribute('height', vh);
       }
-      
-      adjustSVGSize();
-      window.addEventListener('resize', adjustSVGSize);
-
-      const childrenGroup = document.getElementById('children');
-      const childOrbs = [];
-      const parentOrb = document.getElementById('parentOrb');
-      const particlesGroup = document.getElementById('particles');
       const childGradIds = ["childGrad0", "childGrad1", "childGrad2", "childGrad3", "childGrad4"];
       
       // Create child orbs
@@ -495,28 +527,30 @@
                 <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
                 <g id="children"></g>
               </svg>
-              <div class="hero-section" style="height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; background: #0a0b1a; overflow: hidden;">
-              <div class="orb-container" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
-                <svg id="orbCanvas" style="width: 100%; height: 100%; position: absolute;">                  
-                  <defs>
-                    <linearGradient id="parentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop id="p0" offset="0%" stop-color="#00ffc6"/>
-                      <stop id="p1" offset="33%" stop-color="#7b42f6"/>
-                      <stop id="p2" offset="66%" stop-color="#00ffc6"/>
-                      <stop id="p3" offset="100%" stop-color="#7b42f6"/>
-                    </linearGradient>
-                  </defs>
-                  <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
-                  <g id="children"></g>
-                </svg>
-              </div>
-              <div class="title-container" style="position: relative; z-index: 2; text-align: center;">
-                <h1 id="orbTitle" class="hero-title" style="font-size: 5rem; font-weight: 700; margin: 0; padding: 0; color: #fff; text-shadow: 0 0 30px rgba(0,255,198,0.3); line-height: 1.2;">
-                  <span style="display: block;">Sales</span>
-                  <span class="gradient-text" style="background: linear-gradient(135deg, #00ffc6, #7b42f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.1em;">Intelligence</span>
-                  <span style="display: block; font-size: 0.9em;">Evolved</span>
-                </h1>
-              </div>
+              <div class="hero-section">
+        <div class="orb-container">
+          <svg id="orbCanvas" style="width: 100%; height: 100%; position: absolute;">
+            <defs>
+              <linearGradient id="parentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--primary)"/>
+                <stop offset="100%" stop-color="var(--secondary)"/>
+              </linearGradient>
+            </defs>
+            <path id="parentOrb" fill="url(#parentGrad)" opacity="0.9"/>
+            <g id="children"></g>
+          </svg>
+        </div>
+        <div class="title-container">
+          <h1 id="orbTitle" class="hero-title">
+            <span class="title-word">Sales</span>
+            <span class="gradient-text">Intelligence</span>
+            <span class="title-word evolved">Evolved</span>
+          </h1>
+        </div>
+        <div class="cta-container">
+          <div class="start-button">Start Winning More Deals</div>
+        </div>
+      </div>
               <div class="cta-container" style="position: absolute; bottom: 15%; left: 0; right: 0; text-align: center;">
                 <div class="start-button" style="display: inline-block; background: linear-gradient(135deg, #7b42f6, #00ffc6); padding: 1rem 2rem; border-radius: 30px; color: #fff; font-size: 1.2rem; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(123,66,246,0.3);">
                   Start Winning More Deals
@@ -1021,65 +1055,6 @@
     margin: 0 auto 1.5em auto;
   }
 }
-    . .timeline-marker {
-      min-width: 18px;
-      min-height: 18px;
-      border-radius: 50%;
-      background: linear-gradient(135deg,#7B42F6,#00ffc6);
-      margin-right: 1.2em;
-      margin-top: 0.7em;
-      box-shadow: 0 0 10px #7B42F688;
-    }
-    .timeline-content {
-      flex: 1;
-      text-align: left;
-      color: #e0e0e0;
-    }
-    @media (max-width: 700px) {
-      . {
-        max-width: 98vw;
-        padding: 0 0.3em;
-      }
-      . .timeline-item {
-        flex-direction: column;
-        align-items: center;
-        max-width: 98vw;
-        padding: 1em 0.5em;
-      }
-      .timeline-content {
-        text-align: center;
-      }
-      . .timeline-marker {
-        margin: 0 0 1em 0;
-      }
-    }
-    .trigger-card-row {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: stretch;
-      margin-bottom: 2.5em;
-    }
-    .trigger-card-row .feature-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    @media (max-width: 700px) {
-      .trigger-card-row {
-        gap: 1.1rem;
-      }
-    }
-  .enhanced-title {
-  text-align: center;
-  position: relative;
-}
-.gradient-underline {
-  display: block;
-  width: 120px;
-  height: 5px;
   margin: 0.7em auto 0 auto;
   border-radius: 3px;
   background: linear-gradient(90deg,#00ffc6,#7b42f6 80%);
