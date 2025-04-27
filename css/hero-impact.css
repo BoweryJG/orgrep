@@ -26,6 +26,19 @@
   justify-content: center;
   min-height: 70vh;
 }
+
+.hero-visual-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.orb-container {
+  align-self: flex-end;
+  margin-right: 8vw;
+  margin-bottom: 1.5rem;
+}
 .hero-content h1 {
   font-size: 3.5rem;
   font-weight: 800;
