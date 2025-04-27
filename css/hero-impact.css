@@ -17,12 +17,10 @@
   opacity: 0.85;
 }
 .hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   justify-content: center;
 }
 
@@ -35,11 +33,11 @@
 }
 
 .orb-container {
-  margin-bottom: -1.2rem;
+  margin-bottom: -1.5rem;
   margin-top: 0;
   align-self: center;
   position: static;
-  transform: translateX(40px);
+  transform: none;
   border: none;
   background: none;
   padding: 0;
