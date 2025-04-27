@@ -172,9 +172,10 @@
     </script>
 
     <section class="hero-impact" id="hero">
-      <!-- Heading Orb - Positioned above and to the right of title -->
+      <!-- Header Orb - Positioned above and to the right of title -->
       <div class="hero-orbs-bg">
         <svg id="orbSVG" style="width:300px; height:300px; display:block; position:absolute; top:20%; right:15%; z-index:0; pointer-events:none;">
+          <g id="particles"></g>
           <defs>
             <radialGradient id="parentGrad" cx="50%" cy="50%" r="70%">
               <stop id="p0" offset="0%" stop-color="#00E5FF"/>
@@ -182,14 +183,38 @@
               <stop id="p2" offset="50%" stop-color="#00E5FF"/>
               <stop id="p3" offset="75%" stop-color="#5B3CFF"/>
             </radialGradient>
+            <radialGradient id="childGrad0" cx="50%" cy="50%" r="70%">
+              <stop id="c0s0" offset="0%" stop-color="#B3D8FF"/>
+              <stop id="c0s1" offset="100%" stop-color="#0A192F"/>
+            </radialGradient>
+            <radialGradient id="childGrad1" cx="50%" cy="50%" r="70%">
+              <stop id="c1s0" offset="0%" stop-color="#C6FFD9"/>
+              <stop id="c1s1" offset="100%" stop-color="#145A32"/>
+            </radialGradient>
+            <radialGradient id="childGrad2" cx="50%" cy="50%" r="70%">
+              <stop id="c2s0" offset="0%" stop-color="#FFB3C9"/>
+              <stop id="c2s1" offset="100%" stop-color="#7B1F3A"/>
+            </radialGradient>
+            <radialGradient id="childGrad3" cx="50%" cy="50%" r="70%">
+              <stop id="c3s0" offset="0%" stop-color="#E0D1FF"/>
+              <stop id="c3s1" offset="100%" stop-color="#311B4F"/>
+            </radialGradient>
+            <radialGradient id="childGrad4" cx="50%" cy="50%" r="70%">
+              <stop id="c4s0" offset="0%" stop-color="#FFF5B3"/>
+              <stop id="c4s1" offset="100%" stop-color="#4B3800"/>
+            </radialGradient>
           </defs>
           <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
+          <g id="children"></g>
         </svg>
       </div>
       
-      <!-- Add the headingorb animation script -->
+      <!-- Header orb animation script -->
       <script>
         document.addEventListener('DOMContentLoaded', function() {
+          // --- Utility functions ---
+          function lerp(a, b, t) { return a + (b - a) * t; }
+          
           function generateSuperSmoothBlob(cx, cy, r, points, t, amp=1, phase=0) {
             const pts = [];
             for (let i = 0; i < points; i++) {
@@ -223,24 +248,47 @@
             return d;
           }
 
+          // Configuration
+          const childCount = 5;
           const parentRadius = 40;
-          const orbMorphDirection = Math.PI / 2;
-          const orbMorphSpeed = 0.012;
+          const childRadius = 15;
+          const childPoints = 12;
+          const childAmp = 0.5;
           
-          function makeOrbState() {
-            return {
-              time: 0,
-              parentCenter: { x: 150, y: 150 },
-              parentPath: "",
-              parentHue: 190,
-              parentHueTarget: 190,
-              parentHueVelocity: 0
-            };
+          // Get DOM elements
+          const childrenGroup = document.getElementById('children');
+          const childOrbs = [];
+          const parentOrb = document.getElementById('parentOrb');
+          const particlesGroup = document.getElementById('particles');
+          
+          // Create child orbs
+          for (let i = 0; i < childCount; i++) {
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("fill", `url(#childGrad${i})`);
+            path.setAttribute("opacity", "0.9");
+            childrenGroup.appendChild(path);
+            childOrbs.push(path);
           }
           
-          const orbState = makeOrbState();
-          const parentOrb = document.getElementById('parentOrb');
+          // Animation state
+          const orbState = {
+            time: 0,
+            parentCenter: { x: 150, y: 150 },
+            parentPath: "",
+            childPoints: []
+          };
           
+          // Initialize child points
+          for (let i = 0; i < childCount; i++) {
+            orbState.childPoints.push({
+              angle: (Math.PI * 2 * i) / childCount,
+              speed: 0.2 + Math.random() * 0.3,
+              distance: 60 + Math.random() * 30,
+              phase: Math.random() * Math.PI * 2
+            });
+          }
+          
+          // Animation loop
           function animate() {
             orbState.time += 0.016;
             
@@ -257,6 +305,24 @@
             // Apply the path to the SVG
             if (parentOrb) {
               parentOrb.setAttribute('d', orbState.parentPath);
+            }
+            
+            // Animate child orbs
+            for (let i = 0; i < childCount; i++) {
+              const point = orbState.childPoints[i];
+              point.angle += point.speed * 0.01;
+              
+              const x = orbState.parentCenter.x + Math.cos(point.angle) * point.distance;
+              const y = orbState.parentCenter.y + Math.sin(point.angle) * point.distance;
+              
+              const childPath = generateSuperSmoothBlob(
+                x, y, childRadius, childPoints, 
+                orbState.time, childAmp, point.phase
+              );
+              
+              if (childOrbs[i]) {
+                childOrbs[i].setAttribute("d", childPath);
+              }
             }
             
             requestAnimationFrame(animate);
