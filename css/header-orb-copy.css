@@ -31,8 +31,8 @@ svg#orbSVG {
   font-weight: bold;
   line-height: 1.1; /* Adjust for visual spacing */
   /* Base font size - will be scaled by JS */
-  font-size: 20px; /* Reduced base size further */
-  padding: 15px; /* Keep padding */
+  font-size: 24px; /* Increased base size */
+  padding: 12px; /* Reduced padding slightly */
   white-space: nowrap; /* Prevent wrapping */
   transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Add transition for scroll effect */
 }
@@ -48,12 +48,12 @@ svg#orbSVG {
 /* Responsive font size adjustments */
 @media (max-width: 768px) {
   #orb-text-container {
-    font-size: 16px; /* Reduced medium screen size */
+    font-size: 20px; /* Increased medium screen size */
   }
 }
  @media (max-width: 480px) {
   #orb-text-container {
-    font-size: 12px; /* Reduced small screen size */
+    font-size: 16px; /* Increased small screen size */
   }
 }
 
