@@ -1,0 +1,53 @@
+/* Styles for the hero orb animation integrated into index.html */
+
+svg#orbSVG {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: fixed; /* Keep fixed to cover viewport */
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  touch-action: none;
+  z-index: -1; /* Place behind all other page content */
+}
+
+#orb-text-container {
+  position: absolute;
+  top: 0; /* Positioned by JS transform */
+  left: 0; /* Positioned by JS transform */
+  width: auto; /* Fit content */
+  height: auto; /* Fit content */
+  text-align: center;
+  pointer-events: none; /* Don't interfere with mouse/touch */
+  z-index: 0; /* Above SVG background, below main hero content */
+  transform-origin: center center; /* Scale from center */
+  will-change: transform; /* Performance hint */
+  font-family: sans-serif; /* Or a specific font if desired */
+  font-weight: bold;
+  line-height: 1.1; /* Adjust for visual spacing */
+  /* Base font size - will be scaled by JS */
+  font-size: 24px; /* Adjust base size as needed */
+  padding: 10px; /* Internal padding from orb edge */
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+#orb-text-container span {
+  display: block; /* Stack vertically */
+}
+
+#line1 { color: white; }
+#line2 { color: #A0A0FF; } /* Approximate blue/purple from image */
+#line3 { color: #70FFD0; } /* Approximate teal/green from image */
+
+/* Responsive font size adjustments (example) */
+@media (max-width: 768px) {
+  #orb-text-container {
+    font-size: 18px; /* Smaller base size on smaller screens */
+  }
+}
+ @media (max-width: 480px) {
+  #orb-text-container {
+    font-size: 14px; /* Even smaller base size */
+  }
+}

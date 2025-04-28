@@ -1,106 +1,83 @@
 /* Visually impactful hero section styles */
 .hero-impact {
-  position: relative; /* contain absolutely positioned backgrounds */
-  position: relative;
-  min-height: 90vh;
+  position: relative; /* contain backgrounds */
+  min-height: 90vh; /* Ensure it takes up significant height */
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background: transparent;
-}
-
-  position: absolute;
-  left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.85;
-}
-.hero-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-}
-
-.hero-orbs-bg {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
+  overflow: hidden; /* Prevent orb overflow issues */
+  background: transparent; /* Background is handled by orb SVG */
+  padding-top: 80px; /* Add padding to account for navbar height */
 }
 
 .hero-visual-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* Center content vertically */
   position: relative;
-  min-height: 60vh;
+  width: 100%;
+  min-height: calc(90vh - 80px); /* Adjust height considering padding */
+  z-index: 1; /* Ensure layout is above the orb background */
 }
 
-/* .orb-container no longer needed, orbs are now in background */
-/* .orb-container {
-  margin-bottom: -1.5rem;
-  margin-top: 0;
-  align-self: center;
-  position: static;
-  transform: none;
-  border: none;
-  background: none;
-  padding: 0;
+.hero-content {
+  position: relative;
+  z-index: 2; /* Above orb text container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  max-width: 800px; /* Limit content width */
+  padding: 0 20px; /* Horizontal padding */
+  margin-top: 15vh; /* Push content down slightly below visual center */
 }
-.hero-content h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1.1;
-  color: #fff;
-  margin-bottom: 1rem;
-}
-.gradient-text {
-  background: linear-gradient(90deg, #7B42F6, #00FFC6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
-.hero-evolved {
-  color: #00ffc6;
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-}
+
+/* Removed redundant/old styles for .hero-orbs-bg, .orb-container, .hero-content h1, .gradient-text, .hero-evolved */
+
 .hero-subhead {
-  font-size: 1.5rem;
-  color: #e0e0e0;
-  margin-bottom: 2rem;
+  font-size: 1.3rem; /* Slightly smaller */
+  color: #c0c0dd; /* Lighter purple/grey */
+  margin-top: 2rem; /* Increased space below orb/title */
+  margin-bottom: 2.5rem; /* Increased space above CTA */
+  line-height: 1.7; /* Improved readability */
+  max-width: 700px; /* Limit width */
+  font-weight: 400; /* Regular weight */
 }
+
 .hero-cta {
-  font-size: 1.25rem;
-  padding: 1rem 2.5rem;
-  border-radius: 2rem;
-  background: linear-gradient(90deg, #7B42F6, #00FFC6);
+  font-size: 1.2rem; /* Adjusted size */
+  font-weight: 600; /* Bold */
+  padding: 0.9rem 2.2rem; /* Adjusted padding */
+  border-radius: 30px; /* Rounded corners */
+  background: linear-gradient(135deg, #7b42f6, #00ffc6); /* Gradient like image */
   color: #fff;
   border: none;
-  box-shadow: 0 4px 32px 0 rgba(123,66,246,0.2);
-  transition: background 0.3s;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(123, 66, 246, 0.3), 0 0 20px rgba(0, 255, 198, 0.2); /* Combined glow */
+  transition: all 0.3s ease;
+  text-transform: none; /* Ensure normal casing */
+  letter-spacing: 0.02em;
 }
+
 .hero-cta:hover {
-  background: linear-gradient(90deg, #00FFC6, #7B42F6);
+  background: linear-gradient(135deg, #00ffc6, #7b42f6); /* Swap gradient on hover */
+  box-shadow: 0 6px 20px rgba(0, 255, 198, 0.4), 0 0 25px rgba(123, 66, 246, 0.3); /* Enhanced glow */
+  transform: translateY(-2px); /* Slight lift */
 }
+
 @media (max-width: 700px) {
-  
-    width: 320px !important;
-    height: 320px !important;
-  }
-  .hero-content h1 {
-    font-size: 2.1rem;
+  .hero-content {
+     margin-top: 10vh; /* Adjust margin for smaller screens */
   }
   .hero-subhead {
     font-size: 1.1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .hero-cta {
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
   }
 }
