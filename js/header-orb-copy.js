@@ -90,8 +90,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const childrenGroup = document.getElementById('children');
   const parentOrb = document.getElementById('parentOrb');
   const orbTextContainer = document.getElementById('orb-text-container'); // Get text container
+  // Get references to title spans
+  const line1 = document.getElementById('line1');
+  const line2 = document.getElementById('line2');
+  const line3 = document.getElementById('line3');
 
-  if (!svg || !particlesGroup || !childrenGroup || !parentOrb || !orbTextContainer) {
+  if (!svg || !particlesGroup || !childrenGroup || !parentOrb || !orbTextContainer || !line1 || !line2 || !line3) { // Added checks for lines
     console.error("Header Orb Copy Animation: Required SVG or text elements not found.");
     return; // Stop script if elements are missing
   }
@@ -327,6 +331,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const parentAmp = (1 + Math.abs(parentDrag) * 0.008) * scale;
     const parentPath = generateSuperSmoothBlob(px + parentDx * scale, py + parentDy * scale, parentR, 64, parentMorphT, parentAmp);
     parentOrb.setAttribute('d', parentPath);
+
+    // --- Calculate and Apply Complementary Color to Title ---
+    const complementaryHue = (baseHue + 180) % 360;
+    // Use high saturation and lightness for readability against the orb
+    const complementaryColor = hslToHex(complementaryHue, 85, 70); 
+    if (line2) line2.style.color = complementaryColor;
+    if (line3) line3.style.color = complementaryColor;
 
     // --- Update Text Container Position & Scale (only if not scrolled) ---
     if (orbTextContainer && !isScrolled) { // Check isScrolled flag
