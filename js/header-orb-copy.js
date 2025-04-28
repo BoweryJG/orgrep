@@ -75,11 +75,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const light2 = 35 + 15 * Math.sin(now * 0.0006 + i * 3);
     return [hslToHex(baseHue, sat, light1), hslToHex(hue2, sat, light2)];
   }
-  // parentCenter will be set dynamically below
-  const parentRadius = 40;
-  const childRadius = 18;
-  const childPoints = 32;
-  const childAmp = 0.3;
+  // Parameters from header_orb copy.html
+  const parentRadius = 100; // Larger radius from copy
+  const childRadius = 36;  // Larger radius from copy
+  const childPoints = 48;  // More points from copy
+  const childAmp = 0.5;    // Larger amp from copy
   const childGradIds = [
     "childGrad0", "childGrad1", "childGrad2", "childGrad3", "childGrad4"
   ];
@@ -89,10 +89,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const particlesGroup = document.getElementById('particles');
   const childrenGroup = document.getElementById('children');
   const parentOrb = document.getElementById('parentOrb');
-  const orbTextContainer = document.getElementById('orb-text-container');
+  const orbTextContainer = document.getElementById('orb-text-container'); // Get text container
 
   if (!svg || !particlesGroup || !childrenGroup || !parentOrb || !orbTextContainer) {
-    console.error("Hero Orb Animation: Required SVG or text elements not found.");
+    console.error("Header Orb Copy Animation: Required SVG or text elements not found.");
     return; // Stop script if elements are missing
   }
 
@@ -103,21 +103,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const vh = window.innerHeight;
     // Store for later
     window.viewportSize = {vw, vh};
-    // Orbit radii: parentRadius + 120 + i*40 (i = 0..childCount-1)
+    // Orbit radii calculation based on header_orb copy.html parameters
     const maxChildIndex = childCount - 1;
-    const maxOrbit = parentRadius + 120 + maxChildIndex * 40;
+    const maxOrbit = parentRadius + 120 + maxChildIndex * 40; // Using original orbit logic for now
     const maxReach = maxOrbit + childRadius + 8; // +8 for morphing amplitude margin
     // Fit orbs within the smallest viewport dimension
     const minDim = Math.min(vw, vh);
-    // Adjust scale calculation for hero section - make orb significantly larger
-    const scale = minDim / (maxReach * 1.3); // Further decreased divisor for larger orb
-    const size = maxReach * 2 * scale;
+    // Scale calculation - Make orbs much smaller
+    const scale = minDim / (parentRadius * 10.0); // Increased divisor again for smaller size
     
     svg.setAttribute('width', vw);
     svg.setAttribute('height', vh);
     svg.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
-    // Update parentCenter so it's always in the middle of the viewport
-    window.parentCenterBase = window.parentCenter = {x: vw/2, y: vh/2}; // Center in viewport
+    // Update parentCenter so it's always in the middle
+    window.parentCenterBase = window.parentCenter = {x: vw/2, y: vh/2};
     window.orbScale = scale;
   }
   adjustSVGSize();
@@ -187,9 +186,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     // Prevent page scroll only if the target isn't scrollable itself
     if (!e.target.closest || !e.target.closest('.scrollable-content')) {
-        // e.preventDefault(); // Commented out: Allow normal page scroll
+        // e.preventDefault(); // Allow normal page scroll
     }
-  }, { passive: true }); // Changed to passive: true for better scroll performance
+  }, { passive: true }); // Use passive listener
 
   // --- Animation Interpolation Helpers ---
   function approach(current, target, speed) {
@@ -242,9 +241,9 @@ document.addEventListener('DOMContentLoaded', function() {
       particles.push({
         x, y,
         vx, vy,
-        r: 0.8 + Math.random() * 0.6, // smaller particles
-        life: 0.4, // shorter lifespan
-        decay: 0.035 + Math.random() * 0.02, // faster decay
+        r: 1.1 + Math.random() * 1.2, // Adjusted size from copy
+        life: 0.6, // Adjusted life from copy
+        decay: 0.025 + Math.random() * 0.015, // Adjusted decay from copy
         color: particleColor,
         opacity: 0.45 // more subtle
       });
@@ -302,12 +301,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Animate parent orb's position with slow, organic drift ---
     const {vw, vh} = window.viewportSize || {vw: 800, vh: 800};
-    // Center in viewport, allow significantly reduced drift
-    const driftFactor = 0.01; // Reduced drift amplitude
+    // Reduced drift from previous step
+    const driftFactor = 0.01; 
     const px = window.parentCenterBase.x + Math.sin(now * 0.00011) * vw * driftFactor + Math.cos(now * 0.00007) * vw * driftFactor;
     const py = window.parentCenterBase.y + Math.cos(now * 0.00009) * vh * driftFactor + Math.sin(now * 0.00016) * vh * driftFactor;
     window.parentCenter = {x: px, y: py};
 
+    // Use parentRadius from copy (100)
     const parentR = (parentRadius + parentDrag * 0.15) * scale;
     const parentAmp = (1 + Math.abs(parentDrag) * 0.008) * scale;
     const parentPath = generateSuperSmoothBlob(px + parentDx * scale, py + parentDy * scale, parentR, 64, parentMorphT, parentAmp);
@@ -344,13 +344,14 @@ document.addEventListener('DOMContentLoaded', function() {
         window.parentCenter.y,
         vh - window.parentCenter.y
       );
+      // Use childRadius from copy (36)
       const maxChildOrbit = Math.max(40 * scale, minEdgeDist - parentCurrentR - childRadius * scale - 16 * scale);
       
       // Animate orbit radius: base + unique slow sine + unique noise
       const orbitPhase = now * (0.00012 + 0.00007 * i) + i * 1.13;
       const orbitWobble = Math.sin(orbitPhase) * 0.18 + Math.cos(orbitPhase * 0.7) * 0.09;
       const minOrbit = parentCurrentR + childRadius * scale + 12 * scale;
-      // Reduced base distance (30 instead of 60) to bring children closer
+      // Use reduced base distance (30) from previous step
       let rawOrbit = (parentCurrentR + 30 * scale + (i * 0.71 + 1.4) * maxChildOrbit / childCount) * (0.7 + 0.23 * orbitWobble);
       const orbitRadius = Math.max(rawOrbit, minOrbit);
       
@@ -368,11 +369,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const x = window.parentCenter.x + childRelX;
       const y = window.parentCenter.y + childRelY;
       
+      // Use childRadius and childAmp from copy
       const cR = (childRadius + state.drag * 0.08) * scale;
       const cAmp = (childAmp + Math.abs(state.drag) * 0.006) * scale;
       const morphT = now * 0.0005 + i * 10;
       
-      // Generate path using absolute viewport coordinates
+      // Generate path using absolute viewport coordinates, use childPoints from copy
       const childPath = generateSuperSmoothBlob(x, y, cR, childPoints, morphT, cAmp, i);
       
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");

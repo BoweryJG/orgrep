@@ -37,13 +37,14 @@
 /* Removed redundant/old styles for .hero-orbs-bg, .orb-container, .hero-content h1, .gradient-text, .hero-evolved */
 
 .hero-subhead {
-  font-size: 1.3rem; /* Slightly smaller */
+  font-size: 1.2rem; /* Adjusted size */
   color: #c0c0dd; /* Lighter purple/grey */
-  margin-top: 2rem; /* Increased space below orb/title */
-  margin-bottom: 2.5rem; /* Increased space above CTA */
+  margin-top: 3rem; /* More space below orb/title */
+  margin-bottom: 3rem; /* More space above CTA */
   line-height: 1.7; /* Improved readability */
-  max-width: 700px; /* Limit width */
+  max-width: 650px; /* Slightly narrower width */
   font-weight: 400; /* Regular weight */
+  letter-spacing: 0.01em; /* Subtle letter spacing */
 }
 
 .hero-cta {
