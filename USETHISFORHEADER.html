@@ -7,10 +7,16 @@
     body {
       background: #0B0B20;
       margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow-x: hidden;
+    }
+    
+    #animated-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      z-index: 1000;
     }
     svg {
       width: 100vw;
@@ -23,6 +29,47 @@
       pointer-events: none; /* SVG doesn't block scrolling/touch */
       touch-action: none;
     }
+
+    #orb-text-container {
+      position: absolute;
+      top: 0; /* Positioned by JS transform */
+      left: 0; /* Positioned by JS transform */
+      width: auto; /* Fit content */
+      height: auto; /* Fit content */
+      text-align: center;
+      pointer-events: none; /* Don't interfere with mouse/touch */
+      z-index: 1; /* Above SVG background */
+      transform-origin: center center; /* Scale from center */
+      will-change: transform; /* Performance hint */
+      font-family: sans-serif; /* Or a specific font if desired */
+      font-weight: bold;
+      line-height: 1.1; /* Adjust for visual spacing */
+      /* Base font size - will be scaled by JS */
+      font-size: 24px; /* Adjust base size as needed */
+      padding: 10px; /* Internal padding from orb edge */
+      white-space: nowrap; /* Prevent wrapping */
+    }
+
+    #orb-text-container span {
+      display: block; /* Stack vertically */
+    }
+
+    #line1 { color: white; }
+    #line2 { color: #A0A0FF; } /* Approximate blue/purple from image */
+    #line3 { color: #70FFD0; } /* Approximate teal/green from image */
+
+    /* Responsive font size adjustments (example) */
+    @media (max-width: 768px) {
+      #orb-text-container {
+        font-size: 18px; /* Smaller base size on smaller screens */
+      }
+    }
+     @media (max-width: 480px) {
+      #orb-text-container {
+        font-size: 14px; /* Even smaller base size */
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -59,6 +106,11 @@
   <path id="parentOrb" fill="url(#parentGrad)" opacity="0.95"/>
   <g id="children"></g>
 </svg>
+<div id="orb-text-container">
+  <span id="line1">Sales</span>
+  <span id="line2">Intelligence</span>
+  <span id="line3">Evolved</span>
+</div>
 <script>
 // --- Utility functions ---
 function lerp(a, b, t) { return a + (b - a) * t; }
@@ -137,10 +189,10 @@ function getDynamicColorFamily(i, now) {
   return [hslToHex(baseHue, sat, light1), hslToHex(hue2, sat, light2)];
 }
 // parentCenter will be set dynamically below
-const parentRadius = 100;
-const childRadius = 36;
-const childPoints = 48;
-const childAmp = 0.5;
+const parentRadius = 40;
+const childRadius = 18;
+const childPoints = 32;
+const childAmp = 0.3;
 const childGradIds = [
   "childGrad0", "childGrad1", "childGrad2", "childGrad3", "childGrad4"
 ];
@@ -176,6 +228,7 @@ const childOrbs = [];
 // --- Orb State Management ---
 const orbStates = [];
 const parentOrb = document.getElementById('parentOrb');
+const orbTextContainer = document.getElementById('orb-text-container'); // Get text container
 
 // Helper to create default orb state
 function makeOrbState() {
@@ -302,13 +355,21 @@ function animate() {
   const {vw, vh} = window.viewportSize || {vw: 800, vh: 800};
   // Safe zone: parent can drift within 20% of screen center
   const px = window.parentCenterBase.x + Math.sin(now * 0.00011) * vw * 0.09 + Math.cos(now * 0.00007) * vw * 0.07;
-  const py = window.parentCenterBase.y + Math.cos(now * 0.00009) * vh * 0.08 + Math.sin(now * 0.00016) * vh * 0.06;
+  const py = 50 + Math.cos(now * 0.00009) * 8 + Math.sin(now * 0.00016) * 6;
   window.parentCenter = {x: px, y: py};
 
   const parentR = (parentRadius + parentDrag * 0.15) * scale;
   const parentAmp = (1 + Math.abs(parentDrag) * 0.008) * scale;
   const parentPath = generateSuperSmoothBlob(px + parentDx * scale, py + parentDy * scale, parentR, 64, parentMorphT, parentAmp);
   parentOrb.setAttribute('d', parentPath);
+
+  // --- Update Text Container Position & Scale ---
+  if (orbTextContainer) {
+    const textX = px + parentDx * scale;
+    const textY = py + parentDy * scale;
+    // Apply scale and translate to center the text within the orb
+    orbTextContainer.style.transform = `translate(${textX}px, ${textY}px) translate(-50%, -50%) scale(${scale})`;
+  }
 
   // --- Children ---
   // --- Render children orbs in correct z-order ---
@@ -434,9 +495,9 @@ function emitParticles(x, y, color, count = 3, i = 0, now = 0) {
     particles.push({
       x, y,
       vx, vy,
-      r: 1.1 + Math.random() * 1.2, // much smaller
-      life: 0.6, // fades faster
-      decay: 0.025 + Math.random() * 0.015, // fades faster
+      r: 0.8 + Math.random() * 0.6, // smaller particles
+      life: 0.4, // shorter lifespan
+      decay: 0.035 + Math.random() * 0.02, // faster decay
       color: particleColor,
       opacity: 0.45 // more subtle
     });
