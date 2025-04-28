@@ -109,8 +109,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const maxReach = maxOrbit + childRadius + 8; // +8 for morphing amplitude margin
     // Fit orbs within the smallest viewport dimension
     const minDim = Math.min(vw, vh);
-    // Scale calculation - Make orbs much smaller
-    const scale = minDim / (parentRadius * 10.0); // Increased divisor again for smaller size
+    // Scale calculation - Make orbs significantly smaller (closer to half previous size)
+    const scale = minDim / (parentRadius * 13.0); // Increased divisor substantially
     
     svg.setAttribute('width', vw);
     svg.setAttribute('height', vh);
@@ -121,6 +121,21 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   adjustSVGSize();
   window.addEventListener('resize', adjustSVGSize);
+
+  // --- Scroll Detection ---
+  let isScrolled = false;
+  function handleScroll() {
+    const scrollY = window.scrollY;
+    if (scrollY > 50 && !isScrolled) { // Threshold to trigger scrolled state
+      document.body.classList.add('is-scrolled');
+      isScrolled = true;
+    } else if (scrollY <= 50 && isScrolled) {
+      document.body.classList.remove('is-scrolled');
+      isScrolled = false;
+    }
+  }
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // Initial check
 
   const childOrbs = [];
 
@@ -313,13 +328,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const parentPath = generateSuperSmoothBlob(px + parentDx * scale, py + parentDy * scale, parentR, 64, parentMorphT, parentAmp);
     parentOrb.setAttribute('d', parentPath);
 
-    // --- Update Text Container Position & Scale ---
-    if (orbTextContainer) {
+    // --- Update Text Container Position & Scale (only if not scrolled) ---
+    if (orbTextContainer && !isScrolled) { // Check isScrolled flag
       const textX = px + parentDx * scale;
       const textY = py + parentDy * scale;
       // Apply scale and translate to center the text within the orb
       orbTextContainer.style.transform = `translate(${textX}px, ${textY}px) translate(-50%, -50%) scale(${scale})`;
+    } else if (orbTextContainer && isScrolled) {
+       // Reset transform when scrolled so CSS can take over positioning/scaling
+       orbTextContainer.style.transform = 'none'; 
     }
+
 
     // --- Children ---
     childrenGroup.innerHTML = ''; // Clear previous children paths
@@ -350,9 +369,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // Animate orbit radius: base + unique slow sine + unique noise
       const orbitPhase = now * (0.00012 + 0.00007 * i) + i * 1.13;
       const orbitWobble = Math.sin(orbitPhase) * 0.18 + Math.cos(orbitPhase * 0.7) * 0.09;
-      const minOrbit = parentCurrentR + childRadius * scale + 12 * scale;
-      // Use reduced base distance (30) from previous step
-      let rawOrbit = (parentCurrentR + 30 * scale + (i * 0.71 + 1.4) * maxChildOrbit / childCount) * (0.7 + 0.23 * orbitWobble);
+      const minOrbit = parentCurrentR + childRadius * scale + 10 * scale; // Slightly reduced min distance buffer
+      // Reduced base distance (25) and adjusted per-orb factor for tighter, varied orbits
+      let rawOrbit = (parentCurrentR + 25 * scale + (i * 0.8 + 1.0) * maxChildOrbit / childCount) * (0.75 + 0.20 * orbitWobble); // Adjusted factors
       const orbitRadius = Math.max(rawOrbit, minOrbit);
       
       const ellipseA = orbitRadius * 1.3 * (0.97 + 0.07 * Math.sin(now * 0.00013 + i));
@@ -381,7 +400,32 @@ document.addEventListener('DOMContentLoaded', function() {
       path.setAttribute("d", childPath);
       path.setAttribute("fill", `url(#${childGradIds[i]})`);
       
-      // Fade out as dragTarget increases, but trigger instant dissolve/appear
+      // --- Scroll-based Fade/Disappear Logic ---
+      let finalOpacity = 0.95; // Default opacity
+      if (isScrolled) {
+        // Add random disappearance logic when scrolled
+        if (state.disappearTime === undefined) {
+          // Assign a random time to start disappearing if not already set
+          state.disappearTime = now + Math.random() * 2000; // Disappear within 2 seconds
+        }
+        if (now >= state.disappearTime) {
+          // Fade out quickly once disappear time is reached
+          if (state.currentOpacity === undefined) state.currentOpacity = 0.95;
+          state.currentOpacity = Math.max(0, state.currentOpacity - 0.05); // Fade out speed
+          finalOpacity = state.currentOpacity;
+        } else {
+          // Reset opacity if scrolled back up before disappearing
+           state.currentOpacity = 0.95; 
+        }
+      } else {
+        // Reset disappear time and opacity if not scrolled
+        state.disappearTime = undefined;
+        state.currentOpacity = 0.95;
+        finalOpacity = 0.95;
+      }
+      // --- End Scroll-based Fade ---
+
+      // Fade out based on dragTarget (original logic)
       const fadeStart = 40, fadeEnd = 340;
       const fade = Math.min(1, Math.max(0, (fadeEnd - Math.abs(state.dragTarget)) / (fadeEnd - fadeStart)));
       
@@ -411,9 +455,15 @@ document.addEventListener('DOMContentLoaded', function() {
         state.wasVisible = true;
       } else {
         // Normal fade
-        path.setAttribute("opacity", fade * 0.95);
+        path.setAttribute("opacity", fade * finalOpacity); // Apply combined opacity
       }
-      childrenGroup.appendChild(path);
+      // Only append if opacity is > 0
+      if (finalOpacity > 0) {
+          childrenGroup.appendChild(path);
+      } else {
+          // Reset disappear time if orb becomes fully invisible due to scroll fade
+          state.disappearTime = undefined; 
+      }
     }
     // Animate and render particles
     animateParticles();
