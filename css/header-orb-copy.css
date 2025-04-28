@@ -48,12 +48,32 @@ svg#orbSVG {
 /* Responsive font size adjustments */
 @media (max-width: 768px) {
   #orb-text-container {
-    font-size: 20px; /* Increased medium screen size */
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    padding: 8px;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 1;
   }
 }
- @media (max-width: 480px) {
+@media (max-width: 480px) {
   #orb-text-container {
-    font-size: 16px; /* Increased small screen size */
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    padding: 6px;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 1;
   }
 }
 
